@@ -1,33 +1,25 @@
 ################################################################################
 #
-#  Goodness of fit to an expected (model-based) age distribution with print()
-#  and plot() helper functions
-#
-################################################################################
-#
-#  Parameters :
-#
-#    age   Vector of ages
-#
-#    u5mr  Under fives years mortality rate as deaths / 10,000 persons / day
-#
-################################################################################
-#
-#  Returns :
-#
-#    A list of class "ageChildren" with:
-#
-#      u5mr      Under fives years mortality rate as deaths / 10K persons / day
-#
-#      observed  Table of counts in each (year-centred) age group
-#
-#      expected  Table of expected counts in each (year-centred) age group
-#
-#      X2        Chi-squared test statistic
-#
-#      df        Degrees of freedom for Chi-squared test
-#
-#      p         p-value for for Chi-squared test
+#' ageChildren
+#'
+#' Goodness of fit to an expected (model-based) age distribution with print()
+#' and plot() helper functions
+#'
+#' @param age Vector of ages
+#' @param u4mr Under five years mortality rate as deaths / 10,000 persons / day
+#' @return A list of class "ageChildren" with:
+#'     \describe{
+#'       \item{\code{u5mr}}{Under five years mortality rate as deaths / 10000 persons / day}
+#'       \item{\code{observed}}{Table of counts in each (year-centred) age group}
+#'       \item{\code{expected}}{Table of expected counts in each (year-centred) age group}
+#'       \item{\code{X2}}{Chi-squared test statistic}
+#'       \item{\code{df}}{Degrees of freedom for Chi-squared test}
+#'       \item{\code{p}}{p-value for Chi-squared test}
+#'     }
+#' @examples
+#'
+#'
+#'
 #
 ################################################################################
 
