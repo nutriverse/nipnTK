@@ -2,8 +2,7 @@
 #
 #' ageChildren
 #'
-#' Goodness of fit to an expected (model-based) age distribution with print()
-#' and plot() helper functions
+#' Goodness of fit to an expected (model-based) age distribution
 #'
 #' @param age Vector of ages
 #' @param u4mr Under five years mortality rate as deaths / 10,000 persons / day
@@ -17,7 +16,7 @@
 #'       \item{\code{p}}{p-value for Chi-squared test}
 #'     }
 #' @examples
-#'
+#'     #
 #'
 #'
 #
