@@ -7,9 +7,9 @@
 [![CRAN](https://img.shields.io/cran/l/nipnTK.svg)](https://CRAN.R-project.org/package=nipnTK)
 [![CRAN](http://cranlogs.r-pkg.org/badges/nipnTK)](https://cran.r-project.org/package=nipnTK)
 [![Travis-CI Build
-Status](https://travis-ci.org/ernestguevarra/nipnTK.svg?branch=master)](https://travis-ci.org/ernestguevarra/nipnTK)
+Status](https://travis-ci.org/validmeasures/nipnTK.svg?branch=master)](https://travis-ci.org/validmeasures/nipnTK)
 [![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/ernestguevarra/nipnTK?branch=master&svg=true)](https://ci.appveyor.com/project/ernestguevarra/nipnTK)
+Status](https://ci.appveyor.com/api/projects/status/github/validmeasures/nipnTK?branch=master&svg=true)](https://ci.appveyor.com/project/validmeasures/nipnTK)
 
 **National Information Platforms for Nutrition (NIPN)** is an initiative
 of the European Commission to provide support to countries to strengthen
