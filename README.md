@@ -31,24 +31,6 @@ age. The focus is on anthropometric status but many of presented methods
 could be applied to other types of data. NiPN may commission additional
 toolkits to examine other variables or other types of variables.
 
-Data quality is assessed by:
-
-1.  Range checks and value checks to identify univariate outliers.
-
-2.  Scatterplots and statistical methods to identify bivariate outliers.
-
-3.  Use of flags to identify outliers in anthropometric indices.
-
-4.  Examining the distribution and the statistics of the distribution of
-    measurements and anthropometric indices.
-
-5.  Assessing the extent of digit preference in recorded measurements.
-    Assessing the extent of age heaping in recorded ages.
-
-6.  Examining the sex ratio.
-
-7.  Examining age distributions and age by sex distributions.
-
 ## Requirements
 
   - R version 3.4 or higher
@@ -187,9 +169,7 @@ plot(svy$height, svy$weight, pch = ifelse(outliersMD(svy$height, svy$weight), 19
 
 ![](tools/README-unnamed-chunk-10-1.png)<!-- -->
 
-3.  Use of flags to identify outliers in anthropometric indices.
-
-<!-- end list -->
+### 3\. Use of flags to identify outliers in anthropometric indices.
 
 ``` r
 library(nipnTK)
@@ -210,18 +190,20 @@ detected:
 
 We started with zero
 
-Then we added 2^0 (i.e. 1) if HAZ was out of range. Then we added 2^1
-(i.e. 2) if WHZ was out of range. Then we added 2^2 (i.e. 4) if WAZ was
-out of range.
+Then we added 2<sup>0</sup> (i.e. 1) if HAZ was out of range. Then we
+added 2<sup>1</sup> (i.e. 2) if WHZ was out of range. Then we added
+2<sup>2</sup> (i.e. 4) if WAZ was out of range.
 
-If we had another index then we would use 2^3 (i.e. 8) to flag a problem
-in that index.
+If we had another index then we would use 2<sup>3</sup> (i.e. 8) to flag
+a problem in that index.
 
 The advantage of using this coding scheme is that it compactly codes all
-possible combinations of problems in a single variable
+possible combinations of problems in a single
+variable
 
-4.  Examining the distribution and the statistics of the distribution of
-    measurements and anthropometric indices.
+### 4\. Examining the distribution and the statistics of the distribution of
+
+measurements and anthropometric indices.
 
 We will examine the distribution of anthropometric variables
 (e.g. weight, height, and MUAC), anthropometric indices (e.g. WHZ, HAZ,
@@ -241,7 +223,8 @@ sd(svy$weight)
 
 The NipN data quality toolkit provides an R language function called
 `histNormal()` that can help with *“by-eye”* assessments by
-superimposing a normal curve on a histogram of the variable of interest:
+superimposing a normal curve on a histogram of the variable of
+interest:
 
 ``` r
 histNormal(svy$muac) 
@@ -250,29 +233,27 @@ histNormal(svy$muac)
 ![](tools/README-unnamed-chunk-13-1.png)<!-- -->
 
 ``` r
-
 histNormal(svy$haz) 
 ```
 
 ![](tools/README-unnamed-chunk-13-2.png)<!-- -->
 
 ``` r
-
 histNormal(svy$waz) 
 ```
 
 ![](tools/README-unnamed-chunk-13-3.png)<!-- -->
 
 ``` r
-
 histNormal(svy$whz)
 ```
 
 ![](tools/README-unnamed-chunk-13-4.png)<!-- -->
 
-5.  Assessing the extent of digit preference in recorded measurements.
-    Assessing the extent of age heaping in recorded ages.
+### 5\. Assessing the extent of digit preference in recorded measurements. Assessing
 
-6.  Examining the sex ratio.
+the extent of age heaping in recorded ages.
 
-7.  Examining age distributions and age by sex distributions.
+### 6\. Examining the sex ratio.
+
+### 7\. Examining age distributions and age by sex distributions.
