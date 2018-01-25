@@ -201,9 +201,7 @@ The advantage of using this coding scheme is that it compactly codes all
 possible combinations of problems in a single
 variable
 
-### 4\. Examining the distribution and the statistics of the distribution of
-
-measurements and anthropometric indices.
+### 4\. Examining the distribution and the statistics of the distribution of measurements and anthropometric indices.
 
 We will examine the distribution of anthropometric variables
 (e.g. weight, height, and MUAC), anthropometric indices (e.g. WHZ, HAZ,
@@ -250,10 +248,116 @@ histNormal(svy$whz)
 
 ![](tools/README-unnamed-chunk-13-4.png)<!-- -->
 
-### 5\. Assessing the extent of digit preference in recorded measurements. Assessing
+### 5\. Assessing the extent of digit preference in recorded measurements.
 
-the extent of age heaping in recorded ages.
+Measurements in nutritional anthropometry surveys are usually taken and
+recorded to one decimal place.
+
+Digit preference is the observation that the final number in a
+measurement occurs with a greater frequency that is expected by chance.
+This can occur because of rounding, the practice of increasing or
+decreasing the value in a measurement to the nearest whole or half unit,
+or because data are made up.
+
+The NiPN data quality toolkit provides an R language function called
+`digitPreference()` that uses a summary measure that takes into account
+the effect of sample size. A widely used method is the digit preference
+score (DPS) developed by WHO for the
+[MONICA](http://www.thl.fi/publications/monica/bp/bpqa.htm) project.
+
+First we will work with some artificial data:
+
+``` r
+set.seed(0)
+finalDigits <- sample(x = 0:9, size = 1000, replace = TRUE)
+table(finalDigits)
+#> finalDigits
+#>   0   1   2   3   4   5   6   7   8   9 
+#>  96 104  91 113 115  85  90 107  89 110
+```
+
+We can now calculate the DPS using `digitPreference()`:
+
+``` r
+digitPreference(finalDigits, digits = 0)
+#> 
+#>  Digit Preference Score
+#> 
+#> data:    finalDigits
+#> Digit Preference Score (DPS) = 3.5 (Excellent)
+```
+
+### Assessing the extent of age heaping in recorded ages.
+
+Age heaping is the tendency to report children’s ages to the nearest
+year or adults’ ages to the nearest multiple of five or ten years. Age
+heaping is very common. This is a major reason why data from nutritional
+anthropometry surveys is often analysed and reported using broad age
+groups.
+
+The NiPN data quality toolkit provides an R language function called
+`ageHeaping()` that performs age-heaping analysis.
+
+Using data from a SMART survey in Kabul, Afghanistan, we can apply this
+function as follows:
+
+``` r
+library(nipnTK)
+svy <- dp.ex02
+
+# Apply ageHeaping() function
+ah12 <- ageHeaping(svy$age)
+```
+
+The saved results may also be plotted:
+
+``` r
+plot(ah12, main = "Age-heaping (remainder of age / 12)")
+```
+
+![](tools/README-unnamed-chunk-17-1.png)<!-- -->
 
 ### 6\. Examining the sex ratio.
 
+The male to female sex ratio test checks whether the ratio of the number
+of males to the number of females in a survey sample is similar to an
+expected ratio. The expected male to female sex ratio can be calculated
+from census or similar data. If there is no expected value then it is
+usually assumed that there should be equal numbers of males and females
+in the survey sample. This is usually true for children and young adults
+but may not be true for older adults.
+
+The NiPN data quality toolkit provides an R language function called
+`sexRatioTest()` that performs a sex ratio test.
+
+Using data from a SMART survey in Kabul, Afghanistan, we can apply this
+function as follows:
+
+``` r
+library(nipnTK)
+svy <- dp.ex02
+
+# Apply sexRatioTest() function
+sexRatioTest(svy$sex, codes = c(1, 2), pop = c(2.658, 2.508))
+#> 
+#>  Sex Ratio Test
+#> 
+#> Expected proportion male = 0.5145
+#> Observed proportion male = 0.5017
+#> X-squared = 0.5225, p = 0.4698
+```
+
 ### 7\. Examining age distributions and age by sex distributions.
+
+The NiPN data quality toolkit provides an R function called
+`ageChildren()` that performs the model- based Chi-Squared test to check
+whether there is a difference between the number of males and females at
+different age groups. This function can be applied as follows:
+
+``` r
+ageChildren(svy$age, u5mr = 1)
+#> 
+#>  Age Test (Children)
+#> 
+#> X-squared = 21.4366, df = 4, p = 0.0003
+```
