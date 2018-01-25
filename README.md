@@ -31,6 +31,24 @@ age. The focus is on anthropometric status but many of presented methods
 could be applied to other types of data. NiPN may commission additional
 toolkits to examine other variables or other types of variables.
 
+Data quality is assessed by:
+
+1.  Range checks and value checks to identify univariate outliers.
+
+2.  Scatterplots and statistical methods to identify bivariate outliers.
+
+3.  Use of flags to identify outliers in anthropometric indices.
+
+4.  Examining the distribution and the statistics of the distribution of
+    measurements and anthropometric indices.
+
+5.  Assessing the extent of digit preference in recorded measurements.
+    Assessing the extent of age heaping in recorded ages.
+
+6.  Examining the sex ratio.
+
+7.  Examining age distributions and age by sex distributions.
+
 ## Requirements
 
   - R version 3.4 or higher
@@ -52,3 +70,209 @@ You can install the development version of nipnTK from github with:
 # install.packages("devtools")
 devtools::install_github("validmeasures/nipnTK")
 ```
+
+## Usage
+
+### 1\. Range checks and value checks to identify univariate outliers.
+
+Checking that data are within an acceptable or plausible range is an
+important basic check to apply to quantitative data. Checking that data
+are recorded with appropriate legal values or codes is an important
+basic check to apply to categorical data.
+
+``` r
+# Load nipnTK package
+library(nipnTK)
+
+# Assign dataset rl.ex01 to svy
+svy <- rl.ex01
+
+# Summarise MUAC variable
+summary(svy$muac)
+#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#>    11.1   128.0   139.0   140.3   148.0   999.0
+```
+
+``` r
+# Boxplot of MUAC values
+boxplot(svy$muac, horizontal = TRUE, xlab = "MUAC (mm)", frame.plot = FALSE)
+```
+
+![](tools/README-unnamed-chunk-3-1.png)<!-- -->
+
+``` r
+# Use outliersUV() function to identify outliers
+svy[outliersUV(svy$muac), ]
+#> 
+#> Univariate outliers : Lower fence = 98, Upper fence = 178
+#>     age sex weight height  muac oedema
+#> 33   24   1    9.8   74.5 180.0      2
+#> 93   12   2    6.7   67.0  96.0      1
+#> 126  16   2    9.0   74.6 999.0      2
+#> 135  18   2    8.5   74.5 999.0      2
+#> 194  24   M    7.0   75.0  95.0      2
+#> 227   8   M    6.2   66.0  11.1      2
+#> 253  35   2    7.6   75.6  97.0      2
+#> 381  24   1   10.8   82.8  12.4      2
+#> 501  36   2   15.5   93.4 185.0      2
+#> 594  21   2    9.8   76.5  13.2      2
+#> 714  59   2   18.9   98.5 180.0      2
+#> 752  48   2   15.6  102.2 999.0      2
+#> 756  59   1   19.4  101.1 180.0      2
+#> 873  59   1   20.6  109.4 179.0      2
+```
+
+### 2\. Scatterplots and statistical methods to identify bivariate outliers.
+
+``` r
+# Retrieve sp.ex01 data and assign to svy
+svy <- sp.ex01
+```
+
+``` r
+# Look at the relationship between height and weight
+plot(svy$height, svy$weight)
+```
+
+![](tools/README-unnamed-chunk-6-1.png)<!-- -->
+
+``` r
+# Assess the strength of relationship using the Pearson correlation coefficient:
+cor(svy$height, svy$weight, method = "pearson", use = "complete.obs")
+#> [1] 0.9204116
+```
+
+This is very close to one, which indicates a perfect positive
+association. There are, however a few points that lie outside of the
+bulk of the plotted points. These outliers may be due to errors in the
+data. The presence of oedema can be associated with increased weight.
+This is a particular issue with severe oedema. An outlier with a high
+value of weight for a given height could be due to oedema. We can check
+this:
+
+``` r
+plot(svy$height, svy$weight, pch = ifelse(svy$oedema == 1, 19, 1))
+```
+
+![](tools/README-unnamed-chunk-8-1.png)<!-- -->
+
+A more formal method of identifying outliers is to use a measure of the
+statistical distance. A common measure of statistical distance that is
+applied to scatterplot data is the Mahalanobis distance. This treats the
+bivariate probability distribution as an ellipsoid. The Mahalanobis
+distance is the distance of a point from the centre of mass of the
+distribution divided by width of the ellipsoid in the direction of the
+point:
+
+The NiPN data quality toolkit provides an R language function
+`outliersMD()` that uses the Mahalanobis distance to identify outliers
+in the same dataset:
+
+``` r
+svy[outliersMD(svy$height,svy$weight), ]
+#>    age sex weight height muac oedema
+#> 1   54   1   20.5  111.5  180      2
+#> 6   48   2   18.6   95.3  171      1
+#> 16  30   1   16.9   92.5  188      2
+#> 62  55   1   15.1  118.0  156      2
+#> 66  56   1   15.0  115.0  148      2
+```
+
+We can use the `outliersMD()` to identify and display outliers on a
+scatterplot:
+
+``` r
+plot(svy$height, svy$weight, pch = ifelse(outliersMD(svy$height, svy$weight), 19, 1))
+```
+
+![](tools/README-unnamed-chunk-10-1.png)<!-- -->
+
+3.  Use of flags to identify outliers in anthropometric indices.
+
+<!-- end list -->
+
+``` r
+library(nipnTK)
+svy <- flag.ex01
+
+# Set flag variable to 0
+svy$flag <- 0
+
+# Apply WHO flagging criteria to survey data
+svy$flag <- ifelse(!is.na(svy$haz) & (svy$haz < -6 | svy$haz > 6), svy$flag + 1, svy$flag)
+svy$flag <- ifelse(!is.na(svy$whz) & (svy$whz < -5 | svy$whz > 5), svy$flag + 2, svy$flag)
+svy$flag <- ifelse(!is.na(svy$waz) & (svy$waz < -6 | svy$waz > 5), svy$flag + 4, svy$flag)
+```
+
+Note that each time we apply a flagging criteria we increase the value
+of the flagging variable by the next power of two when a problem is
+detected:
+
+We started with zero
+
+Then we added 2^0 (i.e. 1) if HAZ was out of range. Then we added 2^1
+(i.e. 2) if WHZ was out of range. Then we added 2^2 (i.e. 4) if WAZ was
+out of range.
+
+If we had another index then we would use 2^3 (i.e. 8) to flag a problem
+in that index.
+
+The advantage of using this coding scheme is that it compactly codes all
+possible combinations of problems in a single variable
+
+4.  Examining the distribution and the statistics of the distribution of
+    measurements and anthropometric indices.
+
+We will examine the distribution of anthropometric variables
+(e.g. weight, height, and MUAC), anthropometric indices (e.g. WHZ, HAZ,
+and WHZ), and anthropometric indicators (e.g. wasted, stunted, and
+underweight).
+
+``` r
+svy <- dist.ex01
+
+summary(svy$weight)
+#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#>    4.90    9.00   11.00   11.13   13.10   20.70
+
+sd(svy$weight)
+#> [1] 2.802065
+```
+
+The NipN data quality toolkit provides an R language function called
+`histNormal()` that can help with *“by-eye”* assessments by
+superimposing a normal curve on a histogram of the variable of interest:
+
+``` r
+histNormal(svy$muac) 
+```
+
+![](tools/README-unnamed-chunk-13-1.png)<!-- -->
+
+``` r
+
+histNormal(svy$haz) 
+```
+
+![](tools/README-unnamed-chunk-13-2.png)<!-- -->
+
+``` r
+
+histNormal(svy$waz) 
+```
+
+![](tools/README-unnamed-chunk-13-3.png)<!-- -->
+
+``` r
+
+histNormal(svy$whz)
+```
+
+![](tools/README-unnamed-chunk-13-4.png)<!-- -->
+
+5.  Assessing the extent of digit preference in recorded measurements.
+    Assessing the extent of age heaping in recorded ages.
+
+6.  Examining the sex ratio.
+
+7.  Examining age distributions and age by sex distributions.
