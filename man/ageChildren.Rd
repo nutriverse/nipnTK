@@ -10,25 +10,40 @@ ageChildren(age, u5mr = 0,
 \arguments{
 \item{age}{Vector of ages}
 
-\item{u4mr}{Under five years mortality rate as deaths / 10,000 persons / day}
+\item{u5mr}{Under five years mortality rate as deaths / 10,000 persons / day}
+
+\item{groups}{Age groupings specified as recodes parameter in the
+\code{recode} function; default is
+\code{"6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5"}}
 }
 \value{
 A list of class "ageChildren" with:
-    \describe{
-      \item{\code{u5mr}}{Under five years mortality rate as deaths / 10000 persons / day}
-      \item{\code{observed}}{Table of counts in each (year-centred) age group}
-      \item{\code{expected}}{Table of expected counts in each (year-centred) age group}
-      \item{\code{X2}}{Chi-squared test statistic}
-      \item{\code{df}}{Degrees of freedom for Chi-squared test}
-      \item{\code{p}}{p-value for Chi-squared test}
-    }
+\describe{
+\item{\code{u5mr}}{Under five years mortality rate as deaths / 10000 persons / day}
+\item{\code{observed}}{Table of counts in each (year-centred) age group}
+\item{\code{expected}}{Table of expected counts in each (year-centred) age group}
+\item{\code{X2}}{Chi-squared test statistic}
+\item{\code{df}}{Degrees of freedom for Chi-squared test}
+\item{\code{p}}{p-value for Chi-squared test}
+}
 }
 \description{
-Goodness of fit to an expected (model-based) age distribution with print()
-and plot() helper functions
+Goodness of fit to an expected (model-based) age distribution
 }
 \examples{
+# Chi-Squared test for age of children in dp.ex02 sample dataset using an
+# \\code{u5mr} of 1 / 10,000 / day.
+svy <- dp.ex02
+ac <- ageChildren(svy$age, u5mr = 1)
+ac
 
+# Apply function to each sex separately
+# Males
+acM <- ageChildren(svy$age[svy$sex == 1], u5mr = 1)
+acM
+# Females
+acF <- ageChildren(svy$age[svy$sex == 2], u5mr = 1)
 
-
+# Simplified call to function by sex
+by(svy$age, svy$sex, ageChildren, u5mr = 1)
 }

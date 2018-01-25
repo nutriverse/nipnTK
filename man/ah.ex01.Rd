@@ -4,9 +4,21 @@
 \name{ah.ex01}
 \alias{ah.ex01}
 \title{Example dataset for age heaping function}
-\format{An object of class \code{data.frame} with 593 rows and 10 columns.}
+\format{A data frame with 593 observations and 10 variables
+\describe{
+\item{\code{psu}}{Primary sampling unit}
+\item{\code{camp}}{Camp name code}
+\item{\code{block}}{Block code}
+\item{\code{age}}{Age (years)}
+\item{\code{sex}}{Sex}
+\item{\code{weight}}{Weight (kg)}
+\item{\code{height}}{Height (cm)}
+\item{\code{demispan}}{Demispan (cm)}
+\item{\code{muac}}{Mid-upper arm circumference (cm)}
+\item{\code{oedema}}{Oedema}
+}}
 \source{
-Data courtesy of \link{HelpAge International}{http://www.helpage.org}
+Data courtesy of \href{HelpAge International}{http://www.helpage.org}
 }
 \usage{
 ah.ex01
