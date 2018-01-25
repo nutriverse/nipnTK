@@ -13,6 +13,11 @@ knitr::opts_chunk$set(
 ```
 
 # nipnTK
+[![CRAN](https://img.shields.io/cran/v/nipnTK.svg)](https://cran.r-project.org/package=nipnTK)
+[![CRAN](https://img.shields.io/cran/l/nipnTK.svg)](https://CRAN.R-project.org/package=nipnTK)
+[![CRAN](http://cranlogs.r-pkg.org/badges/nipnTK)](https://cran.r-project.org/package=nipnTK)
+[![Travis-CI Build Status](https://travis-ci.org/ernestguevarra/nipnTK.svg?branch=master)](https://travis-ci.org/ernestguevarra/nipnTK)
+
 
 The goal of nipnTK is to ...
 
