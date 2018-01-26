@@ -8,5 +8,5 @@ qqNormalPlot(svy$waz)
 qqNormalPlot(svy$whz)
 
 test_that("qqNormalPlot is NULL", {
-  expect_is(qqNormalPlot, "NULL")
+  expect_is(qqNormalPlot(svy$muac), "NULL")
 })
