@@ -20,3 +20,12 @@ test_that("names of elements of ac", {
   expect_match(names(ac[5]), "df")
   expect_match(names(ac[6]), "p")
 })
+
+test_that("plot(ac) is matrix", {
+  expect_is(plot(ac), "matrix")
+})
+
+
+test_that("print(ac) message exists", {
+  expect_output(print(ac))
+})
