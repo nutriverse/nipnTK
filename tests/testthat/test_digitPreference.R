@@ -18,3 +18,11 @@ test_that("names of dp", {
   expect_equal(names(dp)[3], "pct")
   expect_equal(names(dp)[4], "dpsClass")
 })
+
+test_that("plot(dp) is NULL", {
+  expect_is(plot(dp), "NULL")
+})
+
+test_that("print(dp) message exists", {
+  expect_output(print(dp))
+})
