@@ -23,3 +23,12 @@ test_that("names of elements of ah12", {
   expect_match(names(ah12[4]), "tab")
   expect_match(names(ah12[5]), "pct")
 })
+
+test_that("plot(ah12) is NULL", {
+  expect_is(plot(ah12), "NULL")
+})
+
+
+test_that("print(ah12) message exists", {
+  expect_output(print(ah12))
+})

@@ -21,3 +21,7 @@ test_that("names of art", {
   expect_equal(names(art)[6], "df")
   expect_equal(names(art)[7], "p")
 })
+
+test_that("print(art) message exists", {
+  expect_output(print(art))
+})
