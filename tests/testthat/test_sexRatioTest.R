@@ -22,3 +22,7 @@ test_that("names of srt", {
   expect_equal(names(srt)[4], "df")
   expect_equal(names(srt)[5], "p")
 })
+
+test_that("print(srt) message exists", {
+  expect_output(print(srt))
+})
