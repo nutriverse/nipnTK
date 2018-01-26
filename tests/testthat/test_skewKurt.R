@@ -9,7 +9,7 @@ test_that("sk is skewKurt", {
 })
 
 test_that("str(sk) is list", {
-  expect_tru(is.list(sk))
+  expect_true(is.list(sk))
 })
 
 
