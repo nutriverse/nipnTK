@@ -6,7 +6,7 @@ Authors@R: c(
     person("Mark", "Myatt", email = "mark@brixtonhealth.com", role = "aut"),
     person("Ernest", "Guevarra", email = "ernestgmd@gmail.com", role = c("ctb", "cre")))
 Description: An implementation of the National Information Platforms for Nutrition 
-    (NiPN) analytical methods for assessing quality of anthropometic datasets that 
+    (NiPN) analytical methods for assessing quality of anthropometric datasets that 
     include measurements of weight, height or length, MUAC, sex and age. The 
     focus is on anthropometric status but many of the presented methods could be 
     applied to other variables.
