@@ -39,7 +39,7 @@ The value of Green's Index can range between \code{-1/(n - 1)} for maximum
 uniformity (specific to the dataset) and one for maximum clumping. The
 interpretation of Green’s Index is straightforward:
 \describe{
-\item{\code{Green's Index ≈ 0}}{Random}
+\item{\code{Green's Index U+2248 0}}{Random}
 \item{\code{Green's Index > 0}}{Clumped (i.e. more clumped than random)}
 \item{\code{Green’s Index < 0}}{Uniform (i.e. more uniform than random)}
 }
