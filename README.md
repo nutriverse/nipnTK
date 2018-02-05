@@ -7,10 +7,10 @@
 [![CRAN](https://img.shields.io/cran/l/nipnTK.svg)](https://CRAN.R-project.org/package=nipnTK)
 [![CRAN](http://cranlogs.r-pkg.org/badges/nipnTK)](https://cran.r-project.org/package=nipnTK)
 [![Travis-CI Build
-Status](https://travis-ci.org/validmeasures/nipnTK.svg?branch=master)](https://travis-ci.org/validmeasures/nipnTK)
+Status](https://travis-ci.org/nutriverse/nipnTK.svg?branch=master)](https://travis-ci.org/nutriverse/nipnTK)
 [![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/validmeasures/nipnTK?branch=master&svg=true)](https://ci.appveyor.com/project/validmeasures/nipnTK)
-[![codecov](https://codecov.io/gh/validmeasures/nipnTK/branch/master/graph/badge.svg)](https://codecov.io/gh/validmeasures/nipnTK)
+Status](https://ci.appveyor.com/api/projects/status/github/nutriverse/nipnTK?branch=master&svg=true)](https://ci.appveyor.com/project/nutriverse/nipnTK)
+[![codecov](https://codecov.io/gh/nutriverse/nipnTK/branch/master/graph/badge.svg)](https://codecov.io/gh/nutriverse/nipnTK)
 
 [National Information Platforms for Nutrition
 (NIPN)](http://www.nipn-nutrition-platforms.org) is an initiative of the
