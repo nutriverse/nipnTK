@@ -1,6 +1,6 @@
 ---
 title: "The NiPN data quality toolkit"
-author: "Vignette Author"
+author: "Mark Myatt"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
