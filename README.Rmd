@@ -8,11 +8,11 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "tools/README-"
+  fig.path = "man/figures/README-"
 )
 ```
 
-# nipnTK: National Information Platforms for Nutrition (NiPN) data quality toolkit
+# nipnTK: National Information Platforms for Nutrition (NiPN) data quality toolkit <img src="man/figures/logo_nipn_en.png" align="right" />
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 [![CRAN](https://img.shields.io/cran/v/nipnTK.svg)](https://cran.r-project.org/package=nipnTK)
 [![CRAN](https://img.shields.io/cran/l/nipnTK.svg)](https://CRAN.R-project.org/package=nipnTK)
@@ -71,7 +71,7 @@ basic check to apply to quantitative data. Checking that data are recorded with
 appropriate legal values or codes is an important basic check to apply to 
 categorical data.
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage1a, eval = TRUE, echo = TRUE}
 # Load nipnTK package
 library(nipnTK)
 
@@ -82,12 +82,12 @@ svy <- rl.ex01
 summary(svy$muac)
 ```
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage1b, eval = TRUE, echo = TRUE}
 # Boxplot of MUAC values
 boxplot(svy$muac, horizontal = TRUE, xlab = "MUAC (mm)", frame.plot = FALSE)
 ```
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage1c, eval = TRUE, echo = TRUE}
 # Use outliersUV() function to identify outliers
 svy[outliersUV(svy$muac), ]
 ```
@@ -96,17 +96,17 @@ svy[outliersUV(svy$muac), ]
 ### 2. Scatterplots and statistical methods to identify bivariate outliers.
 
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage2a, eval = TRUE, echo = TRUE}
 # Retrieve sp.ex01 data and assign to svy
 svy <- sp.ex01
 ```
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage2b, eval = TRUE, echo = TRUE}
 # Look at the relationship between height and weight
 plot(svy$height, svy$weight)
 ```
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage2c, eval = TRUE, echo = TRUE}
 # Assess the strength of relationship using the Pearson correlation coefficient:
 cor(svy$height, svy$weight, method = "pearson", use = "complete.obs")
 ```
@@ -118,7 +118,7 @@ associated with increased weight. This is a particular issue with severe oedema.
 An outlier with a high value of weight for a given height could be due to oedema. 
 We can check this:
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage2d, eval = TRUE, echo = TRUE}
 plot(svy$height, svy$weight, pch = ifelse(svy$oedema == 1, 19, 1))
 ```
 
@@ -131,12 +131,13 @@ of the ellipsoid in the direction of the point:
 
 The NiPN data quality toolkit provides an R language function `outliersMD()` that 
 uses the Mahalanobis distance to identify outliers in the same dataset:
-```{r eval = TRUE, echo = TRUE}
+
+```{r usage2e, eval = TRUE, echo = TRUE}
 svy[outliersMD(svy$height,svy$weight), ]
 ```
 
 We can use the `outliersMD()` to identify and display outliers on a scatterplot: 
-```{r eval = TRUE, echo = TRUE}
+```{r usage2f, eval = TRUE, echo = TRUE}
 plot(svy$height, svy$weight, pch = ifelse(outliersMD(svy$height, svy$weight), 19, 1))
 ```
 
@@ -144,7 +145,7 @@ plot(svy$height, svy$weight, pch = ifelse(outliersMD(svy$height, svy$weight), 19
 ### 3. Use of flags to identify outliers in anthropometric indices.
 
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage3, eval = TRUE, echo = TRUE}
 library(nipnTK)
 svy <- flag.ex01
 
@@ -177,7 +178,7 @@ We will examine the distribution of anthropometric variables (e.g. weight,
 height, and MUAC), anthropometric indices (e.g. WHZ, HAZ, and WHZ), and 
 anthropometric indicators (e.g. wasted, stunted, and underweight).
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage4a, eval = TRUE, echo = TRUE}
 svy <- dist.ex01
 
 summary(svy$weight)
@@ -190,7 +191,7 @@ The NipN data quality toolkit provides an R language function called
 `histNormal()` that can help with *“by-eye”* assessments by superimposing a normal 
 curve on a histogram of the variable of interest:
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage4b, eval = TRUE, echo = TRUE}
 histNormal(svy$muac) 
 histNormal(svy$haz) 
 histNormal(svy$waz) 
@@ -214,7 +215,7 @@ A widely used method is the digit preference score (DPS) developed by WHO for th
 
 First we will work with some artificial data:
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage5a, eval = TRUE, echo = TRUE}
 set.seed(0)
 finalDigits <- sample(x = 0:9, size = 1000, replace = TRUE)
 table(finalDigits)
@@ -222,7 +223,7 @@ table(finalDigits)
 
 We can now calculate the DPS using `digitPreference()`:
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage5b, eval = TRUE, echo = TRUE}
 digitPreference(finalDigits, digits = 0)
 ```
 
@@ -239,7 +240,7 @@ that performs age-heaping analysis.
 Using data from a SMART survey in Kabul, Afghanistan, we can apply this function 
 as follows:
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage5c, eval = TRUE, echo = TRUE}
 library(nipnTK)
 svy <- dp.ex02
 
@@ -249,7 +250,7 @@ ah12 <- ageHeaping(svy$age)
 
 The saved results may also be plotted:
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage5d, eval = TRUE, echo = TRUE}
 plot(ah12, main = "Age-heaping (remainder of age / 12)")
 ```
 
@@ -268,7 +269,7 @@ that performs a sex ratio test.
 Using data from a SMART survey in Kabul, Afghanistan, we can apply this function 
 as follows:
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage6, eval = TRUE, echo = TRUE}
 library(nipnTK)
 svy <- dp.ex02
 
@@ -284,7 +285,7 @@ performs the model- based Chi-Squared test to check whether there is a differenc
 between the number of males and females at different age groups. This function
 can be applied as follows:
 
-```{r eval = TRUE, echo = TRUE}
+```{r usage7, eval = TRUE, echo = TRUE}
 ageChildren(svy$age, u5mr = 1)
 ```
 

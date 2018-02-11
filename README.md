@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# nipnTK: National Information Platforms for Nutrition (NiPN) data quality toolkit
+# nipnTK: National Information Platforms for Nutrition (NiPN) data quality toolkit <img src="man/figures/logo_nipn_en.png" align="right" />
 
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
@@ -83,7 +83,7 @@ summary(svy$muac)
 boxplot(svy$muac, horizontal = TRUE, xlab = "MUAC (mm)", frame.plot = FALSE)
 ```
 
-![](tools/README-unnamed-chunk-3-1.png)<!-- -->
+![](man/figures/README-usage1b-1.png)<!-- -->
 
 ``` r
 # Use outliersUV() function to identify outliers
@@ -119,7 +119,7 @@ svy <- sp.ex01
 plot(svy$height, svy$weight)
 ```
 
-![](tools/README-unnamed-chunk-6-1.png)<!-- -->
+![](man/figures/README-usage2b-1.png)<!-- -->
 
 ``` r
 # Assess the strength of relationship using the Pearson correlation coefficient:
@@ -139,7 +139,7 @@ this:
 plot(svy$height, svy$weight, pch = ifelse(svy$oedema == 1, 19, 1))
 ```
 
-![](tools/README-unnamed-chunk-8-1.png)<!-- -->
+![](man/figures/README-usage2d-1.png)<!-- -->
 
 A more formal method of identifying outliers is to use a measure of the
 statistical distance. A common measure of statistical distance that is
@@ -170,7 +170,7 @@ scatterplot:
 plot(svy$height, svy$weight, pch = ifelse(outliersMD(svy$height, svy$weight), 19, 1))
 ```
 
-![](tools/README-unnamed-chunk-10-1.png)<!-- -->
+![](man/figures/README-usage2f-1.png)<!-- -->
 
 ### 3\. Use of flags to identify outliers in anthropometric indices.
 
@@ -231,25 +231,25 @@ interest:
 histNormal(svy$muac) 
 ```
 
-![](tools/README-unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/README-usage4b-1.png)<!-- -->
 
 ``` r
 histNormal(svy$haz) 
 ```
 
-![](tools/README-unnamed-chunk-13-2.png)<!-- -->
+![](man/figures/README-usage4b-2.png)<!-- -->
 
 ``` r
 histNormal(svy$waz) 
 ```
 
-![](tools/README-unnamed-chunk-13-3.png)<!-- -->
+![](man/figures/README-usage4b-3.png)<!-- -->
 
 ``` r
 histNormal(svy$whz)
 ```
 
-![](tools/README-unnamed-chunk-13-4.png)<!-- -->
+![](man/figures/README-usage4b-4.png)<!-- -->
 
 ### 5\. Assessing the extent of digit preference in recorded measurements.
 
@@ -318,7 +318,7 @@ The saved results may also be plotted:
 plot(ah12, main = "Age-heaping (remainder of age / 12)")
 ```
 
-![](tools/README-unnamed-chunk-17-1.png)<!-- -->
+![](man/figures/README-usage5d-1.png)<!-- -->
 
 ### 6\. Examining the sex ratio.
 
