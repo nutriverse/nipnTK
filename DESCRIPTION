@@ -1,7 +1,7 @@
 Package: nipnTK
 Type: Package
 Title: NiPN Anthropometric Data Toolkit
-Version: 0.1.0.9000
+Version: 0.1.0
 Authors@R: c(
     person("Mark", "Myatt", email = "mark@brixtonhealth.com", role = "aut"),
     person("Ernest", "Guevarra", email = "ernestgmd@gmail.com", role = c("aut", "cre")),
