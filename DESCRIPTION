@@ -4,7 +4,8 @@ Title: NiPN Anthropometric Data Toolkit
 Version: 0.1.0
 Authors@R: c(
     person("Mark", "Myatt", email = "mark@brixtonhealth.com", role = "aut"),
-    person("Ernest", "Guevarra", email = "ernestgmd@gmail.com", role = c("aut", "cre")),
+    person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
+                  email = "ernestgmd@gmail.com", role = c("aut", "cre")),
     person("Denis", "Alder", email = "denis@validinternational.org", role = "ctb"),
     person("Laura", "Bramley", email = "laura@validinternational.org", role = "ctb"))
 Description: An implementation of the National Information Platforms for Nutrition 
@@ -14,11 +15,13 @@ Description: An implementation of the National Information Platforms for Nutriti
     applied to other variables.
 Imports: bbw
 Depends: R (>= 2.10)
+Suggests: testthat,
+    knitr,
+    rmarkdown
 License: AGPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Suggests: testthat,
-    knitr,
-    rmarkdown
+URL: https://github.com/nutriverse/nipnTK
+BugReports: https://github.com/nutriverse/nipnTK/issues
 VignetteBuilder: knitr
