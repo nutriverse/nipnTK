@@ -22,7 +22,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -31,8 +31,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">nipnTK</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="index.html">nipnTK</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -56,8 +60,18 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/nutriverse/nipnTK">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -67,12 +81,11 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     
 
     
     
-<div class="contents">
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="nipntk-national-information-platforms-for-nutrition-nipn-data-quality-toolkit" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
@@ -116,7 +129,7 @@
 <a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt;    11.1   128.0   139.0   140.3   148.0   999.0</span></a></code></pre>
 <pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Boxplot of MUAC values</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">boxplot</span>(svy<span class="op">$</span>muac, <span class="dt">horizontal =</span> <span class="ot">TRUE</span>, <span class="dt">xlab =</span> <span class="st">"MUAC (mm)"</span>, <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>)</a></code></pre>
-<p><img src="reference/figures/README-usage1b-1.png" width="672"></p>
+<p><img src="reference/figures/README-usage1b-1.png" width="700"></p>
 <pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Use outliersUV() function to identify outliers</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">svy[<span class="kw"><a href="reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac), ]</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; </span></a>
@@ -144,13 +157,13 @@
 <a class="sourceLine" id="cb5-2" data-line-number="2">svy &lt;-<span class="st"> </span>sp.ex01</a></code></pre>
 <pre class="sourceCode r" id="cb6"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Look at the relationship between height and weight</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">plot</span>(svy<span class="op">$</span>height, svy<span class="op">$</span>weight)</a></code></pre>
-<p><img src="reference/figures/README-usage2b-1.png" width="672"></p>
+<p><img src="reference/figures/README-usage2b-1.png" width="700"></p>
 <pre class="sourceCode r" id="cb7"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Assess the strength of relationship using the Pearson correlation coefficient:</span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">cor</span>(svy<span class="op">$</span>height, svy<span class="op">$</span>weight, <span class="dt">method =</span> <span class="st">"pearson"</span>, <span class="dt">use =</span> <span class="st">"complete.obs"</span>)</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; [1] 0.9204116</span></a></code></pre>
 <p>This is very close to one, which indicates a perfect positive association. There are, however a few points that lie outside of the bulk of the plotted points. These outliers may be due to errors in the data. The presence of oedema can be associated with increased weight. This is a particular issue with severe oedema. An outlier with a high value of weight for a given height could be due to oedema. We can check this:</p>
 <pre class="sourceCode r" id="cb8"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">plot</span>(svy<span class="op">$</span>height, svy<span class="op">$</span>weight, <span class="dt">pch =</span> <span class="kw">ifelse</span>(svy<span class="op">$</span>oedema <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">19</span>, <span class="dv">1</span>))</a></code></pre>
-<p><img src="reference/figures/README-usage2d-1.png" width="672"></p>
+<p><img src="reference/figures/README-usage2d-1.png" width="700"></p>
 <p>A more formal method of identifying outliers is to use a measure of the statistical distance. A common measure of statistical distance that is applied to scatterplot data is the Mahalanobis distance. This treats the bivariate probability distribution as an ellipsoid. The Mahalanobis distance is the distance of a point from the centre of mass of the distribution divided by width of the ellipsoid in the direction of the point:</p>
 <p>The NiPN data quality toolkit provides an R language function <code><a href="reference/outliersMD.html">outliersMD()</a></code> that uses the Mahalanobis distance to identify outliers in the same dataset:</p>
 <pre class="sourceCode r" id="cb9"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">svy[<span class="kw"><a href="reference/outliersMD.html">outliersMD</a></span>(svy<span class="op">$</span>height,svy<span class="op">$</span>weight), ]</a>
@@ -162,7 +175,7 @@
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; 66  56   1   15.0  115.0  148      2</span></a></code></pre>
 <p>We can use the <code><a href="reference/outliersMD.html">outliersMD()</a></code> to identify and display outliers on a scatterplot:</p>
 <pre class="sourceCode r" id="cb10"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">plot</span>(svy<span class="op">$</span>height, svy<span class="op">$</span>weight, <span class="dt">pch =</span> <span class="kw">ifelse</span>(<span class="kw"><a href="reference/outliersMD.html">outliersMD</a></span>(svy<span class="op">$</span>height, svy<span class="op">$</span>weight), <span class="dv">19</span>, <span class="dv">1</span>))</a></code></pre>
-<p><img src="reference/figures/README-usage2f-1.png" width="672"></p>
+<p><img src="reference/figures/README-usage2f-1.png" width="700"></p>
 </div>
 <div id="use-of-flags-to-identify-outliers-in-anthropometric-indices-" class="section level3">
 <h3 class="hasAnchor">
@@ -197,13 +210,13 @@
 <a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; [1] 2.802065</span></a></code></pre>
 <p>The NipN data quality toolkit provides an R language function called <code><a href="reference/histNormal.html">histNormal()</a></code> that can help with <em>“by-eye”</em> assessments by superimposing a normal curve on a histogram of the variable of interest:</p>
 <pre class="sourceCode r" id="cb13"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="reference/histNormal.html">histNormal</a></span>(svy<span class="op">$</span>muac) </a></code></pre>
-<p><img src="reference/figures/README-usage4b-1.png" width="672"></p>
+<p><img src="reference/figures/README-usage4b-1.png" width="700"></p>
 <pre class="sourceCode r" id="cb14"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="reference/histNormal.html">histNormal</a></span>(svy<span class="op">$</span>haz) </a></code></pre>
-<p><img src="reference/figures/README-usage4b-2.png" width="672"></p>
+<p><img src="reference/figures/README-usage4b-2.png" width="700"></p>
 <pre class="sourceCode r" id="cb15"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="reference/histNormal.html">histNormal</a></span>(svy<span class="op">$</span>waz) </a></code></pre>
-<p><img src="reference/figures/README-usage4b-3.png" width="672"></p>
+<p><img src="reference/figures/README-usage4b-3.png" width="700"></p>
 <pre class="sourceCode r" id="cb16"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="reference/histNormal.html">histNormal</a></span>(svy<span class="op">$</span>whz)</a></code></pre>
-<p><img src="reference/figures/README-usage4b-4.png" width="672"></p>
+<p><img src="reference/figures/README-usage4b-4.png" width="700"></p>
 </div>
 <div id="assessing-the-extent-of-digit-preference-in-recorded-measurements-" class="section level3">
 <h3 class="hasAnchor">
@@ -239,7 +252,7 @@
 <a class="sourceLine" id="cb19-5" data-line-number="5">ah12 &lt;-<span class="st"> </span><span class="kw"><a href="reference/ageHeaping.html">ageHeaping</a></span>(svy<span class="op">$</span>age)</a></code></pre>
 <p>The saved results may also be plotted:</p>
 <pre class="sourceCode r" id="cb20"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">plot</span>(ah12, <span class="dt">main =</span> <span class="st">"Age-heaping (remainder of age / 12)"</span>)</a></code></pre>
-<p><img src="reference/figures/README-usage5d-1.png" width="672"></p>
+<p><img src="reference/figures/README-usage5d-1.png" width="700"></p>
 </div>
 <div id="examining-the-sex-ratio-" class="section level3">
 <h3 class="hasAnchor">
@@ -271,19 +284,34 @@
 </div>
 </div>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2 class="hasAnchor">
-<a href="#sidebar" class="anchor"></a>License</h2>
-<p><a href="https://www.r-project.org/Licenses/AGPL-3">AGPL-3</a></p>
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Browse source code at <br><a href="https://github.com/nutriverse/nipnTK">https://​github.com/​nutriverse/​nipnTK</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/nutriverse/nipnTK/issues">https://​github.com/​nutriverse/​nipnTK/​issues</a>
+</li>
+</ul>
+</div>
+<div class="license">
+<h2>License</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.r-project.org/Licenses/AGPL-3">AGPL-3</a></li>
+</ul>
+</div>
+<div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Mark Myatt <br><small class="roles"> Author </small>  </li>
-<li>Ernest Guevarra <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Ernest Guevarra <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4887-4415" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" height="16"></a> </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
+</div>
+
+      <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="http://www.repostatus.org/#wip"><img src="http://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
@@ -294,6 +322,7 @@
 <li><a href="https://ci.appveyor.com/project/nutriverse/nipnTK"><img src="https://ci.appveyor.com/api/projects/status/github/nutriverse/nipnTK?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
 <li><a href="https://codecov.io/gh/nutriverse/nipnTK"><img src="https://codecov.io/gh/nutriverse/nipnTK/branch/master/graph/badge.svg" alt="codecov"></a></li>
 </ul>
+</div>
 </div>
 
 </div>
@@ -309,6 +338,8 @@
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

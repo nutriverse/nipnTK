@@ -25,8 +25,6 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
 <meta property="og:title" content="digitPreference — digitPreference" />
 
 <meta property="og:description" content="Digit preference is the observation that the final number in a measurement
@@ -36,6 +34,8 @@ measurement to the nearest whole or half unit, or because data are made up.
 The digitPreference() function assesses the level by which digit
 preference exists in a given dataset using a digit preference score (DPS)." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -43,6 +43,8 @@ preference exists in a given dataset using a digit preference score (DPS)." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 
 
   </head>
@@ -58,8 +60,12 @@ preference exists in a given dataset using a digit preference score (DPS)." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">nipnTK</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">nipnTK</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -83,11 +89,20 @@ preference exists in a given dataset using a digit preference score (DPS)." />
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/nutriverse/nipnTK">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,10 +110,12 @@ preference exists in a given dataset using a digit preference score (DPS)." />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>digitPreference</h1>
+    <small>Source: <a href='https://github.com/nutriverse/nipnTK/blob/master/R/digitPreference.R'><code>R/digitPreference.R</code></a></small>
+    <div class="hidden name"><code>digitPreference.Rd</code></div>
     </div>
 
     
@@ -112,7 +129,7 @@ preference exists in a given dataset using a <code>digit preference score (DPS)<
 
     <pre class="usage"><span class='fu'>digitPreference</span>(<span class='no'>x</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>values</span> <span class='kw'>=</span> <span class='fl'>0</span>:<span class='fl'>9</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -141,8 +158,8 @@ preference exists in a given dataset using a <code>digit preference score (DPS)<
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>DPS definition from:
-    <cite>Kari Kuulasmaa K, Hense HW, Tolonen H (for the WHO MONICA Project), Quality
+    <p>DPS definition from:</p>
+<p><cite>Kari Kuulasmaa K, Hense HW, Tolonen H (for the WHO MONICA Project), Quality
 Assessment of Data on Blood Pressure in the WHO MONICA Project, WHO MONICA
 Project e-publications No. 9, WHO, Geneva, May 1998 available from
 <a href='http://www.thl.fi/publications/monica/bp/bpqa.htm'>http://www.thl.fi/publications/monica/bp/bpqa.htm</a></cite></p>
@@ -185,6 +202,8 @@ Project e-publications No. 9, WHO, Geneva, May 1998 available from
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>
