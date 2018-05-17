@@ -290,7 +290,7 @@ digitPreference(finalDigits, digits = 0)
 #> Digit Preference Score (DPS) = 3.5 (Excellent)
 ```
 
-### Assessing the extent of age heaping in recorded ages.
+### 6\. Assessing the extent of age heaping in recorded ages.
 
 Age heaping is the tendency to report children’s ages to the nearest
 year or adults’ ages to the nearest multiple of five or ten years. Age
@@ -320,7 +320,7 @@ plot(ah12, main = "Age-heaping (remainder of age / 12)")
 
 ![](man/figures/README-usage5d-1.png)<!-- -->
 
-### 6\. Examining the sex ratio.
+### 7\. Examining the sex ratio.
 
 The male to female sex ratio test checks whether the ratio of the number
 of males to the number of females in a survey sample is similar to an
@@ -350,7 +350,7 @@ sexRatioTest(svy$sex, codes = c(1, 2), pop = c(2.658, 2.508))
 #> X-squared = 0.5225, p = 0.4698
 ```
 
-### 7\. Examining age distributions and age by sex distributions.
+### 8\. Examining age distributions and age by sex distributions.
 
 The NiPN data quality toolkit provides an R function called
 `ageChildren()` that performs the model- based Chi-Squared test to check
