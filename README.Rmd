@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
 
 # nipnTK: National Information Platforms for Nutrition (NiPN) data quality toolkit <img src="man/figures/logo_nipn_en.png" align="right" />
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN](https://img.shields.io/cran/v/nipnTK.svg)](https://cran.r-project.org/package=nipnTK)
 [![CRAN](https://img.shields.io/cran/l/nipnTK.svg)](https://CRAN.R-project.org/package=nipnTK)
 [![CRAN](http://cranlogs.r-pkg.org/badges/nipnTK)](https://cran.r-project.org/package=nipnTK)
