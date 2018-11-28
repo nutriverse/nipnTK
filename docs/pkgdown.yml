@@ -1,9 +1,9 @@
 pandoc: 2.0.4
-pkgdown: 1.1.0
+pkgdown: 1.2.0
 pkgdown_sha: ~
 articles:
   Overview: Overview.html
 urls:
-  reference: https://validmeasures.org/bbw/reference
-  article: https://validmeasures.org/bbw/articles
+  reference: https://nutriverse.validmeasures.org/nipnTK/reference
+  article: https://nutriverse.validmeasures.org/nipnTK/articles
 
