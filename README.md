@@ -1,7 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# nipnTK: National Information Platforms for Nutrition (NiPN) data quality toolkit <img src="man/figures/logo_nipn_en.png" align="right" />
+# nipnTK: National Information Platforms for Nutrition (NiPN) data quality toolkit
+
+<!-- <img src="man/figures/logo_nipn_en.png" align="right" display="none" /> -->
 
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
@@ -277,7 +279,7 @@ finalDigits <- sample(x = 0:9, size = 1000, replace = TRUE)
 table(finalDigits)
 #> finalDigits
 #>   0   1   2   3   4   5   6   7   8   9 
-#>  96 104  91 113 115  85  90 107  89 110
+#>  95  80  96 102 106  98 109  95 109 110
 ```
 
 We can now calculate the DPS using `digitPreference()`:
@@ -288,7 +290,7 @@ digitPreference(finalDigits, digits = 0)
 #>  Digit Preference Score
 #> 
 #> data:    finalDigits
-#> Digit Preference Score (DPS) = 3.5 (Excellent)
+#> Digit Preference Score (DPS) = 2.93 (Excellent)
 ```
 
 ### 6\. Assessing the extent of age heaping in recorded ages.
