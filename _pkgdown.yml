@@ -1,6 +1,87 @@
 title: nipnTK
+
 url: https://nutriverse.io/nipnTK
+
 template:
   params:
     bootswatch: sandstone
     #ganalytics: UA-102485058-4
+
+home:
+  #strip_header: true
+  links:
+  - text: Read more about NiPN
+    href: http://www.nipn-nutrition-platforms.org
+
+reference:
+- title: Description
+  contents:
+  - nipnTK
+
+- title: Checking ranges and legal values
+  contents:
+  - outliersUV
+  - rl.ex01
+
+- title: Using scatterplots to identify outliers
+  contents:
+  - outliersMD
+  - sp.ex01
+  - sp.ex02
+
+- title: Identifying outliers using flags
+  contents:
+  - national.SMART
+  - flag.ex01
+  - flag.ex02
+  - flag.ex03
+
+- title: Distribution of variable and indices
+  contents:
+  - histNormal
+  - qqNormalPlot
+  - skewKurt
+  - print.skewKurt
+  - dist.ex01
+
+- title: Digit preference
+  contents:
+  - fullTable
+  - digitPreference
+  - plot.digitPreference
+  - print.digitPreference
+  - dp.ex01
+
+- title: Age heaping
+  contents:
+  - ageHeaping
+  - plot.ageHeaping
+  - print.ageHeaping
+  - dp.ex02
+  - ah.ex01
+
+- title: Sex ratio
+  contents:
+  - sexRatioTest
+  - print.sexRatioTest
+  - dp.ex02
+
+- title: Age and sex distributions
+  contents:
+  - ageChildren
+  - plot.ageChildren
+  - print.ageChildren
+  - ageRatioTest
+  - print.ageRatioTest
+  - sexRatioTest
+  - pyramid.plot
+  - as.ex01
+  - as.ex02
+  - dp.ex02
+  - dp.ex03
+
+- title: Utility
+  contents:
+  - boxText
+  - greensIndex
+  - print.greensIndex
