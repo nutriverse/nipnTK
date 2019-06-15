@@ -2,3 +2,4 @@
 .Rapp.history
 .Rhistory
 inst/doc
+.DS_Store
