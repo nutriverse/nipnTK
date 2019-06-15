@@ -55,8 +55,8 @@ related to anthropometry and anthropometric indices.
 You can install the development version of nipnTK from github with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("validmeasures/nipnTK")
+# install.packages("remotes")
+remotes::install_github("nutriverse/nipnTK")
 ```
 
 ## Usage
