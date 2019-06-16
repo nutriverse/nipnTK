@@ -2,7 +2,7 @@
 % Please edit documentation in R/skewKurt.R
 \name{print.skewKurt}
 \alias{print.skewKurt}
-\title{print.skewKurt}
+\title{\code{print()} helper function for \code{skewKurt()} function}
 \usage{
 \method{print}{skewKurt}(x, ...)
 }

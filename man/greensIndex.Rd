@@ -2,7 +2,7 @@
 % Please edit documentation in R/greensIndex.R
 \name{greensIndex}
 \alias{greensIndex}
-\title{greensIndex}
+\title{Green's Index of Dispersion}
 \usage{
 greensIndex(data, psu, case, replicates = 999)
 }

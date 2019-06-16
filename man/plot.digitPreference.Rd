@@ -2,7 +2,7 @@
 % Please edit documentation in R/digitPreference.R
 \name{plot.digitPreference}
 \alias{plot.digitPreference}
-\title{plot.digitPreference}
+\title{\code{plot()} helper function for \code{digitPreference()} function}
 \usage{
 \method{plot}{digitPreference}(x, main = "", xlab = "Final Digit",
   ylab = "Frequency", cex = 0.75, ...)

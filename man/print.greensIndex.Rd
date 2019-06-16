@@ -2,7 +2,7 @@
 % Please edit documentation in R/greensIndex.R
 \name{print.greensIndex}
 \alias{print.greensIndex}
-\title{print.greensIndex}
+\title{\code{print()} helper function for \code{print.greensIndex()} function}
 \usage{
 \method{print}{greensIndex}(x, ...)
 }

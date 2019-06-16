@@ -2,7 +2,7 @@
 % Please edit documentation in R/ageChildren.R
 \name{print.ageChildren}
 \alias{print.ageChildren}
-\title{print.ageChildren}
+\title{\code{print()} helper function for \code{ageChildren()} function}
 \usage{
 \method{print}{ageChildren}(x, ...)
 }

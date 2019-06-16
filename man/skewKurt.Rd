@@ -2,7 +2,7 @@
 % Please edit documentation in R/skewKurt.R
 \name{skewKurt}
 \alias{skewKurt}
-\title{skewKurt}
+\title{Skew and kurtosis}
 \usage{
 skewKurt(x)
 }

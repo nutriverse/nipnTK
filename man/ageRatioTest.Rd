@@ -2,7 +2,7 @@
 % Please edit documentation in R/ageRatioTest.R
 \name{ageRatioTest}
 \alias{ageRatioTest}
-\title{ageRatioTest}
+\title{Age ratio test}
 \usage{
 ageRatioTest(x, ratio = 0.85)
 }

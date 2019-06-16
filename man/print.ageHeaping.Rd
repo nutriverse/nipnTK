@@ -2,7 +2,7 @@
 % Please edit documentation in R/ageHeaping.R
 \name{print.ageHeaping}
 \alias{print.ageHeaping}
-\title{print.ageHeaping}
+\title{\code{print()} helper functions for \code{ageHeaping()} functions}
 \usage{
 \method{print}{ageHeaping}(x, ...)
 }

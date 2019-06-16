@@ -2,7 +2,7 @@
 % Please edit documentation in R/qqNormalPlot.R
 \name{qqNormalPlot}
 \alias{qqNormalPlot}
-\title{qqNormalPlot}
+\title{Normal quantile-quantile plot}
 \usage{
 qqNormalPlot(x)
 }

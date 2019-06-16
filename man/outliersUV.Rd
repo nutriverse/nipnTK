@@ -2,7 +2,7 @@
 % Please edit documentation in R/outliersUV.R
 \name{outliersUV}
 \alias{outliersUV}
-\title{outliersUV}
+\title{IQR to detect univariate outliers}
 \usage{
 outliersUV(x, fence = 1.5)
 }

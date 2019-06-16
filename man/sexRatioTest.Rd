@@ -2,7 +2,7 @@
 % Please edit documentation in R/sexRatioTest.R
 \name{sexRatioTest}
 \alias{sexRatioTest}
-\title{sexRatioTest}
+\title{Sex Ratio Test}
 \usage{
 sexRatioTest(sex, codes = c(1, 2), pop = c(1, 1))
 }

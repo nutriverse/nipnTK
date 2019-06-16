@@ -2,7 +2,7 @@
 % Please edit documentation in R/digitPreference.R
 \name{print.digitPreference}
 \alias{print.digitPreference}
-\title{print.digitPreference}
+\title{\code{print()} helper function for \code{digitPreference()} function}
 \usage{
 \method{print}{digitPreference}(x, ...)
 }

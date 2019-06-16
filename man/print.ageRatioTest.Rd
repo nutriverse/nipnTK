@@ -2,7 +2,7 @@
 % Please edit documentation in R/ageRatioTest.R
 \name{print.ageRatioTest}
 \alias{print.ageRatioTest}
-\title{print.ageRatioTest}
+\title{\code{print()} helper function for \code{ageRatioTest()} function}
 \usage{
 \method{print}{ageRatioTest}(x, ...)
 }

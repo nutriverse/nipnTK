@@ -2,7 +2,7 @@
 % Please edit documentation in R/pyramid.plot.R
 \name{pyramid.plot}
 \alias{pyramid.plot}
-\title{pyramid.plot}
+\title{Pyramid plot function for creating population pyramids.}
 \usage{
 pyramid.plot(x, g, main = paste("Pyramid plot of",
   deparse(substitute(x)), "by", deparse(substitute(g))),

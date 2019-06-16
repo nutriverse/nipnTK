@@ -2,7 +2,7 @@
 % Please edit documentation in R/sexRatioTest.R
 \name{print.sexRatioTest}
 \alias{print.sexRatioTest}
-\title{print.sexRatioTest}
+\title{\code{print()} helper function for \code{sexRatioTest()} function}
 \usage{
 \method{print}{sexRatioTest}(x, ...)
 }

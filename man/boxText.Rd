@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxText.R
 \name{boxText}
 \alias{boxText}
-\title{boxText}
+\title{Plot text in a coloured bounding box.}
 \usage{
 boxText(x, y, labels, cex = 0.75, col = "white", border = FALSE,
   lwd = 0.5, pad = TRUE)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/outliersMD.R
 \name{outliersMD}
 \alias{outliersMD}
-\title{outliersMD}
+\title{Mahalanobis distance to detect bivariate outliers}
 \usage{
 outliersMD(x, y, alpha = 0.001)
 }

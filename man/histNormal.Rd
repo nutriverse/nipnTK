@@ -2,7 +2,8 @@
 % Please edit documentation in R/histNormal.R
 \name{histNormal}
 \alias{histNormal}
-\title{histNormal}
+\title{Histogram with normal curve superimposed to help with “by-eye” assessments
+of normality of distribution}
 \usage{
 histNormal(x, xlab = deparse(substitute(x)), ylab = "Frequency",
   main = deparse(substitute(x)), breaks = "Sturges", ylim = NULL)

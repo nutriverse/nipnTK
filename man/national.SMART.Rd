@@ -2,7 +2,8 @@
 % Please edit documentation in R/national.SMART.R
 \name{national.SMART}
 \alias{national.SMART}
-\title{national.SMART}
+\title{Add SMART flags to a stratified sample survey (e.g. MICS, DHS, national
+SMART)}
 \usage{
 national.SMART(x, strata, indices = c("haz", "whz", "waz"))
 }
@@ -18,7 +19,8 @@ A data.frame with same structure as \code{x} with a \code{flagSMART}
     column added. This column is coded using sums of powers of two
 }
 \description{
-Add SMART flags to a stratified sample survey (e.g. MICS, DHS, national SMART)
+Add SMART flags to a stratified sample survey (e.g. MICS, DHS, national
+SMART)
 }
 \examples{
 # Use the \\code{national.SMART()} function to flag indices from a national

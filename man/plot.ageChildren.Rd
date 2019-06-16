@@ -2,7 +2,7 @@
 % Please edit documentation in R/ageChildren.R
 \name{plot.ageChildren}
 \alias{plot.ageChildren}
-\title{plot.ageChildren}
+\title{\code{plot()} helper function for \code{ageChildren()} function}
 \usage{
 \method{plot}{ageChildren}(x, ...)
 }

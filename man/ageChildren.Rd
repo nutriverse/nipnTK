@@ -2,7 +2,7 @@
 % Please edit documentation in R/ageChildren.R
 \name{ageChildren}
 \alias{ageChildren}
-\title{ageChildren}
+\title{Goodness of fit to an expected (model-based) age distribution}
 \usage{
 ageChildren(age, u5mr = 0,
   groups = "6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5")

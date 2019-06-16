@@ -2,7 +2,7 @@
 % Please edit documentation in R/ageHeaping.R
 \name{plot.ageHeaping}
 \alias{plot.ageHeaping}
-\title{plot.ageHeaping}
+\title{\code{plot()} helper functions for \code{ageHeaping()} functions}
 \usage{
 \method{plot}{ageHeaping}(x, main = "", xlab = "Remainder",
   ylab = "Frequency", cex = 0.75, ...)
