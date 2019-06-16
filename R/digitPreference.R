@@ -1,20 +1,21 @@
 ################################################################################
 #
-#' digitPreference
+#' Digit preference test
 #'
 #' Digit preference is the observation that the final number in a measurement
 #' occurs with a greater frequency that is expected by chance. This can occur
 #' because of rounding, the practice of increasing or decreasing the value in a
 #' measurement to the nearest whole or half unit, or because data are made up.
 #' The \code{digitPreference()} function assesses the level by which digit
-#' preference exists in a given dataset using a \code{digit preference score (DPS)}.
+#' preference exists in a given dataset using a \code{digit preference score
+#' (DPS)}.
 #'
 #' DPS definition from:
 #'
-#' \cite{Kari Kuulasmaa K, Hense HW, Tolonen H (for the WHO MONICA Project), Quality
-#' Assessment of Data on Blood Pressure in the WHO MONICA Project, WHO MONICA
-#' Project e-publications No. 9, WHO, Geneva, May 1998 available from
-#' \url{http://www.thl.fi/publications/monica/bp/bpqa.htm}}
+#' \cite{Kari Kuulasmaa K, Hense HW, Tolonen H (for the WHO MONICA Project),
+#' Quality Assessment of Data on Blood Pressure in the WHO MONICA Project,
+#' WHO MONICA Project e-publications No. 9, WHO, Geneva, May 1998 available
+#' from \url{http://www.thl.fi/publications/monica/bp/bpqa.htm}}
 #'
 #' @param x Numeric vector
 #' @param digits Number of decimal places in \code{x}. using \code{digits = 1}
@@ -55,8 +56,6 @@ digitPreference <- function(x, digits = 1, values = 0:9) {
 
 ################################################################################
 #
-#' print.digitPreference
-#'
 #' \code{print()} helper function for \code{digitPreference()} function
 #'
 #' @param x Object resulting from applying the \code{digitPreference()} function.
@@ -80,8 +79,6 @@ print.digitPreference <- function(x, ...) {
 
 ################################################################################
 #
-#' plot.digitPreference
-#'
 #' \code{plot()} helper function for \code{digitPreference()} function
 #'
 #' @param x Object resulting from applying the \code{digitPreference()} function.

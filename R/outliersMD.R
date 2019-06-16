@@ -1,7 +1,5 @@
 ################################################################################
 #
-#' outliersMD
-#'
 #' Mahalanobis distance to detect bivariate outliers
 #'
 #' @param x Numeric vector

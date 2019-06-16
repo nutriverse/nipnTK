@@ -48,8 +48,6 @@ ageHeaping <- function(x, divisor = 12) {
 
 ################################################################################
 #
-#' print.ageHeaping
-#'
 #' \code{print()} helper functions for \code{ageHeaping()} functions
 #'
 #' @param x Object resulting from applying the \code{ageHeaping()} function
@@ -75,8 +73,6 @@ print.ageHeaping <- function(x, ...) {
 
 ################################################################################
 #
-#' plot.ageHeaping
-#'
 #' \code{plot()} helper functions for \code{ageHeaping()} functions
 #'
 #' @param x Object resulting from applying the \code{ageHeaping()} function

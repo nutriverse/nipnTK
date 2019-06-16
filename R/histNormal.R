@@ -1,7 +1,5 @@
 ################################################################################
 #
-#' histNormal
-#'
 #' Histogram with normal curve superimposed to help with “by-eye” assessments
 #' of normality of distribution
 #'

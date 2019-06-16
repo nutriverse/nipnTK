@@ -1,6 +1,6 @@
 ################################################################################
 #
-#' ageRatioTest
+#' Age ratio test
 #'
 #' Age Ratio Test is an age-related test of survey and data quality.
 #'
@@ -49,8 +49,6 @@ ageRatioTest <- function(x, ratio = 0.85) {
 
 ################################################################################
 #
-#' print.ageRatioTest
-#'
 #' \code{print()} helper function for \code{ageRatioTest()} function
 #'
 #' @param x Object resulting from applying \code{ageRatioTest()} function

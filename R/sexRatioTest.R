@@ -1,7 +1,5 @@
 ################################################################################
 #
-#' sexRatioTest
-#'
 #' Sex Ratio Test
 #'
 #' @param sex Numeric vector (\code{sex})
@@ -42,8 +40,6 @@ sexRatioTest <- function(sex, codes = c(1, 2), pop = c(1, 1)) {
 
 ################################################################################
 #
-#' print.sexRatioTest
-#'
 #' \code{print()} helper function for \code{sexRatioTest()} function
 #'
 #' @param x Output resulting from applying the \code{sexRatioTest()} function

@@ -1,7 +1,5 @@
 ################################################################################
 #
-#' boxText
-#'
 #' Plot text in a coloured bounding box.
 #'
 #' @param x,y Co-ordinates of text that is to be plotted

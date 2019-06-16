@@ -1,7 +1,5 @@
 ################################################################################
 #
-#' fullTable
-#'
 #' Fill out a one-dimensional table to include a specified range of values
 #'
 #' @param x A vector to tabulate

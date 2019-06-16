@@ -1,7 +1,5 @@
 ################################################################################
 #
-#' ageChildren
-#'
 #' Goodness of fit to an expected (model-based) age distribution
 #'
 #' @param age Vector of ages
@@ -68,8 +66,6 @@ ageChildren <- function(age,
 
 ################################################################################
 #
-#' print.ageChildren
-#'
 #' \code{print()} helper function for \code{ageChildren()} function
 #'
 #' @param x Object resulting from applying \code{ageChildren()} function
@@ -93,8 +89,6 @@ print.ageChildren <- function(x, ...) {
 
 ################################################################################
 #
-#' plot.ageChildren
-#'
 #' \code{plot()} helper function for \code{ageChildren()} function
 #'
 #' @param x Object resulting from applying \code{ageChildren()} function

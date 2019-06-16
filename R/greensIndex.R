@@ -1,6 +1,6 @@
 ################################################################################
 #
-#' greensIndex
+#' Green's Index of Dispersion
 #'
 #' Implementation of the Green's Index of Dispersion by bootstrap. The sampling
 #' distribution of the Green's Index is not well described hence bootstrapping
@@ -73,8 +73,6 @@ greensIndex <- function(data, psu, case, replicates = 999) {
 
 ################################################################################
 #
-#' print.greensIndex
-#'
 #' \code{print()} helper function for \code{print.greensIndex()} function
 #'
 #' @param x Object resulting from applying the \code{greensIndex()} function

@@ -1,7 +1,5 @@
 ################################################################################
 #
-#' skewKurt
-#'
 #' Skew and kurtosis
 #'
 #' @param x Numeric vector
@@ -46,8 +44,6 @@ skewKurt <- function(x) {
 
 ################################################################################
 #
-#' print.skewKurt
-#'
 #' \code{print()} helper function for \code{skewKurt()} function
 #'
 #' @param x Object resulting from applying the \code{skewKurt()} function

@@ -1,7 +1,5 @@
 ################################################################################
 #
-#' pyramid.plot
-#'
 #' Pyramid plot function for creating population pyramids.
 #'
 #' @param x Vector of ages (usually grouped)

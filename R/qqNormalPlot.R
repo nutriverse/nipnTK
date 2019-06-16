@@ -1,7 +1,5 @@
 ################################################################################
 #
-#' qqNormalPlot
-#'
 #' Normal quantile-quantile plot
 #'
 #' @param x A numeric vector

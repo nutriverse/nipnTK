@@ -1,7 +1,5 @@
 ################################################################################
 #
-#' outliersUV
-#'
 #' IQR to detect univariate outliers
 #'
 #' @param x Numeric vector

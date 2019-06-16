@@ -1,8 +1,7 @@
 ################################################################################
 #
-#' national.SMART
-#'
-#' Add SMART flags to a stratified sample survey (e.g. MICS, DHS, national SMART)
+#' Add SMART flags to a stratified sample survey (e.g. MICS, DHS, national
+#' SMART)
 #'
 #' @param x Survey dataset (as an R data.frame) with indices present
 #' @param strata Name of column in \code{x} that defines the strata
