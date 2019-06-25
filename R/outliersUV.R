@@ -15,11 +15,14 @@
 #
 ################################################################################
 
-outliersUV <- function(x, fence = 1.5) {
-  x <- x[!is.na(x)]
-  iqr <- IQR(x)
-  quartiles <- quantile(x, probs = c(0.25, 0.75))
-  cat("\nUnivariate outliers : Lower fence = ", quartiles[1] - fence * iqr, ", Upper fence = ", quartiles[2] + fence * iqr, "\n\n", sep = "")
+outliersUV <- function(x, fence = 1.5)
+{
+  iqr <- IQR(x, na.rm = TRUE)
+  quartiles <- quantile(x, probs = c(0.25, 0.75), na.rm = TRUE)
+  cat("\nUnivariate outliers : Lower fence = ",
+      quartiles[1] - fence * iqr,
+      ", Upper fence = ", quartiles[2] + fence * iqr, "\n\n", sep = "")
   outliers <- (x < quartiles[1] - fence * iqr) | (x > quartiles[2] + fence * iqr)
+  outliers[is.na(outliers)] <- FALSE
   return(outliers)
 }
