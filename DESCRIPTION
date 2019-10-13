@@ -3,9 +3,10 @@ Type: Package
 Title: NiPN Anthropometric Data Toolkit
 Version: 0.1.0
 Authors@R: c(
-    person("Mark", "Myatt", email = "mark@brixtonhealth.com", role = "aut"),
+    person("Mark", "Myatt", comment = c(ORCID = "0000-0003-1119-1474"),
+           email = "mark@brixtonhealth.com", role = c("aut", "cph")),
     person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
-                  email = "ernest@guevarra.io", role = c("ctb", "cre")))
+           email = "ernest@guevarra.io", role = c("ctb", "cre")))
 Description: An implementation of the National Information Platforms for Nutrition 
     (NiPN) analytical methods for assessing quality of anthropometric datasets that 
     include measurements of weight, height or length, MUAC, sex and age. The 
