@@ -9,3 +9,21 @@
 This is a library of R functions for assessing data-quality in nutritional
 anthropometry surveys.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/nutriverse/nipnTK}
+  \item Report bugs at \url{https://github.com/nutriverse/nipnTK/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Ernest Guevarra \email{ernest@guevarra.io} (0000-0002-4887-4415) [contributor]
+
+Authors:
+\itemize{
+  \item Mark Myatt \email{mark@brixtonhealth.com} (0000-0003-1119-1474) [copyright holder]
+}
+
+}
+\keyword{internal}
