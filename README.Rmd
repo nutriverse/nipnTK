@@ -281,7 +281,6 @@ sexRatioTest(svy$sex, codes = c(1, 2), pop = c(2.658, 2.508))
 
 ### 8. Examining age distributions and age by sex distributions.
 
-
 The NiPN data quality toolkit provides an R function called `ageChildren()` that
 performs the model- based Chi-Squared test to check whether there is a difference
 between the number of males and females at different age groups. This function
