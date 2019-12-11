@@ -152,4 +152,40 @@ svy$muac[svy$muac == 999.00] <- NA
 
 Range checks should be repeated after editing the data to ensure that the problems have been fixed:
 
+```{r, echo = TRUE, eval = FALSE}
+summary(svy$muac)
+svy[outliersUV(svy$muac), ]
+svy[outliersUV(svy$muac, fence = 3), ]
+```
+
+Following is a boxplot of the **muac** variable made using:
+
+```{r, echo = TRUE, eval = FALSE}
+boxplot(svy$muac, horizontal = TRUE, xlab = "MUAC (mm)", frame.plot = FALSE)
+```
+
+after the fixes for incorrectly entered data and missing values were made.
+
+```{r, echo = FALSE, eval = TRUE}
+boxplot(svy$muac, horizontal = TRUE, xlab = "MUAC (mm)", frame.plot = FALSE)
+```
+
+There should now be no severe outliers:
+
+```{r, echo = TRUE, eval = FALSE}
+prop.table(table(outliersUV(svy$muac, fence = 3))) * 100
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+prop.table(table(outliersUV(svy$muac, fence = 3))) * 100
+```
+
+It is usually better to identify and edit only the most extreme *univariate* outliers, as we have done here, and use the scatterplot and statistical distance methods described elsewherein this toolkit to identify other potential outliers.
+
+
+
+
+
 
