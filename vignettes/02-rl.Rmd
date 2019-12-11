@@ -1,0 +1,155 @@
+---
+title: "Checking ranges and legal values"
+author: "Mark Myatt"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE,
+  error = FALSE,
+  message = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(nipnTK)
+```
+
+Checking that data are within an acceptable or plausible range is an important basic check to apply to quantitative data. Checking that data are recorded with appropriate legal values or codes is an important basic check to apply to categorical data.
+
+## Checking quantitative data
+
+We will use the dataset `rl.ex01` that is included in the **nipnTK** package.
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- rl.ex01
+head(svy)
+```
+
+```{r, echo = FALSE, eval = TRUE}
+svy <- rl.ex01
+head(svy)
+```
+
+The `rl.ex01` dataset contains anthropometry data from a SMART survey from Angola.
+
+We can use the `summary()` function to examine range (and other summary statistics) of a quantitative variable:
+
+```{r, echo = TRUE, eval = FALSE}
+summary(svy$muac)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+summary(svy$muac)
+```
+
+A graphical examination can also be made:
+
+```{r, echo = TRUE, eval = FALSE}
+boxplot(svy$muac, horizontal = TRUE, xlab = "MUAC (mm)", frame.plot = FALSE)
+```
+
+```{r, echo = FALSE, eval = TRUE}
+boxplot(svy$muac, horizontal = TRUE, xlab = "MUAC (mm)", frame.plot = FALSE)
+```
+
+The "whiskers" on the boxplot extend to 1.5 times the interquartile range from the ends of the box (i.e., the lower and upper quartiles). This is known as the *inner fence*. Data points that are outside the inner fence are considered to be *mild outliers*. The NiPN data quality toolkit provides an R language function `outliersUV()` that uses the same method to identify outliers:
+
+```{r, echo = TRUE, eval = FALSE}
+svy[outliersUV(svy$muac), ]
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+svy[outliersUV(svy$muac), ]
+```
+
+We can count the number of outliers or use:
+
+```{r, echo = TRUE, eval = FALSE}
+table(outliersUV(svy$muac))
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+table(outliersUV(svy$muac))
+```
+
+We can express this as a proportion:
+
+```{r, echo = TRUE, eval = FALSE}
+prop.table(table(outliersUV(svy$muac)))
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+prop.table(table(outliersUV(svy$muac)))
+```
+
+You may find it easier to use percentages:
+
+```{r, echo = TRUE, eval = FALSE}
+prop.table(table(outliersUV(svy$muac))) * 100
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+prop.table(table(outliersUV(svy$muac))) * 100
+```
+
+Some of the **muac** values identified as potential outliers are possible **muac** values:
+
+```{r, echo = FALSE, eval = TRUE}
+svy[outliersUV(svy$muac), ]
+```
+
+The `outliersUV()` function provides a **fence** parameter which alters the threshold at which a data point is considered to be an outlier.
+
+The default **fence = 1.5** defines the *inner fence* (i.e **1.5** times the interquartile range below the lower quartile and above the upper quartile). This will identify *mild* and *severe* outliers.
+
+The value **fence = 3** defines the *outer fence* (i.e **3** times the interquartile range below the lower quartile and above the upper quartile). This will identify *severe* outliers only:
+
+```{r, echo = TRUE, eval = FALSE}
+svy[outliersUV(svy$muac, fence = 3), ]
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+svy[outliersUV(svy$muac, fence = 3), ]
+```
+
+There is something wrong with all of these values of **muac**.
+
+The intention was that the **muac** variable records mid-upper-arm-circumference (MUAC) in mm. There are some impossibly small (i.e. **11.1**, **12.4**, and **13.2**) and impossibly large values (i.e. **999.0**).
+
+The three impossibly small values are probably due to data being recorded in cm rather than mm. It is probably safe to change these three values to 111, 124 and 132. It is easiest to do this each record separately:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$muac[svy$muac == 11.1] <- 111
+```
+
+An alternative approach is to specify row numbers instead of values:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$muac[381] <- 124
+svy$muac[594] <- 132
+```
+
+The three **999.0** values are missing values coded as 999.0. It is safe to set these three values to missing using the special NA value:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$muac[svy$muac == 999.00] <- NA
+```
+
+Range checks should be repeated after editing the data to ensure that the problems have been fixed:
+
+
