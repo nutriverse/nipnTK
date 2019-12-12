@@ -1,0 +1,15 @@
+---
+title: "Identifying outliers using flags"
+author: "Mark Myatt"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(nipnTK)
+```

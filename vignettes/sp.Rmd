@@ -1,0 +1,15 @@
+---
+title: "Using scatterplots to identify outliers"
+author: "Mark Myatt"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(nipnTK)
+```
