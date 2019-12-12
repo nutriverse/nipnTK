@@ -12,4 +12,4 @@
 ^netlify\.toml$
 ^_pkgdown\.yml$
 ^LICENSE\.md$
-^vignettes/Checking-ranges-and-legal-values\.Rmd$
+^vignettes/02-rl\.Rmd$
