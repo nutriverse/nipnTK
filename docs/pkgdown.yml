@@ -2,8 +2,8 @@ pandoc: 2.3.1
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
-  01-tk: 01-tk.html
-  02-rl: 02-rl.html
+  a_tk: a_tk.html
+  b_rl: b_rl.html
 urls:
   reference: https://nutriverse.io/nipnTK/reference
   article: https://nutriverse.io/nipnTK/articles
