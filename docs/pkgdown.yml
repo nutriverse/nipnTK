@@ -2,8 +2,15 @@ pandoc: 2.3.1
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
-  a_tk: a_tk.html
-  b_rl: b_rl.html
+  ad: ad.html
+  ah: ah.html
+  as: as.html
+  dp: dp.html
+  flagging: flagging.html
+  rl: rl.html
+  sp: sp.html
+  sr: sr.html
+  tk: tk.html
 urls:
   reference: https://nutriverse.io/nipnTK/reference
   article: https://nutriverse.io/nipnTK/articles
