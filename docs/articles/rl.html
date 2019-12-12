@@ -244,6 +244,54 @@
 #&gt;   100</code></pre>
 <p>It is usually better to identify and edit only the most extreme <em>univariate</em> outliers, as we have done here, and use the scatterplot and statistical distance methods described elsewhere in this toolkit to identify other potential outliers.</p>
 </div>
+<div id="editing-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#editing-data" class="anchor"></a>Editing data</h2>
+<p>We have edited records with outliers at the <em>R</em> command line.</p>
+<p>It is a good idea to edit data at the command line or using a script containing the required commands.</p>
+<p>A script provides a record of changes made to the data.</p>
+<p><em>R</em> also keeps a record of whatever you do at the command line in a “history file”. The history file is a plain text file which is usually called .Rhistory and stored in your home directory.</p>
+<p>Some regulatory authorities require you to keep a history file.</p>
+<p>Some publications may require you to provide a “reproducible data analysis”. This could be an edited and annotated copy of your history file.</p>
+<p>The <strong>edit()</strong> function provides a basic tool for editing data interactively.</p>
+<p>Editing data using the <strong>edit()</strong> function is typically a three stage process:</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a new object containing only the data that requires editing.</p></li>
+<li><p>Use the <strong>edit()</strong> function to edit data in the new object closing the data editor window when you are finished.</p></li>
+<li><p>Replace the old records with the edited records.</p></li>
+</ol>
+<p>We will try this using a separate copy of the example data:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">x &lt;-<span class="st"> </span>rl.ex01</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">records2update &lt;-<span class="st"> </span>x[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(x<span class="op">$</span>muac, <span class="dt">fence =</span> <span class="dv">3</span>), ]</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">records2update &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/edit.html">edit</a></span>(records2update)</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">x[<span class="kw"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span>(records2update), ] &lt;-<span class="st"> </span>records2update</a></code></pre></div>
+<p>We can check that the edits have been made using:</p>
+<pre><code>#&gt; 
+#&gt; Univariate outliers : Lower fence = 68, Upper fence = 208</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">x[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(x<span class="op">$</span>muac, <span class="dt">fence =</span> <span class="dv">3</span>), ]</a></code></pre></div>
+<p>If you have fixed the problems in the data this should return:</p>
+<pre><code>#&gt; 
+#&gt; Univariate outliers : Lower fence = 68, Upper fence = 208
+#&gt;     age sex weight height  muac oedema
+#&gt; 126  16   2    9.0   74.6 999.0      2
+#&gt; 135  18   2    8.5   74.5 999.0      2
+#&gt; 227   8   M    6.2   66.0  11.1      2
+#&gt; 381  24   1   10.8   82.8  12.4      2
+#&gt; 594  21   2    9.8   76.5  13.2      2
+#&gt; 752  48   2   15.6  102.2 999.0      2</code></pre>
+<p>The <strong>edit()</strong> function works differently on different operating systems and with different graphical user interfaces. If you are using <em>RStudio</em> or <em>RAnalyticFlow</em> on OS X you will need to install <em>XQuartz</em> if you want to use the <strong>edit()</strong> function. <em>XQuarts</em> is available from:</p>
+<p><a href="https://www.xquartz.org/index.html">https://www.xquartz.org/index.html</a></p>
+</div>
+<div id="checking-categorical-variables" class="section level2">
+<h2 class="hasAnchor">
+<a href="#checking-categorical-variables" class="anchor"></a>Checking categorical variables</h2>
+<p>We can use the <strong>table()</strong> function to examine the codes used in categorical variables. For example:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(svy<span class="op">$</span>sex)</a></code></pre></div>
+<p>returns:</p>
+<pre><code>#&gt; 
+#&gt;   1   2   3   F   M 
+#&gt; 404 458   1  24  19</code></pre>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -253,6 +301,8 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#checking-quantitative-data">Checking quantitative data</a></li>
+      <li><a href="#editing-data">Editing data</a></li>
+      <li><a href="#checking-categorical-variables">Checking categorical variables</a></li>
       </ul>
 </div>
       </div>
