@@ -117,14 +117,13 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(nipnTK)</a></code></pre></div>
 <p>Checking that data are within an acceptable or plausible range is an important basic check to apply to quantitative data. Checking that data are recorded with appropriate legal values or codes is an important basic check to apply to categorical data.</p>
 <div id="checking-quantitative-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#checking-quantitative-data" class="anchor"></a>Checking quantitative data</h2>
 <p>We will use the dataset <code>rl.ex01</code> that is included in the <strong>nipnTK</strong> package.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">svy &lt;-<span class="st"> </span>rl.ex01</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(svy)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">svy &lt;-<span class="st"> </span>rl.ex01</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(svy)</a></code></pre></div>
 <pre><code>#&gt;   age sex weight height muac oedema
 #&gt; 1  12   2    6.7   68.5  148      2
 #&gt; 2   6   1    6.4   65.0  125      2
@@ -134,15 +133,15 @@
 #&gt; 6   8   1    7.7   66.5  146      2</code></pre>
 <p>The <code>rl.ex01</code> dataset contains anthropometry data from a SMART survey from Angola.</p>
 <p>We can use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to examine range (and other summary statistics) of a quantitative variable:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(svy<span class="op">$</span>muac)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(svy<span class="op">$</span>muac)</a></code></pre></div>
 <p>This returns:</p>
 <pre><code>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #&gt;    11.1   128.0   139.0   140.3   148.0   999.0</code></pre>
 <p>A graphical examination can also be made:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(svy<span class="op">$</span>muac, <span class="dt">horizontal =</span> <span class="ot">TRUE</span>, <span class="dt">xlab =</span> <span class="st">"MUAC (mm)"</span>, <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(svy<span class="op">$</span>muac, <span class="dt">horizontal =</span> <span class="ot">TRUE</span>, <span class="dt">xlab =</span> <span class="st">"MUAC (mm)"</span>, <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="rl_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>The “whiskers” on the boxplot extend to 1.5 times the interquartile range from the ends of the box (i.e., the lower and upper quartiles). This is known as the <em>inner fence</em>. Data points that are outside the inner fence are considered to be <em>mild outliers</em>. The NiPN data quality toolkit provides an R language function <code><a href="../reference/outliersUV.html">outliersUV()</a></code> that uses the same method to identify outliers:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">svy[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac), ]</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">svy[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac), ]</a></code></pre></div>
 <p>This returns:</p>
 <pre><code>#&gt; 
 #&gt; Univariate outliers : Lower fence = 98, Upper fence = 178
@@ -162,7 +161,7 @@
 #&gt; 756  59   1   19.4  101.1 180.0      2
 #&gt; 873  59   1   20.6  109.4 179.0      2</code></pre>
 <p>We can count the number of outliers or use:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac))</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac))</a></code></pre></div>
 <p>This returns:</p>
 <pre><code>#&gt; 
 #&gt; Univariate outliers : Lower fence = 98, Upper fence = 178
@@ -170,7 +169,7 @@
 #&gt; FALSE  TRUE 
 #&gt;   892    14</code></pre>
 <p>We can express this as a proportion:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac)))</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac)))</a></code></pre></div>
 <p>This returns:</p>
 <pre><code>#&gt; 
 #&gt; Univariate outliers : Lower fence = 98, Upper fence = 178
@@ -178,7 +177,7 @@
 #&gt;      FALSE       TRUE 
 #&gt; 0.98454746 0.01545254</code></pre>
 <p>You may find it easier to use percentages:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac))) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac))) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a></code></pre></div>
 <p>This returns:</p>
 <pre><code>#&gt; 
 #&gt; Univariate outliers : Lower fence = 98, Upper fence = 178
@@ -206,7 +205,7 @@
 <p>The <code><a href="../reference/outliersUV.html">outliersUV()</a></code> function provides a <strong>fence</strong> parameter which alters the threshold at which a data point is considered to be an outlier.</p>
 <p>The default <strong>fence = 1.5</strong> defines the <em>inner fence</em> (i.e <strong>1.5</strong> times the interquartile range below the lower quartile and above the upper quartile). This will identify <em>mild</em> and <em>severe</em> outliers.</p>
 <p>The value <strong>fence = 3</strong> defines the <em>outer fence</em> (i.e <strong>3</strong> times the interquartile range below the lower quartile and above the upper quartile). This will identify <em>severe</em> outliers only:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">svy[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac, <span class="dt">fence =</span> <span class="dv">3</span>), ]</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">svy[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac, <span class="dt">fence =</span> <span class="dv">3</span>), ]</a></code></pre></div>
 <p>This returns:</p>
 <pre><code>#&gt; 
 #&gt; Univariate outliers : Lower fence = 68, Upper fence = 208
@@ -220,22 +219,22 @@
 <p>There is something wrong with all of these values of <strong>muac</strong>.</p>
 <p>The intention was that the <strong>muac</strong> variable records mid-upper-arm-circumference (MUAC) in mm. There are some impossibly small (i.e. <strong>11.1</strong>, <strong>12.4</strong>, and <strong>13.2</strong>) and impossibly large values (i.e. <strong>999.0</strong>).</p>
 <p>The three impossibly small values are probably due to data being recorded in cm rather than mm. It is probably safe to change these three values to 111, 124 and 132. It is easiest to do this each record separately:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">svy<span class="op">$</span>muac[svy<span class="op">$</span>muac <span class="op">==</span><span class="st"> </span><span class="fl">11.1</span>] &lt;-<span class="st"> </span><span class="dv">111</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">svy<span class="op">$</span>muac[svy<span class="op">$</span>muac <span class="op">==</span><span class="st"> </span><span class="fl">11.1</span>] &lt;-<span class="st"> </span><span class="dv">111</span></a></code></pre></div>
 <p>An alternative approach is to specify row numbers instead of values:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">svy<span class="op">$</span>muac[<span class="dv">381</span>] &lt;-<span class="st"> </span><span class="dv">124</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">svy<span class="op">$</span>muac[<span class="dv">594</span>] &lt;-<span class="st"> </span><span class="dv">132</span></a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">svy<span class="op">$</span>muac[<span class="dv">381</span>] &lt;-<span class="st"> </span><span class="dv">124</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">svy<span class="op">$</span>muac[<span class="dv">594</span>] &lt;-<span class="st"> </span><span class="dv">132</span></a></code></pre></div>
 <p>The three <strong>999.0</strong> values are missing values coded as 999.0. It is safe to set these three values to missing using the special NA value:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">svy<span class="op">$</span>muac[svy<span class="op">$</span>muac <span class="op">==</span><span class="st"> </span><span class="fl">999.00</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">svy<span class="op">$</span>muac[svy<span class="op">$</span>muac <span class="op">==</span><span class="st"> </span><span class="fl">999.00</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
 <p>Range checks should be repeated after editing the data to ensure that the problems have been fixed:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(svy<span class="op">$</span>muac)</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">svy[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac), ]</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">svy[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac, <span class="dt">fence =</span> <span class="dv">3</span>), ]</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(svy<span class="op">$</span>muac)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">svy[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac), ]</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">svy[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac, <span class="dt">fence =</span> <span class="dv">3</span>), ]</a></code></pre></div>
 <p>Following is a boxplot of the <strong>muac</strong> variable made using:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(svy<span class="op">$</span>muac, <span class="dt">horizontal =</span> <span class="ot">TRUE</span>, <span class="dt">xlab =</span> <span class="st">"MUAC (mm)"</span>, <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(svy<span class="op">$</span>muac, <span class="dt">horizontal =</span> <span class="ot">TRUE</span>, <span class="dt">xlab =</span> <span class="st">"MUAC (mm)"</span>, <span class="dt">frame.plot =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>after the fixes for incorrectly entered data and missing values were made.</p>
 <p><img src="rl_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
 <p>There should now be no severe outliers:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac, <span class="dt">fence =</span> <span class="dv">3</span>))) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(svy<span class="op">$</span>muac, <span class="dt">fence =</span> <span class="dv">3</span>))) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a></code></pre></div>
 <p>returns:</p>
 <pre><code>#&gt; 
 #&gt; Univariate outliers : Lower fence = 68, Upper fence = 208
@@ -253,22 +252,22 @@
 <p><em>R</em> also keeps a record of whatever you do at the command line in a “history file”. The history file is a plain text file which is usually called .Rhistory and stored in your home directory.</p>
 <p>Some regulatory authorities require you to keep a history file.</p>
 <p>Some publications may require you to provide a “reproducible data analysis”. This could be an edited and annotated copy of your history file.</p>
-<p>The <strong>edit()</strong> function provides a basic tool for editing data interactively.</p>
-<p>Editing data using the <strong>edit()</strong> function is typically a three stage process:</p>
+<p>The <code><a href="https://rdrr.io/r/utils/edit.html">edit()</a></code> function provides a basic tool for editing data interactively.</p>
+<p>Editing data using the <code><a href="https://rdrr.io/r/utils/edit.html">edit()</a></code> function is typically a three stage process:</p>
 <ol style="list-style-type: decimal">
 <li><p>Create a new object containing only the data that requires editing.</p></li>
-<li><p>Use the <strong>edit()</strong> function to edit data in the new object closing the data editor window when you are finished.</p></li>
+<li><p>Use the <code><a href="https://rdrr.io/r/utils/edit.html">edit()</a></code> function to edit data in the new object closing the data editor window when you are finished.</p></li>
 <li><p>Replace the old records with the edited records.</p></li>
 </ol>
 <p>We will try this using a separate copy of the example data:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">x &lt;-<span class="st"> </span>rl.ex01</a>
-<a class="sourceLine" id="cb25-2" data-line-number="2">records2update &lt;-<span class="st"> </span>x[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(x<span class="op">$</span>muac, <span class="dt">fence =</span> <span class="dv">3</span>), ]</a>
-<a class="sourceLine" id="cb25-3" data-line-number="3">records2update &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/edit.html">edit</a></span>(records2update)</a>
-<a class="sourceLine" id="cb25-4" data-line-number="4">x[<span class="kw"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span>(records2update), ] &lt;-<span class="st"> </span>records2update</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">x &lt;-<span class="st"> </span>rl.ex01</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">records2update &lt;-<span class="st"> </span>x[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(x<span class="op">$</span>muac, <span class="dt">fence =</span> <span class="dv">3</span>), ]</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">records2update &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/edit.html">edit</a></span>(records2update)</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">x[<span class="kw"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span>(records2update), ] &lt;-<span class="st"> </span>records2update</a></code></pre></div>
 <p>We can check that the edits have been made using:</p>
 <pre><code>#&gt; 
 #&gt; Univariate outliers : Lower fence = 68, Upper fence = 208</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">x[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(x<span class="op">$</span>muac, <span class="dt">fence =</span> <span class="dv">3</span>), ]</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">x[<span class="kw"><a href="../reference/outliersUV.html">outliersUV</a></span>(x<span class="op">$</span>muac, <span class="dt">fence =</span> <span class="dv">3</span>), ]</a></code></pre></div>
 <p>If you have fixed the problems in the data this should return:</p>
 <pre><code>#&gt; 
 #&gt; Univariate outliers : Lower fence = 68, Upper fence = 208
@@ -279,18 +278,54 @@
 #&gt; 381  24   1   10.8   82.8  12.4      2
 #&gt; 594  21   2    9.8   76.5  13.2      2
 #&gt; 752  48   2   15.6  102.2 999.0      2</code></pre>
-<p>The <strong>edit()</strong> function works differently on different operating systems and with different graphical user interfaces. If you are using <em>RStudio</em> or <em>RAnalyticFlow</em> on OS X you will need to install <em>XQuartz</em> if you want to use the <strong>edit()</strong> function. <em>XQuarts</em> is available from:</p>
+<p>The <code><a href="https://rdrr.io/r/utils/edit.html">edit()</a></code> function works differently on different operating systems and with different graphical user interfaces. If you are using <em>RStudio</em> or <em>RAnalyticFlow</em> on OS X you will need to install <em>XQuartz</em> if you want to use the <code><a href="https://rdrr.io/r/utils/edit.html">edit()</a></code> function. <em>XQuarts</em> is available from:</p>
 <p><a href="https://www.xquartz.org/index.html">https://www.xquartz.org/index.html</a></p>
 </div>
 <div id="checking-categorical-variables" class="section level2">
 <h2 class="hasAnchor">
 <a href="#checking-categorical-variables" class="anchor"></a>Checking categorical variables</h2>
 <p>We can use the <strong>table()</strong> function to examine the codes used in categorical variables. For example:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(svy<span class="op">$</span>sex)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(svy<span class="op">$</span>sex)</a></code></pre></div>
 <p>returns:</p>
 <pre><code>#&gt; 
 #&gt;   1   2   3   F   M 
 #&gt; 404 458   1  24  19</code></pre>
+<p>The intention was that the <strong>sex</strong> variable was coded using 1 for male and 2 for female but in a small number of records the codes <strong>M</strong> for male and <strong>F</strong> for female have been used. A mixed coding scheme like this will complicate data-management and data-analysis. Data in the sex variable should be edited to ensure that consistent coding is used:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">svy<span class="op">$</span>sex[svy<span class="op">$</span>sex <span class="op">==</span><span class="st"> "M"</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">svy<span class="op">$</span>sex[svy<span class="op">$</span>sex <span class="op">==</span><span class="st"> "F"</span>] &lt;-<span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<p>You may find that a few records contain meaningless codes. The code <strong>3</strong> in the example dataset has, very probably, no meaning and is likely to be a simple data entry error. This record should be checked and corrected, if possible. If the record cannot be corrected then the <strong>sex</strong> variable should be set to missing:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">svy<span class="op">$</span>sex[svy<span class="op">$</span>sex <span class="op">==</span><span class="st"> </span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
+<p>Legal value checks should be repeated after editing to ensure that problems have been fixed:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(svy<span class="op">$</span>sex)</a></code></pre></div>
+<p>now returns:</p>
+<pre><code>#&gt; 
+#&gt;   1   2   3   F   M 
+#&gt; 423 482   0   0   0</code></pre>
+<p>The table contains cells for the values <strong>M</strong>, <strong>F</strong>, and <strong>3</strong> because <em>R</em> imported the variable as a categorical or “factor” variable:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(svy)</a></code></pre></div>
+<p>returns:</p>
+<pre><code>#&gt; 'data.frame':    906 obs. of  6 variables:
+#&gt;  $ age   : int  12 6 6 8 12 8 18 9 12 12 ...
+#&gt;  $ sex   : Factor w/ 5 levels "1","2","3","F",..: 2 1 2 1 1 1 1 1 2 1 ...
+#&gt;  $ weight: num  6.7 6.4 6.5 7.2 6.1 7.7 6.4 7.8 7.5 6.5 ...
+#&gt;  $ height: num  68.5 65 65.6 68.4 65.4 66.5 66.7 65.3 69.1 70.3 ...
+#&gt;  $ muac  : num  148 125 125 144 114 146 119 140 138 121 ...
+#&gt;  $ oedema: int  2 2 2 2 2 2 2 2 2 2 ...</code></pre>
+<p>We can fix this by redefining the levels of the sex variable:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/levels.html">levels</a></span>(svy<span class="op">$</span>sex) &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(svy<span class="op">$</span>sex)</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb36-4" data-line-number="4"><span class="co">#&gt;   1   2 </span></a>
+<a class="sourceLine" id="cb36-5" data-line-number="5"><span class="co">#&gt; 423 482</span></a></code></pre></div>
+</div>
+<div id="saving-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#saving-changes" class="anchor"></a>Saving changes</h2>
+<p>We have edited some data.</p>
+<p>We usually want to save changes.</p>
+<p>It is simple to save a dataset in a comma-separated-value (CSV) text file using the <code><a href="https://rdrr.io/r/utils/write.table.html">write.table()</a></code> function:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span>(<span class="dt">x =</span> svy, <span class="dt">file =</span> <span class="st">"rl.ex01.clean.csv"</span>, <span class="dt">sep =</span> <span class="st">","</span>, <span class="dt">quote =</span> <span class="ot">FALSE</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>, <span class="dt">fileEncoding =</span> <span class="st">"ASCII"</span>)</a></code></pre></div>
+<p><em>R</em> can work with a variety of files format but it is usually simplest to work with simple text files.</p>
 </div>
   </div>
 
@@ -303,6 +338,7 @@
 <li><a href="#checking-quantitative-data">Checking quantitative data</a></li>
       <li><a href="#editing-data">Editing data</a></li>
       <li><a href="#checking-categorical-variables">Checking categorical variables</a></li>
+      <li><a href="#saving-changes">Saving changes</a></li>
       </ul>
 </div>
       </div>

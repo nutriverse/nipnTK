@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, echo = FALSE}
 library(nipnTK)
 ```
 
@@ -198,13 +198,13 @@ Some regulatory authorities require you to keep a history file.
 
 Some publications may require you to provide a "reproducible data analysis". This could be an edited and annotated copy of your history file.
 
-The **edit()** function provides a basic tool for editing data interactively.
+The `edit()` function provides a basic tool for editing data interactively.
 
-Editing data using the **edit()** function is typically a three stage process:
+Editing data using the `edit()` function is typically a three stage process:
 
 1. Create a new object containing only the data that requires editing.
 
-2. Use the **edit()** function to edit data in the new object closing the data editor window when you are finished.
+2. Use the `edit()` function to edit data in the new object closing the data editor window when you are finished.
 
 3. Replace the old records with the edited records.
 
@@ -236,7 +236,7 @@ If you have fixed the problems in the data this should return:
 x[outliersUV(x$muac, fence = 3), ]
 ```
 
-The **edit()** function works differently on different operating systems and with different graphical user interfaces. If you are using *RStudio* or *RAnalyticFlow* on OS X you will need to install *XQuartz* if you want to use the **edit()** function. *XQuarts* is available from:
+The `edit()` function works differently on different operating systems and with different graphical user interfaces. If you are using *RStudio* or *RAnalyticFlow* on OS X you will need to install *XQuartz* if you want to use the `edit()` function. *XQuarts* is available from:
 
 [https://www.xquartz.org/index.html](https://www.xquartz.org/index.html)
 
@@ -254,5 +254,61 @@ returns:
 table(svy$sex)
 ```
 
+The intention was that the **sex** variable was coded using 1 for male and 2 for female but in a small number of records the codes **M** for male and **F** for female have been used. A mixed coding scheme like this will complicate data-management and data-analysis. Data in the sex variable should be edited to ensure that consistent coding is used:
 
+```{r, echo = TRUE, eval = TRUE}
+svy$sex[svy$sex == "M"] <- 1
+svy$sex[svy$sex == "F"] <- 2
+```
+
+You may find that a few records contain meaningless codes. The code **3** in the example dataset has, very probably, no meaning and is likely to be a simple data entry error. This record should be checked and corrected, if possible. If the record cannot be corrected then the **sex** variable should be set to missing:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$sex[svy$sex == 3] <- NA
+```
+
+Legal value checks should be repeated after editing to ensure that problems have been fixed:
+
+```{r, echo = TRUE, eval = FALSE}
+table(svy$sex)
+```
+
+now returns:
+
+```{r, echo = FALSE, eval = TRUE}
+table(svy$sex)
+```
+
+The table contains cells for the values **M**, **F**, and **3** because *R* imported the variable as a categorical or "factor" variable:
+
+```{r, echo = TRUE, eval = FALSE}
+str(svy)
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+str(svy)
+```
+
+We can fix this by redefining the levels of the sex variable:
+
+```{r, echo = TRUE, eval = TRUE}
+levels(svy$sex) <- c("1", "2", NA, NA, NA)
+table(svy$sex)
+```
+
+## Saving changes
+
+We have edited some data.
+
+We usually want to save changes.
+
+It is simple to save a dataset in a comma-separated-value (CSV) text file using the `write.table()` function:
+
+```{r, echo = TRUE, eval = FALSE}
+write.table(x = svy, file = "rl.ex01.clean.csv", sep = ",", quote = FALSE, row.names = FALSE, fileEncoding = "ASCII")
+```
+
+*R* can work with a variety of files format but it is usually simplest to work with simple text files.
 
