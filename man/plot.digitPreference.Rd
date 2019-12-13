@@ -4,8 +4,7 @@
 \alias{plot.digitPreference}
 \title{\code{plot()} helper function for \code{digitPreference()} function}
 \usage{
-\method{plot}{digitPreference}(x, main = "", xlab = "Final Digit",
-  ylab = "Frequency", cex = 0.75, ...)
+\method{plot}{digitPreference}(x, main = "", xlab = "Final Digit", ylab = "Frequency", cex = 0.75, ...)
 }
 \arguments{
 \item{x}{Object resulting from applying the \code{digitPreference()} function.}

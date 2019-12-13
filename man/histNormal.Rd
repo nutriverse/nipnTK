@@ -5,8 +5,14 @@
 \title{Histogram with normal curve superimposed to help with “by-eye” assessments
 of normality of distribution}
 \usage{
-histNormal(x, xlab = deparse(substitute(x)), ylab = "Frequency",
-  main = deparse(substitute(x)), breaks = "Sturges", ylim = NULL)
+histNormal(
+  x,
+  xlab = deparse(substitute(x)),
+  ylab = "Frequency",
+  main = deparse(substitute(x)),
+  breaks = "Sturges",
+  ylim = NULL
+)
 }
 \arguments{
 \item{x}{A numeric vector}
@@ -26,7 +32,7 @@ Histogram with normal curve superimposed to help with “by-eye” assessments
 of normality of distribution
 }
 \examples{
-# \\code{histNormal()} with data from a SMART survey in Kabul, Afghanistan
+# \code{histNormal()} with data from a SMART survey in Kabul, Afghanistan
 # (dist.ex01)
 svy <- dist.ex01
 histNormal(svy$muac)

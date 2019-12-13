@@ -4,11 +4,16 @@
 \alias{pyramid.plot}
 \title{Pyramid plot function for creating population pyramids.}
 \usage{
-pyramid.plot(x, g, main = paste("Pyramid plot of",
-  deparse(substitute(x)), "by", deparse(substitute(g))),
+pyramid.plot(
+  x,
+  g,
+  main = paste("Pyramid plot of", deparse(substitute(x)), "by", deparse(substitute(g))),
   xlab = paste(deparse(substitute(g)), "(", levels(as.factor(g))[1], "/",
-  levels(as.factor(g))[2], ")"), ylab = deparse(substitute(x)),
-  col = "white", ...)
+    levels(as.factor(g))[2], ")"),
+  ylab = deparse(substitute(x)),
+  col = "white",
+  ...
+)
 }
 \arguments{
 \item{x}{Vector of ages (usually grouped)}
@@ -35,7 +40,7 @@ A table of \code{x} by \code{g} (invisible)
 Pyramid plot function for creating population pyramids.
 }
 \examples{
-# Use \\code{pyramid.plot()} on anthropometric data from a SMART survey in
+# Use \code{pyramid.plot()} on anthropometric data from a SMART survey in
 # Kabul, Afghanistan (dp.ex02)
 svy <- dp.ex02
 pyramid.plot(svy$age, svy$sex)

@@ -19,7 +19,7 @@ A table object including zero cells
 Fill out a one-dimensional table to include a specified range of values
 }
 \examples{
-# Generate some artificial data and then apply \\code{fullTable()}
+# Generate some artificial data and then apply \code{fullTable()}
 set.seed(0)
 finalDigits <- sample(x = 0:9, size = 1000, replace = TRUE)
 fullTable(finalDigits)

@@ -4,8 +4,16 @@
 \alias{boxText}
 \title{Plot text in a coloured bounding box.}
 \usage{
-boxText(x, y, labels, cex = 0.75, col = "white", border = FALSE,
-  lwd = 0.5, pad = TRUE)
+boxText(
+  x,
+  y,
+  labels,
+  cex = 0.75,
+  col = "white",
+  border = FALSE,
+  lwd = 0.5,
+  pad = TRUE
+)
 }
 \arguments{
 \item{x, y}{Co-ordinates of text that is to be plotted}

@@ -27,7 +27,7 @@ A list of class \code{sexRatioTest} with:
 Sex Ratio Test
 }
 \examples{
-# Use \\code{sexRatioTest()} on household roster data from a survey in Tanzania
+# Use \code{sexRatioTest()} on household roster data from a survey in Tanzania
 # (as.ex01) and census data of Tanzania extracted from Wolfram|Alpha knowledge
 # engine (as.ex02)
 svy <- as.ex01

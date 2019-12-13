@@ -18,7 +18,7 @@ Printed output of \code{skewKurt()} function
 \code{print()} helper function for \code{skewKurt()} function
 }
 \examples{
-# Use \\code{skewKurt()} on an anthropometric data from a SMART survey in
+# Use \code{skewKurt()} on an anthropometric data from a SMART survey in
 # Kabul, Afghanistan (dist.ex01)
 svy <- dist.ex01
 sk <- skewKurt(svy$muac)

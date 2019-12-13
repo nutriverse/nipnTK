@@ -18,7 +18,7 @@ A logical vector (\code{TRUE} for an outlier)
 IQR to detect univariate outliers
 }
 \examples{
-# Use \\code{outliersUV()} to detect univariate outliers in an anthropometric
+# Use \code{outliersUV()} to detect univariate outliers in an anthropometric
 # dataset from a SMART survey from Angola (rl.ex01)
 svy <- rl.ex01
 svy[outliersUV(svy$muac), ]
