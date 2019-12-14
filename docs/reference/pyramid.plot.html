@@ -153,11 +153,16 @@
     <p>Pyramid plot function for creating population pyramids.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pyramid.plot</span>(<span class='no'>x</span>, <span class='no'>g</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Pyramid plot of"</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(<span class='no'>x</span>)), <span class='st'>"by"</span>, <span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(<span class='no'>g</span>))),
+    <pre class="usage"><span class='fu'>pyramid.plot</span>(
+  <span class='no'>x</span>,
+  <span class='no'>g</span>,
+  <span class='kw'>main</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Pyramid plot of"</span>, <span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(<span class='no'>x</span>)), <span class='st'>"by"</span>, <span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(<span class='no'>g</span>))),
   <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(<span class='no'>g</span>)), <span class='st'>"("</span>, <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>g</span>))[<span class='fl'>1</span>], <span class='st'>"/"</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>g</span>))[<span class='fl'>2</span>], <span class='st'>")"</span>), <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(<span class='no'>x</span>)),
-  <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='no'>...</span>)</pre>
+    <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>g</span>))[<span class='fl'>2</span>], <span class='st'>")"</span>),
+  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(<span class='no'>x</span>)),
+  <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
