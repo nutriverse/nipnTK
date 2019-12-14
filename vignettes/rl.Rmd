@@ -307,7 +307,8 @@ We usually want to save changes.
 It is simple to save a dataset in a comma-separated-value (CSV) text file using the `write.table()` function:
 
 ```{r, echo = TRUE, eval = FALSE}
-write.table(x = svy, file = "rl.ex01.clean.csv", sep = ",", quote = FALSE, row.names = FALSE, fileEncoding = "ASCII")
+write.table(x = svy, file = "rl.ex01.clean.csv", sep = ",", quote = FALSE, 
+            row.names = FALSE, fileEncoding = "ASCII")
 ```
 
 *R* can work with a variety of files format but it is usually simplest to work with simple text files.
