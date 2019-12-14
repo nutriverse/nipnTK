@@ -5,11 +5,403 @@ author: "Mark Myatt"
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  error = FALSE,
+  message = FALSE,
+  warning = FALSE,
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
-```{r setup}
+```{r setup, echo = FALSE}
 library(nipnTK)
 ```
+
+We can expect anthropometric variables in children to be strongly and positively associated with each other. This is because children tend to gain both weight and height as they grow. This allows us to use graphical and numeric methods to identify outliers (i.e. observations that are distant from most other observations) that may be due to errors.
+
+It is important to note that anthropometric surveys often use a method of comparing observed values against reference values using a process known as “flagging” to identify and censor outliers. The methods outlined in this section are intended to complement rather than replace the “flagging”
+
+## Identifying outliers by observation
+
+We will use the dataset `sp.ex01`:
+
+```{r, echo = TRUE, eval = TRUE}
+svy <- sp.ex01
+head(svy)
+```
+
+The dataset `sp.ex01` contains anthropometric data from a SMART survey from the Democratic Republic of Congo.
+
+We will look at the relationship between height and weight in this dataset:
+
+```{r, echo = TRUE, eval = FALSE}
+plot(svy$height, svy$weight)
+```
+
+The resulting plot is shown below. 
+
+```{r, echo = FALSE, eval = TRUE, fig.align = "center"}
+plot(svy$height, svy$weight)
+```
+
+There is a clear positive linear relationship between height and weight (i.e. weight increases with increasing height along a straight line). We can assess the strength of this relationship using the Pearson correlation coefficient:
+
+```{r, echo = TRUE, eval = FALSE}
+cor(svy$height, svy$weight, method = "pearson", use = "complete.obs")
+```
+
+which returns:
+
+```{r, echo = FALSE, eval = TRUE}
+cor(svy$height, svy$weight, method = "pearson", use = "complete.obs")
+```
+
+This is very close to one, which indicates a perfect positive association. There are, however a few points that lie outside of the bulk of the plotted points. These outliers may be due to errors in the data.
+
+The presence of oedema can be associated with increased weight. This is a particular issue with severe oedema. An outlier with a high value of weight for a given height could be due to oedema. We can check this:
+
+```{r, echo = TRUE, eval = FALSE}
+plot(svy$height, svy$weight, pch = ifelse(svy$oedema == 1, 19, 1))
+```
+
+The `pch = ifelse(svy$oedema == 1, 19, 1)` tells the `plot()` function to plot filled circles for oedema cases and open circles for children without oedema. The resulting plot is shown below. 
+
+```{r, echo = FALSE, eval = TRUE, fig.align = "center"}
+plot(svy$height, svy$weight, pch = ifelse(svy$oedema == 1, 19, 1))
+```
+
+A single high weight for height outlier appears to be due to the presence of oedema.
+
+The other filled circles that are located in the main mass of plotted points show that children with oedema may have a body weight within the normal range for their height. These children may not be not wasted but they are suffering from a form of severe acute malnutrition (SAM) known as *kwashiorkor*.
+
+Outliers can be identified by eye. The `identify()` function can help with this: 
+
+```{r, echo = TRUE, eval = FALSE}
+plot(svy$height, svy$weight, pch = ifelse(svy$oedema == 1, 19, 1))
+identify(svy$height, svy$weight)
+```
+
+Clicking on any point will cause the record (row) number associated with each point to be displayed on the plot (as shown below). 
+
+```{r, echo = FALSE, eval = TRUE, fig.align = "center"}
+plot(svy$height, svy$weight, pch = ifelse(svy$oedema == 1, 19, 1))
+text(x = svy$height[c(1, 6, 16, 62, 66)], 
+     y = svy$weight[c(1, 6, 16, 62, 66)], 
+     labels = row.names(svy[c(1, 6, 16, 62, 66), ]),
+     cex = 0.75, pos = 1)
+```
+
+Right-clicking on the plot or pressing the "escape" key will stop `identify()`.
+
+The behaviour of the `identify()` function may be different when you use an alternative user interface for R such as *RStudio* or *RAnalyticFlow*.
+
+The `identify()` function will, by default, display record (row) numbers for identified points. This is usually what is needed. Alternative labels can be displayed. For example:
+
+```{r, echo = TRUE, eval = FALSE}
+plot(svy$height, svy$weight, pch = ifelse(svy$oedema == 1, 19, 1)) 
+identify(svy$height, svy$weight, 
+         labels = paste(svy$height, svy$weight, sep = ";"), 
+         cex = 0.75)
+```
+
+displays the height and weight values at selected points.
+
+The ability to display custom labels is useful if there is a variable (column) in a dataset that contains unique record identifiers.
+
+It is useful to be able to store the record (row) numbers of identified points:
+
+```{r, echo = TRUE, eval = FALSE}
+plot(svy$height, svy$weight, pch = ifelse(svy$oedema == 1, 19, 1)) 
+stored <- identify(svy$height, svy$weight)
+```
+
+If the same points shown in the previous figure are clicked to identify them then: 
+
+```{r, echo = TRUE, eval = FALSE}
+stored
+```
+
+will return:
+
+```{r, echo = FALSE, eval = TRUE}
+stored <- row.names(svy[c(1, 6, 16, 62, 66), ])
+stored
+```
+
+We can examine the data for the identified points:
+
+```{r, echo = TRUE, eval = FALSE}
+svy[stored, ]
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+svy[stored, ]
+```
+
+The **oedema** data is coded **1** for present and **2** for absent.
+
+Data can be checked and edited if needed. Note that record **6** is an oedema case and should probably be left alone.
+
+If your dataset has many variables (columns) then you may specify only the variables (columns) of interest:
+
+```{r, echo = TRUE, eval = FALSE}
+svy[stored, c("weight", "height", "oedema")]
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+svy[stored, c("weight", "height", "oedema")]
+```
+
+## Identifying outliers using statistical distance
+
+A more formal method of identifying outliers is to use a measure of the statistical distance. A common measure of *statistical distance* that is applied to scatterplot data is the *Mahalanobis distance*. This treats the bivariate probability distribution as an ellipsoid. The Mahalanobis distance is the distance of a point from the centre of mass of the distribution divided by width of the ellipsoid in the direction of the point:
+
+```{r, echo = FALSE, eval = TRUE, fig.align = "center"}
+knitr::include_graphics("../man/figures/mahalanobis.png")
+```
+
+
+In directions in which the ellipsoid has a short axis the test point must be close to the centre of mass of the distribution. In directions in which the ellipsoid has a long axis the test point may be more distant from the centre of mass of the distribution.
+
+The NiPN data quality toolkit provides an *R* language function `outliersMD()` that uses the Mahalanobis distance to identify outliers in the same dataset:
+
+```{r, echo = TRUE, eval = FALSE}
+svy[outliersMD(svy$height, svy$weight), ]
+```
+
+This returns the same set of records that was identified by eye:
+
+```{r, echo = FALSE, eval = TRUE}
+svy[outliersMD(svy$height, svy$weight), ]
+```
+
+Data can be checked and edited if needed. Note that record **6** is an oedema case and should probably be left alone.
+
+We can use the `outliersMD()` to identify and display outliers on a scatterplot:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center"}
+plot(svy$height, svy$weight,
+pch = ifelse(outliersMD(svy$height, svy$weight), 19, 1))
+```
+
+The `outliersMD()` function has an **alpha** parameter. The default value for the **alpha** parameter is `alpha = 0.001`. This value is used automatically unless another value is specified.
+
+When we use `alpha = 0.001` we are looking for records with values so extreme that we would expect to find them with a probability of 0.001 when there are no problems with the data.
+
+We can calculate the number of outliers that we expect to see by chance with `alpha = 0.001` using:
+
+```{r, echo = TRUE, eval = FALSE}
+round(nrow(svy) * 0.001)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+round(nrow(svy) * 0.001)
+```
+
+We found five potential outliers. The difference between the number that we expected and the number that we observed (i.e. one expected vs. five observed) suggests that some of the identified outliers are true outliers or due to data errors.
+
+Another way of looking at the **alpha** parameter is that it alters the sensitivity of the `outlierMD()` function for detecting outliers by altering the threshold distance that is used to define outliers. This can be useful when using the `outlierMD()` function with some, but not all, curvilinear relationships (see below).
+
+Larger values of **alpha** will tend to detect more potential outliers. For example: 
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center"}
+plot(svy$height, svy$weight,
+     pch = ifelse(outliersMD(svy$height, svy$weight, alpha = 0.01), 19, 1))
+```
+
+and:
+
+```{r, echo = TRUE, eval = TRUE}
+svy[outliersMD(svy$height,svy$weight, alpha = 0.01), ]
+```
+
+In almost all cases the default **alpha = 0.001** will be appropriate.
+
+The techniques outlined above can be used to examine the relationships between other pairs of anthropometric variables (e.g. **weight** and **muac**) and to identify outliers. All sensible pairings of variables should be examined.
+
+## Anthropometric measurements and age
+
+We also expect anthropometric variables to be associated with age. This relationship is particularly strong in children. It will be less strong in adults and may be weak or even reversed in older people.
+
+We can explore the relationship between an anthropometric variable and age using the techniques described above. For example:
+
+```{r, echo = TRUE, eval = FALSE}
+plot(svy$age, svy$height, pch = ifelse(outliersMD(svy$age, svy$height), 19, 1)) 
+svy[outliersMD(svy$age, svy$height), ]
+```
+
+```{r, echo = FALSE, eval = TRUE, fig.align = "center"}
+plot(svy$age, svy$height, pch = ifelse(outliersMD(svy$age, svy$height), 19, 1)) 
+svy[outliersMD(svy$age, svy$height), ]
+```
+
+There are some problems with this approach. Age is often reported and recorded with considerable age heaping. Age is unlikely to be approximately normally distributed, which is an assumption of the Mahalanobis distance method. The relationship between anthropometric variables and age usually follows a “growth curve” rather than a straight line.
+
+The combination of age heaping, non-normality, and a curvilinear relationship may reduce the effectiveness of the Mahalanobis distance method for detecting outliers. It may be useful, in such cases, to increase the value of the **alpha** parameter. For example:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center"}
+plot(svy$age, svy$height, pch = ifelse(outliersMD(svy$age, svy$height, alpha = 0.025), 19, 1))
+```
+
+Outliers can be listed using the same value for **alpha**: 
+
+```{r, echo = TRUE, eval = TRUE}
+svy[outliersMD(svy$age, svy$height, alpha = 0.025), ]
+```
+
+The Mahalanobis distance method is usually robust enough to deal with age data provided an appropriate value for **alpha** is used.
+
+## Difficult relationships for the Mahalanobis distance method
+
+The Mahalanobis distance method works well with pairs of variables as long as the relationship between the two variables is *monotonic* (i.e. one variables always increases or always decreases in value as the other variable increases in value). This is usually the case with anthropometric data.
+
+We will explore the use of the Mahalanobis distance method with data that is not monotonic using generated data:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center"}
+x <- c(4, 8, 16, 17, 22, 27, 38, 40, 47, 48, 53, 55, 63, 71, 76, 85, 92, 96) 
+y <- c(6, 22, 34, 42, 51, 59, 64, 69, 70, 20, 70, 63, 63, 55, 46, 33, 19, 6)
+plot(x, y)
+```
+
+There is a clear relationship between **x** and **y** but it is **not** a monotonic relationship (i.e. it is not always increasing or decreasing). There is a single obvious outlier. The Mahalanobis distance method will **not** work well with this data. This:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center"}
+plot(x, y, pch = ifelse(outliersMD(x, y), 19, 1))
+```
+
+fails to detect the outlier. Relaxing the alpha parameter:
+
+```{r, echo = TRUE, eval = FALSE, fig.align = "center"}
+plot(x, y, pch = ifelse(outliersMD(x, y, alpha = 0.025), 19, 1))
+```
+
+does not help. Relaxing the alpha parameter further:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center"}
+plot(x, y, pch = ifelse(outliersMD(x, y, alpha = 0.1), 19, 1))
+```
+
+results in false positive results but fails to identify the clear outlier.
+
+Although Mahalanobis distance cannot be used directly to identify outliers in non-monotonic relationships, it can be applied to residuals from fitted non-linear models. This technique is unlikely to be required with anthropometric data and is not covered in this toolkit.
+
+It is very unlikely that you will see non-monotonic relationships with anthropometric data. You are likely to see “growth curves” that look like this:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center"}
+set.seed(0)
+x <- 0:100
+y <- 1 - exp(-x / 50) + rnorm(101, 0, 0.05) 
+plot(x, y)
+lines(x, 1 - exp(-x / 50), lty = 2)
+```
+
+This is a monotonic relationship. The Mahalanobis distance method should work well with this data. If we add a clear outlier:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center"}
+y[50] <- 0.3
+plot(x, y)
+```
+
+this can be detected using the Mahalanobis distance method using a slightly relaxed alpha value: 
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center"}
+plot(x, y, pch = ifelse(outliersMD(x, y, alpha = 0.005), 19, 1))
+```
+
+## Working with data from older children
+
+We will now look at using scatterplots and Mahalanobis distance methods with data from older children.
+
+We will use the `sp.ex02` dataset:
+
+```{r, echo = TRUE, eval = TRUE}
+svy <- sp.ex02
+head(svy)
+```
+
+The dataset `sp.ex02` contains anthropometric data from a survey of school-age (i.e. between 5 and 15 years) children from Pakistan.
+
+We can summarise the dataset using:
+
+```{r, echo = TRUE, eval = FALSE}
+summary(svy)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+summary(svy)
+```
+
+The **baz** variable contains the BMI-for-age z-score calculated from the **ageMonths**, **sex**, **weight**, and **height** variables using the WHO growth reference. A key thing to notice in the summary is the large number of missing values in the **waz** variable. This is because the weight-for-age z-score is not calculated for children aged older than 120 months. You can check this using:
+
+```{r, echo = TRUE, eval = FALSE}
+by(svy$ageMonths, is.na(svy$waz), summary)
+```
+
+This gives:
+
+```{r, echo = FALSE, eval = TRUE}
+by(svy$ageMonths, is.na(svy$waz), summary)
+```
+
+There appears to be nothing odd about the large number of missing values in the **waz** variable.
+
+We should investigate the missing values in the **baz** variable: 
+
+```{r, echo = TRUE, eval = FALSE}
+svy[is.na(svy$baz), ]
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+svy[is.na(svy$baz), ]
+```
+
+The data required to calculate the BMI-for-age z-score are present. Given the extreme values in the **waz** variable it is likely that the BMI-for-age z-scores in these records were calculated, found to be outside of the upper and lower flagging criteria, and the value for **baz** set to missing. We should check this and recalculate the BMI-for-age z-scores.
+
+We can use scatterplots to examine the relationship between **ageMonths**, **weight**, and **height**:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center"}
+plot(svy$ageMonths, svy$weight) 
+plot(svy$ageMonths, svy$height) 
+plot(svy$height, svy$weight)
+```
+
+These relationships are not as simple as in younger children:
+
+Variability in **weight** appears to increase with increasing **ageMonths**.
+
+The relationship between **height** and **ageMonths** may not be entirely linear.
+
+The relationship between **weight** and **height** is clearly non-linear.
+
+All of these relationships are monotonic so we should still be able to use the Mahalanobis distance method to identify outliers:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center"}
+plot(svy$ageMonths, svy$weight,
+     pch = ifelse(outliersMD(svy$ageMonths, svy$weight), 19, 1))
+
+plot(svy$ageMonths, svy$height,
+     pch = ifelse(outliersMD(svy$ageMonths, svy$height), 19, 1))
+
+plot(svy$height, svy$weight,
+     pch = ifelse(outliersMD(svy$height, svy$weight), 19, 1))
+```
+
+You may want to experiment with different values of the **alpha** parameter of the `outliersMD()` function as described above. Records containing values identified as outliers can be listed:
+
+```{r, echo = TRUE, eval = TRUE}
+svy[outliersMD(svy$ageMonths, svy$weight), ] 
+svy[outliersMD(svy$ageMonths, svy$height), ] 
+svy[outliersMD(svy$weight, svy$height), ]
+```
+
+These records can be checked, edited (if required), and anthropometric indices recalculated.
