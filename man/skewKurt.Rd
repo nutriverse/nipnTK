@@ -26,7 +26,7 @@ A list of class "skewKurt" with:
 Skew and kurtosis
 }
 \examples{
-# Use \\code{skewKurt()} on an anthropometric data from a SMART survey in
+# Use \code{skewKurt()} on an anthropometric data from a SMART survey in
 # Kabul, Afghanistan (dist.ex01)
 svy <- dist.ex01
 skewKurt(svy$muac)

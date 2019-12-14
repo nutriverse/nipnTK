@@ -19,7 +19,7 @@ Printed output of \code{ageChildren()} function
 }
 \examples{
 # Print Chi-Squared test for age of children in dp.ex02 sample dataset using
-# an \\code{u5mr} of 1 / 10,000 / day.
+# an \code{u5mr} of 1 / 10,000 / day.
 svy <- dp.ex02
 ac <- ageChildren(svy$age, u5mr = 1)
 print(ac)

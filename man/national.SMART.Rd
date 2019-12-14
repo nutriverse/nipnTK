@@ -23,7 +23,7 @@ Add SMART flags to a stratified sample survey (e.g. MICS, DHS, national
 SMART)
 }
 \examples{
-# Use the \\code{national.SMART()} function to flag indices from a national
+# Use the \code{national.SMART()} function to flag indices from a national
 # SMART survey in Nigeria (flag.ex03)
 svy <- flag.ex03
 svyFlagged <- national.SMART(x = svy, strata = "state")

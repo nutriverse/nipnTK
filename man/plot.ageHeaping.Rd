@@ -4,8 +4,7 @@
 \alias{plot.ageHeaping}
 \title{\code{plot()} helper functions for \code{ageHeaping()} functions}
 \usage{
-\method{plot}{ageHeaping}(x, main = "", xlab = "Remainder",
-  ylab = "Frequency", cex = 0.75, ...)
+\method{plot}{ageHeaping}(x, main = "", xlab = "Remainder", ylab = "Frequency", cex = 0.75, ...)
 }
 \arguments{
 \item{x}{Object resulting from applying the \code{ageHeaping()} function}
