@@ -5,11 +5,254 @@ author: "Mark Myatt"
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  error = FALSE,
+  warning = FALSE,
+  message = FALSE,
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
-```{r setup}
+```{r setup, echo = FALSE}
 library(nipnTK)
+library(magrittr)
 ```
+
+Flagging is a way of identifying records for which there is a strong likelihood that values of anthropometric measurements or the age of the child are incorrect. Records can then be checked and corrected, or censored (i.e. excluded) from subsequent analyses.
+
+Flagging is a process of checking whether values of anthropometric indices are outside a given range and recording the result in one or more new variables. The result may be a set of logical (i.e. 1/0 or true/false) flag variables (i.e. one flag variable per anthropometric index) or a single variable holding a code number that classifies the nature of the detected problem(s).
+
+Flagging is usually applied to height-for-age z-scores (HAZ), weight-for-age z-scores (WAZ), weight-for-height z-scores (WHZ), and BMI-for-age z-scores (BAZ) calculated from data collected during nutritional anthropometry surveys. The flagging process can be easily applied to other variables.
+
+Two flagging criteria for anthropometric indices are in common use internationally. These are the WHO flagging criteria and the SMART flagging criteria. Both methods flag records in which one or more anthropometric indices are more than a certain distance either side of a reference value. The two methods are summarised in table below.
+
+&nbsp;
+
+```{r tab1, echo = FALSE, eval = TRUE}
+row1 <- c("-6", "+6", "-6", "+5", "-5", "+5", "-5", "+5", "Zero")
+row2 <- c("-3", "+3", "-3", "+3", "-3", "+3", "NA$^ 2$", "NA$^ 2$", "Survey sample")
+
+tab <- data.frame(rbind(row1, row2))
+
+row.names(tab) <- c("WHO", "SMART")
+
+knitr::kable(x = tab,
+             booktabs = TRUE,
+             caption = "WHO and SMART flagging criteria",
+             col.names = c(rep(c("Lower\nlimit", "Upper\nlimit"), 4), "Reference\nvalue"),
+             row.names = TRUE,
+             escape = FALSE,
+             format = "html") %>%
+  kableExtra::kable_styling(full_width = FALSE) %>%
+  kableExtra::add_header_above(header = c("", "HAZ" = 2, "WAZ" = 2, "WHZ" = 2, "BAZ" = 2, "")) %>%
+  kableExtra::add_header_above(header = c("", "Anthropometric index$^ 1$" = 8, "")) %>%
+  kableExtra::footnote(number = c("Indices are height-for-age z-score (HAZ), weight-for-age z-score (WAZ), weight-for-height z-score (WHZ), and BMI-for-age z-score (BAZ).", 
+                                  "NA = Not available. BAZ is not used in SMART surveys. SMART flagging criteria for BAZ are undefined."))
+```
+
+&nbsp;
+
+Applying flagging criteria is a matter of checking that individual values of these indices are within the lower and upper limits shown in the table above. Values that are outside of these limits are flagged in a new variable.
+
+The WHO criteria are simple *biologically plausible* ranges. If, for example, a value for WHZ is below -5 or above +5 then the record is flagged to indicate a likely problem with WHZ. This will usually be caused by an erroneous weight or height value being recorded.
+
+Note that values outside of these flagging limits may be observed in children admitted into (e.g.) therapeutic feeding programs.
+
+SMART criteria are more complicated. They require the mean value of the index to be calculated from the survey data. This is then used as the reference value. For example, if a value for WHZ is below: 
+
+&nbsp;
+
+$$ \text{mean WHZ} ~ - ~ 3 $$
+
+&nbsp;
+
+or above:
+
+&nbsp;
+
+$$ \text{mean WHZ} ~ + ~ 3 $$
+
+&nbsp;
+
+then the record is flagged to indicate a likely problem with WHZ.
+
+A mean WHZ of -1.15 gives lower and upper SMART flagging limits of: 
+
+&nbsp;
+
+$$ -1.15 ~ - ~ 3 ~ = ~ -4.15 $$ 
+
+&nbsp;
+
+and:
+
+&nbsp;
+
+$$ -1.15 ~ + ~ 3 ~ = ~ +1.85 $$ 
+
+&nbsp;
+
+respectively. These limits may incorrectly flag biologically plausible values. See figure below.
+
+&nbsp;
+
+```{r fig1, echo = FALSE, eval = TRUE, fig.cap = "Example of WHO and SMART flagging criteria for weight-for-height z-scores (WHZ)", fig.align = "center", out.width = "70%"}
+knitr::include_graphics(path = "../man/figures/flagging1.png")
+```
+
+&nbsp;
+
+The WHO and SMART flagging criteria will flag different but overlapping sets of measurements. This means that survey results can be affected by the flagging criteria used. This is because the prevalence of an indicator describes the proportion of values in one of the “tails” of the distribution of an index (see figure below).
+
+
+The SMART flagging criteria will usually flag more records than the WHO flagging criteria. This will act to reduce estimated prevalence (see figure below). This will be a particular problem when the prevalence of severe forms of undernutrition is high.
+
+There are some problems with using the SMART flagging criteria:
+
+1. Flagging is about detecting outlier values. The SMART flagging criteria use distance from the sample mean, but the value of the mean can be strongly influenced by the presence of outliers. This could be overcome by, for example, using the median or a trimmed mean as the reference mean. If you do this you will not be using the SMART flagging criteria.
+
+2. SMART flagging criteria are supposed to define outliers using statistically plausible limits. The underlying principle is that, for a normally distributed variable, we expect 99.87% of all values to lie within three sample standard deviations of the sample mean. If we exclude records with values more than three standard deviations from the mean then we would incorrectly flag very few records (i.e. 0.13% of the total) as problematic. The SMART method assumes that the distribution of each anthropometric index in a population is always perfectly normal and that the standard deviation is always exactly one. This assumption is almost always violated. If it is violated then the use of the SMART flagging criteria may lead to records being flagged inappropriately. There are ways (e.g. transforming data toward normality, using the sample standard deviation) to avoid this problem but using them would also not be using the SMART flagging criteria.
+
+3. Wide-area surveys such as MICS and DHS will usually collect data from many populations. Each population may have different distributions of anthropometric indices and different prevalence of anthropometric indicators. In this case the mean of the entire survey sample will not be a suitable reference mean and the assumed standard deviation (i.e. SD = 1) will usually be too narrow to set limits that define statistical outliers. This will lead to records being flagged incorrectly. This is illustrated in Figure F3. Stratum or district specific means should be used instead of whole sample means, but this may not solve the problem entirely.
+
+If SMART flagging criteria have already been applied to data and the flagged records have been removed from the dataset then a subsequent application of the SMART flagging criteria will tend to flag additional records. SMART flagging criteria should, therefore, only be applied to raw data. Do not apply SMART flagging criteria to data from which flagged records have been removed.
+
+It is important to note that only one set of flagging criteria, either WHO or SMART, should be used at any one time.
+
+The WHO and SMART flagging criteria are designed to be applied to survey samples. They should not be applied to clinical populations or samples.
+
+Software such as ENA from SMART, EpiInfo, WHO Anthro, WHO AnthroPlus, and scripts / macros for R, SAS, SPSS, and STATA provided by the WHO are frequently used to calculate anthropometric indices and apply flagging criteria to data from surveys that collect anthropometric data. It is quite common to receive data to which flagging criteria have already been applied and contain one or more flag variables. You may use these flags if you are sure which flagging criteria have been applied. If you are unsure which flagging criteria have been applied then you should apply your flagging criteria of choice using one of these software packages or the procedures outlined in this section. You may also need to recalculate anthropometric indices using WHO reference values if they were calculated using NCHS, CDC, or local growth references.
+
+## Applying WHO flagging criteria to survey data
+
+For a first exercise, we will apply the WHO flagging criteria to survey data.
+
+We will retrieve a survey dataset:
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- read.table("flag.ex01.csv", header = TRUE, sep = ",")
+```
+
+```{r, echo = FALSE, eval = TRUE}
+svy <- flag.ex01
+head(svy)
+```
+
+The file **flag.ex01.csv** is a comma-separated-value (CSV) file containing anthropometric data from a recent SMART survey in Sudan.
+
+Applying WHO flagging criteria is straightforward. We first create a column that will contain the flag code and set this to zero (i.e. no flags) for all records:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$flag <- 0
+```
+
+```{r, echo = FALSE, eval = TRUE}
+head(svy)
+```
+
+Then we apply the flagging criteria for each index. Here we apply the WHO flagging criteria to the HAZ index:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$flag <- ifelse(!is.na(svy$haz) & (svy$haz < -6 | svy$haz > 6), svy$flag + 1, svy$flag)
+```
+
+```{r, echo = FALSE, eval = TRUE}
+head(svy)
+```
+
+This can be translated as *“if HAZ is not missing and HAZ is below -6 or HAZ is above +6 then add 1 to the flag variable else leave the flag variable unchanged”*.
+
+Be careful when using the $<$ comparison operator with negative numbers. Always insert a space between the $<$ and $–$ characters. *R* interprets $<-$ as an assignment operator and may produce unexpected and unwanted results without issuing a warning or error message.
+
+Here we apply the WHO flagging criteria to the WHZ index:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$flag <- ifelse(!is.na(svy$whz) & (svy$whz < - 5 | svy$whz > 5), svy$flag + 2, svy$flag)
+```
+
+```{r, echo = FALSE, eval = TRUE}
+head(svy)
+```
+
+Here we apply the WHO flagging criteria to the WAZ index:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$flag <- ifelse(!is.na(svy$waz) & (svy$waz < - 6 | svy$waz > 5), svy$flag + 4, svy$flag)
+```
+
+```{r, echo = FALSE, eval = TRUE}
+head(svy)
+```
+
+Note that each time we apply a flagging criteria we increase the value of the flagging variable by the next power of two when a problem is detected:
+
+    We started with zero
+
+    Then we added $2 ^ 0$ (i.e. 1) if HAZ was out of range. 
+    
+    Then we added $2 ^ 1$ (i.e. 2) if WHZ was out of range. 
+    
+    Then we added $2 ^ 2$ (i.e. 4) if WAZ was out of range.
+
+If we had another index then we would use $2 ^ 3$ (i.e. 8) to flag a problem in that index.
+
+The advantage of using this coding scheme is that it compactly codes all possible combinations of
+problems in a single variable (see table below).
+
+There are a number of flagged records in the example dataset. This:
+
+```{r, echo = TRUE, eval = FALSE}
+table(svy$flag)
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+table(svy$flag)
+```
+
+This table shows the relative frequency of detected problems. See table below to find the meaning of each of the codes.
+
+&nbsp;
+
+```{r tab2, echo = FALSE, eval = TRUE}
+code <- 0:7
+haz <- c("O", "X", "O", "X", "O", "X", "O", "X")
+whz <- c("O", "O", "X", "X", "O", "O", "X", "X")
+waz <- c("O", "O", "O", "O", "X", "X", "X", "X")
+action <- c("None", 
+            "Check height and age", 
+            "Check weight and height", 
+            "Check height", 
+            "Check weight and age", 
+            "Check age", 
+            "Check weight", 
+            "Check age, height, and weight")
+
+tab2 <- data.frame(code, haz, whz, waz, action)
+
+knitr::kable(x = tab2,
+             booktabs = TRUE,
+             caption = "Flagging codes based on powers of two and their meanings",
+             col.names = c("Code", "HAZ", "WHZ", "WAZ", "Suggested action(s)"),
+             row.names = FALSE,
+             escape = FALSE,
+             format = "html") %>%
+  kableExtra::kable_styling(full_width = FALSE) %>%
+  kableExtra::add_header_above(header = c("", "Problem detected with ..." = 3, ""))
+```
+
+&nbsp;
+
+The number of flagged records can be found using:
+
+```{r, echo = TRUE, eval = FALSE}
+table(svy$flag != 0)["TRUE"]
+```
+
+which returns:
+
+```{r, echo = FALSE, eval = TRUE}
+table(svy$flag != 0)["TRUE"]
+```
+
