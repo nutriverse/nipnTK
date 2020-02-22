@@ -256,3 +256,28 @@ which returns:
 table(svy$flag != 0)["TRUE"]
 ```
 
+The proportion of records that are flagged can be found using:
+
+```{r, echo = TRUE, eval = FALSE}
+prop.table(table(svy$flag != 0))["TRUE"]
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+prop.table(table(svy$flag != 0))["TRUE"]
+```
+
+About 4.45% of records are flagged.
+
+Note that missing values are not flagged. It can be useful to check missing values to see if there are missing component measurements or if a component measurement is out of range for the calculation of index values (e.g. WAZ is only calculated for children aged ten years or younger). This issue can be explored by selection and listing. For example:
+
+```{r, echo = TRUE, eval = FALSE}
+svy[is.na(svy$whz), c("weight", "height", "whz")]
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+svy[is.na(svy$whz), c("weight", "height", "whz")]
+```

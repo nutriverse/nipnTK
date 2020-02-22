@@ -562,6 +562,17 @@ Check age, height, and weight
 <p>which returns:</p>
 <pre><code>#&gt; TRUE 
 #&gt;   35</code></pre>
+<p>The proportion of records that are flagged can be found using:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(svy<span class="op">$</span>flag <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>))[<span class="st">"TRUE"</span>]</a></code></pre></div>
+<p>This returns:</p>
+<pre><code>#&gt;       TRUE 
+#&gt; 0.04452926</code></pre>
+<p>About 4.45% of records are flagged.</p>
+<p>Note that missing values are not flagged. It can be useful to check missing values to see if there are missing component measurements or if a component measurement is out of range for the calculation of index values (e.g. WAZ is only calculated for children aged ten years or younger). This issue can be explored by selection and listing. For example:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">svy[<span class="kw"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(svy<span class="op">$</span>whz), <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"weight"</span>, <span class="st">"height"</span>, <span class="st">"whz"</span>)]</a></code></pre></div>
+<p>This returns:</p>
+<pre><code>#&gt;   weight height whz
+#&gt; 8    8.1     NA  NA</code></pre>
 </div>
   </div>
 
