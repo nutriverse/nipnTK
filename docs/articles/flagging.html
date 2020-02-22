@@ -103,7 +103,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="flagging_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Identifying outliers using flags</h1>
@@ -117,11 +117,463 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(nipnTK)</a></code></pre></div>
+<p>Flagging is a way of identifying records for which there is a strong likelihood that values of anthropometric measurements or the age of the child are incorrect. Records can then be checked and corrected, or censored (i.e. excluded) from subsequent analyses.</p>
+<p>Flagging is a process of checking whether values of anthropometric indices are outside a given range and recording the result in one or more new variables. The result may be a set of logical (i.e. 1/0 or true/false) flag variables (i.e. one flag variable per anthropometric index) or a single variable holding a code number that classifies the nature of the detected problem(s).</p>
+<p>Flagging is usually applied to height-for-age z-scores (HAZ), weight-for-age z-scores (WAZ), weight-for-height z-scores (WHZ), and BMI-for-age z-scores (BAZ) calculated from data collected during nutritional anthropometry surveys. The flagging process can be easily applied to other variables.</p>
+<p>Two flagging criteria for anthropometric indices are in common use internationally. These are the WHO flagging criteria and the SMART flagging criteria. Both methods flag records in which one or more anthropometric indices are more than a certain distance either side of a reference value. The two methods are summarised in table below.</p>
+<p> </p>
+<table class="table table">
+<caption>
+WHO and SMART flagging criteria
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="8">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Anthropometric index<span class="math inline">\(^ 1\)</span>
+</div>
+</th>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+HAZ
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+WAZ
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+WHZ
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+BAZ
+</div>
+</th>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Lower limit
+</th>
+<th style="text-align:left;">
+Upper limit
+</th>
+<th style="text-align:left;">
+Lower limit
+</th>
+<th style="text-align:left;">
+Upper limit
+</th>
+<th style="text-align:left;">
+Lower limit
+</th>
+<th style="text-align:left;">
+Upper limit
+</th>
+<th style="text-align:left;">
+Lower limit
+</th>
+<th style="text-align:left;">
+Upper limit
+</th>
+<th style="text-align:left;">
+Reference value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+WHO
+</td>
+<td style="text-align:left;">
+-6
+</td>
+<td style="text-align:left;">
++6
+</td>
+<td style="text-align:left;">
+-6
+</td>
+<td style="text-align:left;">
++5
+</td>
+<td style="text-align:left;">
+-5
+</td>
+<td style="text-align:left;">
++5
+</td>
+<td style="text-align:left;">
+-5
+</td>
+<td style="text-align:left;">
++5
+</td>
+<td style="text-align:left;">
+Zero
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SMART
+</td>
+<td style="text-align:left;">
+-3
+</td>
+<td style="text-align:left;">
++3
+</td>
+<td style="text-align:left;">
+-3
+</td>
+<td style="text-align:left;">
++3
+</td>
+<td style="text-align:left;">
+-3
+</td>
+<td style="text-align:left;">
++3
+</td>
+<td style="text-align:left;">
+NA<span class="math inline">\(^ 2\)</span>
+</td>
+<td style="text-align:left;">
+NA<span class="math inline">\(^ 2\)</span>
+</td>
+<td style="text-align:left;">
+Survey sample
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>1</sup> Indices are height-for-age z-score (HAZ), weight-for-age z-score (WAZ), weight-for-height z-score (WHZ), and BMI-for-age z-score (BAZ).
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>2</sup> NA = Not available. BAZ is not used in SMART surveys. SMART flagging criteria for BAZ are undefined.
+</td>
+</tr>
+</tfoot>
+</table>
+<p> </p>
+<p>Applying flagging criteria is a matter of checking that individual values of these indices are within the lower and upper limits shown in the table above. Values that are outside of these limits are flagged in a new variable.</p>
+<p>The WHO criteria are simple <em>biologically plausible</em> ranges. If, for example, a value for WHZ is below -5 or above +5 then the record is flagged to indicate a likely problem with WHZ. This will usually be caused by an erroneous weight or height value being recorded.</p>
+<p>Note that values outside of these flagging limits may be observed in children admitted into (e.g.) therapeutic feeding programs.</p>
+<p>SMART criteria are more complicated. They require the mean value of the index to be calculated from the survey data. This is then used as the reference value. For example, if a value for WHZ is below:</p>
+<p> </p>
+<p><span class="math display">\[ \text{mean WHZ} ~ - ~ 3 \]</span></p>
+<p> </p>
+<p>or above:</p>
+<p> </p>
+<p><span class="math display">\[ \text{mean WHZ} ~ + ~ 3 \]</span></p>
+<p> </p>
+<p>then the record is flagged to indicate a likely problem with WHZ.</p>
+<p>A mean WHZ of -1.15 gives lower and upper SMART flagging limits of:</p>
+<p> </p>
+<p><span class="math display">\[ -1.15 ~ - ~ 3 ~ = ~ -4.15 \]</span></p>
+<p> </p>
+<p>and:</p>
+<p> </p>
+<p><span class="math display">\[ -1.15 ~ + ~ 3 ~ = ~ +1.85 \]</span></p>
+<p> </p>
+<p>respectively. These limits may incorrectly flag biologically plausible values. See figure below.</p>
+<p> </p>
+<div class="figure" style="text-align: center">
+<img src="../man/figures/flagging1.png" alt="Example of WHO and SMART flagging criteria for weight-for-height z-scores (WHZ)" width="70%"><p class="caption">
+Example of WHO and SMART flagging criteria for weight-for-height z-scores (WHZ)
+</p>
+</div>
+<p> </p>
+<p>The WHO and SMART flagging criteria will flag different but overlapping sets of measurements. This means that survey results can be affected by the flagging criteria used. This is because the prevalence of an indicator describes the proportion of values in one of the “tails” of the distribution of an index (see figure below).</p>
+<p>The SMART flagging criteria will usually flag more records than the WHO flagging criteria. This will act to reduce estimated prevalence (see figure below). This will be a particular problem when the prevalence of severe forms of undernutrition is high.</p>
+<p>There are some problems with using the SMART flagging criteria:</p>
+<ol style="list-style-type: decimal">
+<li><p>Flagging is about detecting outlier values. The SMART flagging criteria use distance from the sample mean, but the value of the mean can be strongly influenced by the presence of outliers. This could be overcome by, for example, using the median or a trimmed mean as the reference mean. If you do this you will not be using the SMART flagging criteria.</p></li>
+<li><p>SMART flagging criteria are supposed to define outliers using statistically plausible limits. The underlying principle is that, for a normally distributed variable, we expect 99.87% of all values to lie within three sample standard deviations of the sample mean. If we exclude records with values more than three standard deviations from the mean then we would incorrectly flag very few records (i.e. 0.13% of the total) as problematic. The SMART method assumes that the distribution of each anthropometric index in a population is always perfectly normal and that the standard deviation is always exactly one. This assumption is almost always violated. If it is violated then the use of the SMART flagging criteria may lead to records being flagged inappropriately. There are ways (e.g. transforming data toward normality, using the sample standard deviation) to avoid this problem but using them would also not be using the SMART flagging criteria.</p></li>
+<li><p>Wide-area surveys such as MICS and DHS will usually collect data from many populations. Each population may have different distributions of anthropometric indices and different prevalence of anthropometric indicators. In this case the mean of the entire survey sample will not be a suitable reference mean and the assumed standard deviation (i.e. SD = 1) will usually be too narrow to set limits that define statistical outliers. This will lead to records being flagged incorrectly. This is illustrated in Figure F3. Stratum or district specific means should be used instead of whole sample means, but this may not solve the problem entirely.</p></li>
+</ol>
+<p>If SMART flagging criteria have already been applied to data and the flagged records have been removed from the dataset then a subsequent application of the SMART flagging criteria will tend to flag additional records. SMART flagging criteria should, therefore, only be applied to raw data. Do not apply SMART flagging criteria to data from which flagged records have been removed.</p>
+<p>It is important to note that only one set of flagging criteria, either WHO or SMART, should be used at any one time.</p>
+<p>The WHO and SMART flagging criteria are designed to be applied to survey samples. They should not be applied to clinical populations or samples.</p>
+<p>Software such as ENA from SMART, EpiInfo, WHO Anthro, WHO AnthroPlus, and scripts / macros for R, SAS, SPSS, and STATA provided by the WHO are frequently used to calculate anthropometric indices and apply flagging criteria to data from surveys that collect anthropometric data. It is quite common to receive data to which flagging criteria have already been applied and contain one or more flag variables. You may use these flags if you are sure which flagging criteria have been applied. If you are unsure which flagging criteria have been applied then you should apply your flagging criteria of choice using one of these software packages or the procedures outlined in this section. You may also need to recalculate anthropometric indices using WHO reference values if they were calculated using NCHS, CDC, or local growth references.</p>
+<div id="applying-who-flagging-criteria-to-survey-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#applying-who-flagging-criteria-to-survey-data" class="anchor"></a>Applying WHO flagging criteria to survey data</h2>
+<p>For a first exercise, we will apply the WHO flagging criteria to survey data.</p>
+<p>We will retrieve a survey dataset:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">svy &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span>(<span class="st">"flag.ex01.csv"</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">","</span>)</a></code></pre></div>
+<pre><code>#&gt;   psu child age sex weight height muac oedema   haz   waz   whz
+#&gt; 1   1     1  20   2    6.1   82.5  127      2 -0.07 -4.54 -6.03
+#&gt; 2   1     2  13   2    6.4   70.4  116      2 -1.83 -3.04 -2.93
+#&gt; 3   1     3  15   1    7.1   67.5  124      2 -4.60 -3.34 -1.25
+#&gt; 4   1     4  15   1    7.2   75.4  130      2 -1.48 -3.22 -3.57
+#&gt; 5   1     5  15   1    7.4   70.0  124      2 -3.61 -2.99 -1.61
+#&gt; 6   1     6  18   2    7.7   70.6  130      2 -3.48 -2.40 -0.82</code></pre>
+<p>The file <strong>flag.ex01.csv</strong> is a comma-separated-value (CSV) file containing anthropometric data from a recent SMART survey in Sudan.</p>
+<p>Applying WHO flagging criteria is straightforward. We first create a column that will contain the flag code and set this to zero (i.e. no flags) for all records:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">svy<span class="op">$</span>flag &lt;-<span class="st"> </span><span class="dv">0</span></a></code></pre></div>
+<pre><code>#&gt;   psu child age sex weight height muac oedema   haz   waz   whz flag
+#&gt; 1   1     1  20   2    6.1   82.5  127      2 -0.07 -4.54 -6.03    0
+#&gt; 2   1     2  13   2    6.4   70.4  116      2 -1.83 -3.04 -2.93    0
+#&gt; 3   1     3  15   1    7.1   67.5  124      2 -4.60 -3.34 -1.25    0
+#&gt; 4   1     4  15   1    7.2   75.4  130      2 -1.48 -3.22 -3.57    0
+#&gt; 5   1     5  15   1    7.4   70.0  124      2 -3.61 -2.99 -1.61    0
+#&gt; 6   1     6  18   2    7.7   70.6  130      2 -3.48 -2.40 -0.82    0</code></pre>
+<p>Then we apply the flagging criteria for each index. Here we apply the WHO flagging criteria to the HAZ index:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">svy<span class="op">$</span>flag &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(svy<span class="op">$</span>haz) <span class="op">&amp;</span><span class="st"> </span>(svy<span class="op">$</span>haz <span class="op">&lt;</span><span class="st"> </span><span class="dv">-6</span> <span class="op">|</span><span class="st"> </span>svy<span class="op">$</span>haz <span class="op">&gt;</span><span class="st"> </span><span class="dv">6</span>), svy<span class="op">$</span>flag <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, svy<span class="op">$</span>flag)</a></code></pre></div>
+<pre><code>#&gt;   psu child age sex weight height muac oedema   haz   waz   whz flag
+#&gt; 1   1     1  20   2    6.1   82.5  127      2 -0.07 -4.54 -6.03    0
+#&gt; 2   1     2  13   2    6.4   70.4  116      2 -1.83 -3.04 -2.93    0
+#&gt; 3   1     3  15   1    7.1   67.5  124      2 -4.60 -3.34 -1.25    0
+#&gt; 4   1     4  15   1    7.2   75.4  130      2 -1.48 -3.22 -3.57    0
+#&gt; 5   1     5  15   1    7.4   70.0  124      2 -3.61 -2.99 -1.61    0
+#&gt; 6   1     6  18   2    7.7   70.6  130      2 -3.48 -2.40 -0.82    0</code></pre>
+<p>This can be translated as <em>“if HAZ is not missing and HAZ is below -6 or HAZ is above +6 then add 1 to the flag variable else leave the flag variable unchanged”</em>.</p>
+<p>Be careful when using the <span class="math inline">\(&lt;\)</span> comparison operator with negative numbers. Always insert a space between the <span class="math inline">\(&lt;\)</span> and <span class="math inline">\(–\)</span> characters. <em>R</em> interprets <span class="math inline">\(&lt;-\)</span> as an assignment operator and may produce unexpected and unwanted results without issuing a warning or error message.</p>
+<p>Here we apply the WHO flagging criteria to the WHZ index:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">svy<span class="op">$</span>flag &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(svy<span class="op">$</span>whz) <span class="op">&amp;</span><span class="st"> </span>(svy<span class="op">$</span>whz <span class="op">&lt;</span><span class="st"> </span><span class="op">-</span><span class="st"> </span><span class="dv">5</span> <span class="op">|</span><span class="st"> </span>svy<span class="op">$</span>whz <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>), svy<span class="op">$</span>flag <span class="op">+</span><span class="st"> </span><span class="dv">2</span>, svy<span class="op">$</span>flag)</a></code></pre></div>
+<pre><code>#&gt;   psu child age sex weight height muac oedema   haz   waz   whz flag
+#&gt; 1   1     1  20   2    6.1   82.5  127      2 -0.07 -4.54 -6.03    2
+#&gt; 2   1     2  13   2    6.4   70.4  116      2 -1.83 -3.04 -2.93    0
+#&gt; 3   1     3  15   1    7.1   67.5  124      2 -4.60 -3.34 -1.25    0
+#&gt; 4   1     4  15   1    7.2   75.4  130      2 -1.48 -3.22 -3.57    0
+#&gt; 5   1     5  15   1    7.4   70.0  124      2 -3.61 -2.99 -1.61    0
+#&gt; 6   1     6  18   2    7.7   70.6  130      2 -3.48 -2.40 -0.82    0</code></pre>
+<p>Here we apply the WHO flagging criteria to the WAZ index:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">svy<span class="op">$</span>flag &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(svy<span class="op">$</span>waz) <span class="op">&amp;</span><span class="st"> </span>(svy<span class="op">$</span>waz <span class="op">&lt;</span><span class="st"> </span><span class="op">-</span><span class="st"> </span><span class="dv">6</span> <span class="op">|</span><span class="st"> </span>svy<span class="op">$</span>waz <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>), svy<span class="op">$</span>flag <span class="op">+</span><span class="st"> </span><span class="dv">4</span>, svy<span class="op">$</span>flag)</a></code></pre></div>
+<pre><code>#&gt;   psu child age sex weight height muac oedema   haz   waz   whz flag
+#&gt; 1   1     1  20   2    6.1   82.5  127      2 -0.07 -4.54 -6.03    2
+#&gt; 2   1     2  13   2    6.4   70.4  116      2 -1.83 -3.04 -2.93    0
+#&gt; 3   1     3  15   1    7.1   67.5  124      2 -4.60 -3.34 -1.25    0
+#&gt; 4   1     4  15   1    7.2   75.4  130      2 -1.48 -3.22 -3.57    0
+#&gt; 5   1     5  15   1    7.4   70.0  124      2 -3.61 -2.99 -1.61    0
+#&gt; 6   1     6  18   2    7.7   70.6  130      2 -3.48 -2.40 -0.82    0</code></pre>
+<p>Note that each time we apply a flagging criteria we increase the value of the flagging variable by the next power of two when a problem is detected:</p>
+<p>We started with zero</p>
+<p>Then we added <span class="math inline">\(2 ^ 0\)</span> (i.e. 1) if HAZ was out of range.</p>
+<p>Then we added <span class="math inline">\(2 ^ 1\)</span> (i.e. 2) if WHZ was out of range.</p>
+<p>Then we added <span class="math inline">\(2 ^ 2\)</span> (i.e. 4) if WAZ was out of range.</p>
+<p>If we had another index then we would use <span class="math inline">\(2 ^ 3\)</span> (i.e. 8) to flag a problem in that index.</p>
+<p>The advantage of using this coding scheme is that it compactly codes all possible combinations of problems in a single variable (see table below).</p>
+<p>There are a number of flagged records in the example dataset. This:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(svy<span class="op">$</span>flag)</a></code></pre></div>
+<p>returns:</p>
+<pre><code>#&gt; 
+#&gt;   0   1   2   3   5   6 
+#&gt; 751   9  12   9   2   3</code></pre>
+<p>This table shows the relative frequency of detected problems. See table below to find the meaning of each of the codes.</p>
+<p> </p>
+<table class="table table">
+<caption>
+Flagging codes based on powers of two and their meanings
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Problem detected with …
+</div>
+</th>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:right;">
+Code
+</th>
+<th style="text-align:left;">
+HAZ
+</th>
+<th style="text-align:left;">
+WHZ
+</th>
+<th style="text-align:left;">
+WAZ
+</th>
+<th style="text-align:left;">
+Suggested action(s)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+Check height and age
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+Check weight and height
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+Check height
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Check weight and age
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Check age
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Check weight
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+X
+</td>
+<td style="text-align:left;">
+Check age, height, and weight
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>The number of flagged records can be found using:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(svy<span class="op">$</span>flag <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)[<span class="st">"TRUE"</span>]</a></code></pre></div>
+<p>which returns:</p>
+<pre><code>#&gt; TRUE 
+#&gt;   35</code></pre>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
 
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#applying-who-flagging-criteria-to-survey-data">Applying WHO flagging criteria to survey data</a></li>
+      </ul>
+</div>
       </div>
 
 </div>
