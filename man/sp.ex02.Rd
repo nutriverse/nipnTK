@@ -4,7 +4,8 @@
 \name{sp.ex02}
 \alias{sp.ex02}
 \title{Example dataset for using scatterplots to identify outliers}
-\format{A data frame with 849 observations and 9 variables
+\format{
+A data frame with 849 observations and 9 variables
 \describe{
 \item{\code{region}}{Region code}
 \item{\code{school}}{School code}
@@ -15,7 +16,8 @@
 \item{\code{haz}}{Height-for-age z-score}
 \item{\code{waz}}{Weight-for-age z-score}
 \item{\code{baz}}{Body mass index (BMI)-for-age z-score}
-}}
+}
+}
 \usage{
 sp.ex02
 }

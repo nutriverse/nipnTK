@@ -4,7 +4,8 @@
 \name{sp.ex01}
 \alias{sp.ex01}
 \title{Example dataset for using scatterplots to identify outliers}
-\format{A data frame with 895 observations and 6 variables
+\format{
+A data frame with 895 observations and 6 variables
 \describe{
 \item{\code{age}}{Age (months)}
 \item{\code{sex}}{Gender (1 = Male / 2 = Female)}
@@ -12,7 +13,8 @@
 \item{\code{height}}{Height (cm)}
 \item{\code{muac}}{Mid-upper arm circumference (mm)}
 \item{\code{oedema}}{Presence or absence of oedema}
-}}
+}
+}
 \usage{
 sp.ex01
 }

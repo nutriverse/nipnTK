@@ -4,7 +4,8 @@
 \name{flag.ex02}
 \alias{flag.ex02}
 \title{Example dataset for identifying outliers using flags}
-\format{A data.frame with 973 observations and 7 variables.
+\format{
+A data.frame with 973 observations and 7 variables.
 \describe{
 \item{\code{school}}{School ID}
 \item{\code{sex}}{Gender (1 = Male / 2 = Female)}
@@ -13,7 +14,8 @@
 \item{\code{height}}{Height (cm)}
 \item{\code{haz}}{Height-for-age z-score}
 \item{\code{baz}}{Body mass index (BMI)-for-age z-score}
-}}
+}
+}
 \usage{
 flag.ex02
 }
