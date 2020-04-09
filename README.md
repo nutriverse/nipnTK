@@ -5,6 +5,8 @@
 
 <!-- <img src="man/figures/logo_nipn_en.png" align="right" display="none" /> -->
 
+<!-- Badges start here -->
+
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -17,6 +19,7 @@ Status](https://travis-ci.org/nutriverse/nipnTK.svg?branch=master)](https://trav
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/nutriverse/nipnTK?branch=master&svg=true)](https://ci.appveyor.com/project/nutriverse/nipnTK)
 [![codecov](https://codecov.io/gh/nutriverse/nipnTK/branch/master/graph/badge.svg)](https://codecov.io/gh/nutriverse/nipnTK)
+<!-- Badges end here -->
 
 [National Information Platforms for Nutrition
 (NIPN)](http://www.nipn-nutrition-platforms.org) is an initiative of the
@@ -84,4 +87,4 @@ Data quality is assessed by:
 These activities and a proposed order in which they should be performed
 are shown below:
 
-![](man/figures/nipnWorkflow.png)<!-- -->
+<img src="man/figures/nipnWorkflow.png" width="918" />
