@@ -7,11 +7,11 @@ articles:
   as: as.html
   dp: dp.html
   flagging: flagging.html
+  nipnTK: nipnTK.html
   rl: rl.html
   sp: sp.html
   sr: sr.html
-  tk: tk.html
-last_built: 2020-04-09T18:43Z
+last_built: 2020-04-09T19:32Z
 urls:
   reference: https://nutriverse.io/nipnTK/reference
   article: https://nutriverse.io/nipnTK/articles
