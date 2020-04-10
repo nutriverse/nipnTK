@@ -256,3 +256,300 @@ which returns:
 table(svy$flag != 0)["TRUE"]
 ```
 
+The proportion of records that are flagged can be found using:
+
+```{r, echo = TRUE, eval = FALSE}
+prop.table(table(svy$flag != 0))["TRUE"]
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+prop.table(table(svy$flag != 0))["TRUE"]                       
+```
+
+About 4.45% of records are flagged.
+
+Note that missing values are not flagged. It can be useful to check missing values to see if there are missing component measurements or if a component measurement is out of range for the calculation of index values (e.g. WAZ is only calculated for children aged ten years or younger). This issue can be explored by selection and listing. For example:
+
+```{r, echo = TRUE, eval = FALSE}
+svy[is.na(svy$whz), c("weight", "height", "whz")]
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+svy[is.na(svy$whz), c("weight", "height", "whz")]
+```
+
+There is one missing value for **whz** in record **8**.This is due to a missing value for **height** (shown as **NA**). and **haz** will also be missing. It may be possible to fix this issue if the missing data are available on paper forms.
+
+Flagging has a dual role:
+
+1. It is a data-checking tool. If you have access to data collection forms you will be often able to check records and fix data-entry errors in the data.
+
+2. It is a measure of data-quality. Flagged records can indicate problems with measurement, recording, data-entry, and data-checking. The proportion of flagged records in a dataset should, ideally, be below about 2.5%. SMART guidelines consider proportions above 7.5% to be problematic. We found that 4.45% of records in the example dataset were flagged. The data are of acceptable quality.
+
+We can use:
+
+```{r, echo = TRUE, eval = TRUE}
+svy[svy$flag != 0, ]
+```
+
+to display the flagged records.
+
+This:
+
+```{r, echo = TRUE, eval = TRUE}
+svy[svy$flag != 0, c("psu", "child", "flag")]
+```
+
+produces a more compact list.
+
+In the example dataset records are identified using a combination of the **psu** and **child** variables.
+
+The listed records can be checked and edited (see previous table). Anthropometric indices can then be recalculated and the flagging process repeated until all records that can be fixed have been fixed.
+
+Records that cannot be fixed can be censored during analysis. Records are usually censored on an index-by-index basis. For example, an analysis based on WHZ would censor records in which the flag variable is 2, 3, 6, or 7.
+
+Table below shows censoring rules for each index:
+
+&nbsp;
+
+```{r tab3, echo = FALSE, eval = TRUE}
+index <- c("HAZ", "WHZ", "WAZ")
+censor <- c("1, 3, 5, or 7",
+            "2, 3, 6, or 7",
+            "4, 5, 6, or 7")
+
+tab3 <- data.frame(index, censor)
+
+knitr::kable(x = tab3,
+             booktabs = TRUE,
+             caption = "Censoring rules for each index",
+             align = "c",
+             col.names = c("Analysis uses ...", "Censor if flag code is ..."),
+             row.names = FALSE,
+             latex = "html") %>%
+  kableExtra::kable_styling(full_width = FALSE)
+```
+
+&nbsp;
+
+You should be very careful when applying censoring rules. An analysis of prevalence using WHZ, for example, will usually include children with oedema because a commonly used case-definition for acute malnutrition is:
+
+$$ \text{WHZ} < -2 ~ \text{or bilateral pitting oedema} $$
+
+If you want to use case-definitions that include oedema then you should be careful not to exclude children with oedema when censoring flagged records. For an analysis using WAZ you might want to exclude oedema cases.
+
+## Applying SMART flagging criteria to survey data
+
+In the next exercise we will apply SMART flagging criteria to the same survey dataset.
+
+We will retrieve the survey dataset:
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- read.table("flag.ex01.csv", header = TRUE, sep = ",")
+```
+
+```{r, echo = FALSE, eval = TRUE}
+svy <- flag.ex01
+head(svy)
+```
+
+and create a column that will contain the flag code and set this to zero (i.e. no flags) for all records:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$flag <- 0
+```
+
+Applying SMART flagging criteria requires us to first calculate a mean index value:
+
+```{r, echo = TRUE, eval = TRUE}
+meanHAZ <- mean(svy$haz, na.rm = TRUE)
+```
+
+and then to use this mean value to define flagging ranges:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$flag <- ifelse(!is.na(svy$haz) & 
+              (svy$haz < (meanHAZ - 3) | svy$haz > (meanHAZ + 3)), 
+              svy$flag + 1, svy$flag)
+```
+
+We do this for each index:
+
+```{r, echo = TRUE, eval = TRUE}
+
+meanWHZ <- mean(svy$whz, na.rm = TRUE)
+
+svy$flag <- ifelse(!is.na(svy$whz) &
+              (svy$whz < (meanWHZ - 3) | svy$whz > (meanWHZ + 3)),
+              svy$flag + 2, svy$flag) 
+
+meanWAZ <- mean(svy$waz, na.rm = TRUE)
+
+svy$flag <- ifelse(!is.na(svy$waz) &
+              (svy$waz < (meanWAZ - 3) | svy$waz > (meanWAZ + 3)),
+              svy$flag + 4, svy$flag)
+```
+
+There are a number of flagged records in the example dataset. 
+
+This:
+
+```{r, echo = TRUE, eval = FALSE}
+table(svy$flag)
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+table(svy$flag)
+```
+
+This table shows the relative frequency of detected problems. See the previous table to find the meaning of each of the codes. The number of flagged records can be found using:
+
+```{r, echo = TRUE, eval = FALSE}
+table(svy$flag != 0)["TRUE"]
+```
+
+which returns:
+
+```{r, echo = FALSE, eval = TRUE}
+table(svy$flag != 0)["TRUE"]
+```
+
+The proportion of records that are flagged can be found using:
+
+```{r, echo = TRUE, eval = FALSE}
+prop.table(table(svy$flag != 0))["TRUE"]
+```
+
+which returns:
+
+```{r, echo = FALSE, eval = TRUE}
+prop.table(table(svy$flag != 0))["TRUE"]
+```
+
+About 16% of records are flagged. This is a very high proportion of records flagged.
+
+Note how the SMART flagging criteria identify considerably more records (126 records flagged) than the WHO flagging criteria (35 records flagged). In this example the SMART flagging criteria flagged 91 *biologically plausible* records.
+
+We can list flagged records using:
+
+```{r, echo = TRUE, eval = TRUE}
+svy[svy$flag != 0, ]
+```
+
+The listed records can be checked and edited (see previous table). Anthropometric indices can then be recalculated and the flagging process repeated until all records that can be fixed have been fixed.
+
+When listing records or displaying very large tables you may see a message like this:
+
+```{r, echo = FALSE, eval = TRUE}
+print('[ reached getOption("max.print") -- omitted 43 rows ]')
+```
+
+The **max.print** option sets a limit on the length of information that can be displayed by a single command. You can alter this behaviour using:
+
+```{r, echo = TRUE, eval = FALSE}
+options(max.print = 99999)
+```
+
+## Flagging data from older children
+
+The process of flagging anthropometric indices in older children is very similar to that used with younger children.
+
+We will retrieve a survey dataset:
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- read.table("flag.ex02.csv", header = TRUE, sep = ",") 
+```
+
+```{r, echo = FALSE, eval = TRUE}
+svy <- flag.ex02
+head(svy)
+```
+
+The file **flag.ex02.csv** is a comma-separated-value (CSV) file containing anthropometric data from a survey of children aged 11 year or older and attending school in Ethiopia.
+
+The variables of interest are height-for-age z-score (**haz**) and BMI-for-age z-score (**baz**). We will apply the WHO flagging criteria (see previous table) to these variables:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$flag <- 0
+
+svy$flag <- ifelse(!is.na(svy$haz) & (svy$haz < -6 | svy$haz > 6), 
+              svy$flag + 1, svy$flag)
+
+svy$flag <- ifelse(!is.na(svy$baz) & (svy$baz < -5 | svy$baz > 5), 
+              svy$flag + 2, svy$flag)
+```
+
+Note that we do not usually apply SMART flagging criteria to older (i.e. > 59 months) children. 
+
+The coding of the flag variable is shown in previous table.
+
+```{r tab4, echo = FALSE, eval = TRUE}
+code <- 0:3
+haz <- c("O", "X", "O", "X")
+baz <- c("O", "O", "X", "X")
+action <- c("None",
+            "Check height and age",
+            "Check weight, height and age",
+            "Check weight, height and age")
+
+tab4 <- data.frame(code, haz, baz, action)
+
+knitr::kable(x = tab4,
+             booktabs = TRUE,
+             caption = "Flagging codes based on powers of two and their meanings",
+             row.names = FALSE,
+             col.names = c("Code", "HAZ", "BAZ", "Suggested action(s)"),
+             format = "html") %>%
+  kableExtra::kable_styling(full_width = FALSE) %>%
+  kableExtra::add_header_above(header = c("", "Problem with ..." = 2, ""))
+```
+ 
+This:
+
+```{r, echo = TRUE, eval = FALSE}
+table(svy$flag)
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+table(svy$flag)
+```
+
+This table shows the relative frequency of detected problems. See previou table to find the meaning of each of the codes. The number of flagged records can be found using:
+
+```{r, echo = TRUE, eval = FALSE}
+table(svy$flag != 0)["TRUE"]
+```
+
+which returns:
+
+```{r, echo = FALSE, eval = TRUE}
+table(svy$flag != 0)["TRUE"]
+```
+
+The proportion of records that are flagged can be found using:
+
+```{r, echo = TRUE, eval = FALSE}
+prop.table(table(svy$flag != 0))["TRUE"]
+```
+
+which returns:
+
+```{r, echo = FALSE, eval = TRUE}
+prop.table(table(svy$flag != 0))["TRUE"]
+```
+
+About 1.3% of records are flagged. This is an acceptably low proportion of records flagged. We can list flagged records using:
+
+```{r, echo = TRUE, eval = TRUE}
+svy[svy$flag != 0, ]
+```
+
+The listed records can be checked and edited (see previous table). Anthropometric indices can then be recalculated and the flagging process repeated until all records that can be fixed have been fixed.

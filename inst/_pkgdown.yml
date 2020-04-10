@@ -5,10 +5,41 @@ url: https://nutriverse.io/nipnTK
 template:
   params:
     bootswatch: sandstone
-    #ganalytics: UA-102485058-4
+    ganalytics: UA-155098215-2
+
+navbar:
+  structure:
+    left: [home, intro, reference, articles, news]
+    right: [twitter, linkedin, github]
+
+  components:
+    articles:
+      text: Articles
+      menu:
+      - text: "Check ranges and legal values"
+        href: articles/rl.html
+      - text: "Identify outliers using scatterplots"
+        href: articles/sp.html
+      - text: "Identify outliers using flags"
+        href: articles/flagging.html
+      - text: "Assess distributions of variables and indices"
+        href: articles/ad.html
+      - text: "Assess digit preference"
+        href: articles/dp.html
+      - text: "Assess age heaping"
+        href: articles/ah.html
+      - text: "Assess sex ratio"
+        href: articles/sr.html
+      - text: "Assess age and sex distributions"
+        href: articles/as.html
+    twitter:
+      icon: "fab fa-twitter fa-lg"
+      href: https://twitter.com/ernestguevarra
+    linkedin:
+      icon: "fab fa-linkedin fa-lg"
+      href: https://www.linkedin.com/in/ernestguevarra/
 
 home:
-  #strip_header: true
   links:
   - text: Read more about NiPN
     href: http://www.nipn-nutrition-platforms.org
@@ -85,32 +116,3 @@ reference:
     - boxText
     - greensIndex
     - print.greensIndex
-
-toc:
-  depth: 2
-
-navbar:
-  components:
-    articles:
-      text: Articles
-      menu:
-      - text: "The NiPN data quality toolkit"
-        href: articles/tk.html
-      - text: "Check ranges and legal values"
-        href: articles/rl.html
-      - text: "Identify outliers using scatterplots"
-        href: articles/sp.html
-      - text: "Identify outliers using flags"
-        href: articles/flagging.html
-      - text: "Assess distributions of variables and indices"
-        href: articles/ad.html
-      - text: "Assess digit preference"
-        href: articles/dp.html
-      - text: "Assess age heaping"
-        href: articles/ah.html
-      - text: "Assess sex ratio"
-        href: articles/sr.html
-      - text: "Assess age and sex distributions"
-        href: articles/as.html
-
-

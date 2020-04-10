@@ -4,13 +4,15 @@
 \name{as.ex02}
 \alias{as.ex02}
 \title{Example dataset for age and sex distributions function}
-\format{A data frame with 20 observations and 4 variables
+\format{
+A data frame with 20 observations and 4 variables
 \describe{
 \item{\code{age}}{Age group}
 \item{\code{Males}}{Total male population}
 \item{\code{Females}}{Total female population}
 \item{\code{All}}{Total population}
-}}
+}
+}
 \source{
 \url{http://www.wolframalpha.com/input/?i=Tanzania+age+distribution}
 }

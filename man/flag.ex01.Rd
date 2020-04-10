@@ -4,7 +4,8 @@
 \name{flag.ex01}
 \alias{flag.ex01}
 \title{Example dataset for identifying outliers using flags}
-\format{A data frame with 786 observations and 11 variables
+\format{
+A data frame with 786 observations and 11 variables
 \describe{
 \item{\code{psu}}{Primary sampling unit}
 \item{\code{child}}{Child ID}
@@ -17,7 +18,8 @@
 \item{\code{haz}}{Height-for-age z-score}
 \item{\code{waz}}{Weight-for-age z-score}
 \item{\code{whz}}{Weight-for-height z-score}
-}}
+}
+}
 \usage{
 flag.ex01
 }

@@ -4,7 +4,8 @@
 \name{dp.ex01}
 \alias{dp.ex01}
 \title{Example dataset for digit preference function}
-\format{A data frame with 796 observations and 6 variables
+\format{
+A data frame with 796 observations and 6 variables
 \describe{
 \item{\code{psu}}{Primary sampling unit}
 \item{\code{age}}{Age (months)}
@@ -12,7 +13,8 @@
 \item{\code{wt}}{Weight (kg)}
 \item{\code{ht}}{height (cm)}
 \item{\code{oedema}}{Presence or absence of oedema}
-}}
+}
+}
 \usage{
 dp.ex01
 }

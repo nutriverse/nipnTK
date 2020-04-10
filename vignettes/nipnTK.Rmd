@@ -1,0 +1,56 @@
+---
+title: "The NiPN data quality toolkit"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The NiPN data quality toolkit}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+This document presents a set of practical analytical methods that can be applied to variables in datasets to assess their quality. An index of data quality that both describes and scores the quality of the data is also presented.
+
+The focus of this toolkit is on data required to assess anthropometric status such as measurements of weight, height or length, MUAC, sex and age.
+
+The focus is on anthropometric status but many of presented methods could be applied to other variables. NiPN may commission additional toolkits to examine other variables or other types of variables.
+
+Data quality is assessed by:
+
+* Range checks and value checks to identify univariate outliers.
+
+* Scatterplots and statistical methods to identify bivariate outliers.
+
+* Use of flags to identify outliers in anthropometric indices.
+
+* Examining the distribution and the statistics of the distribution of measurements and anthropometric indices.
+
+* Assessing the extent of digit preference in recorded measurements.
+
+* Assessing the extent of age heaping in recorded ages.
+
+* Examining the sex ratio.
+
+* Examining age distributions and age by sex distributions.
+
+These activities and a proposed order in which they should be performed are shown in the figure below.
+
+```{r fig1, echo = FALSE, eval = TRUE, fig.cap = "NiPN data quality workflow", fig.align = "center", out.width = "70%"}
+knitr::include_graphics(path = "../man/figures/nipnWorkflow.png")
+```
+
+The material is intended to provide a practical or “hands on” introduction to assessing data quality and is presented as a series of computer-based exercises. Example datasets are provided.
+
+Extensive use is made of the R language and environment for statistical computing. This is a free and powerful data analysis system. Methods have been described in sufficient detail to allow activities to be performed using other data analysis systems.
+
+R provides a very extensive language for working with data. The material presented here has been written using only a small subset of the R language. Many of the data quality activities are supported by R functions that have been written specifically for this purpose. These simplify the assessment of the quality of data related to anthropometry and anthropometric indices. The basic R functions, the purpose written functions, and the filenames of example datasets are also shown in the figure above.
+
+The purpose written functions are described in detail [here](https://nutriverse.io/nipnTK/reference/index.html).
+

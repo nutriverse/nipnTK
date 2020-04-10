@@ -4,7 +4,8 @@
 \name{dist.ex01}
 \alias{dist.ex01}
 \title{Example dataset for distributions of variables and indices}
-\format{A data frame with 873 observations and 11 variables
+\format{
+A data frame with 873 observations and 11 variables
 \describe{
 \item{\code{psu}}{Primary sampling unit}
 \item{\code{age}}{Age of child (months)}
@@ -17,7 +18,8 @@
 \item{\code{waz}}{Weight-for-age z-score}
 \item{\code{whz}}{Weight-for-height z-score}
 \item{\code{flag}}{Data quality flag}
-}}
+}
+}
 \usage{
 dist.ex01
 }

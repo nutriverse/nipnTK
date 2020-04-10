@@ -1,5 +1,6 @@
 ---
 title: "Distributions of variables and indices"
+author: "Mark Myatt"
 ---
 
 ```{r, include = FALSE}
@@ -9,6 +10,935 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, echo = FALSE}
 library(nipnTK)
+library(magrittr)
+library(tufte)
 ```
+
+## Assessing the distribution of anthropometric variables, indices, and indicators
+
+In this section we will examine the distribution of anthropometric variables (e.g. weight, height, and MUAC), anthropometric indices (e.g. WHZ, HAZ, and WHZ), and anthropometric indicators (e.g. wasted, stunted, and underweight).
+
+Topics such as the distribution of age, age by sex, age-heaping, and digit preference are covered in other sections of this toolkit.
+
+We will retrieve a survey dataset:
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- read.table("dist.ex01.csv", header = TRUE, sep = ",") head(svy)
+```
+
+```{r, echo = FALSE, eval = TRUE}
+svy <- dist.ex01
+```
+
+The file **dist.ex01.csv** is a comma-separated-value (CSV) file containing anthropometric data from a SMART survey in Kabul, Afghanistan.
+
+## Numerical summaries
+
+The `summary()` function in R provides a six-figure summary (i.e. minimum, first quartile, median, means, third quartile, and maximum) of a numeric variable. For example:
+
+```{r, echo = TRUE, eval = FALSE}
+summary(svy$weight)
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+summary(svy$weight)
+```
+
+The six-figure summary does not report the standard deviation.
+
+The `sd()` function in R calculates the standard deviation. For example:
+
+```{r, echo = TRUE, eval = FALSE}
+sd(svy$weight)
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+sd(svy$weight)
+```
+
+The `sd()` function may return **NA**. This will happen if there are missing values in the specified variable. 
+
+If this happens you can instruct the function to ignore missing values:
+
+```{r, echo = TRUE, eval = FALSE}
+sd(svy$weight, na.rm = TRUE)
+```
+
+returns the same value:
+
+```{r, echo = FALSE, eval = TRUE}
+sd(svy$weight, na.rm = TRUE)
+```
+
+Using the `na.rm` parameter in this way (i.e. specifying `na.rm = TRUE`) works with many descriptive functions in R (see table below).
+
+```{r tab1, echo = FALSE, eval = TRUE}
+col1 <- c("mean()", "sd()", "var()", "median()", "min()", "max()", "range()", "IQR()", "quantile()", "summary()", "mad()", "length()", "nrow()")
+col2 <- c("Mean of the specified variables",
+          "Standard deviation of the specified variable",
+          "Variance of the specified variable",
+          "Median of the specified variable",
+          "Minimum of the specified variable",
+          "Maximum of the specified variable",
+          "Range of the specified variable",
+          "Interquartile range of the specified variable",
+          "Quantiles of the specified variable",
+          "Six-figure summary of the specified variable",
+          "Adjusted median absolute deviation",
+          "Number of observations in the specified variable",
+          "Number of rows in a data.frame (dataset)")
+
+tab <- data.frame(col1, col2)
+
+knitr::kable(x = tab,
+             booktabs = TRUE,
+             caption = "Some descriptive functions in R",
+             col.names = c("Function*", "Returns"),
+             row.names = FALSE,
+             escape = TRUE,
+             format = "html") %>%
+  kableExtra::kable_styling(full_width = FALSE) %>%
+  kableExtra::column_spec(column = 1, monospace = TRUE) %>%
+  kableExtra::footnote(symbol = c("If a function returns NA this may be because the variable contains missing values. 
+                                  Use na.rm = TRUE to instruct the function to ignore missing values."))
+```
+
+## Graphical and numerical summaries
+
+Numerical summaries are useful for checking that data are within an expected range.
+
+Graphical methods are often more informative than numerical summaries.
+
+A key graphical method for examining the distribution of a variable is the histogram. For example:
+
+```{r, echo = TRUE, eval = FALSE}
+hist(svy$weight)
+```
+
+displays a histogram of the weight variable in the example dataset (see figure below).
+
+```{r, echo = FALSE, eval = TRUE, fig.align = "center", out.width = "70%"}
+hist(svy$weight)
+```
+
+We need to be careful when examining the distribution of measurements, as they may vary by sex. For example:
+
+```{r, echo = TRUE, eval = FALSE}
+hist(svy$height)
+```
+
+will display the heights of both males and females. That is, it will display two separate distributions as if they were a single distribution.
+
+```{r, echo = FALSE, eval = TRUE, fig.align = "center", out.width = "70%"}
+hist(svy$height)
+```
+
+In this case it is sensible to look at the data for males and the data for females using separate histograms:
+
+```{r, echo = TRUE, eval = FALSE}
+hist(svy$height[svy$sex == 1]) 
+hist(svy$height[svy$sex == 2])
+```
+
+```{r, echo = FALSE, eval = TRUE, fig.show = "hold", out.width = "50%"}
+hist(svy$height[svy$sex == 1]) 
+hist(svy$height[svy$sex == 2])
+```
+
+or using a box-plot:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "50%"}
+boxplot(svy$height ~ svy$sex, names = c("M", "F"), 
+        xlab = "Sex", ylab = "Height (cm)", main = "Height by sex")
+```
+
+Numerical summaries can also be used:
+
+```{r, echo = TRUE, eval = FALSE}
+by(svy$height, svy$sex, summary)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+by(svy$height, svy$sex, summary)
+```
+
+## Normal distributions
+
+With anthropometric variables and indices we usually expect a symmetrical (or nearly symmetrical) “bell-shaped” distribution. The variables and indices of interest are usually:
+
+```{r, echo = TRUE, eval = FALSE}
+hist(svy$muac) 
+hist(svy$haz) 
+hist(svy$waz) 
+hist(svy$whz)
+```
+
+These plots are shown below.
+
+```{r, echo = FALSE, eval = TRUE, fig.show = "hold", out.width = "50%"}
+hist(svy$muac) 
+hist(svy$haz) 
+```
+
+```{r, echo = FALSE, eval = TRUE, fig.cap = "Histograms showing the distribution of anthropometric indices in the example dataset", fig.show = "hold", out.width = "50%"}
+hist(svy$waz) 
+hist(svy$whz)
+```
+
+The number and size of the “intervals” (`breaks`) used when plotting a histogram is calculated to produce a useful plot. The intervals used are based on the range of the data.
+
+You can specify a different set of `breaks` for the `hist()` function to use. For example:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+hist(svy$haz, breaks = "scott")
+```
+
+calculates intervals using the standard deviation and the sample size. This:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+hist(svy$haz, breaks = "FD")
+```
+
+calculates intervals using the inter-quartile range. This:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+hist(svy$haz, breaks = 40)
+```
+
+will use about **40** intervals. This: 
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+hist(svy$haz, 
+     breaks = seq(from = floor(min(svy$haz)), to = ceiling(max(svy$haz)), by = 0.5))
+```
+
+uses intervals that are **0.5** z-scores wide over the full range of **haz**.
+
+All of these plots show nearly symmetrical “bell-shaped” distributions.
+
+The ideal symmetrical "bell-shaped" distribution is the normal distribution.
+
+There are a number of ways of assessing whether a variable is normally distributed.
+
+The first way of assessing whether a variable is normally distributed is a simple “by-eye” assessment as we have already done using histograms.
+
+The NiPN data quality toolkit provides an R language function called `histNormal()` that can help with “by-eye” assessments by superimposing a normal curve on a histogram of the variable of interest:
+
+```{r, echo = TRUE, eval = FALSE}
+histNormal(svy$muac)
+histNormal(svy$haz)
+histNormal(svy$waz)
+histNormal(svy$whz)
+```
+
+These plots are shown below. All variables appear to be approximately normally distributed.
+
+```{r, echo = FALSE, eval = TRUE, fig.show = "hold", out.width = "50%"}
+histNormal(svy$muac)
+histNormal(svy$haz)
+```
+
+```{r, echo = FALSE, eval = TRUE, fig.cap = "Histograms of anthropometric indices with normal curves superimposed", fig.show = "hold", out.width = "50%"}
+histNormal(svy$waz)
+histNormal(svy$whz)
+```
+
+Changing the `breaks` parameter may make a histogram easier to “read”. For example: 
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+histNormal(svy$haz, breaks = 15)
+```
+
+Another graphical method for assessing whether a variable is normally distributed is the *normal quantile-quantile plot*. These are easy to produce using *R*.
+
+The NiPN data quality toolkit provided a helper function called `qqNormalPlot()` that produces a slightly enhanced normal quantile-quantile plot:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+qqNormalPlot(svy$whz)
+```
+
+This plot is shown below (with annotations). In this example the tails of the distribution contain more cases than would be expected in a perfectly normally distributed variable.
+
+```{r fig1, echo = FALSE, eval = TRUE, fig.cap = "Annotated normal quantile-quantile plot of the whz variable in the example dataset", fig.align = "center", out.width = "70%"}
+knitr::include_graphics(path = "../man/figures/qqNormalPlot.png")
+```
+
+We should examine all of the relevant variables:
+
+```{r, echo = TRUE, eval = FALSE}
+qqNormalPlot(svy$muac) 
+qqNormalPlot(svy$haz) 
+qqNormalPlot(svy$waz) 
+qqNormalPlot(svy$whz)
+```
+
+These plots are shown below. There is evidence of small deviations from normality in **muac**, **haz**, and **whz**.
+
+```{r, echo = FALSE, eval = TRUE, fig.show = "hold", out.width = "50%"}
+qqNormalPlot(svy$muac) 
+qqNormalPlot(svy$haz)
+```
+
+```{r, echo = FALSE, eval = TRUE, fig.cap = "Normal quantile-quantile plots of anthropometric indices in the example dataset", fig.show = "hold", out.width = "50%"}
+qqNormalPlot(svy$waz) 
+qqNormalPlot(svy$whz)
+```
+
+A final way of assessing normality is to use a formal statistical significance test. The preferred test is the *Shapiro-Wilk test of normality*:
+
+```{r, echo = TRUE, eval = TRUE}
+shapiro.test(svy$muac) 
+shapiro.test(svy$haz) 
+shapiro.test(svy$waz) 
+shapiro.test(svy$whz)
+```
+
+These tests indicate that **muac**, **haz**, and **whz** are significantly non-normal. Examination of the histograms and the normal quantile-quantile plots show that the deviation from normality in these indices are not particular marked. All indices have symmetrical, or nearly symmetrical, “bell-shaped” distributions.
+
+We need to be careful when using significance tests such as the Shapiro-Wilk test of normality because the results can be strongly influenced by the sample size.
+
+Small sample sizes can lead to tests missing large effects and large sample sizes can lead to tests identifying small effects as highly significant.
+
+The analysis above found some highly significant but small deviations from normality that would probably not have been detected by a significance test if a smaller sample size had been used.
+
+We can simulate a considerably smaller sample size by taking, for example, every fourth **muac** value:
+
+```{r, echo = TRUE, eval = TRUE}
+length(svy$muac)
+oneQuarter <- svy$muac[seq(from = 1, to = length(svy$muac), by = 4)] 
+length(oneQuarter)
+```
+
+Inspecting this smaller sample graphically:
+
+```{r, echo = TRUE, eval = FALSE}
+histNormal(oneQuarter) 
+qqNormalPlot(oneQuarter)
+```
+
+```{r, echo = FALSE, eval = TRUE, fig.show = "hold", out.width = "50%"}
+histNormal(oneQuarter) 
+qqNormalPlot(oneQuarter)
+```
+
+yields results similar to those found when the complete sample was used, but the formal test:
+
+```{r, echo = TRUE, eval = TRUE}
+shapiro.test(oneQuarter)
+```
+
+is no longer significant at *p < 0.05*.
+
+If a distribution appears to be normal (i.e. has a symmetrical, or nearly symmetrical, “bell-shaped” distribution) then it is usually safe to assume normality and to use statistical procedures that assume normality. Formal tests for normality can be misleading when sample sizes of more than a few hundred cases are used. Graphical methods are not very useful when sample sizes are small. Formal test are not very useful when sample sizes are large. The sample sizes of most anthropometry surveys will be large enough to cause formal tests for normality to identify small deviations from normality as highly significant.
+
+## Skew and kurtosis
+
+Skew is a measure of the asymmetry of a distribution about its mean. Skew can be zero, positive, or negative. Zero skew is found when the distribution is perfectly symmetrical. Positive skew is found when there is a long right tail to the distribution and the mass of the distribution is concentrated to the left. Negative skew is found when there is a long left tail to the distribution and the mass of the distribution is concentrated to the right. We can usually see skew in histograms. We can also calculate a skewness statistic and test if this is significantly different from zero.
+
+Kurtosis is a measure of how much a distribution is concentrated about the mean. Kurtosis can be zero, positive, or negative. Zero kurtosis is found when a variable is normally distributed. Positive kurtosis is found when the mass of the distribution is concentrated about the mean and there are very few values far from the mean. Negative kurtosis is found when the mass of the distribution is concentrated in the tails of the distribution. We can usually see kurtosis in histograms. We can also calculate a kurtosis statistic and test if this is significantly different from zero.
+
+The NiPN data quality toolkit provides an R language function called `skewKurt()` that calculates skewness and kurtosis statistics and tests whether they differ significantly from zero. Here we apply the `skewKurt()` function to the muac variable in the example dataset:
+
+```{r, echo = TRUE, eval = FALSE}
+skewKurt(svy$muac)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+skewKurt(svy$muac)
+```
+
+There is positive skew and negative kurtosis. Neither is significantly different from zero. 
+
+Applying the `skewKurt()` function to the **haz** variable in the example dataset:
+
+```{r, echo = TRUE, eval = FALSE}
+skewKurt(svy$haz)
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+skewKurt(svy$haz)
+```
+
+There is a positive skew and a positive kurtosis. The skew is significantly different from zero. The skew can be seen in the histogram:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+histNormal(svy$haz, breaks = "scott")
+```
+
+Applying the `skewKurt()` function to the **waz** variable in the example dataset: 
+
+```{r, echo = TRUE, eval = FALSE}
+skewKurt(svy$waz)
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+skewKurt(svy$waz)
+```
+
+There is negative skew and positive kurtosis. Neither is significantly different from zero.
+
+Applying the `skewKurt()` function to the **whz** variable in the example dataset: 
+
+```{r, echo = TRUE, eval = FALSE}
+skewKurt(svy$whz)
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+skewKurt(svy$whz)
+```
+
+There is a positive skew and a positive kurtosis. The kurtosis is significantly different from zero. The kurtosis can be seen on the histogram:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+histNormal(svy$whz, breaks = "scott")
+```
+
+as the tall central columns that exceed the expected values shown by the overlaid normal distribution.
+
+Skew and kurtosis are both used in SMART plausibility checks. Table below shows how skew and kurtosis statistics are applied by SMART.
+
+```{r tab2, echo = FALSE, eval = TRUE}
+col1 <- c("< 0.2", "≥ 0.2 and < 0.4", "≥ 0.6 and < 0.6", "≥ 0.6")
+col2 <- c("Excellent", "Good", "Acceptable", "Problematic")
+
+tab <- data.frame(col1, col2)
+
+knitr::kable(x = tab,
+             booktabs = TRUE,
+             caption = "The range of absolute values of skewness and kurtosis statistics that are applied by SMART (2015)",
+             col.names = c("Absolute value* of skewness / kurtosis", "SMART Interpretation"),
+             row.names = FALSE,
+             align = "c",
+             escape = TRUE,
+             format = "html") %>%
+  kableExtra::kable_styling(full_width = FALSE, position = "center") %>%
+  kableExtra::footnote(symbol = c("This is the value of a number ignoring its negative or positive sign.
+                                  The absolute value of -0.2412 is 0.2412. The absolute value of +0.2412 is also 0.2412."))
+```
+
+The **whz** variable in the example dataset is considered “problematic” according to this scheme because kurtosis is above 0.6.
+
+Care should be exercised when using statistical significance tests to classify data as “problematic”. The use of thresholds and ranges for skew and kurtosis statistics is usually a better approach than relying on tests of statistical significance. Significance tests can be strongly affected by sample size. Small sample sizes can lead to tests missing large effects and large sample sizes can lead to tests identifying small effects as highly significant. If a distribution appears to be normal (i.e. has a symmetrical, or nearly symmetrical, “bell-shaped” distribution) then it is usually safe to assume normality and to use statistical procedures that assume normality.
+
+It is important to remember that the normal distribution is a mathematical abstraction. There is nothing compelling the real world to conform to the normal distribution. The normal distribution has become reified:
+
+> Everyone is sure of this [the normal distribution] ... experimentalists believe that it is a mathematical theorem, and the mathematicians that it is an experimentally determined fact.
+`r tufte::quote_footer("--- Henri Poincaré (1912), Calcul des Probabilités")`
+
+The data we see may be representative of reality even when it fails tests for normality.
+
+Tests for normality are useful when selecting statistical methods that rely on normality. They are less useful for determining data quality. If data follows a symmetrical, or nearly symmetrical, “bell-shaped” distribution then it will usually safe to use.
+
+## Deviation from normality
+Some anthropometric survey methods (e.g. SMART) use deviations from perfect normality as an indicator of poor data quality. This is not a sensible approach because deviations from normality are not necessarily due to poor quality data; they can be due to sampling a mixed population. This is easy to demonstrate with some simulated data.
+
+We will assume that we have a population consisting of two groups: 
+
+**Group 1 :** 75% of the population, mean = -0.48, sd = 0.87
+
+**Group 2 :** 25% of the population, mean = -1.04, sd = 1.10 
+
+and that we take a sample size = 1000 from the whole population. We can simulate this:
+
+```{r, echo = TRUE, eval = FALSE}
+set.seed(0)
+g1 <- rnorm(n = 750, mean = -0.48, sd = 0.87) 
+g2 <- rnorm(n = 250, mean = -1.04, sd = 1.11) 
+g1g2 <- c(g1, g2)
+```
+
+```{r, echo = FALSE, eval = TRUE}
+set.seed(0)
+g1 <- rnorm(n = 750, mean = -0.48, sd = 0.87) 
+g2 <- rnorm(n = 250, mean = -1.04, sd = 1.11) 
+g1g2 <- c(g1, g2)
+```
+
+The distributions in the two subgroups (**g1** and **g2**) are both normally distributed:
+
+```{r, echo = TRUE, eval = FALSE}
+histNormal(g1) 
+qqNormalPlot(g1)
+shapiro.test(g1) 
+skewKurt(g1)
+```
+
+```{r, echo = FALSE, eval = TRUE, fig.show = "hold", out.width = "50%"}
+histNormal(g1) 
+qqNormalPlot(g1)
+```
+
+```{r, echo = FALSE, eval = TRUE}
+shapiro.test(g1) 
+skewKurt(g1)
+```
+
+```{r, echo = TRUE, eval = FALSE}
+histNormal(g2) 
+qqNormalPlot(g2) 
+shapiro.test(g2) 
+skewKurt(g2)
+```
+
+```{r, echo = FALSE, eval = TRUE, fig.show = "hold", out.width = "50%"}
+histNormal(g2) 
+qqNormalPlot(g2) 
+```
+
+```{r, echo = FALSE, eval = TRUE}
+shapiro.test(g2) 
+skewKurt(g2)
+```
+
+but the distribution in the entire sample (**g1g2**) is not normal:
+
+```{r, echo = TRUE, eval = FALSE}
+histNormal(g1g2) 
+qqNormalPlot(g1g2) 
+shapiro.test(g1g2) 
+skewKurt(g1g2)
+```
+
+```{r, echo = FALSE, eval = TRUE, fig.show = "hold", out.width = "50%"}
+histNormal(g1g2) 
+qqNormalPlot(g1g2) 
+```
+
+
+The *Shapiro-Wilk test of normality* returns: 
+
+```{r, echo = FALSE, eval = TRUE}
+shapiro.test(g1g2)
+```
+
+There is statistically significant negative skew:
+
+```{r, echo = FALSE, eval = TRUE}
+skewKurt(g1g2)
+```
+
+There is, however, nothing wrong with the sample or with the data
+
+The distribution in the entire sample (**g1g2**) is called a “mixture of Gaussians” (the term “Gaussian” refers to the normal distribution in this context).
+
+We can see this mixture of Gaussians with:
+
+```{r, echo = TRUE, eval = TRUE}
+hist(g1, col=rgb(0.2, 0.2, 0.2, 0.5),
+     breaks = seq(-5, 3, 0.5), xlab = "", main = "")
+hist(g2, col=rgb(0.8, 0.8, 0.8, 0.5), breaks = seq(-5, 3, 0.5), add = TRUE) 
+title(main = "Histogram of g1 and g2", xlab = "z-score")
+```
+
+In this case the mixture was already known. There are a number of methods for revealing the underlying mixture when the components of the mixture are unknown. These techniques are not covered in this toolkit. We will, however, continue with an example in which the components of the mixture are suspected.
+
+We expect to see small deviations from normality in most survey datasets. This will often be the case when a survey samples subjects over a wide area covering, for example, several agro-ecological zones, socio-economic groups, or ethnic groups. This will almost always be the case, particularly with large surveys such as DHS, MICS, and national SMART surveys.
+
+Another reason for non-normality is that one (or more) of the survey teams has a systematic bias in making a measurement. Identifying the “offending” survey team by examining and testing for normality separately in all combinations of data from $n ~ – ~ 1$ survey teams can be attempted. If (e.g.) there were three teams then we would need to separately test data from:
+
+Team 1 and Team 2 (Team 3 excluded)
+
+Team 1 and Team 3 (Team 2 excluded)
+
+Team 2 and Team 3 (Team 1 excluded)
+
+to see if the deviation from normality disappears when a particular team’s data are excluded. There is, however, a problem with this type of analysis. In cluster-sampled surveys, teams often sample adjacent primary sampling units (clusters). When this occurs the “exclude one team” analysis cannot distinguish between differences due to spatial heterogeneity (i.e. patchiness) and differences due to a team having a systematic measurement bias.
+
+## The standard deviation and alternatives
+
+The standard deviation is sometimes considered to be useful measure of data quality when applied to z-scores. 
+
+We can use the **sd()** function to find the standard deviation. For example:
+
+```{r, echo = TRUE, eval = FALSE}
+sd(svy$whz)
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+sd(svy$whz)
+```
+
+1.323469
+
+This may produce misleading values if applied to raw data. This procedure should only be applied to cleaned data from which erroneous data and flagged records have been censored.
+
+SMART guidelines state that the acceptable range for the standard deviation of the weight-for-height z-scores (**whz**) is 0.8 to 1.2 when flagging criteria have been applied and flagged records have been censored. Standard deviations outside this range are considered to indicate poor survey quality. Note that SMART does not define threshold for anthropometric indices other than weight-for-height z-scores. It is important to note that a standard deviation above 1.2 may be due to sampling from a mixed population rather than due to poor data quality.
+
+The **flag** column in the example dataset contains a flagging code in which the codes **2**, **3**, **6**, or **7** indicate potential problems with weight and / or height. We should calculate the standard deviation of the **whz** variable using only the data in which records with these flagging codes are censored and there is no oedema recorded:
+
+```{r, echo = TRUE, eval = FALSE}
+sd(svy$whz[!(svy$flag %in% c(2, 3, 6, 7) | svy$oedema == 1)])
+```
+
+The `!` character specifies a logical “not”. The standard deviation is, therefore, calculated using records in which the **flag** variable does **not** contain **2**, **3**, **6**, or **7** or oedema is **not** recorded as being present.
+
+The standard deviation for **whz** when flagged records and oedema cases are censored is:
+
+```{r, echo = FALSE, eval = TRUE}
+sd(svy$whz[!(svy$flag %in% c(2, 3, 6, 7) | svy$oedema == 1)])
+```
+
+This is within the SMART acceptable range of 0.8 to 1.2.
+
+The problem with using the standard deviation with raw data is that it is a non-robust statistic. This means that it can be strongly influenced by outliers. For example:
+
+```{r, echo = TRUE, eval = FALSE}
+sd(c(4.55, 5.93, 2.68, 5.61, 3.53, 4.78, 3.60, 5.82, 4.41, 5.42))
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+sd(c(4.55, 5.93, 2.68, 5.61, 3.53, 4.78, 3.60, 5.82, 4.41, 5.42))
+```
+
+Adding a single outlier (e.g. data entered as **7.84** rather than as **4.78**):
+
+```{r, echo = TRUE, eval = FALSE}
+sd(c(4.55, 5.93, 2.68, 5.61, 3.53, 7.84, 3.60, 5.82, 4.41, 5.42))
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+sd(c(4.55, 5.93, 2.68, 5.61, 3.53, 7.84, 3.60, 5.82, 4.41, 5.42))
+```
+
+In this example a single outlier has strongly influenced the standard deviation.
+
+There are a number of robust estimators for the standard deviation. R provides the `mad()` function to calculate an adjusted *median absolute deviation* (MAD).
+
+The median absolute deviation (MAD) is defined as the median of the absolute deviations from the median. It is the median of the absolute values of the differences between the individual data points and the median of the data:
+
+$$ MAD ~ = ~ ( | x_i ~ - ~ median(x) | ) $$
+
+The calculated MAD is adjusted to make it consistent with the standard deviation:
+
+$$ \hat{\sigma} ~ = ~ k ~ \times ~ MAD  $$
+
+where *k* is a constant scaling factor, which depends upon the distribution. For the normal distribution:
+
+$$ k ~ = ~ 1.4826 $$
+
+The `mad()` function in R function returns the adjusted MAD:
+
+$$ \hat{\sigma} ~ = ~ 1.4826 ~ \times ~ MAD $$
+
+This is a robust estimate of the standard deviation.
+
+This estimator is preferred when a sample is taken from a mixed population (this is almost always the case) and when the distribution has “fat” or “heavy” tails, as is the case with the **whz** variable in the example dataset.
+
+Using the `mad()` function with the raw WHZ data:
+
+```{r, echo = TRUE, eval = FALSE}
+mad(svy$whz)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+mad(svy$whz)
+```
+
+We would usually want to calculate the adjusted MAD of the whz variable using only the data in which records with flagging codes relevant to whz and cases of oedema are censored:
+
+```{r, echo = TRUE, eval = FALSE}
+mad(svy$whz[!(svy$flag %in% c(2, 3, 6, 7) | svy$oedema == 1)])
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+mad(svy$whz[!(svy$flag %in% c(2, 3, 6, 7) | svy$oedema == 1)])
+```
+
+The use of the standard deviation and robust equivalents such as the adjusted MAD with simple thresholds is problematic. Data that is a mixture of Gaussians distributions will tend to have large standard deviations even when there is no systematic error and nothing is wrong with the sample. Checks on the standard deviation in large surveys should, therefore, be performed on the smallest spatial strata above the PSU or cluster level. This reduces but does not eliminate the problem of sampling from mixed populations.
+
+We will retrieve a dataset and examine within-strata MADs:
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- read.table("flag.ex03.csv", header = TRUE, sep = ",")
+head(svy)
+```
+
+```{r, echo = FALSE, eval = TRUE}
+svy <- flag.ex03
+head(svy)
+```
+
+The file **flag.ex03.csv** is a comma-separated-value (CSV) file containing anthropometric data from a national SMART survey in Nigeria.
+
+The data stored in the file flag.ex03.csv were collected using methods similar to MICS and DHS surveys. The only difference is that the survey concentrated on anthropometric data in children aged between 6 and 59 months. In this exercise we will concentrate on WHZ.
+
+Data are stratified by **region** and by **state** within **region**. We will create a new variable that combines **region** and **state**:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$regionState <- paste(svy$region, svy$state, sep = ":")
+head(svy)
+table(svy$regionState)
+```
+
+We can examine the adjusted MAD for **whz** for each combination of **region** and **state** in the survey dataset using:
+
+```{r, echo = TRUE, eval = TRUE}
+by(svy$whz, svy$regionState, mad, na.rm = TRUE)
+```
+
+
+The long output can be made more compact, easier to read, and easier to work with:
+
+```{r, echo = TRUE, eval = TRUE}
+mads <- by(svy$whz, svy$regionState, mad, na.rm = TRUE)
+mads <- round(mads[1:length(mads)], 2)
+mads
+```
+
+The saved **mads** object can be summarised:
+
+```{r, echo = TRUE, eval = FALSE}
+summary(mads)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+summary(mads)
+```
+
+A table can also be useful:
+
+```{r, echo = TRUE, eval = TRUE}
+table(mads)
+```
+
+In this example the adjusted MAD of the **whz** variable is within the limits 0.8 to 1.2 for all combinations of **region** and **state**.
+
+Note that we combined **region** and **state**. We did this to avoid potential problems with duplicate **state** names (i.e. the same **state** name used in more than one **region**).
+
+In the previous exercise we used the raw (i.e. without flagging) data. It is better to use only the data in which records with flagging codes relevant to **whz** and cases of oedema are censored.
+
+This is a national SMART survey so we will use SMART flagging criteria. We will use the `national.SMART()` function to add SMART flags to the survey dataset:
+
+```{r, echo = TRUE, eval = TRUE}
+svyFlagged <- national.SMART(x = svy, strata = "regionState")
+```
+
+We need to exclude records with flagging codes relevant to whz:
+
+```{r, echo = TRUE, eval = TRUE}
+svyFlagged <- svyFlagged[!(svyFlagged$flagSMART %in% c(2, 3, 6, 7)), ]
+```
+
+Note that oedema is not recorded in the dataset so we cannot exclude oedema cases.
+
+We can now calculate the MAD for **whz** in each stratum:
+
+```{r, echo = TRUE, eval = TRUE}
+mads <- by(svyFlagged$whz, svyFlagged$regionState, mad, na.rm = TRUE)
+mads <- round(mads[1:length(mads)], 2)
+mads
+```
+
+The saved **mads** object can be summarised:
+
+```{r, echo = TRUE, eval = FALSE}
+summary(mads)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+summary(mads)
+```
+
+In this analysis the adjusted MAD of the **whz** variable is within the limits 0.8 to 1.2 for all combinations of **region** and **state**.
+
+## Measures of dispersion
+
+Measures of dispersion summarise how cases (e.g. children classified as wasted, stunted, or underweight) are distributed across a survey’s primary sampling units (e.g. clusters).
+
+We will retrieve a survey dataset:
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- read.table("flag.ex01.csv", header = TRUE, sep = ",") 
+head(svy)
+```
+
+```{r, echo = FALSE, eval = TRUE}
+svy <- flag.ex01
+head(svy)
+```
+
+The file **flag.ex01.csv** is a comma-separated-value (CSV) file containing anthropometric data from a recent SMART survey in Sudan.
+
+We will apply WHO flagging criteria to the data:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$flag <- 0
+svy$flag <- ifelse(!is.na(svy$haz) & (svy$haz < -6 | svy$haz > 6), svy$flag + 1, svy$flag)
+svy$flag <- ifelse(!is.na(svy$whz) & (svy$whz < -5 | svy$whz > 5), svy$flag + 2, svy$flag)
+svy$flag <- ifelse(!is.na(svy$waz) & (svy$waz < -6 | svy$waz > 5), svy$flag + 4, svy$flag)
+```
+
+We should exclude flagged records:
+
+```{r, echo = TRUE, eval = TRUE}
+svy <- svy[svy$flag == 0, ]
+```
+
+We will apply a case-definition for being stunted:
+
+```{r, echo = TRUE, eval = TRUE}
+svy$stunted <- ifelse(svy$haz < -2, 1, 2)
+```
+
+We can examine the distribution of stunted cases across the primary sampling units in this survey:
+
+```{r, echo = TRUE, eval = TRUE}
+table(svy$psu, svy$stunted)
+```
+
+We only need the counts of cases in each primary sampling unit:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+table(svy$psu, svy$stunted)[,1]
+barplot(table(svy$psu, svy$stunted)[,1], xlab = "PSU", ylab = "Cases", cex.names = 0.5)
+```
+
+It will be useful to keep this for later use:
+
+```{r, echo = TRUE, eval = TRUE}
+casesPerPSU <- table(svy$psu, svy$stunted)[,1] 
+casesPerPSU
+```
+
+We are interested in how cases are distributed across the primary sampling units.
+
+There are three general patterns. These are *random*, *clumped*, and *uniform*.
+
+We can identify the pattern to which the example data most likely belongs using an *index of dispersion*.
+
+The simplest index of dispersion, and the one used by SMART, is the *variance to mean ratio*: 
+
+$$ \text{Variance to mean ratio} ~ = ~ \frac{s ^ 2}{\overline{\chi}} $$
+
+The interpretation of the variance to mean ratio is straightforward:
+
+Variance to mean ratio ≈ 1     Random
+
+Variance to mean ratio > 1     Clumped (i.e. more clumped than random)
+
+Variance to mean ratio < 1     Uniform (i.e. more uniform than random)
+
+The value of the variance to mean ratio can range between zero (maximum uniformity) and the total number of cases in the data (maximum clumping). Maximum uniformity is found when the same number of cases are found in every primary sampling unit. Maximum clumping is found when all cases are found in one primary sampling unit.
+
+With the example data:
+
+```{r, echo = TRUE, eval = TRUE}
+varianceCasesPerPSU <- var(casesPerPSU)
+meanCasesPerPSU <- sum(casesPerPSU) / length(casesPerPSU) 
+V2M <- varianceCasesPerPSU / meanCasesPerPSU
+V2M
+```
+
+The observed variance to mean ratio (**0.6393127**) suggests that the distribution of cases across primary sampling units is not completely uniform, but neither is it random.
+
+A formal (*Chi-squared*) test can be performed. The Chi-squared test statistic can be calculated using: 
+
+```{r, echo = TRUE, eval = FALSE}
+sum((casesPerPSU - meanCasesPerPSU)^2) / meanCasesPerPSU
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+sum((casesPerPSU - meanCasesPerPSU)^2) / meanCasesPerPSU
+```
+
+18.54007
+
+The critical values for this test statistic can be found using:
+
+```{r, echo = TRUE, eval = FALSE}
+qchisq(p = c(0.025, 0.975), df = length(casesPerPSU) - 1)
+```
+
+This returns:
+
+```{r, echo = TRUE, eval = FALSE}
+qchisq(p = c(0.025, 0.975), df = length(casesPerPSU) - 1)
+```
+
+16.04707 45.72229
+
+If the Chi-squared test statistic was below **16.04707** then we would conclude that the pattern of cases across primary sampling units in the example data is uniform. This is not the case in the example data.
+
+If the Chi-squared test statistic was above **45.72229** then we would conclude that the pattern of cases across primary sampling units in the example data is clumped. This is not the case in the example data.
+
+Since the Chi-squared test statistic falls between **16.04707** and **45.72229** we conclude that the pattern of cases across primary sampling units in the example data is random.
+
+There are problems with the variance to mean ratio. Some clearly non-random patterns can produce variance to mean ratios of one. The variance to mean ratio is also strongly influenced by the total number of cases present in the data when clumping is present.
+
+A better measure is *Green's Index of Dispersion*: 
+
+$$ \text{Green's Index} ~ = ~  \frac{ \left ( \frac{s ^ 2}{\overline{\chi}} \right ) ~ - ~ 1}{n ~ - ~ 1} $$
+
+Green’s Index corrects the variance to mean ratio for the total number of cases present in the data.
+
+The value of Green's Index can range between $ -1 / (n - 1) $   for maximum uniformity (specific to the dataset) and one for maximum clumping. The interpretation of Green’s Index is straightforward:
+
+Green’s Index ≈ 0     Random
+
+Green’s Index > 0     Clumped (i.e. more clumped than random)
+
+Green’s Index < 0     Uniform (i.e. more uniform than random)
+
+The sampling distribution of Green’s Index is not well described. The NiPN data quality toolkit provides the `greenIndex()` function that overcomes this problem. This R language function uses the bootstrap technique to estimate Green's Index and test whether the distribution of cases across primary sampling units is random.
+
+The `greenIndex()` function requires you to specify the name of the survey dataset, the name of the variable specifying the primary sampling unit, and the name of the variable specifying case status. With the example data:
+
+```{r, echo = TRUE, eval = FALSE}
+greensIndex(data = svy, psu = "psu", case = "stunted")
+```
+
+this returns:
+
+```{r, echo = FALSE, eval = TRUE}
+greensIndex(data = svy, psu = "psu", case = "stunted")
+```
+
+The point estimate of Green's Index (**-0.0013**) is below zero and the p-value of the test for a random distribution of cases across primary sampling units (**0.0040**) is below 0.05. The distribution of cases across primary sampling units in the example data is significantly more uniform than it is random. We can see this graphically using:
+
+```{r, echo = TRUE, eval = TRUE}
+table(svy$psu, svy$stunted)[,1]
+barplot(table(svy$psu, svy$stunted)[,1], xlab = "PSU", ylab = "Cases", cex.names = 0.5)
+abline(h = sum(casesPerPSU) / length(casesPerPSU), lty = 2)
+```
+
+The dashed line on the plot marks the mean number of cases found in each primary sampling unit. A uniform distribution would show all bars ending close to this line (see figure above).
+
+SMART uses the variance to mean ratio as a test of data quality. Green’s Index is a more robust choice because it can be used to compare samples that vary in overall sample size and the number of sampling units used.
+
+The idea behind using a measure of dispersion to judge data quality is a belief that the distribution of cases of malnutrition across primary sampling units should always be random. If this is not the case then the data are considered to be suspect. The problem with this approach is that deviations from random can reflect the true distribution of cases in the survey area. This may occur when the survey area comprises, for example, more than one livelihood zone. It is also less likely to be the case for conditions, such as wasting and oedema, that are associated with infectious disease and so may be more clumped than randomly distributed across primary sampling units. This may become a particular problem when proximity sampling is used to collect the within-cluster samples.
+
+Measures of dispersion are problematic when used as measures of data quality and should be interpreted with caution. The exception to this rule is finding maximum, or almost maximum, uniformity or maximum, or almost maximum, clumping. A finding of maximum uniformity is likely only when data have been fabricated. A finding of maximum clumping may indicate poor data collection and / or poor data management.
+
+

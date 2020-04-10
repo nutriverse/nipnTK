@@ -4,11 +4,13 @@
 \name{as.ex01}
 \alias{as.ex01}
 \title{Example dataset for age and sex distributions function}
-\format{A data frame of 8736 observations and 2 variables
+\format{
+A data frame of 8736 observations and 2 variables
 \describe{
 \item{\code{age}}{Age (years)}
 \item{\code{sex}}{Sex (1 = Male / 2 = Female)}
-}}
+}
+}
 \usage{
 as.ex01
 }
