@@ -9,6 +9,533 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, echo = FALSE}
 library(nipnTK)
+library(magrittr)
+```
+
+## Digit preference in anthropometric measurements
+
+Measurements in nutritional anthropometry surveys are usually taken and recorded to one decimal place. Examples are given in table below.
+
+```{r tab1, echo = FALSE, eval = TRUE}
+col1 <- c("Weight", "Height/length", "MUAC", "MUAC")
+col2 <- c("kg", "cm", "cm", "mm")
+col3 <- c("Nearest 0.1 kg", "Nearest 0.1 cm", "Nearest 0.1 cm", "Nearest 0.1 mm")
+col4 <- c("8.7 kg", "85.3 kg", "13.7 cm", "137 mm")
+col5 <- c("Most surveys use scales with a 0.1 kg precision",
+          "Height boards tend to have a 0.1 cm pesion",
+          "MUAC may be measured and recorded in centimetres or millimetres. Sometimes both may be used in the same survey. You will need to check this and recode data",
+          "MUAC may be measured and recorded in centimetres or millimetres. Sometimes both may be used in the same survey. You will need to check this and recode data")
+
+tab <- data.frame(col1, col2, col3, col4, col5)
+
+knitr::kable(x = tab,
+             booktabs = TRUE,
+             caption = "Common measurements used in anthropometric surveys",
+             col.names = c("Variable", "Unit", "Precision", "Example", "Notes"),
+             row.names = FALSE,
+             escape = FALSE,
+             format = "html") %>%
+  kableExtra::kable_styling(full_width = FALSE) %>%
+  kableExtra::collapse_rows(columns = c(1, 5), valign = "middle")
+```
+
+Digit preference is the observation that the final number in a measurement occurs with a greater frequency that is expected by chance. This can occur because of rounding, the practice of increasing or decreasing the value in a measurement to the nearest whole or half unit, or because data are made up.
+
+When taking and recording measurements in the field it is common for field staff to round the first value after the decimal point to zero or five. Measurements in whole numbers may also be rounded to the nearest decade (e.g. 137 mm may be rounded to 140 mm) or half-decade (e.g. 137 mm may be rounded to 135 mm). A small number of rounded measurements is unlikely to affect survey results. A large number of rounded measurements can affect survey results particularly if measurements have been systematically rounded in one direction. This is a form of bias.
+
+Fictitious data often shows digit preference with (e.g.) ”2” and “6” appearing as final digits much more frequently than expected. This happens because, without using a computer, a large quantity of random data is very much harder to fake than merely random-looking data.
+
+If there were little or no digit preference in anthropometric data then we would expect the final recorded digit of each measurement to occur with approximately equal frequency. We can check if digit preference is absent in data by testing whether this is the case.
+
+We will use the R Language for Data Analysis and Graphics to illustrate how this can be done. 
+
+## Tabulation and visualisation
+
+First we will work with some artificial data:
+
+```{r, echo = TRUE, eval = TRUE}
+set.seed(0)
+finalDigits <- sample(x = 0:9, size = 1000, replace = TRUE)
+```
+
+The use of `set.seed()` resets the pseudorandom number generator. This ensures that the results shown here are the same as you will get when you follow the example analyses.
+
+You should always examine data before performing any formal tests. A table can be useful:
+
+```{r, echo = TRUE, eval = FALSE}
+table(finalDigits)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+table(finalDigits)
+```
+
+We can look at proportions instead of counts:
+
+```{r, echo = TRUE, eval = FALSE}
+prop.table(table(finalDigits))
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+prop.table(table(finalDigits))
+```
+
+If you prefer working with percentages then:
+
+```{r, echo = TRUE, eval = FALSE}
+prop.table(table(finalDigits)) * 100
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+prop.table(table(finalDigits)) * 100
+```
+
+Examining data graphically is very useful:
+
+```{r, echo = TRUE, eval = FALSE}
+barplot(table(finalDigits), xlab = "Final digit", ylab = "Frequency")
+```
+
+We can add a line showing our expectation that each final digit should occur about 10% of the time:
+
+```{r, echo = TRUE, eval = FALSE}
+abline(h = sum(table(finalDigits)) / 10, lty = 3)
+```
+
+The resulting plot is shown below.
+
+```{r, echo = FALSE, eval = TRUE}
+barplot(table(finalDigits), xlab = "Final digit", ylab = "Frequency")
+abline(h = sum(table(finalDigits)) / 10, lty = 3)
+```
+
+The tabular and graphical analyses are consistent with there being little or no digit preference in the
+generated data.
+
+Both analyses agree with the expectation that each final digit should occur about 10% of the time. 
+
+All we are seeing is random variation.
+
+We can use a formal test to confirm this:
+
+```{r, echo = TRUE, eval = FALSE}
+chisq.test(table(finalDigits))
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+chisq.test(table(finalDigits))
+```
+
+In this example the *p-value* is not below 0.05 so we accept the *null hypothesis* that there is no digit preference.
+
+It is important to check that each digit between zero and nine is represented in tables and plots. 
+
+Missing digits can indicate strong digit preference.
+
+The NiPN data quality toolkit provides the `fullTable()` function. This R language function produces a table that includes cells with zero counts.
+
+As an example we will remove all the values with a final digit equal to 6 from our generated data: 
+
+```{r, echo = TRUE, eval = TRUE}
+finalDigits[finalDigits == 6] <- NA
+```
+
+and see the effect:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+table(finalDigits)
+prop.table(table(finalDigits)) * 100
+barplot(table(finalDigits), xlab = "Final digit", ylab = "Frequency") 
+abline(h = sum(table(finalDigits)) / 10, lty = 3) 
+```
+
+```{r, echo = TRUE, eval = TRUE}
+chisq.test(table(finalDigits))
+```
+
+This is a misleading analysis. It is very easy to miss that there are no final digits equal to **6** in the data. The plot is misleading because the final digit **6** is not represented and we assumed that there were ten rather than nine final digits when we calculated the expected frequencies. The Chi-squared test is not correct because it does not account for there being zero cases in which the final digit is equal to **6**.
+
+The `fullTable()` function avoids these issues:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+fullTable(finalDigits)
+prop.table(fullTable(finalDigits)) * 100
+barplot(fullTable(finalDigits), xlab = "Final digit", ylab = "Frequency") 
+abline(h = sum(fullTable(finalDigits)) / 10, lty = 3)
+```
+
+```{r, echo = TRUE, eval = TRUE}
+chisq.test(fullTable(finalDigits))
+```
+
+The Chi-squared test (incorrectly) calculated without the zero cell:
+
+```{r, echo = FALSE, eval = TRUE}
+chisq.test(table(finalDigits))
+```
+
+indicates that there is no problem with the data.
+
+The chi-square test (correctly) calculated with the zero cell:
+
+```{r, echo = FALSE, eval = TRUE}
+chisq.test(fullTable(finalDigits))
+```
+
+indicates that there is a problem with the data.
+
+Note that we use `sum(fullTable(finalDigits)) / 10` (i.e. we divide by ten) because we know
+that there should be ten final digits (i.e. **0, 1, 2, 3, 4, 5, 6, 7, 8, 9**).
+
+There is an issue with using hypothesis test such as the chi-squared test. Test values are strongly influenced by sample size yielding *false-negative* results when used with small sample sizes and *false-positive* results when used with large sample sizes.
+
+We can illustrate this by generating some new artificial data with marked digit preference:
+
+```{r, echo = TRUE, eval = TRUE}
+finalDigits <- as.table(x = c(11, 7, 5, 4, 7, 11, 5, 4, 4, 2)) 
+names(finalDigits) <- 0:9
+```
+
+This creates a table object containing counts of imaginary final digits.
+
+Looking at this data:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+finalDigits
+prop.table(finalDigits) * 100
+barplot(finalDigits, xlab = "Final digit", ylab = "Frequency") 
+abline(h = sum(finalDigits) / 10, lty = 3)
+```
+
+There is a marked digit preference for zero and five (see figure above). The Chi-squared test:
+
+```{r, echo = TRUE, eval = FALSE}
+chisq.test(finalDigits)
+```
+
+returns:
+
+```{r, echo = FALSE, eval = TRUE}
+chisq.test(finalDigits)
+```
+
+In this example the Chi-squared test has failed to detect marked digit preference. This is a *false negative* test result. The failure of the Chi-squared test in this example is due to the small number of observations (i.e. n = 60) used in the analysis.
+
+A tabular and graphical analysis was required to identify the digit preference problem in this example. 
+
+We will usually be working with large sample sizes. This can bring the problem of false positives.
+
+We will generate some data:
+
+```{r, echo = TRUE, eval = TRUE}
+set.seed(3)
+finalDigits <- sample(x = 0:9, size = 1000, replace = TRUE)
+```
+
+These data will approximate the properties of a set of true uniformly random numbers. 
+
+Any digit preference that we might observe in these data is due solely to chance.
+
+The generated data appear to exhibit some digit preference:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+table(finalDigits)
+prop.table(fullTable(finalDigits)) * 100
+barplot(fullTable(finalDigits), xlab = "Final digit", ylab = "Frequency") 
+abline(h = sum(fullTable(finalDigits)) / 10, lty = 3)
+```
+
+but this digit preference is not especially marked. The Chi-squared test:
+
+```{r, echo = TRUE, eval = FALSE}
+chisq.test(fullTable(finalDigits))
+```
+
+yields:
+
+```{r, echo = FALSE, eval = TRUE}
+chisq.test(fullTable(finalDigits))
+```
+
+which suggests significant digit preference.
+
+This is a *false positive* result because the generated data is constrained to be uniformly random and any digit preference that we observed is due solely to chance.
+
+The failure of the Chi-squared test in this example is due to the test mistaking random variation for digit preference is, in part, due to the use of a large (i.e. $n ~ = ~ 1000$) number of observations.
+
+It is also important to note that any test with a *p < 0.05* significance threshold will generate a positive result in 1 in 20 tests with data exhibiting nothing but random variation. All tests with a *p < 0.05* significance threshold have a 5% false positive rate.
+
+## Avoiding false positives using the digit preference score
+
+The problem of false-positives can be addressed by using a summary measure that takes the effect of sample size into account. A widely used method is the *digit preference score* (DPS). The DPS was developed by the WHO for the MONICA project:
+
+[http://www.thl.fi/publications/monica/bp/bpqa.htm](http://www.thl.fi/publications/monica/bp/bpqa.htm)
+
+The DPS corrects the Chi-squared statistic ($\chi ^ 2$) for the sample size (*n*) and the degrees of freedom (*df*) of the test:
+
+$$ DPS ~ = ~ 100 ~ \times ~ \sqrt{\frac{\chi ^ 2}{n ~ \times ~ df}} $$
+
+This has the effect of “desensitising” the Chi-squared test.
+
+The DPS can be used with anthropometric data from all types surveys and may also be applied to clinical data. A low DPS value indicates little or no digit preference. A high DPS value indicates considerable digit preference.
+
+Guideline values for DPS are shown in table below.
+
+```{r, echo = FALSE, eval = TRUE}
+col1 <- c("0 ≤ DPS < 8", "8 ≤ DPS < 12", "12 ≤ DPS ≤ 20", "DPS ≥ 20")
+col2 <- c("Excellent", "Good", "Acceptable", "Problematic")
+
+tab <- data.frame(col1, col2)
+
+knitr::kable(x = tab,
+             booktabs = TRUE,
+             caption = "Guideline thresholds for the DPS",
+             col.names = c("DPS value", "Interpretation"),
+             row.names = FALSE,
+             align = "c",
+             escape = FALSE,
+             format = "html") %>%
+  kableExtra::kable_styling(full_width = FALSE)
+```
+
+The NiPN data quality toolkit provides the R language function `digitPreference()` for calculating the DPS. Applying this function to the example data:
+
+```{r, echo = TRUE, eval = FALSE}
+digitPreference(finalDigits, digits = 0)
+```
+    
+yields:
+
+```{r, echo = FALSE, eval = TRUE}
+digitPreference(finalDigits, digits = 0)
+```
+
+which is consistent with there being little or no digit preference in the example data.
+
+The output of the `digitPreference()` function can be saved for later use: 
+
+```{r, echo = TRUE, eval = TRUE}
+dpsResults <- digitPreference(finalDigits, digits = 0)
+```
+
+The saved output contains the DPS value and frequency tables of the final digits (counts and percentages). These can be accessed using:
+
+```{r, echo = TRUE, eval = TRUE}
+dpsResults$dps 
+dpsResults$tab 
+dpsResults$pct 
+dpsResults$dpsClass
+```
+
+The saved results may also be plotted:
+
+```{r, echo = TRUE, eval = FALSE}
+plot(dpsResults, main = "finalDigit example data")
+```
+
+The resulting plot is shown below.
+
+```{r, echo = FALSE, eval = TRUE}
+plot(dpsResults, main = "finalDigit example data")
+```
+
+We will now practice using the `digitPreference()` function on survey data. 
+
+We will start by retrieving some survey data:
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- read.table("dp.ex01.csv", header = TRUE, sep = ",")
+```
+
+```{r, echo = FALSE, eval = TRUE}
+svy <- dp.ex01
+```
+
+The file **dp.ex01.csv** is a comma-separated-value (CSV) file containing anthropometric data for a single state from a DHS survey of a West African country. 
+
+The first few records in this dataset can be seen using:
+
+```{r, echo = TRUE, eval = FALSE}
+head(svy)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+head(svy)
+```
+
+The two variables of interest are **wt** (weight) and **ht** (height).
+
+We can examine digit preference in the variable for weight (**wt**) using:
+
+```{r, echo = TRUE, eval = FALSE}
+digitPreference(svy$wt, digits = 1)
+```
+
+which returns:
+
+```{r, echo = FALSE, eval = TRUE}
+digitPreference(svy$wt, digits = 1)
+```
+
+We can plot digit preference using:
+
+```{r, echo = TRUE, eval = FALSE}
+plot(digitPreference(svy$wt, digits = 1), main = "Weight")
+```
+
+The resulting plot is shown below.
+
+```{r, echo = FALSE, eval = TRUE}
+plot(digitPreference(svy$wt, digits = 1), main = "Weight")
+```
+
+The weight data shows some digit preference and would be classified as “Good” using the classifications shown in the table above.
+
+We can examine digit preference in the variable for height (**ht**) using:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+digitPreference(svy$ht, digits = 1) 
+plot(digitPreference(svy$ht, digits = 1), main = "Height")
+```
+
+The DPS value (22.77) and the DPS plot (above) show considerable digit preference in the height (**ht**) variable. This would be classified as “Problematic” using the classifications shown in table above.
+
+Note that we specified `digits = 1` when we used the `digitPreference()` function for the weight and height data in the example DHS data. This is because these variables are measured and recorded to one decimal place.
+
+If we were using the `digitPreference()` function with MUAC data that is measured and recorded as whole numbers (i.e. with no decimal places) then we should specify `digits = 0`. For example:
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- read.table("dp.ex02.csv", header = TRUE, sep = ",")
+```
+
+```{r, echo = FALSE, eval = TRUE}
+svy <- dp.ex02
+```
+
+The file **dp.ex02.csv** is a comma-separated-value (CSV) file containing anthropometric data from a SMART survey in Kabul, Afghanistan.
+
+The first few records in this dataset can be seen using:
+
+```{r, echo = TRUE, eval = FALSE}
+head(svy)
+```
+
+which returns:
+
+```{r, echo = FALSE, eval = TRUE}
+head(svy)
+```
+
+The variable of interest is **muac** (MUAC). This variable is measured and recorded in whole millimetres. 
+
+We can examine digit preference in the MUAC variable using:
+
+```{r, echo = TRUE, eval = TRUE}
+digitPreference(svy$muac, digits = 0) 
+plot(digitPreference(svy$muac, digits = 0), main = "MUAC")
+```
+
+The DPS value (13.08) and the DPS plot (above) show considerable digit preference and would be classified as “Acceptable” using the classifications shown in the table above.
+
+## Some warnings
+
+The material presented here has assumed that data are recorded with a fixed precision (e.g. one decimal place for weight and height, no decimal places for MUAC). It may be the case that data are recorded with mixed precision. For example, the weights of younger children may be measured using “baby scales” and recorded to the nearest 10 g (i.e. to two decimal places) and the weights of older children measured using “hanging scales” and recorded to the nearest 100 g (i.e. to one decimal place). These sorts of situations can be difficult to handle automatically since (e.g.) 3.1 and 3.10 are the same number and both will be stored in the same way. The easiest approach is to treat the data as two separate datasets when examining digit preference.
+
+Care should be taken to ensure that you do not mistake the limitations of the measuring instrument for digit preference. For example, some designs of MUAC tape can only return measurements with an even number for the final digit. In this case you should never see MUAC measurements with **1, 3, 5, 7,** or **9** as the final digit. This limitation of the instrument would look like digit preference. The `digitPreference()` function can handle this situation.
+
+We will retrieve a dataset:
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- read.table("dp.ex03.csv", header = TRUE, sep = ",") 
+head(svy)
+```
+
+```{r, echo = FALSE, eval = TRUE}
+svy <- dp.ex03
+head(svy)
+```
+
+The file **dp.ex03.csv** is a comma-separated-value (CSV) file containing anthropometric data for a sample of children living in a refugee camp in a West African country.
+
+MUAC was measured using a “numbers in boxes” design MUAC tape:
+
+```{r, echo = FALSE, eval = TRUE}
+knitr::include_graphics("../man/figures/oldMUAC.png")
+```
+
+There can only be even numbers in the final digit when this type of MUAC tape is used. 
+
+We should check this:
+
+```{r, echo = TRUE, eval = FALSE}
+table(svy$muac)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+table(svy$muac)
+```
+
+There are only even numbers. Any odd number would be a recording error or a data-entry error. 
+
+We can examine digit preference in these data using the `digitPreference()` function:
+
+```{r, echo = TRUE, eval = FALSE}
+digitPreference(svy$muac, digits = 0)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+digitPreference(svy$muac, digits = 0)
+```
+
+This is misleading because the `digitPreference()` function assumes that all possible final digits (i.e. **0, 1, 2, 3, 4, 5, 6, 7, 8, 9**) should be present. This is not the case in the example data.
+
+We can examine this using:
+
+```{r, echo = TRUE, eval = FALSE}
+digitPreference(svy$muac, digits = 0)$tab
+```
+
+which returns:
+
+```{r, echo = FALSE, eval = TRUE}
+digitPreference(svy$muac, digits = 0)$tab
+```
+
+We can use the **values** parameter of the `digitPreference()` to specify the values that are allowed in the final digit:
+
+```{r, echo = TRUE, eval = FALSE}
+digitPreference(svy$muac, digits = 0, values = c(0, 2, 4, 6, 8)) 
+```
+
+This returns:
+  
+```{r, echo = FALSE, eval = TRUE}
+digitPreference(svy$muac, digits = 0, values = c(0, 2, 4, 6, 8)) 
+```
+
+The DPS has moved from 33.34 (“Problematic”) to 0.78 (“Excellent”).
+
+We can tabulate and plot the frequency of final digits in the **muac** variable:
+
+```{r, echo = TRUE, eval = TRUE}
+dpsResults <- digitPreference (svy$muac, digits = 0, values = c(0, 2, 4, 6, 8)) 
+dpsResults$tab
+dpsResults$pct
+plot(dpsResults)
 ```

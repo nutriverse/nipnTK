@@ -9,6 +9,195 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, echo = FALSE}
 library(nipnTK)
+library(magrittr)
 ```
+
+This section depends on some of the material presented in the section relating to digit preference.
+
+Age heaping is the tendency to report children's ages to the nearest year or adults’ ages to the nearest multiple of five or ten years. Age heaping is very common. This is a major reason why data from nutritional anthropometry surveys is often analysed and reported using broad age groups.
+
+We will retrieve a survey dataset:
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- read.table("dp.ex02.csv", header = TRUE, sep = ",")
+```
+
+```{r, echo = FALSE, eval = TRUE}
+svy <- dp.ex02
+```
+
+The file **dp.ex02.csv** is a comma-separated-value (CSV) file containing anthropometric data from a SMART survey in Kabul, Afghanistan.
+
+The first few records in this dataset can be seen using:
+
+```{r, echo = TRUE, eval = FALSE}
+head(svy)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+head(svy)
+```
+
+## Summarising, tabulating, and visualising age data
+
+The variable of interest is **age** (age in months): 
+
+```{r, echo = TRUE, eval = TRUE}
+summary(svy$age)
+```
+
+Tables can be difficult to use with ungrouped age data because there are usually many different values:
+
+```{r, echo = TRUE, eval = TRUE}
+table(svy$age)
+```
+
+The `fullTable()` function from the NiPN data-quality toolkit is preferred as this will include values with zero counts:
+
+```{r, echo = TRUE, eval = TRUE}
+fullTable(svy$age, values = 6:59)
+```
+
+We used the `fullTable()` function here because it returns a table containing cells for every value specified by the **values** parameter. The returned table will also only contain cells for the **values** specified by the values parameter. The default for the **values** parameter is the range of the variable being tabulated. This means that the values parameter can be sometimes be omitted:
+
+```{r, echo = TRUE, eval = TRUE}
+fullTable(svy$age)
+```
+
+Omitting the **values** parameter only works reliably for numeric variables containing whole numbers. If the variable being tabulated is a character variable or is a numeric variable containing one or more numbers with decimal places then you should specify the **values** parameter.
+
+A graphical analysis is usually more informative than a tabular analysis:
+
+```{r, echo = TRUE, eval = TRUE}
+barplot(fullTable(svy$age, values = 6:59), 
+        xlab = "Age (months)", ylab = "Frequency", las = 3, cex.names = 0.6)
+```
+
+We expect all ages to be present in roughly equal frequency or with frequency reducing slowly with age due to mortality. We can see that there is marked age-heaping at 12, 18, 24, 30, 36, and 48 months (see figure above). This is very common when age is reported by mothers. This is because of a tendency for mothers and other carers to round ages to whole years or half years.
+
+Note that we used `values = 6:59` with the `fullTable()` function from the NiPN data quality toolkit. We did this because it is the range of values that should be present in the age variable.
+
+## Age heaping in children
+Age heaping can seriously affect survey results for indices that include an age component (e.g. height- for-age and weight-for age). The effect is important when there is systematic rounding up or systematic rounding down. Systematic rounding can lead to bias. If rounding is systematically down then indices will be biased upwards and prevalence biased downwards. If rounding is systematically up then indices will be biased downwards and prevalence biased upwards.
+
+A useful way of looking at age heaping when age is recorded in months is to examine the remainders when the ages are divided by 12.
+
+The R language provides a special operator (%%) to help with this:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+rem <- svy$age %% 12
+remTable <- fullTable(rem, values = 0:11)
+remTable
+prop.table(remTable) * 100
+barplot(remTable, xlab = "Age (months) %% 12", ylab = "Frequency") 
+abline(h = sum(remTable / 12), lty = 3)
+chisq.test(remTable)
+```
+
+The NiPN data quality toolkit provides an R language function called `ageHeaping()` that performs this age-heaping analysis. Applying this function to the example data:
+
+```{r, echo = TRUE, eval = FALSE}
+ageHeaping(svy$age)
+```
+
+This returns:
+
+```{r, echo = FALSE, eval = TRUE}
+ageHeaping(svy$age)
+```
+
+The output of the `ageHeaping()` function can be saved for later use: 
+
+```{r, echo = TRUE, eval = TRUE}
+ah12 <- ageHeaping(svy$age)
+```
+
+The saved output contains the Chi-squared test and frequency tables of the final digits (counts and percentages). These can be accessed using:
+
+```{r, echo = TRUE, eval = TRUE}
+ah12
+ah12$X2
+ah12$df
+ah12$p
+ah12$tab
+ah12$pct
+```       
+
+The saved results may also be plotted:
+
+```{r, echo = TRUE, eval = FALSE}
+plot(ah12, main = "Age-heaping (remainder of age / 12)")
+```
+
+The resulting plot is shown below.
+
+```{r, echo = FALSE, eval = TRUE, fig.align = "center", out.width = "70%"}
+plot(ah12, main = "Age-heaping (remainder of age / 12)")
+```
+
+The `ageHeaping()` function assumes that you want to examine the remainder after dividing by twelve. This is useful when working with ages that are recorded in months. It may also be useful to use other divisors, such as examining the remainder after dividing by six:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+ah6 <- ageHeaping(svy$age, divisor = 6) 
+print(ah6)
+plot(ah6)
+```
+
+This shows the extent of age heaping at whole and half-years (see figure above).
+
+## Age heaping in adults
+
+Using ten and five as divisors can be useful when dealing with data for adults in which ages are recorded in whole years. For example:
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- read.table("ah.ex01.csv", header = TRUE, sep = ",") 
+head(svy)
+```
+
+```{r, echo = TRUE, eval = FALSE}
+svy <- ah.ex01 
+head(svy)
+```
+
+The file **ah.ex01.csv** is a comma-separated-value (CSV) file containing anthropometric data from a Rapid Assessment Method for Older People (RAM-OP) survey in the Dadaab refugee camp in Garissa, Kenya. This is a survey of people aged sixty years and older.
+
+The variable of interest is age (age in years): 
+
+```{r, echo = TRUE, eval = TRUE}
+summary(svy$age)
+```
+
+Care should be exercised when specifying the **divisor** to use in the analysis of age heaping. Not all calendars use base ten. Amongst Han Chinese, for example, age heaping may occur with a twelve-year cycle corresponding to preferred animal years in the Chinese calendar. An analysis of age heaping that concentrates on specific digits (e.g. zero and five) or on decimal intervals will not be appropriate in all populations. It is advisable, therefore to use simple tabulation and visualisation techniques to heap decide an appropriate **divisor**.
+
+With the example data:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+summary(svy$age)
+fullTable(svy$age)
+barplot(fullTable(svy$age), 
+        xlab = "Age (years)", ylab = "Frequency", las = 3, cex.names = 0.6)
+```
+
+shows age-heaping at decades and half-decades (see figure above). In this survey using a **divisor** of 10 would be appropriate:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+ah10 <- ageHeaping(svy$age, divisor = 10) 
+print(ah10)
+plot(ah10)
+```
+
+There is pronounced age heaping at decades and, to a lesser extent, half-decades in these data (see figure above).
+
+It may also be useful to use other divisors, such as examining the remainder after dividing by five:
+
+```{r, echo = TRUE, eval = TRUE, fig.align = "center", out.width = "70%"}
+ah5 <- ageHeaping(svy$age, divisor = 5) 
+print(ah5)
+plot(ah5)
+```
+
+This shows the extent of age heaping at whole and half decades (see figure above).
