@@ -121,7 +121,7 @@
 
       
 
-      </header><script src="dp_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
+      </header><script src="dp_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="dp_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Digit preference</h1>
@@ -244,13 +244,13 @@ Nearest 0.1 mm
 #&gt;   0   1   2   3   4   5   6   7   8   9 
 #&gt;  95  80  96 102 106  98 109  95 109 110</code></pre>
 <p>We can look at proportions instead of counts:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">finalDigits</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">finalDigits</span>))</pre></body></html></div>
 <p>This returns:</p>
 <pre><code>#&gt; finalDigits
 #&gt;     0     1     2     3     4     5     6     7     8     9 
 #&gt; 0.095 0.080 0.096 0.102 0.106 0.098 0.109 0.095 0.109 0.110</code></pre>
 <p>If you prefer working with percentages then:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">finalDigits</span>)) * <span class="fl">100</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">finalDigits</span>)) * <span class="fl">100</span></pre></body></html></div>
 <p>returns:</p>
 <pre><code>#&gt; finalDigits
 #&gt;    0    1    2    3    4    5    6    7    8    9 
@@ -283,7 +283,7 @@ Nearest 0.1 mm
 <span class="co">#&gt; finalDigits</span>
 <span class="co">#&gt;   0   1   2   3   4   5   7   8   9 </span>
 <span class="co">#&gt;  95  80  96 102 106  98  95 109 110</span>
-<span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">finalDigits</span>)) * <span class="fl">100</span>
+<span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">finalDigits</span>)) * <span class="fl">100</span>
 <span class="co">#&gt; finalDigits</span>
 <span class="co">#&gt;         0         1         2         3         4         5         7         8 </span>
 <span class="co">#&gt; 10.662177  8.978676 10.774411 11.447811 11.896745 10.998878 10.662177 12.233446 </span>
@@ -303,7 +303,7 @@ Nearest 0.1 mm
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../reference/fullTable.html">fullTable</a></span>(<span class="no">finalDigits</span>)
 <span class="co">#&gt;   0   1   2   3   4   5   6   7   8   9 </span>
 <span class="co">#&gt;  95  80  96 102 106  98   0  95 109 110</span>
-<span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="fu"><a href="../reference/fullTable.html">fullTable</a></span>(<span class="no">finalDigits</span>)) * <span class="fl">100</span>
+<span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="../reference/fullTable.html">fullTable</a></span>(<span class="no">finalDigits</span>)) * <span class="fl">100</span>
 <span class="co">#&gt;         0         1         2         3         4         5         6         7 </span>
 <span class="co">#&gt; 10.662177  8.978676 10.774411 11.447811 11.896745 10.998878  0.000000 10.662177 </span>
 <span class="co">#&gt;         8         9 </span>
@@ -331,7 +331,7 @@ Nearest 0.1 mm
 #&gt; data:  fullTable(finalDigits)
 #&gt; X-squared = 106.65, df = 9, p-value &lt; 2.2e-16</code></pre>
 <p>indicates that there is a problem with the data.</p>
-<p>Note that we use <code>sum(fullTable(finalDigits)) / 10</code> (i.e. we divide by ten) because we know that there should be ten final digits (i.e. <strong>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</strong>).</p>
+<p>Note that we use <code>sum(fullTable(finalDigits)) / 10</code> (i.e. we divide by ten) because we know that there should be ten final digits (i.e. <strong>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</strong>).</p>
 <p>There is an issue with using hypothesis test such as the chi-squared test. Test values are strongly influenced by sample size yielding <em>false-negative</em> results when used with small sample sizes and <em>false-positive</em> results when used with large sample sizes.</p>
 <p>We can illustrate this by generating some new artificial data with marked digit preference:</p>
 <div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">finalDigits</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">as.table</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">11</span>, <span class="fl">7</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">7</span>, <span class="fl">11</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">2</span>))
@@ -341,7 +341,7 @@ Nearest 0.1 mm
 <div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">finalDigits</span>
 <span class="co">#&gt;  0  1  2  3  4  5  6  7  8  9 </span>
 <span class="co">#&gt; 11  7  5  4  7 11  5  4  4  2</span>
-<span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="no">finalDigits</span>) * <span class="fl">100</span>
+<span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="no">finalDigits</span>) * <span class="fl">100</span>
 <span class="co">#&gt;         0         1         2         3         4         5         6         7 </span>
 <span class="co">#&gt; 18.333333 11.666667  8.333333  6.666667 11.666667 18.333333  8.333333  6.666667 </span>
 <span class="co">#&gt;         8         9 </span>
@@ -370,7 +370,7 @@ Nearest 0.1 mm
 <span class="co">#&gt; finalDigits</span>
 <span class="co">#&gt;   0   1   2   3   4   5   6   7   8   9 </span>
 <span class="co">#&gt; 102 104  96  88 103 115  91  86 105 110</span>
-<span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="fu"><a href="../reference/fullTable.html">fullTable</a></span>(<span class="no">finalDigits</span>)) * <span class="fl">100</span>
+<span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="../reference/fullTable.html">fullTable</a></span>(<span class="no">finalDigits</span>)) * <span class="fl">100</span>
 <span class="co">#&gt;    0    1    2    3    4    5    6    7    8    9 </span>
 <span class="co">#&gt; 10.2 10.4  9.6  8.8 10.3 11.5  9.1  8.6 10.5 11.0</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span>(<span class="fu"><a href="../reference/fullTable.html">fullTable</a></span>(<span class="no">finalDigits</span>), <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Final digit"</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Frequency"</span>)
@@ -386,7 +386,7 @@ Nearest 0.1 mm
 #&gt; X-squared = 8.16, df = 9, p-value = 0.5181</code></pre>
 <p>which suggests significant digit preference.</p>
 <p>This is a <em>false positive</em> result because the generated data is constrained to be uniformly random and any digit preference that we observed is due solely to chance.</p>
-<p>The failure of the Chi-squared test in this example is due to the test mistaking random variation for digit preference is, in part, due to the use of a large (i.e. <span class="math inline">\(n ~ = ~ 1000\)</span>) number of observations.</p>
+<p>The failure of the Chi-squared test in this example is due to the test mistaking random variation for digit preference is, in part, due to the use of a large (i.e. <span class="math inline">\(n ~ = ~ 1000\)</span>) number of observations.</p>
 <p>It is also important to note that any test with a <em>p &lt; 0.05</em> significance threshold will generate a positive result in 1 in 20 tests with data exhibiting nothing but random variation. All tests with a <em>p &lt; 0.05</em> significance threshold have a 5% false positive rate.</p>
 </div>
 <div id="avoiding-false-positives-using-the-digit-preference-score" class="section level2">
@@ -472,7 +472,7 @@ Problematic
 <span class="co">#&gt; SMART DPS Class </span>
 <span class="co">#&gt;     "Excellent"</span></pre></body></html></div>
 <p>The saved results may also be plotted:</p>
-<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">dpsResults</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"finalDigit example data"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">dpsResults</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"finalDigit example data"</span>)</pre></body></html></div>
 <p>The resulting plot is shown below.</p>
 <p><img src="dp_files/figure-html/unnamed-chunk-35-1.png" width="700"></p>
 <p>We will now practice using the <code><a href="../reference/digitPreference.html">digitPreference()</a></code> function on survey data.</p>
@@ -499,7 +499,7 @@ Problematic
 #&gt; data:    svy$wt
 #&gt; Digit Preference Score (DPS) = 11.86 (Good)</code></pre>
 <p>We can plot digit preference using:</p>
-<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="fu"><a href="../reference/digitPreference.html">digitPreference</a></span>(<span class="no">svy</span>$<span class="no">wt</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">1</span>), <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Weight"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="fu"><a href="../reference/digitPreference.html">digitPreference</a></span>(<span class="no">svy</span>$<span class="no">wt</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">1</span>), <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Weight"</span>)</pre></body></html></div>
 <p>The resulting plot is shown below.</p>
 <p><img src="dp_files/figure-html/unnamed-chunk-43-1.png" width="700"></p>
 <p>The weight data shows some digit preference and would be classified as “Good” using the classifications shown in the table above.</p>
@@ -510,7 +510,7 @@ Problematic
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:    svy$ht</span>
 <span class="co">#&gt; Digit Preference Score (DPS) = 22.77 (Problematic)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="fu"><a href="../reference/digitPreference.html">digitPreference</a></span>(<span class="no">svy</span>$<span class="no">ht</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">1</span>), <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Height"</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="fu"><a href="../reference/digitPreference.html">digitPreference</a></span>(<span class="no">svy</span>$<span class="no">ht</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">1</span>), <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Height"</span>)</pre></body></html></div>
 <p><img src="dp_files/figure-html/unnamed-chunk-44-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>The DPS value (22.77) and the DPS plot (above) show considerable digit preference in the height (<strong>ht</strong>) variable. This would be classified as “Problematic” using the classifications shown in table above.</p>
 <p>Note that we specified <code>digits = 1</code> when we used the <code><a href="../reference/digitPreference.html">digitPreference()</a></code> function for the weight and height data in the example DHS data. This is because these variables are measured and recorded to one decimal place.</p>
@@ -535,7 +535,7 @@ Problematic
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:    svy$muac</span>
 <span class="co">#&gt; Digit Preference Score (DPS) = 13.08 (Acceptable)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="fu"><a href="../reference/digitPreference.html">digitPreference</a></span>(<span class="no">svy</span>$<span class="no">muac</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">0</span>), <span class="kw">main</span> <span class="kw">=</span> <span class="st">"MUAC"</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="fu"><a href="../reference/digitPreference.html">digitPreference</a></span>(<span class="no">svy</span>$<span class="no">muac</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">0</span>), <span class="kw">main</span> <span class="kw">=</span> <span class="st">"MUAC"</span>)</pre></body></html></div>
 <p><img src="dp_files/figure-html/unnamed-chunk-49-1.png" width="700"></p>
 <p>The DPS value (13.08) and the DPS plot (above) show considerable digit preference and would be classified as “Acceptable” using the classifications shown in the table above.</p>
 </div>
@@ -575,7 +575,7 @@ Problematic
 #&gt; 
 #&gt; data:    svy$muac
 #&gt; Digit Preference Score (DPS) = 33.34 (Problematic)</code></pre>
-<p>This is misleading because the <code><a href="../reference/digitPreference.html">digitPreference()</a></code> function assumes that all possible final digits (i.e. <strong>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</strong>) should be present. This is not the case in the example data.</p>
+<p>This is misleading because the <code><a href="../reference/digitPreference.html">digitPreference()</a></code> function assumes that all possible final digits (i.e. <strong>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</strong>) should be present. This is not the case in the example data.</p>
 <p>We can examine this using:</p>
 <div class="sourceCode" id="cb49"><html><body><pre class="r"><span class="fu"><a href="../reference/digitPreference.html">digitPreference</a></span>(<span class="no">svy</span>$<span class="no">muac</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">0</span>)$<span class="no">tab</span></pre></body></html></div>
 <p>which returns:</p>
@@ -601,7 +601,7 @@ Problematic
 <span class="co">#&gt; svy$muac</span>
 <span class="co">#&gt;    0    2    4    6    8 </span>
 <span class="co">#&gt; 20.1 19.8 19.8 20.6 19.8</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">dpsResults</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">dpsResults</span>)</pre></body></html></div>
 <p><img src="dp_files/figure-html/unnamed-chunk-61-1.png" width="700"></p>
 </div>
   </div>

@@ -121,7 +121,7 @@
 
       
 
-      </header><script src="flagging_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
+      </header><script src="flagging_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="flagging_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Identifying outliers using flags</h1>
@@ -581,7 +581,7 @@ Check age, height, and weight
 <pre><code>#&gt; TRUE 
 #&gt;   35</code></pre>
 <p>The proportion of records that are flagged can be found using:</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">svy</span>$<span class="no">flag</span> <span class="kw">!=</span> <span class="fl">0</span>))[<span class="st">"TRUE"</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">svy</span>$<span class="no">flag</span> <span class="kw">!=</span> <span class="fl">0</span>))[<span class="st">"TRUE"</span>]</pre></body></html></div>
 <p>This returns:</p>
 <pre><code>#&gt;       TRUE 
 #&gt; 0.04452926</code></pre>
@@ -771,7 +771,7 @@ WAZ
 <pre><code>#&gt; TRUE 
 #&gt;  126</code></pre>
 <p>The proportion of records that are flagged can be found using:</p>
-<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">svy</span>$<span class="no">flag</span> <span class="kw">!=</span> <span class="fl">0</span>))[<span class="st">"TRUE"</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">svy</span>$<span class="no">flag</span> <span class="kw">!=</span> <span class="fl">0</span>))[<span class="st">"TRUE"</span>]</pre></body></html></div>
 <p>which returns:</p>
 <pre><code>#&gt;      TRUE 
 #&gt; 0.1603053</code></pre>
@@ -934,7 +934,7 @@ WAZ
 
 <span class="no">svy</span>$<span class="no">flag</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(!<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">svy</span>$<span class="no">baz</span>) <span class="kw">&amp;</span> (<span class="no">svy</span>$<span class="no">baz</span> <span class="kw">&lt;</span> -<span class="fl">5</span> <span class="kw">|</span> <span class="no">svy</span>$<span class="no">baz</span> <span class="kw">&gt;</span> <span class="fl">5</span>),
               <span class="no">svy</span>$<span class="no">flag</span> + <span class="fl">2</span>, <span class="no">svy</span>$<span class="no">flag</span>)</pre></body></html></div>
-<p>Note that we do not usually apply SMART flagging criteria to older (i.e. &gt; 59 months) children.</p>
+<p>Note that we do not usually apply SMART flagging criteria to older (i.e. &gt; 59 months) children.</p>
 <p>The coding of the flag variable is shown in previous table.</p>
 <table class="table table">
 <caption>
@@ -1038,7 +1038,7 @@ Check weight, height and age
 <pre><code>#&gt; TRUE 
 #&gt;   13</code></pre>
 <p>The proportion of records that are flagged can be found using:</p>
-<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">svy</span>$<span class="no">flag</span> <span class="kw">!=</span> <span class="fl">0</span>))[<span class="st">"TRUE"</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">svy</span>$<span class="no">flag</span> <span class="kw">!=</span> <span class="fl">0</span>))[<span class="st">"TRUE"</span>]</pre></body></html></div>
 <p>which returns:</p>
 <pre><code>#&gt;       TRUE 
 #&gt; 0.01336074</code></pre>
