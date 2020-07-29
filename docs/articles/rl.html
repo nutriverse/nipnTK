@@ -121,7 +121,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="rl_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Checking ranges and legal values</h1>
@@ -187,7 +187,7 @@
 #&gt; FALSE  TRUE 
 #&gt;   892    14</code></pre>
 <p>We can express this as a proportion:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="fu"><a href="../reference/outliersUV.html">outliersUV</a></span>(<span class="no">svy</span>$<span class="no">muac</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="fu"><a href="../reference/outliersUV.html">outliersUV</a></span>(<span class="no">svy</span>$<span class="no">muac</span>)))</pre></body></html></div>
 <p>This returns:</p>
 <pre><code>#&gt; 
 #&gt; Univariate outliers : Lower fence = 98, Upper fence = 178
@@ -195,7 +195,7 @@
 #&gt;      FALSE       TRUE 
 #&gt; 0.98454746 0.01545254</code></pre>
 <p>You may find it easier to use percentages:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="fu"><a href="../reference/outliersUV.html">outliersUV</a></span>(<span class="no">svy</span>$<span class="no">muac</span>))) * <span class="fl">100</span></pre></body></html></div>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="fu"><a href="../reference/outliersUV.html">outliersUV</a></span>(<span class="no">svy</span>$<span class="no">muac</span>))) * <span class="fl">100</span></pre></body></html></div>
 <p>This returns:</p>
 <pre><code>#&gt; 
 #&gt; Univariate outliers : Lower fence = 98, Upper fence = 178
@@ -235,7 +235,7 @@
 #&gt; 594  21   2    9.8   76.5  13.2      2
 #&gt; 752  48   2   15.6  102.2 999.0      2</code></pre>
 <p>There is something wrong with all of these values of <strong>muac</strong>.</p>
-<p>The intention was that the <strong>muac</strong> variable records mid-upper-arm-circumference (MUAC) in mm. There are some impossibly small (i.e. <strong>11.1</strong>, <strong>12.4</strong>, and <strong>13.2</strong>) and impossibly large values (i.e. <strong>999.0</strong>).</p>
+<p>The intention was that the <strong>muac</strong> variable records mid-upper-arm-circumference (MUAC) in mm. There are some impossibly small (i.e. <strong>11.1</strong>, <strong>12.4</strong>, and <strong>13.2</strong>) and impossibly large values (i.e. <strong>999.0</strong>).</p>
 <p>The three impossibly small values are probably due to data being recorded in cm rather than mm. It is probably safe to change these three values to 111, 124 and 132. It is easiest to do this each record separately:</p>
 <div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">svy</span>$<span class="no">muac</span>[<span class="no">svy</span>$<span class="no">muac</span> <span class="kw">==</span> <span class="fl">11.1</span>] <span class="kw">&lt;-</span> <span class="fl">111</span></pre></body></html></div>
 <p>An alternative approach is to specify row numbers instead of values:</p>
@@ -252,7 +252,7 @@
 <p>after the fixes for incorrectly entered data and missing values were made.</p>
 <p><img src="rl_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
 <p>There should now be no severe outliers:</p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="fu"><a href="../reference/outliersUV.html">outliersUV</a></span>(<span class="no">svy</span>$<span class="no">muac</span>, <span class="kw">fence</span> <span class="kw">=</span> <span class="fl">3</span>))) * <span class="fl">100</span></pre></body></html></div>
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="fu"><a href="../reference/outliersUV.html">outliersUV</a></span>(<span class="no">svy</span>$<span class="no">muac</span>, <span class="kw">fence</span> <span class="kw">=</span> <span class="fl">3</span>))) * <span class="fl">100</span></pre></body></html></div>
 <p>returns:</p>
 <pre><code>#&gt; 
 #&gt; Univariate outliers : Lower fence = 68, Upper fence = 208

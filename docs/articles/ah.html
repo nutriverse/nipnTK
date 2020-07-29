@@ -121,7 +121,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="ah_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Age heaping</h1>
@@ -200,7 +200,7 @@
 <span class="no">remTable</span>
 <span class="co">#&gt;   0   1   2   3   4   5   6   7   8   9  10  11 </span>
 <span class="co">#&gt; 170  33  46  41  46  48 105  63  83  72  90  76</span>
-<span class="fu"><a href="https://rdrr.io/r/base/prop.table.html">prop.table</a></span>(<span class="no">remTable</span>) * <span class="fl">100</span>
+<span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="no">remTable</span>) * <span class="fl">100</span>
 <span class="co">#&gt;         0         1         2         3         4         5         6         7 </span>
 <span class="co">#&gt; 19.473081  3.780069  5.269187  4.696449  5.269187  5.498282 12.027491  7.216495 </span>
 <span class="co">#&gt;         8         9        10        11 </span>
@@ -248,7 +248,7 @@
 <span class="co">#&gt;    0    1    2    3    4    5    6    7    8    9   10   11 </span>
 <span class="co">#&gt; 19.5  3.8  5.3  4.7  5.3  5.5 12.0  7.2  9.5  8.2 10.3  8.7</span></pre></body></html></div>
 <p>The saved results may also be plotted:</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">ah12</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Age-heaping (remainder of age / 12)"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">ah12</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Age-heaping (remainder of age / 12)"</span>)</pre></body></html></div>
 <p>The resulting plot is shown below.</p>
 <p><img src="ah_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>The <code><a href="../reference/ageHeaping.html">ageHeaping()</a></code> function assumes that you want to examine the remainder after dividing by twelve. This is useful when working with ages that are recorded in months. It may also be useful to use other divisors, such as examining the remainder after dividing by six:</p>
@@ -259,7 +259,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:    Remainder of svy$age / 6</span>
 <span class="co">#&gt; X-squared = 145.0275, df = 5, p-value = 0.0000</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">ah6</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">ah6</span>)</pre></body></html></div>
 <p><img src="ah_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>This shows the extent of age heaping at whole and half-years (see figure above).</p>
 </div>
@@ -299,7 +299,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:    Remainder of svy$age / 10</span>
 <span class="co">#&gt; X-squared = 70.31042, df = 9, p-value = 0.0000</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">ah10</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">ah10</span>)</pre></body></html></div>
 <p><img src="ah_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>There is pronounced age heaping at decades and, to a lesser extent, half-decades in these data (see figure above).</p>
 <p>It may also be useful to use other divisors, such as examining the remainder after dividing by five:</p>
@@ -310,7 +310,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:    Remainder of svy$age / 5</span>
 <span class="co">#&gt; X-squared = 10.39633, df = 4, p-value = 0.0343</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">ah5</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">ah5</span>)</pre></body></html></div>
 <p><img src="ah_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>This shows the extent of age heaping at whole and half decades (see figure above).</p>
 </div>
