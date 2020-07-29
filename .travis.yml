@@ -5,10 +5,3 @@ language: R
 warnings_are_errors: true
 cache: packages
 
-addons:
-  apt:
-    packages:
-      - libicu-dev
-
-env:
-  - STRINGI_DISABLE_ICU_BUNDLE="1"
