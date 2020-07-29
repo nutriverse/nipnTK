@@ -85,7 +85,7 @@ recode <- function(var, recodes, afr, anr = TRUE, levels) {
       result[(var >= low) & (var <= high)] <- target
     } else if (0 < length(grep("^else=", squeezeBlanks(term)))) {
       target <- eval(parse(text = strsplit(term, "=")[[1]][2]))
-      result[1:length(var)] <- target
+      result[seq_len(length(var))] <- target
       } else {
         set <- eval(parse(text = strsplit(term, "=")[[1]][1]))
         target <- eval(parse(text = strsplit(term, "=")[[1]][2]))
