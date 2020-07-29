@@ -14,7 +14,8 @@ Description: An implementation of the National Information Platforms for Nutriti
     applied to other variables.
 Depends: R (>= 2.10)
 Imports: 
-    bbw
+    stats,
+    graphics
 Suggests: 
     testthat,
     knitr,
