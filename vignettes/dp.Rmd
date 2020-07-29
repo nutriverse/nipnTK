@@ -1,5 +1,6 @@
 ---
 title: "Digit preference"
+author: "Mark Myatt"
 ---
 
 ```{r, include = FALSE}
