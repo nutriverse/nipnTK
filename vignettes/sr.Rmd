@@ -12,6 +12,9 @@ knitr::opts_chunk$set(
 
 ```{r setup, echo = FALSE}
 library(nipnTK)
+library(bbw)
+library(knitr)
+library(kableExtra)
 ```
 
 The male to female sex ratio test checks whether the ratio of the number of males to the number of females in a survey sample is similar to an expected ratio. The expected male to female sex ratio can be calculated from census or similar data. If there is no expected value then it is usually assumed that there should be equal numbers of males and females in the survey sample. This is usually true for children and young adults but may not be true for older adults.
@@ -110,10 +113,155 @@ The codes used in the sex variable for male and female are specified using the c
 
 Population data are specified using the `pop` parameter (males then females). This can be specified as numbers or as a ratio. The test above could have been specified as:
 
-```{r sr8, echo = TRUE, eval = FALSE}
+```{r sr8, echo = TRUE, eval = TRUE}
 sexRatioTest(svy$sex, codes = c(1, 2), pop = c(1.059809, 1))
 ```
 
 If (e.g.) you want to specify a one to one sex ratio then you would use `pop = c(1, 1)`.
 
 The observed sex ratio at birth is 1.06:1.00 (males to females). This could be used to assess if selective abortion or female infanticide is taking place although a large sample size (i.e. about n = 6200) is required for such a test to have sufficient power.
+
+## Analysis by age
+
+The sex ratio test may be performed on each age group separately. You can apply the sex ratio test to each age-group using the `by()` function:
+
+```{r sr9, echo = TRUE, eval = TRUE}
+svy$ycag <- recode(svy$age, "6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5") 
+by(svy$sex, svy$ycag, sexRatioTest, codes = c(1, 2), pop = c(2.658, 2.508))
+```
+
+Note that the variable `ycag` created above holds the year-centred-age-group. 
+
+This approach assumes that the sex ratio is independent of age.
+
+An approach that does not make this assumption is to use the numbers of male and female children in the same age-ranges in the population taken from census data.
+
+A useful source of census data is the [United States Census Bureau’s International Data Base](https://www.census.gov/data-tools/demo/idb/informationGateway.php):
+
+https://www.census.gov/data-tools/demo/idb/informationGateway.php
+
+This source gives the following estimates for Afghanistan in 2016:
+
+```{r censusTable, echo = FALSE, eval = TRUE}
+age <- c(0, 1, 2, 3, 4) 
+males <- c(594602, 550593, 526827, 509048, 493521) 
+females <- c(573956, 533579, 510479, 493185, 478137)
+pMale <- c(0.5088, 0.5078, 0.5079, 0.5079, 0.5079)
+pFemale <- c(0.4912, 0.4922, 0.4921, 0.4921, 0.4921)
+mfRatio <- c("1.04:1.00", "1.03:1.00", "1.03:1.00", "1.03:1.00", "1.03:1.00")
+              
+df <- data.frame(age, males, females, pMale, pFemale, mfRatio)
+
+kable(x = df,
+      booktabs = TRUE,
+      col.names = c("Age", 
+                    "Number\nMales", 
+                    "Number\nFemales",
+                    "Proportion\nMale", 
+                    "Propotion\nFemale", 
+                    "Male-to-Female\nSex Ratio")) %>%
+  kable_styling(bootstrap_options = c("striped"), full_width = FALSE)
+```
+
+We need to ensure we use the same age-ranges as the census:
+
+```{r sr10, echo = TRUE, eval = TRUE}
+svy$ageGroup <- recode(svy$age, "0:11=0; 12:23=1; 24:35=2; 36:47=3; 48:59=4")
+```
+
+and then test the sex ratio in each age group separately:
+
+```{r sr11, echo = TRUE, eval = FALSE}
+sexRatioTest(svy$sex[svy$ageGroup == 0], pop = c(594602, 573956)) sexRatioTest(svy$sex[svy$ageGroup == 1], pop = c(550593, 533579)) sexRatioTest(svy$sex[svy$ageGroup == 2], pop = c(526827, 510479)) sexRatioTest(svy$sex[svy$ageGroup == 3], pop = c(509048, 493185)) sexRatioTest(svy$sex[svy$ageGroup == 4], pop = c(493521, 478137))
+```
+
+```{r sr11a, echo = FALSE, eval = TRUE}
+sexRatioTest(svy$sex[svy$ageGroup == 0], pop = c(594602, 573956))
+sexRatioTest(svy$sex[svy$ageGroup == 1], pop = c(550593, 533579))
+sexRatioTest(svy$sex[svy$ageGroup == 2], pop = c(526827, 510479))
+sexRatioTest(svy$sex[svy$ageGroup == 3], pop = c(509048, 493185))
+sexRatioTest(svy$sex[svy$ageGroup == 4], pop = c(493521, 478137))
+```
+
+All of these tests find no significant differences between the observed and expected sex ratios. 
+It should be noted that some (or all) of the tests might be based on small sample sizes:
+
+```{r sr12, echo = TRUE, eval = TRUE}
+table(svy$ageGroup)
+```
+
+and may, therefore, be able to detect only large differences.
+
+## Sex ratios in adults
+
+With data from children we usually expect something like a one to one male to female sex ratio. This will not usually be the case with adults, especially older adults.
+
+We will retrieve a survey dataset:
+
+```{r sr13, echo = TRUE, eval = FALSE}
+svy <- read.table("ah.ex01.csv", header = TRUE, sep = ",") 
+head(svy)
+```
+
+```{r sr13a, echo = FALSE, eval = TRUE}
+svy <- ah.ex01
+head(svy)
+```
+
+The dataset `ah.ex01` is a comma-separated-value (CSV) file containing anthropometry data from a Rapid Assessment Method for Older People (RAM-OP) survey in the Dadaab refugee camps in Garissa, Kenya. This is a survey of older people, defined as people aged sixty years and older.
+
+With this type of survey it is usually possible to use camp administration data to find the expected male to female sex ratio. This information was not given in the RAM-OP survey report.
+
+The camp population is predominantly Somali. It is reported that there are 188 thousand men and 220 thousand women aged sixty years and older in Somalia (2010 estimates). The sex ratio is:
+
+```{r sr14, echo = TRUE, eval = FALSE}
+188 / 220
+```
+
+which is:
+
+```{r sr14a, echo = FALSE, eval = TRUE}
+188 / 220
+```
+
+The expected proportion of the population that is male is:
+
+```{r sr15, echo = TRUE, eval = FALSE}
+188 / (188 + 220)
+```
+
+which is:
+
+```{r sr15a, echo = FALSE, eval = TRUE}
+188 / (188 + 220)
+```
+
+The proportion of the sample that is male:
+
+```{r sr16, echo = TRUE, eval = FALSE}
+prop.table(table(svy$sex))
+```
+
+is:
+
+```{r sr16a, echo = FALSE, eval = TRUE}
+prop.table(table(svy$sex))
+```
+
+This looks to be much smaller than the expected proportion. The sex ratio test:
+
+```{r sr17, echo = TRUE, eval = FALSE}
+sexRatioTest(svy$sex, codes = c(1, 2), pop = c(188, 220))
+```
+
+reports:
+
+```{r sr17a, echo = FALSE, eval = TRUE}
+sexRatioTest(svy$sex, codes = c(1, 2), pop = c(188, 220))
+```
+
+The proportion of males in the sample is significantly smaller than we expected.
+
+This result could be due to the extraordinary nature of the population (e.g. the camp population could really have very many more older women than older men). It could also due to a selection bias in the survey. In this example, men were more likely than women to be away from home during the day and a household sample taken during the day would have systematically excluded the more active members of the male population.
+
+Note that the sex ratio test only applies to population surveys. If surveys focus on (e.g.) carers of small children then the observed male to female sex ratio is likely to be strongly biased towards women. In such cases it is not sensible to apply a sex ratio test.
