@@ -12,6 +12,8 @@
 #'     prop.test qqline qqnorm quantile sd var
 #' @importFrom graphics abline axTicks axis barplot hist lines par plot rect
 #'     strheight strwidth text
+#' @importFrom withr with_options
+#'
 #
 ################################################################################
 "_PACKAGE"

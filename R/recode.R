@@ -99,7 +99,7 @@ recode <- function(var, recodes, afr, anr = TRUE, levels) {
   } else if (anr && (!is.numeric(result))) {
       result.valid <- na.omit(result)
       withr::with_options(
-        new = options(warn = -1),
+        new = list(warn = -1),
         code = {
           result.valid <- as.numeric(result.valid)
       #options(opt)
