@@ -98,10 +98,14 @@ recode <- function(var, recodes, afr, anr = TRUE, levels) {
     result <- if (!missing(levels)) factor(result, levels = levels) else as.factor(result)
   } else if (anr && (!is.numeric(result))) {
       result.valid <- na.omit(result)
-      opt <- options(warn = -1)
-      result.valid <- as.numeric(result.valid)
-      options(opt)
-      if (!any(is.na(result.valid))) result <- as.numeric(result)
+      withr::with_options(
+        new = options(warn = -1),
+        code = {
+          result.valid <- as.numeric(result.valid)
+      #options(opt)
+          if (!any(is.na(result.valid))) result <- as.numeric(result)
+        }
+      )
   }
   return(result)
 }
