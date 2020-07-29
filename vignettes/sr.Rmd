@@ -1,5 +1,6 @@
 ---
 title: "Sex ratio"
+author: "Mark Myatt"
 ---
 
 ```{r, include = FALSE}
@@ -9,6 +10,110 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, echo = FALSE}
 library(nipnTK)
 ```
+
+The male to female sex ratio test checks whether the ratio of the number of males to the number of females in a survey sample is similar to an expected ratio. The expected male to female sex ratio can be calculated from census or similar data. If there is no expected value then it is usually assumed that there should be equal numbers of males and females in the survey sample. This is usually true for children and young adults but may not be true for older adults.
+
+We will retrieve a survey dataset:
+
+```{r sr1, echo = TRUE, eval = FALSE}
+svy <- read.table("dp.ex02.csv", header = TRUE, sep = ",")
+head(svy)
+```
+
+```{r sr1a, echo = FALSE, eval = TRUE}
+svy <- dp.ex02
+head(svy)
+```
+
+The dataset `dp.ex02.csv` is a comma-separated-value (CSV) file containing anthropometric data from a SMART survey in Kabul, Afghanistan.
+
+It is reported that there are about 2.658 million boys and 2.508 million girls aged between zero and four years in Afghanistan (2012 estimates).
+
+The male to female sex ratio is:
+
+```{r sr2, echo = TRUE, eval = FALSE}
+2.658 / 2.508
+```
+
+which is:
+
+```{r sr2a, echo = FALSE, eval = TRUE}
+2.658 / 2.508
+```
+
+It is often easier to work with the proportion of the population that is male:
+
+```{r sr3, echo = TRUE, eval = FALSE}
+2.658 / (2.658 + 2.508)
+```
+
+which is:
+
+```{r sr3a, echo = FALSE, eval = TRUE}
+2.658 / (2.658 + 2.508)
+```
+
+We compare this to the proportion of the sample that is male:
+
+```{r sr4, echo = TRUE, eval = FALSE}
+table(svy$sex)
+```
+
+this gives:
+
+```{r sr4a, echo = FALSE, eval = TRUE}
+table(svy$sex)
+```
+
+This table is more useful when the cell counts are expressed as proportions:
+
+```{r sr5, echo = TRUE, eval = FALSE}
+prop.table(table(svy$sex))
+```
+
+this gives:
+
+```{r sr5a, echo = FALSE, eval = TRUE}
+prop.table(table(svy$sex))
+```
+
+A formal test can be made:
+
+```{r sr6, echo = TRUE, eval = FALSE}
+prop.test(table(svy$sex), p = 0.514518)
+```
+
+This returns:
+
+```{r sr6a, echo = FALSE, eval = TRUE}
+prop.test(table(svy$sex), p = 0.514518)
+```
+
+The male to female sex ratio (expressed as the proportion male) in the example data is not significantly different from the expected male to female sex ratio (expressed as the proportion male).
+
+The NiPN data quality toolkit provides an R language function called `sexRatioTest()` that performs a sex ratio test:
+
+```{r sr7, echo = TRUE, eval = FALSE}
+sexRatioTest(svy$sex, codes = c(1, 2), pop = c(2.658, 2.508))
+```
+
+which returns:
+
+```{r sr7a, echo = FALSE, eval = TRUE}
+sexRatioTest(svy$sex, codes = c(1, 2), pop = c(2.658, 2.508))
+```
+
+The codes used in the sex variable for male and female are specified using the codes parameter. If (e.g.) `sex` were coded using **M** and **F** then you would specify `codes = c("M", "F")`.
+
+Population data are specified using the `pop` parameter (males then females). This can be specified as numbers or as a ratio. The test above could have been specified as:
+
+```{r sr8, echo = TRUE, eval = FALSE}
+sexRatioTest(svy$sex, codes = c(1, 2), pop = c(1.059809, 1))
+```
+
+If (e.g.) you want to specify a one to one sex ratio then you would use `pop = c(1, 1)`.
+
+The observed sex ratio at birth is 1.06:1.00 (males to females). This could be used to assess if selective abortion or female infanticide is taking place although a large sample size (i.e. about n = 6200) is required for such a test to have sufficient power.
