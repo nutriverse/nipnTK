@@ -15,7 +15,8 @@ Description: An implementation of the National Information Platforms for Nutriti
 Depends: R (>= 2.10)
 Imports: 
     stats,
-    graphics
+    graphics,
+    withr
 Suggests: 
     testthat,
     knitr,
