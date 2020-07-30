@@ -121,10 +121,11 @@
 
       
 
-      </header><script src="sr_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="sr_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="sr_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Sex ratio</h1>
+                        <h4 class="author">Mark Myatt</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/nutriverse/nipnTK/blob/master/vignettes/sr.Rmd"><code>vignettes/sr.Rmd</code></a></small>
@@ -134,12 +135,344 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">nipnTK</span>)</pre></body></html></div>
+<p>The male to female sex ratio test checks whether the ratio of the number of males to the number of females in a survey sample is similar to an expected ratio. The expected male to female sex ratio can be calculated from census or similar data. If there is no expected value then it is usually assumed that there should be equal numbers of males and females in the survey sample. This is usually true for children and young adults but may not be true for older adults.</p>
+<p>We will retrieve a survey dataset:</p>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">svy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span>(<span class="st">"dp.ex02.csv"</span>, <span class="kw">header</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">","</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">svy</span>)</pre></body></html></div>
+<pre><code>#&gt;   psu age sex weight height muac oedema
+#&gt; 1   1   6   1    7.3   65.0  146      2
+#&gt; 2   1  42   2   12.5   89.5  156      2
+#&gt; 3   1  23   1   10.6   78.1  149      2
+#&gt; 4   1  18   1   12.8   81.5  160      2
+#&gt; 5   1  52   1   12.1   87.3  152      2
+#&gt; 6   1  36   2   16.9   93.0  190      2</code></pre>
+<p>The dataset <code>dp.ex02.csv</code> is a comma-separated-value (CSV) file containing anthropometric data from a SMART survey in Kabul, Afghanistan.</p>
+<p>It is reported that there are about 2.658 million boys and 2.508 million girls aged between zero and four years in Afghanistan (2012 estimates).</p>
+<p>The male to female sex ratio is:</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fl">2.658</span> / <span class="fl">2.508</span></pre></body></html></div>
+<p>which is:</p>
+<pre><code>#&gt; [1] 1.059809</code></pre>
+<p>It is often easier to work with the proportion of the population that is male:</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fl">2.658</span> / (<span class="fl">2.658</span> + <span class="fl">2.508</span>)</pre></body></html></div>
+<p>which is:</p>
+<pre><code>#&gt; [1] 0.514518</code></pre>
+<p>We compare this to the proportion of the sample that is male:</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">svy</span>$<span class="no">sex</span>)</pre></body></html></div>
+<p>this gives:</p>
+<pre><code>#&gt; 
+#&gt;   1   2 
+#&gt; 438 435</code></pre>
+<p>This table is more useful when the cell counts are expressed as proportions:</p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">svy</span>$<span class="no">sex</span>))</pre></body></html></div>
+<p>this gives:</p>
+<pre><code>#&gt; 
+#&gt;         1         2 
+#&gt; 0.5017182 0.4982818</code></pre>
+<p>A formal test can be made:</p>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/prop.test.html">prop.test</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">svy</span>$<span class="no">sex</span>), <span class="kw">p</span> <span class="kw">=</span> <span class="fl">0.514518</span>)</pre></body></html></div>
+<p>This returns:</p>
+<pre><code>#&gt; 
+#&gt;  1-sample proportions test with continuity correction
+#&gt; 
+#&gt; data:  table(svy$sex), null probability 0.514518
+#&gt; X-squared = 0.5225, df = 1, p-value = 0.4698
+#&gt; alternative hypothesis: true p is not equal to 0.514518
+#&gt; 95 percent confidence interval:
+#&gt;  0.4680459 0.5353752
+#&gt; sample estimates:
+#&gt;         p 
+#&gt; 0.5017182</code></pre>
+<p>The male to female sex ratio (expressed as the proportion male) in the example data is not significantly different from the expected male to female sex ratio (expressed as the proportion male).</p>
+<p>The NiPN data quality toolkit provides an R language function called <code><a href="../reference/sexRatioTest.html">sexRatioTest()</a></code> that performs a sex ratio test:</p>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/sexRatioTest.html">sexRatioTest</a></span>(<span class="no">svy</span>$<span class="no">sex</span>, <span class="kw">codes</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>), <span class="kw">pop</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2.658</span>, <span class="fl">2.508</span>))</pre></body></html></div>
+<p>which returns:</p>
+<pre><code>#&gt; 
+#&gt;  Sex Ratio Test
+#&gt; 
+#&gt; Expected proportion male = 0.5145
+#&gt; Observed proportion male = 0.5017
+#&gt; X-squared = 0.5225, p = 0.4698</code></pre>
+<p>The codes used in the sex variable for male and female are specified using the codes parameter. If (e.g.) <code>sex</code> were coded using <strong>M</strong> and <strong>F</strong> then you would specify <code>codes = c("M", "F")</code>.</p>
+<p>Population data are specified using the <code>pop</code> parameter (males then females). This can be specified as numbers or as a ratio. The test above could have been specified as:</p>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../reference/sexRatioTest.html">sexRatioTest</a></span>(<span class="no">svy</span>$<span class="no">sex</span>, <span class="kw">codes</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>), <span class="kw">pop</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.059809</span>, <span class="fl">1</span>))
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Sex Ratio Test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Expected proportion male = 0.5145</span>
+<span class="co">#&gt; Observed proportion male = 0.5017</span>
+<span class="co">#&gt; X-squared = 0.5225, p = 0.4698</span></pre></body></html></div>
+<p>If (e.g.) you want to specify a one to one sex ratio then you would use <code>pop = c(1, 1)</code>.</p>
+<p>The observed sex ratio at birth is 1.06:1.00 (males to females). This could be used to assess if selective abortion or female infanticide is taking place although a large sample size (i.e. about n = 6200) is required for such a test to have sufficient power.</p>
+<div id="analysis-by-age" class="section level2">
+<h2 class="hasAnchor">
+<a href="#analysis-by-age" class="anchor"></a>Analysis by age</h2>
+<p>The sex ratio test may be performed on each age group separately. You can apply the sex ratio test to each age-group using the <code><a href="https://rdrr.io/r/base/by.html">by()</a></code> function:</p>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">svy</span>$<span class="no">ycag</span> <span class="kw">&lt;-</span> <span class="fu">recode</span>(<span class="no">svy</span>$<span class="no">age</span>, <span class="st">"6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/by.html">by</a></span>(<span class="no">svy</span>$<span class="no">sex</span>, <span class="no">svy</span>$<span class="no">ycag</span>, <span class="no">sexRatioTest</span>, <span class="kw">codes</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>), <span class="kw">pop</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2.658</span>, <span class="fl">2.508</span>))
+<span class="co">#&gt; svy$ycag: 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Sex Ratio Test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Expected proportion male = 0.5145</span>
+<span class="co">#&gt; Observed proportion male = 0.4879</span>
+<span class="co">#&gt; X-squared = 0.4845, p = 0.4864</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ------------------------------------------------------------ </span>
+<span class="co">#&gt; svy$ycag: 2</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Sex Ratio Test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Expected proportion male = 0.5145</span>
+<span class="co">#&gt; Observed proportion male = 0.5152</span>
+<span class="co">#&gt; X-squared = 0.0000, p = 1.0000</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ------------------------------------------------------------ </span>
+<span class="co">#&gt; svy$ycag: 3</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Sex Ratio Test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Expected proportion male = 0.5145</span>
+<span class="co">#&gt; Observed proportion male = 0.5228</span>
+<span class="co">#&gt; X-squared = 0.0374, p = 0.8466</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ------------------------------------------------------------ </span>
+<span class="co">#&gt; svy$ycag: 4</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Sex Ratio Test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Expected proportion male = 0.5145</span>
+<span class="co">#&gt; Observed proportion male = 0.4875</span>
+<span class="co">#&gt; X-squared = 0.3657, p = 0.5454</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ------------------------------------------------------------ </span>
+<span class="co">#&gt; svy$ycag: 5</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Sex Ratio Test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Expected proportion male = 0.5145</span>
+<span class="co">#&gt; Observed proportion male = 0.4627</span>
+<span class="co">#&gt; X-squared = 0.5280, p = 0.4674</span></pre></body></html></div>
+<p>Note that the variable <code>ycag</code> created above holds the year-centred-age-group.</p>
+<p>This approach assumes that the sex ratio is independent of age.</p>
+<p>An approach that does not make this assumption is to use the numbers of male and female children in the same age-ranges in the population taken from census data.</p>
+<p>A useful source of census data is the <a href="https://www.census.gov/data-tools/demo/idb/informationGateway.php">United States Census Bureau’s International Data Base</a>:</p>
+<p><a href="https://www.census.gov/data-tools/demo/idb/informationGateway.php" class="uri">https://www.census.gov/data-tools/demo/idb/informationGateway.php</a></p>
+<p>This source gives the following estimates for Afghanistan in 2016:</p>
+<table class="table table table-striped">
+<thead><tr>
+<th style="text-align:right;">
+Age
+</th>
+<th style="text-align:right;">
+Number Males
+</th>
+<th style="text-align:right;">
+Number Females
+</th>
+<th style="text-align:right;">
+Proportion Male
+</th>
+<th style="text-align:right;">
+Propotion Female
+</th>
+<th style="text-align:left;">
+Male-to-Female Sex Ratio
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+594602
+</td>
+<td style="text-align:right;">
+573956
+</td>
+<td style="text-align:right;">
+0.5088
+</td>
+<td style="text-align:right;">
+0.4912
+</td>
+<td style="text-align:left;">
+1.04:1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+550593
+</td>
+<td style="text-align:right;">
+533579
+</td>
+<td style="text-align:right;">
+0.5078
+</td>
+<td style="text-align:right;">
+0.4922
+</td>
+<td style="text-align:left;">
+1.03:1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+526827
+</td>
+<td style="text-align:right;">
+510479
+</td>
+<td style="text-align:right;">
+0.5079
+</td>
+<td style="text-align:right;">
+0.4921
+</td>
+<td style="text-align:left;">
+1.03:1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+509048
+</td>
+<td style="text-align:right;">
+493185
+</td>
+<td style="text-align:right;">
+0.5079
+</td>
+<td style="text-align:right;">
+0.4921
+</td>
+<td style="text-align:left;">
+1.03:1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+493521
+</td>
+<td style="text-align:right;">
+478137
+</td>
+<td style="text-align:right;">
+0.5079
+</td>
+<td style="text-align:right;">
+0.4921
+</td>
+<td style="text-align:left;">
+1.03:1.00
+</td>
+</tr>
+</tbody>
+</table>
+<p>We need to ensure we use the same age-ranges as the census:</p>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">svy</span>$<span class="no">ageGroup</span> <span class="kw">&lt;-</span> <span class="fu">recode</span>(<span class="no">svy</span>$<span class="no">age</span>, <span class="st">"0:11=0; 12:23=1; 24:35=2; 36:47=3; 48:59=4"</span>)</pre></body></html></div>
+<p>and then test the sex ratio in each age group separately:</p>
+<div class="sourceCode" id="cb18"><html><body><pre class="r">sexRatioTest(svy$sex[svy$ageGroup == 0], pop = c(594602, 573956)) sexRatioTest(svy$sex[svy$ageGroup == 1], pop = c(550593, 533579)) sexRatioTest(svy$sex[svy$ageGroup == 2], pop = c(526827, 510479)) sexRatioTest(svy$sex[svy$ageGroup == 3], pop = c(509048, 493185)) sexRatioTest(svy$sex[svy$ageGroup == 4], pop = c(493521, 478137))</pre></body></html></div>
+<pre><code>#&gt; 
+#&gt;  Sex Ratio Test
+#&gt; 
+#&gt; Expected proportion male = 0.5088
+#&gt; Observed proportion male = 0.5047
+#&gt; X-squared = 0.0000, p = 1.0000
+#&gt; 
+#&gt;  Sex Ratio Test
+#&gt; 
+#&gt; Expected proportion male = 0.5078
+#&gt; Observed proportion male = 0.4901
+#&gt; X-squared = 0.1885, p = 0.6642
+#&gt; 
+#&gt;  Sex Ratio Test
+#&gt; 
+#&gt; Expected proportion male = 0.5079
+#&gt; Observed proportion male = 0.5374
+#&gt; X-squared = 0.6800, p = 0.4096
+#&gt; 
+#&gt;  Sex Ratio Test
+#&gt; 
+#&gt; Expected proportion male = 0.5079
+#&gt; Observed proportion male = 0.5052
+#&gt; X-squared = 0.0000, p = 0.9978
+#&gt; 
+#&gt;  Sex Ratio Test
+#&gt; 
+#&gt; Expected proportion male = 0.5079
+#&gt; Observed proportion male = 0.4552
+#&gt; X-squared = 1.4098, p = 0.2351</code></pre>
+<p>All of these tests find no significant differences between the observed and expected sex ratios. It should be noted that some (or all) of the tests might be based on small sample sizes:</p>
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">svy</span>$<span class="no">ageGroup</span>)
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   0   1   2   3   4 </span>
+<span class="co">#&gt; 107 202 227 192 145</span></pre></body></html></div>
+<p>and may, therefore, be able to detect only large differences.</p>
+</div>
+<div id="sex-ratios-in-adults" class="section level2">
+<h2 class="hasAnchor">
+<a href="#sex-ratios-in-adults" class="anchor"></a>Sex ratios in adults</h2>
+<p>With data from children we usually expect something like a one to one male to female sex ratio. This will not usually be the case with adults, especially older adults.</p>
+<p>We will retrieve a survey dataset:</p>
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">svy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span>(<span class="st">"ah.ex01.csv"</span>, <span class="kw">header</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">","</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">svy</span>)</pre></body></html></div>
+<pre><code>#&gt;   psu camp block age sex weight height demispan muac oedema
+#&gt; 1   1  IFO   A01  90   1   40.8  159.3     77.2 20.0      2
+#&gt; 2   1  IFO   A01  60   2   69.8  155.3     78.3 35.3      2
+#&gt; 3   1  IFO   A01  63   2   51.7  156.8     80.5 25.5      2
+#&gt; 4   1  IFO   A01  74   2   61.1  158.9     83.5 27.0      2
+#&gt; 5   1  IFO   A01  65   2   55.1  156.9     85.5 24.5      2
+#&gt; 6   1  IFO   A01  62   2   56.7  158.1     86.3 26.1      2</code></pre>
+<p>The dataset <code>ah.ex01</code> is a comma-separated-value (CSV) file containing anthropometry data from a Rapid Assessment Method for Older People (RAM-OP) survey in the Dadaab refugee camps in Garissa, Kenya. This is a survey of older people, defined as people aged sixty years and older.</p>
+<p>With this type of survey it is usually possible to use camp administration data to find the expected male to female sex ratio. This information was not given in the RAM-OP survey report.</p>
+<p>The camp population is predominantly Somali. It is reported that there are 188 thousand men and 220 thousand women aged sixty years and older in Somalia (2010 estimates). The sex ratio is:</p>
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fl">188</span> / <span class="fl">220</span></pre></body></html></div>
+<p>which is:</p>
+<pre><code>#&gt; [1] 0.8545455</code></pre>
+<p>The expected proportion of the population that is male is:</p>
+<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fl">188</span> / (<span class="fl">188</span> + <span class="fl">220</span>)</pre></body></html></div>
+<p>which is:</p>
+<pre><code>#&gt; [1] 0.4607843</code></pre>
+<p>The proportion of the sample that is male:</p>
+<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">svy</span>$<span class="no">sex</span>))</pre></body></html></div>
+<p>is:</p>
+<pre><code>#&gt; 
+#&gt;        1        2 
+#&gt; 0.381113 0.618887</code></pre>
+<p>This looks to be much smaller than the expected proportion. The sex ratio test:</p>
+<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="fu"><a href="../reference/sexRatioTest.html">sexRatioTest</a></span>(<span class="no">svy</span>$<span class="no">sex</span>, <span class="kw">codes</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>), <span class="kw">pop</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">188</span>, <span class="fl">220</span>))</pre></body></html></div>
+<p>reports:</p>
+<pre><code>#&gt; 
+#&gt;  Sex Ratio Test
+#&gt; 
+#&gt; Expected proportion male = 0.4608
+#&gt; Observed proportion male = 0.3811
+#&gt; X-squared = 14.8305, p = 0.0001</code></pre>
+<p>The proportion of males in the sample is significantly smaller than we expected.</p>
+<p>This result could be due to the extraordinary nature of the population (e.g. the camp population could really have very many more older women than older men). It could also due to a selection bias in the survey. In this example, men were more likely than women to be away from home during the day and a household sample taken during the day would have systematically excluded the more active members of the male population.</p>
+<p>Note that the sex ratio test only applies to population surveys. If surveys focus on (e.g.) carers of small children then the observed male to female sex ratio is likely to be strongly biased towards women. In such cases it is not sensible to apply a sex ratio test.</p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 
