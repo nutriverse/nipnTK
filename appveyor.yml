@@ -10,6 +10,8 @@ init:
 install:
   ps: Bootstrap
 
+# Adapt as necessary starting from here
+
 environment:
   global:
     R_CHECK_ARGS: "--no-manual --as-cran --run-donttest"
@@ -18,8 +20,6 @@ environment:
 
 cache:
   - C:\RLibrary
-
-# Adapt as necessary starting from here
 
 build_script:
   - travis-tool.sh install_deps
