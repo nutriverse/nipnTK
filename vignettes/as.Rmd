@@ -18,10 +18,10 @@ library(kableExtra)
 ```
 
 ## Age and sex distributions (children's data)
-Age heaping is the tendency to report children's ages to the nearest year or adult ages to the nearest multiple of 5 or 10 years. Age heaping is very common. It is a major reason why data from nutritional anthropometry surveys are often analysed and reported using broad age-groups. The commonest age- groups used with children’s data are 6 to 17 months, 18 to 29 months, 30 to 41 months, 42 to 53 months, and 54 to 59 months (see figure below). These are known as year-centred age-groups. Note that the last age-group covers only six months but is nominally centred at five years. Other age-groups may be used for specific analyses. The techniques presented here can be adapted to work with other age- groups.
+Age heaping is the tendency to report children's ages to the nearest year or adult ages to the nearest multiple of 5 or 10 years. Age heaping is very common. It is a major reason why data from nutritional anthropometry surveys are often analysed and reported using broad age-groups. The commonest age-groups used with children’s data are 6 to 17 months, 18 to 29 months, 30 to 41 months, 42 to 53 months, and 54 to 59 months (see figure below). These are known as year-centred age-groups. Note that the last age-group covers only six months but is nominally centred at five years. Other age-groups may be used for specific analyses. The techniques presented here can be adapted to work with other age- groups.
 
-```{r pyramidPlot, echo = FALSE, eval = TRUE, fig.align = "center"}
-include_graphics(path = "../man/figures/pyramidPlot.png")
+```{r asFigure1, echo = FALSE, eval = TRUE, fig.align = "center"}
+include_graphics(path = "../man/figures/asFigure1.png")
 ```
 
 We will retrieve a survey dataset:
@@ -410,3 +410,388 @@ A significant result in this particular test may be due to:
 The model is crude. Mortality is related to age. Younger children have a greater mortality risk than older children and only an average under five years mortality rate is used. A more sophisticated model could be used but, in many settings, we will not have the data required to use such a model.
 
 It should also be noted that the sample sizes used in most survey can cause tests to yield statistically significant results for small differences between observed and expected numbers.
+
+## Use of census data
+
+The use of simple demographic models is far from ideal. It is usually better to calculate the expected proportions from census data. A useful source of census data is the [United States Census Bureau’s International Data Base](https://www.census.gov/data-tools/demo/idb/informationGateway.php):
+
+https://www.census.gov/data-tools/demo/idb/informationGateway.php
+
+The population in single year age-groups for 0, 1, 2, 3, and 4 years for Afghanistan in 2015 was:
+
+```{r as14, echo = FALSE, eval = TRUE}
+age <- c(0, 1, 2, 3, 4)
+both <- c(1148379, 1062635, 1015688, 981288, 950875)
+males <- c(584276, 539589, 515793, 498365, 482926)
+females <- c(564103, 523046, 499895, 482923, 467949)
+
+df <- data.frame(age, both, males, females)
+
+kable(x = df,
+      booktabs = TRUE,
+      col.names = c("Age", "Both Sexes", "Males", "Females")) %>%
+  kable_styling(bootstrap_options = c("striped"), full_width = FALSE)
+```
+
+We can calculate expected values from these data:
+
+```{r as15, echo = TRUE, eval = TRUE}
+pop <- c(1148379, 1062635, 1015688, 981288, 950875) 
+ep <- pop / sum(pop)
+```
+
+With a sample size of $n = 900$ the expected number in each age-group would be: 
+
+```{r as16, echo = TRUE, eval = TRUE}
+expected <- ep * 900
+expected
+```
+
+These expected values can be used in a Chi-squared test as is illustrated above.
+
+Census data may also be used to estimate the under five years’ mortality rate (U5MR) which can then be used with the `ageChildren()` function.
+
+The model of exponential decay in a population in which births and deaths balance each other with a 1:1 male to female sex ratio:
+
+$$ p ~ = ~ e ^ {-zt} $$
+
+means that we can, given an age-distribution, estimate mortality by fitting the model:
+
+$$ \log_e(n) ~ = ~ \alpha ~ + ~ \beta t $$
+
+where $n$ is the count of children in each age-group.
+
+The absolute value of the β coefficient is the point estimate of the mortality rate (z). Using the 2015 population data for Afghanistan:
+
+```{r as17, echo = TRUE, eval = FALSE}
+t <- 0:4 
+lm(log(pop) ~ t)
+```
+
+This gives:
+
+```{r as17a, echo = FALSE, eval = TRUE}
+t <- 0:4 
+lm(log(pop) ~ t)
+```
+
+The value reported under **t** is the $\beta$ coefficient (**-0.04571**). The absolute value of the $\beta$ coefficient (i.e. the value without the sign) is **0.04571**. This is the point estimate of the mortality rate. Expressed as the number of deaths / 10,000 persons / day:
+
+```{r as18, echo = TRUE, eval = FALSE}
+(0.04571 / 365.25) * 10000
+```
+
+this is:
+
+```{r as18a, echo = FALSE, eval = TRUE}
+(0.04571 / 365.25) * 10000
+```
+
+We can use this estimate with the `ageChildren()` function: 
+
+```{r as19, echo = TRUE, eval = TRUE}
+ageChildren(svy$age, u5mr = 1.251472)
+```
+
+### The age ratio
+
+A much simpler and less problematic age-related test of survey and data quality is the *age ratio* test. 
+
+The age ratio is defined as:
+
+$$ \text{Age ratio} ~ = ~ \frac{\text{number of children aged between 6 and 29 months}}{\text{number of children aged between 30 and 59 months}} $$
+
+We will use the `recode()` function from NiPN data quality toolkit to create the relevant age-groups: 
+
+```{r as20, echo = TRUE, eval = TRUE}
+svy$ageGroup <- recode(svy$age, "6:29=1; 30:59=2")
+head(svy)
+```
+
+The observed age ratio is:
+
+```{r as21, echo = TRUE, eval = FALSE}
+sum(svy$ageGroup == 1) / sum(svy$ageGroup == 2)
+```
+
+which gives:
+
+```{r as22, echo = FALSE, eval = TRUE}
+sum(svy$ageGroup == 1) / sum(svy$ageGroup == 2)
+```
+
+It is often easier to work with proportions than with ratios so we only need to calculate the proportion in the younger age-group:
+
+```{r as23, echo = TRUE, eval = FALSE}
+sum(svy$ageGroup == 1) / sum(table(svy$ageGroup))
+```
+
+which gives:
+
+```{r as24, echo = FALSE, eval = TRUE}
+sum(svy$ageGroup == 1) / sum(table(svy$ageGroup))
+```
+
+We can calculate an expected value using census data or a simple demographic model. The simplest approach is to use a standard value. SMART surveys often use the ratio 0.85:1.
+
+We only need to calculate the expected proportion in the younger group. For the ratio 0.85:1 this is:
+
+```{r as25, echo = TRUE, eval = TRUE}
+p <- 0.85 / (0.85 + 1) 
+```
+
+This gives:
+
+```{r as25a, echo = FALSE, eval = TRUE}
+p
+```
+
+The observed proportion (0.4639175) and expected proportion (0.4594595) are so similar that a formal test of statistical significance is not required in this case.
+
+Formal testing can be done using a Chi-squared test:
+
+```{r as26, echo = TRUE, eval = FALSE}
+prop.test(sum(svy$ageGroup == 1), sum(table(svy$ageGroup)), p = 0.4594595)
+```
+
+This returns:
+
+```{r as26a, echo = FALSE, eval = TRUE}
+prop.test(sum(svy$ageGroup == 1), sum(table(svy$ageGroup)), p = 0.4594595)
+```
+
+The age ratio in the example data is not significantly different from the expected age ratio.
+
+The NiPN data quality toolkit provide an R function called `ageRatioTest()` that performs the age ratio test:
+
+```{r as27, echo = TRUE, eval = FALSE}
+ageRatioTest(svy$age, ratio = 0.85)
+```
+
+This returns:
+
+```{r as27a, echo = FALSE, eval = TRUE}
+ageRatioTest(svy$age, ratio = 0.85)
+```
+
+The `ratio` parameter of the `ageRatioTest()` function allows you to specify an expected age ratio other than 0.85:1.
+
+Note that the `ageRatioTest()` function applies the test to data from children aged between 6 and 59 months only (all other ages are ignored).
+
+The age ratio test might be applied to data from both sexes (as above) and to each sex separately:
+
+```{r as28, echo = TRUE, eval = TRUE}
+by(svy$age, svy$sex, ageRatioTest, ratio = 0.85)
+```
+
+The example data meets expectations regarding the age ratio for all children and for male and female children separately.
+
+## Age and sex distributions : Adults and general population surveys
+
+A key test of survey quality is whether the survey data represents the population in terms of the age and sex distribution. We can test this by comparison with census data.
+
+We will retrieve some example data:
+
+```{r as29, echo = TRUE, eval = FALSE}
+svy <- read.table("as.ex01.csv", header = TRUE, sep = ",") 
+head(svy)
+```
+
+```{r as29a, echo = FALSE, eval = TRUE}
+svy <- as.ex01
+head(svy)
+```
+
+These data are taken from household rosters collected as part of a household survey in Tanzania. 
+We will use census data taken from the Wolfram|Alpha knowledge engine:
+
+http://www.wolframalpha.com/input/?i=Tanzania+age+distribution
+
+Another useful source of census data is the United States Census Bureau’s International Data Base:
+
+https://www.census.gov/data-tools/demo/idb/informationGateway.php 
+
+The pyramid plot produced by Wolfram|Alpha is shown in the figure below.
+
+```{r pyramidPlot, echo = FALSE, eval = TRUE, fig.align = "center"}
+include_graphics(path = "../man/figures/pyramidPlot.png")
+```
+
+The table produced by Wolfram|Alpha was downloaded and stored in a CSV file:
+
+```{r as30, echo = TRUE, eval = FALSE}
+ref <- read.table("as.ex02.csv", header = TRUE, sep = ",")
+ref
+```
+
+```{r as30a, echo = FALSE, eval = TRUE}
+ref <- as.ex02
+ref
+```
+
+The age-groups are expressed using the form specified in ISO 31-11, an international standard that applies to mathematical symbols. The form [a,b) expresses the interval $a ≤ x < b$. For example, [30,35) is used to indicate the set {30, 31, 32, 33, 34} of ages in years. The form [a,b) is said to be *closed* on the left and *open* on the right.
+
+The reference data (`ref`) uses five-year age-groups. We will create the same age-groups in the example dataset.
+
+We should first check the range of ages in the example data:
+
+```{r as31, echo = TRUE, eval = FALSE}
+range(svy$age)
+```
+
+which returns:
+
+```{r as31a, echo = FALSE, eval = TRUE}
+range(svy$age)
+```
+
+The R language provides a function that makes it easy to create ISO 31-11 groupings from raw data: 
+
+```{r as32, echo = TRUE, eval = TRUE}
+svy$ageGroup <-cut(svy$age, 
+                   breaks = seq(from = 0, to = 95, by = 5),
+                   include.lowest = TRUE, right = FALSE)
+```
+
+Using `include.lowest = TRUE` tells the `cut()` function to include the lowest breaks value (zero in this case). Using `right = FALSE` tells the `cut()` function to use groupings that are closed on the left. This combination of parameters creates the same “closed on the left” and “open on the right” age-groups as are used in the reference (**ref**) data:
+
+```{r as33, echo = TRUE, eval = TRUE}
+table(svy$ageGroup)
+```
+
+A tabular analysis of age-group by sex can be produced using:
+
+```{r as34, echo = TRUE, eval = TRUE}
+table(svy$ageGroup, svy$sex)
+```
+
+A visual inspection is useful:
+
+```{r as35, echo = TRUE, eval = TRUE}
+pyramid.plot(svy$ageGroup, svy$sex)
+```
+
+We can make this easier to read:
+
+```{r as35a, echo = TRUE, eval = TRUE}
+pyramid.plot(svy$ageGroup, 
+             svy$sex, 
+             main = "Age-group by sex",
+             xlab = "Number (Males | Females)", 
+             ylab = "", 
+             las = 1, 
+             cex.names = 0.9)
+```
+
+
+Note that we specified `ylab = ""` because it is clear that the category labels represent age-groups and to prevent the y-axis label from obscuring the category labels, which happens with:
+
+```{r as35b, echo = TRUE, eval = TRUE}
+pyramid.plot(svy$ageGroup, 
+             svy$sex, 
+             main = "Age-group by sex",
+             xlab = "Number (Males | Females)", 
+             ylab = "Age-group", 
+             las = 1,
+             cex.names = 0.9)
+```
+
+It is possible to alter the number of lines of text in margins of the plot, reduce the size of the age-group labels, and place the y-axis label on a specific line in the left margin of the plot in order to make a clearer plot:
+
+```{r as35c, echo = TRUE, eval = TRUE}
+par(mar = c(5, 5, 4, 2))
+
+pyramid.plot(svy$ageGroup, 
+             svy$sex, 
+             main = "Age-group by sex",
+             xlab = "Number (Males | Females)", 
+             ylab = "", 
+             las = 1, 
+             cex.names = 0.8)
+
+title(ylab = "Age-group", line = 4)
+```
+
+The easiest way of checking whether the survey data represents the general population in terms of the age and sex distribution is to compare the observed (Figure ASA02) and expected (Figure AS01) distributions. The general shapes of the two distributions are similar. Some of the lumpiness in Figure AS02 is due to age heaping in the adult ages at decades and half-decades:
+
+```{r as36, echo = TRUE, eval = TRUE}
+ah <- ageHeaping(svy$age, divisor = 10) 
+plot(ah, main = "Remainder of age / 10")
+```
+
+A more formal test of the age structure can be made by comparing observed and expected numbers. We can do this graphically:
+
+```{r as37, echo = TRUE, eval = TRUE}
+ref <- ref[1:19, ]
+
+expectedProportions <- ref$All / sum(ref$All)
+expectedNumbers <- expectedProportions * sum(table(svy$ageGroup))
+
+mp <- barplot(table(svy$ageGroup), 
+              main = "Observed and expected numbers", 
+              ylim = c(0, max(expectedNumbers)), 
+              las = 2)
+
+lines(mp, expectedNumbers, lty = 2, lwd = 2)
+```
+
+The observed and expected numbers are similar to each other. The lumpiness in the observed numbers is due to age heaping. See Figure ASA04.
+
+Formal testing can be performed:
+
+```{r as38, echo = TRUE, eval = FALSE}
+chisq.test(table(svy$ageGroup), 
+           p = expectedProportions)
+```
+
+This gives:
+
+```{r as38a, echo = FALSE, eval = TRUE}
+chisq.test(table(svy$ageGroup), 
+           p = expectedProportions)
+```
+
+The warning is due to small expected numbers (i.e. n < 5) in the older age-groups. R provides a more robust “Monte Carlo” test:
+
+```{r as39, echo = TRUE, eval = FALSE}
+chisq.test(table(svy$ageGroup), 
+           p = expectedProportions, 
+           simulate.p.value = TRUE)
+```
+
+This may take a few seconds to compute and yields:
+
+```{r as39a, echo = FALSE, eval = TRUE}
+chisq.test(table(svy$ageGroup), 
+           p = expectedProportions, 
+           simulate.p.value = TRUE)
+```
+
+The test results need to be interpreted with caution. The sample size ($n = 8736$) is large in this example. This means that small differences, which may be due to age heaping, become statistically significant. This test cannot be considered to be good evidence that the age-structure of the sample differs from the expected age-structure of the population.
+We also need to examine the sex ratio of the sample. A sex ratio test can be performed using the `sexRatioTest()` function from the NiPN data quality toolkit and the sex ratio observed in the census data:
+
+```{r as40, echo = TRUE, eval = FALSE}
+censusM <- sum(ref$Males)
+censusF <- sum(ref$Females)
+
+sexRatioTest(svy$sex, 
+             codes = c(1, 2), 
+             pop = c(censusM, censusF))
+```
+
+This yields:
+
+```{r as40a, echo = FALSE, eval = TRUE}
+censusM <- sum(ref$Males)
+censusF <- sum(ref$Females)
+
+sexRatioTest(svy$sex, 
+             codes = c(1, 2), 
+             pop = c(censusM, censusF))
+```
+
+There is no evidence that the sex ratio in the sample differs much from the expected sex ratio in the population.
+
+The techniques outlined in this section are illustrative. This is because many surveys, other than nutritional anthropometry surveys in young children, are not standardised. A survey may sample only women of child-bearing age. The sample may be restricted to women aged between 15 and 45 years.
+
+In this case the age-structure can be examined using the techniques outlined above but it would make no sense to examine the sex ratio. Care should be taken when examining data from surveys that may have deliberately oversampled specific age-groups.
