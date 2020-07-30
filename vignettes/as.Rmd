@@ -125,20 +125,12 @@ pyramid.plot(svy$ycag, svy$sex,
 
 We expect there to be approximately equal numbers of children in the age-groups centred at 1, 2, 3, and 4 years and a smaller number (i.e. about half the number in the other age-groups) in the age-group centred at 5 years. There should also be approximately equal numbers of males and females. This is what we see in the population pyramid below.
 
-```{r pyramid, echo = FALSE, eval = TRUE, fig.align = "center", fig.height = 8, fig.width = 6}
-tza <- as.ex01
-tza$ycage <- cut(x = tza$age, 
-                 breaks = seq(from = 0, to = 100, by = 5),
-                 include.lowest = TRUE)
-
-pyramid.plot(x = tza$ycage,
-             g = tza$sex,
-             main = "Age-group by sex",
-             xlab = "Number (Males | Females)",
-             ylab = "",
-             las = 1)
+```{r as6d, echo = TRUE, eval = TRUE, fig.align = "center"}
+pyramid.plot(svy$ycag, svy$sex, 
+             main = "Distribution of age by sex",
+             xlab = "Frequency (Males | Females)", 
+             ylab = "Year-centred age-group")
 ```
-
 
 The `pyramid.plot()` function uses the values of the grouped age variable as y-axis value labels. 
 
@@ -667,13 +659,13 @@ table(svy$ageGroup, svy$sex)
 
 A visual inspection is useful:
 
-```{r as35, echo = TRUE, eval = TRUE}
+```{r as35, echo = TRUE, eval = TRUE, fig.align = "center"}
 pyramid.plot(svy$ageGroup, svy$sex)
 ```
 
 We can make this easier to read:
 
-```{r as35a, echo = TRUE, eval = TRUE}
+```{r as35a, echo = TRUE, eval = TRUE, fig.align = "center"}
 pyramid.plot(svy$ageGroup, 
              svy$sex, 
              main = "Age-group by sex",
@@ -683,10 +675,9 @@ pyramid.plot(svy$ageGroup,
              cex.names = 0.9)
 ```
 
-
 Note that we specified `ylab = ""` because it is clear that the category labels represent age-groups and to prevent the y-axis label from obscuring the category labels, which happens with:
 
-```{r as35b, echo = TRUE, eval = TRUE}
+```{r as35b, echo = TRUE, eval = TRUE, fig.align = "center"}
 pyramid.plot(svy$ageGroup, 
              svy$sex, 
              main = "Age-group by sex",
@@ -698,7 +689,7 @@ pyramid.plot(svy$ageGroup,
 
 It is possible to alter the number of lines of text in margins of the plot, reduce the size of the age-group labels, and place the y-axis label on a specific line in the left margin of the plot in order to make a clearer plot:
 
-```{r as35c, echo = TRUE, eval = TRUE}
+```{r as35c, echo = TRUE, eval = TRUE, fig.align = "center"}
 par(mar = c(5, 5, 4, 2))
 
 pyramid.plot(svy$ageGroup, 
@@ -712,7 +703,24 @@ pyramid.plot(svy$ageGroup,
 title(ylab = "Age-group", line = 4)
 ```
 
-The easiest way of checking whether the survey data represents the general population in terms of the age and sex distribution is to compare the observed (Figure ASA02) and expected (Figure AS01) distributions. The general shapes of the two distributions are similar. Some of the lumpiness in Figure AS02 is due to age heaping in the adult ages at decades and half-decades:
+The easiest way of checking whether the survey data represents the general population in terms of the age and sex distribution is to compare the observed (figure on right) and expected (figure on left) distributions. 
+
+```{r as35d, echo = FALSE, eval = TRUE, fig.show = "hold", out.width = "50%"}
+include_graphics(path = "../man/figures/pyramidPlot.png")
+
+par(mar = c(5, 5, 4, 2))
+pyramid.plot(svy$ageGroup, 
+             svy$sex, 
+             main = "Age-group by sex",
+             xlab = "Number (Males | Females)", 
+             ylab = "", 
+             las = 1, 
+             cex.names = 0.8)
+
+title(ylab = "Age-group", line = 4)
+```
+
+The general shapes of the two distributions are similar. Some of the lumpiness in figure on the right is due to age heaping in the adult ages at decades and half-decades:
 
 ```{r as36, echo = TRUE, eval = TRUE}
 ah <- ageHeaping(svy$age, divisor = 10) 
