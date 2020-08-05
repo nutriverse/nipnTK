@@ -186,7 +186,7 @@
     <tr>
       <th>groups</th>
       <td><p>Age groupings specified as recodes parameter in the
-<code>recode</code> function; default is
+<code><a href='https://rdrr.io/pkg/bbw/man/recode.html'>name</a></code> function; default is
 <code>"6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5"</code></p></td>
     </tr>
     </table>
@@ -206,7 +206,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Chi-Squared test for age of children in dp.ex02 sample dataset using an</span>
-<span class='co'># \code{u5mr} of 1 / 10,000 / day.</span>
+<span class='co'># u5mr of 1 / 10,000 / day.</span>
 <span class='no'>svy</span> <span class='kw'>&lt;-</span> <span class='no'>dp.ex02</span>
 <span class='no'>ac</span> <span class='kw'>&lt;-</span> <span class='fu'>ageChildren</span>(<span class='no'>svy</span>$<span class='no'>age</span>, <span class='kw'>u5mr</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 <span class='no'>ac</span></div><div class='output co'>#&gt; 
@@ -237,7 +237,8 @@
 #&gt; 	Age Test (Children)
 #&gt; 
 #&gt; X-squared = 6.8429, df = 4, p = 0.1444
-#&gt; </div></pre>
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
