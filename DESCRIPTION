@@ -22,7 +22,7 @@ Suggests:
     knitr,
     rmarkdown,
     tufte
-License: AGPL-3
+License: GPL-3
 Encoding: UTF-8
 Language: en-gb
 LazyData: true
