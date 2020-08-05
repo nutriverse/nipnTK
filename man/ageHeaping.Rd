@@ -2,7 +2,7 @@
 % Please edit documentation in R/ageHeaping.R
 \name{ageHeaping}
 \alias{ageHeaping}
-\title{Age-heaping analysis with print() and plot() helper function}
+\title{Age-heaping analysis}
 \usage{
 ageHeaping(x, divisor = 12)
 }
@@ -14,11 +14,12 @@ ageHeaping(x, divisor = 12)
 \value{
 A list of class "ageHeaping" with:
 \describe{
-\item{\code{X2}}{Chi-squared test statistic}
-\item{\code{df}}{Degrees of freedom or Chi-squared test}
-\item{\code{p}}{\code{p-value} for Chi-squared test}
-\item{\code{tab}}{Table of remainders (for \code{x \%\%} divisor)}
-\item{\code{pct}}{Table of proportions (\code{\%}) of remainders (for \code{x \%\%} divisor)}
+  \item{\code{X2}}{Chi-squared test statistic}
+  \item{\code{df}}{Degrees of freedom or Chi-squared test}
+  \item{\code{p}}{\code{p-value} for Chi-squared test}
+  \item{\code{tab}}{Table of remainders (for \code{x \%\%} divisor)}
+  \item{\code{pct}}{Table of proportions (\code{\%}) of remainders
+    (for \code{x \%\%} divisor)}
 }
 }
 \description{
@@ -38,4 +39,5 @@ ah12
 # using a divisor of 6
 ah6 <- ageHeaping(svy$age, divisor = 6)
 ah6
+
 }

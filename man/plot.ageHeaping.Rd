@@ -2,12 +2,12 @@
 % Please edit documentation in R/ageHeaping.R
 \name{plot.ageHeaping}
 \alias{plot.ageHeaping}
-\title{\code{plot()} helper functions for \code{ageHeaping()} functions}
+\title{\code{plot} helper functions for \code{ageHeaping} functions}
 \usage{
 \method{plot}{ageHeaping}(x, main = "", xlab = "Remainder", ylab = "Frequency", cex = 0.75, ...)
 }
 \arguments{
-\item{x}{Object resulting from applying the \code{ageHeaping()} function}
+\item{x}{Object resulting from applying the \code{\link{ageHeaping}} function}
 
 \item{main}{Title of plot}
 
@@ -17,14 +17,14 @@
 
 \item{cex}{Character expansion (numeric); default is 0.75}
 
-\item{...}{Additional \code{plot()} graphical parameters}
+\item{...}{Additional \code{\link{plot}} graphical parameters}
 }
 \value{
 Barplot of frequency of remainders of age when divided by a specified
 divisor
 }
 \description{
-\code{plot()} helper functions for \code{ageHeaping()} functions
+\code{plot} helper functions for \code{ageHeaping} functions
 }
 \examples{
 # Plot age heaping test results on SMART survey data in Kabul, Afghanistan
@@ -32,4 +32,5 @@ divisor
 svy <- dp.ex02
 ah12 <- ageHeaping(svy$age)
 plot(ah12)
+
 }
