@@ -8,11 +8,18 @@
 
 <title>Goodness of fit to an expected (model-based) age distribution — ageChildren • nipnTK</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -41,6 +48,7 @@
 
 <meta property="og:title" content="Goodness of fit to an expected (model-based) age distribution — ageChildren" />
 <meta property="og:description" content="Goodness of fit to an expected (model-based) age distribution" />
+<meta property="og:image" content="https://nutriverse.io/nipnTK/logo.png" />
 
 
 
@@ -71,7 +79,7 @@
   <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -139,6 +147,18 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://twitter.com/katilingban">
+    <span class="fab fa fab fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/company/katilingban/">
+    <span class="fab fa fab fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/nutriverse/nipnTK/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -166,11 +186,11 @@
     <p>Goodness of fit to an expected (model-based) age distribution</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ageChildren</span>(
-  <span class='no'>age</span>,
-  <span class='kw'>u5mr</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>groups</span> <span class='kw'>=</span> <span class='st'>"6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ageChildren</span><span class='op'>(</span>
+  <span class='va'>age</span>,
+  u5mr <span class='op'>=</span> <span class='fl'>0</span>,
+  groups <span class='op'>=</span> <span class='st'>"6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,46 +206,50 @@
     <tr>
       <th>groups</th>
       <td><p>Age groupings specified as recodes parameter in the
-<code><a href='https://rdrr.io/pkg/bbw/man/recode.html'>name</a></code> function; default is
+<code><a href='https://rdrr.io/pkg/bbw/man/recode.html'>bbw::recode()</a></code> function; default is
 <code>"6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5"</code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of class "ageChildren" with:</p><dl'>
-<dt><code>u5mr</code></dt><dd><p>Under five years mortality rate as deaths / 10000 persons / day</p></dd>
-<dt><code>observed</code></dt><dd><p>Table of counts in each (year-centred) age group</p></dd>
-<dt><code>expected</code></dt><dd><p>Table of expected counts in each (year-centred) age group</p></dd>
-<dt><code>X2</code></dt><dd><p>Chi-squared test statistic</p></dd>
-<dt><code>df</code></dt><dd><p>Degrees of freedom for Chi-squared test</p></dd>
-<dt><code>p</code></dt><dd><p>p-value for Chi-squared test</p></dd>
+    <p>A list of class "ageChildren" with:</p><table class='table'>
+<tr><td><strong>Variable</strong></td><td><strong>Description</strong></td></tr>
+<tr><td><em>u5mr</em></td><td>Under five years mortality rate as deaths / 10000 persons / day</td></tr>
+<tr><td><em>observed</em></td><td>Table of counts in each (year-centred) age group</td></tr>
+<tr><td><em>expected</em></td><td>Table of expected counts in each (year-centred) age group</td></tr>
+<tr><td><em>X2</em></td><td>Chi-squared test statistic</td></tr>
+<tr><td><em>df</em></td><td>Degrees of freedom for Chi-squared test</td></tr>
+<tr><td><em>p</em></td><td>p-value for Chi-squared test</td></tr>
+</table>
 
-</dl>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Chi-Squared test for age of children in dp.ex02 sample dataset using an</span>
 <span class='co'># u5mr of 1 / 10,000 / day.</span>
-<span class='no'>svy</span> <span class='kw'>&lt;-</span> <span class='no'>dp.ex02</span>
-<span class='no'>ac</span> <span class='kw'>&lt;-</span> <span class='fu'>ageChildren</span>(<span class='no'>svy</span>$<span class='no'>age</span>, <span class='kw'>u5mr</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='no'>ac</span></div><div class='output co'>#&gt; 
+<span class='va'>svy</span> <span class='op'>&lt;-</span> <span class='va'>dp.ex02</span>
+<span class='va'>ac</span> <span class='op'>&lt;-</span> <span class='fu'>ageChildren</span><span class='op'>(</span><span class='va'>svy</span><span class='op'>$</span><span class='va'>age</span>, u5mr <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>ac</span>
+</div><div class='output co'>#&gt; 
 #&gt; 	Age Test (Children)
 #&gt; 
 #&gt; X-squared = 21.4366, df = 4, p = 0.0003
 #&gt; </div><div class='input'>
 <span class='co'># Apply function to each sex separately</span>
 <span class='co'># Males</span>
-<span class='no'>acM</span> <span class='kw'>&lt;-</span> <span class='fu'>ageChildren</span>(<span class='no'>svy</span>$<span class='no'>age</span>[<span class='no'>svy</span>$<span class='no'>sex</span> <span class='kw'>==</span> <span class='fl'>1</span>], <span class='kw'>u5mr</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='no'>acM</span></div><div class='output co'>#&gt; 
+<span class='va'>acM</span> <span class='op'>&lt;-</span> <span class='fu'>ageChildren</span><span class='op'>(</span><span class='va'>svy</span><span class='op'>$</span><span class='va'>age</span><span class='op'>[</span><span class='va'>svy</span><span class='op'>$</span><span class='va'>sex</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>]</span>, u5mr <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>acM</span>
+</div><div class='output co'>#&gt; 
 #&gt; 	Age Test (Children)
 #&gt; 
 #&gt; X-squared = 15.8496, df = 4, p = 0.0032
 #&gt; </div><div class='input'><span class='co'># Females</span>
-<span class='no'>acF</span> <span class='kw'>&lt;-</span> <span class='fu'>ageChildren</span>(<span class='no'>svy</span>$<span class='no'>age</span>[<span class='no'>svy</span>$<span class='no'>sex</span> <span class='kw'>==</span> <span class='fl'>2</span>], <span class='kw'>u5mr</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='va'>acF</span> <span class='op'>&lt;-</span> <span class='fu'>ageChildren</span><span class='op'>(</span><span class='va'>svy</span><span class='op'>$</span><span class='va'>age</span><span class='op'>[</span><span class='va'>svy</span><span class='op'>$</span><span class='va'>sex</span> <span class='op'>==</span> <span class='fl'>2</span><span class='op'>]</span>, u5mr <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 
 <span class='co'># Simplified call to function by sex</span>
-<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='no'>svy</span>$<span class='no'>age</span>, <span class='no'>svy</span>$<span class='no'>sex</span>, <span class='no'>ageChildren</span>, <span class='kw'>u5mr</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; svy$sex: 1
+<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span><span class='op'>(</span><span class='va'>svy</span><span class='op'>$</span><span class='va'>age</span>, <span class='va'>svy</span><span class='op'>$</span><span class='va'>sex</span>, <span class='va'>ageChildren</span>, u5mr <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; svy$sex: 1
 #&gt; 
 #&gt; 	Age Test (Children)
 #&gt; 
@@ -254,7 +278,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

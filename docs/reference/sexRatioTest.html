@@ -8,11 +8,18 @@
 
 <title>Sex Ratio Test — sexRatioTest • nipnTK</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -41,6 +48,7 @@
 
 <meta property="og:title" content="Sex Ratio Test — sexRatioTest" />
 <meta property="og:description" content="Sex Ratio Test" />
+<meta property="og:image" content="https://nutriverse.io/nipnTK/logo.png" />
 
 
 
@@ -71,7 +79,7 @@
   <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -139,6 +147,18 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://twitter.com/katilingban">
+    <span class="fab fa fab fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/company/katilingban/">
+    <span class="fab fa fab fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/nutriverse/nipnTK/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -166,7 +186,7 @@
     <p>Sex Ratio Test</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sexRatioTest</span>(<span class='no'>sex</span>, <span class='kw'>codes</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>pop</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>))</pre>
+    <pre class="usage"><span class='fu'>sexRatioTest</span><span class='op'>(</span><span class='va'>sex</span>, codes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>, pop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,31 +207,34 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of class <code>sexRatioTest</code> with:</p><dl'>
-<dt><code>pM</code></dt><dd><p>Observed proportion male</p></dd>
-<dt><code>eM</code></dt><dd><p>Expected proportion male</p></dd>
-<dt><code>X2</code></dt><dd><p>Chi-squared test statistic</p></dd>
-<dt><code>df</code></dt><dd><p>Degrees of freedom for Chi-squared test</p></dd>
-<dt><code>p</code></dt><dd><p><code>p-value</code> for Chi-squared test</p></dd>
+    <p>A list of class <code>"sexRatioTest"</code> with:</p><table class='table'>
+<tr><td><strong>Variable</strong></td><td><strong>Description</strong></td></tr>
+<tr><td><em>pM</em></td><td>Observed proportion male</td></tr>
+<tr><td><em>eM</em></td><td>Expected proportion male</td></tr>
+<tr><td><em>X2</em></td><td>Chi-squared test statistic</td></tr>
+<tr><td><em>df</em></td><td>Degrees of freedom for Chi-squared test</td></tr>
+<tr><td><em>p</em></td><td><code>p-value</code> for Chi-squared test</td></tr>
+</table>
 
-</dl>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Use \code{sexRatioTest()} on household roster data from a survey in Tanzania</span>
+    <pre class="examples"><div class='input'><span class='co'># Use sexRatioTest() on household roster data from a survey in Tanzania</span>
 <span class='co'># (as.ex01) and census data of Tanzania extracted from Wolfram|Alpha knowledge</span>
 <span class='co'># engine (as.ex02)</span>
-<span class='no'>svy</span> <span class='kw'>&lt;-</span> <span class='no'>as.ex01</span>
-<span class='no'>ref</span> <span class='kw'>&lt;-</span> <span class='no'>as.ex02</span>
-<span class='no'>censusM</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>ref</span>$<span class='no'>Males</span>)
-<span class='no'>censusF</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>ref</span>$<span class='no'>Females</span>)
-<span class='fu'>sexRatioTest</span>(<span class='no'>svy</span>$<span class='no'>sex</span>, <span class='kw'>codes</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>pop</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>censusM</span>, <span class='no'>censusF</span>))</div><div class='output co'>#&gt; 
+<span class='va'>svy</span> <span class='op'>&lt;-</span> <span class='va'>as.ex01</span>
+<span class='va'>ref</span> <span class='op'>&lt;-</span> <span class='va'>as.ex02</span>
+<span class='va'>censusM</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>ref</span><span class='op'>$</span><span class='va'>Males</span><span class='op'>)</span>
+<span class='va'>censusF</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>ref</span><span class='op'>$</span><span class='va'>Females</span><span class='op'>)</span>
+<span class='fu'>sexRatioTest</span><span class='op'>(</span><span class='va'>svy</span><span class='op'>$</span><span class='va'>sex</span>, codes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>, pop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>censusM</span>, <span class='va'>censusF</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; 	Sex Ratio Test
 #&gt; 
 #&gt; Expected proportion male = 0.4988
 #&gt; Observed proportion male = 0.4914
 #&gt; X-squared = 1.8713, p = 0.1713
-#&gt; </div></pre>
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -227,7 +250,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

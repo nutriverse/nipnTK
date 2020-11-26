@@ -6,13 +6,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Age heaping • nipnTK</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Age heaping">
 <meta property="og:description" content="nipnTK">
+<meta property="og:image" content="https://nutriverse.io/nipnTK/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -26,7 +33,7 @@
 </head>
 <body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -94,6 +101,18 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
+  <a href="https://twitter.com/katilingban">
+    <span class="fab fa fab fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/company/katilingban/">
+    <span class="fab fa fab fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/nutriverse/nipnTK/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -109,7 +128,8 @@
 
       
 
-      </header><script src="ah_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="ah_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="ah_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="ah_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Age heaping</h1>
@@ -126,10 +146,12 @@
 <p>This section depends on some of the material presented in the section relating to digit preference.</p>
 <p>Age heaping is the tendency to report children’s ages to the nearest year or adults’ ages to the nearest multiple of five or ten years. Age heaping is very common. This is a major reason why data from nutritional anthropometry surveys is often analysed and reported using broad age groups.</p>
 <p>We will retrieve a survey dataset:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">svy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span>(<span class="st">"dp.ex02.csv"</span>, <span class="kw">header</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">","</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">svy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"dp.ex02.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span></code></pre></div>
 <p>The file <strong>dp.ex02.csv</strong> is a comma-separated-value (CSV) file containing anthropometric data from a SMART survey in Kabul, Afghanistan.</p>
 <p>The first few records in this dataset can be seen using:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">svy</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">svy</span><span class="op">)</span></code></pre></div>
 <p>This returns:</p>
 <pre><code>#&gt;   psu age sex weight height muac oedema
 #&gt; 1   1   6   1    7.3   65.0  146      2
@@ -142,38 +164,43 @@
 <h2 class="hasAnchor">
 <a href="#summarising-tabulating-and-visualising-age-data" class="anchor"></a>Summarising, tabulating, and visualising age data</h2>
 <p>The variable of interest is <strong>age</strong> (age in months):</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">svy</span>$<span class="no">age</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>
 <span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
-<span class="co">#&gt;     6.0    18.0    30.0    30.4    42.0    59.0</span></pre></body></html></div>
+<span class="co">#&gt;     6.0    18.0    30.0    30.4    42.0    59.0</span></code></pre></div>
 <p>Tables can be difficult to use with ungrouped age data because there are usually many different values:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">svy</span>$<span class="no">age</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 </span>
 <span class="co">#&gt; 10 17 25 13 19 23 38 11 11 17  9 14 26  9 17 14 24 12 31  8 13  9 21 14 38 14 </span>
 <span class="co">#&gt; 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 </span>
 <span class="co">#&gt; 16 23 22 18 57  8 13  9 11 12 19 10 13 14 12 14 44  6  9  6  5  8 12 13 12  8 </span>
 <span class="co">#&gt; 58 59 </span>
-<span class="co">#&gt; 13  9</span></pre></body></html></div>
+<span class="co">#&gt; 13  9</span></code></pre></div>
 <p>The <code><a href="../reference/fullTable.html">fullTable()</a></code> function from the NiPN data-quality toolkit is preferred as this will include values with zero counts:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/fullTable.html">fullTable</a></span>(<span class="no">svy</span>$<span class="no">age</span>, <span class="kw">values</span> <span class="kw">=</span> <span class="fl">6</span>:<span class="fl">59</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fullTable.html">fullTable</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, values <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">59</span><span class="op">)</span>
 <span class="co">#&gt;  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 </span>
 <span class="co">#&gt; 10 17 25 13 19 23 38 11 11 17  9 14 26  9 17 14 24 12 31  8 13  9 21 14 38 14 </span>
 <span class="co">#&gt; 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 </span>
 <span class="co">#&gt; 16 23 22 18 57  8 13  9 11 12 19 10 13 14 12 14 44  6  9  6  5  8 12 13 12  8 </span>
 <span class="co">#&gt; 58 59 </span>
-<span class="co">#&gt; 13  9</span></pre></body></html></div>
+<span class="co">#&gt; 13  9</span></code></pre></div>
 <p>We used the <code><a href="../reference/fullTable.html">fullTable()</a></code> function here because it returns a table containing cells for every value specified by the <strong>values</strong> parameter. The returned table will also only contain cells for the <strong>values</strong> specified by the values parameter. The default for the <strong>values</strong> parameter is the range of the variable being tabulated. This means that the values parameter can be sometimes be omitted:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/fullTable.html">fullTable</a></span>(<span class="no">svy</span>$<span class="no">age</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fullTable.html">fullTable</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>
 <span class="co">#&gt;  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 </span>
 <span class="co">#&gt; 10 17 25 13 19 23 38 11 11 17  9 14 26  9 17 14 24 12 31  8 13  9 21 14 38 14 </span>
 <span class="co">#&gt; 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 </span>
 <span class="co">#&gt; 16 23 22 18 57  8 13  9 11 12 19 10 13 14 12 14 44  6  9  6  5  8 12 13 12  8 </span>
 <span class="co">#&gt; 58 59 </span>
-<span class="co">#&gt; 13  9</span></pre></body></html></div>
+<span class="co">#&gt; 13  9</span></code></pre></div>
 <p>Omitting the <strong>values</strong> parameter only works reliably for numeric variables containing whole numbers. If the variable being tabulated is a character variable or is a numeric variable containing one or more numbers with decimal places then you should specify the <strong>values</strong> parameter.</p>
 <p>A graphical analysis is usually more informative than a tabular analysis:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span>(<span class="fu"><a href="../reference/fullTable.html">fullTable</a></span>(<span class="no">svy</span>$<span class="no">age</span>, <span class="kw">values</span> <span class="kw">=</span> <span class="fl">6</span>:<span class="fl">59</span>),
-        <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Age (months)"</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Frequency"</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">cex.names</span> <span class="kw">=</span> <span class="fl">0.6</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/fullTable.html">fullTable</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, values <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">59</span><span class="op">)</span>, 
+        xlab <span class="op">=</span> <span class="st">"Age (months)"</span>, ylab <span class="op">=</span> <span class="st">"Frequency"</span>, las <span class="op">=</span> <span class="fl">3</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></code></pre></div>
 <p><img src="ah_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 <p>We expect all ages to be present in roughly equal frequency or with frequency reducing slowly with age due to mortality. We can see that there is marked age-heaping at 12, 18, 24, 30, 36, and 48 months (see figure above). This is very common when age is reported by mothers. This is because of a tendency for mothers and other carers to round ages to whole years or half years.</p>
 <p>Note that we used <code>values = 6:59</code> with the <code><a href="../reference/fullTable.html">fullTable()</a></code> function from the NiPN data quality toolkit. We did this because it is the range of values that should be present in the age variable.</p>
@@ -184,27 +211,30 @@
 <p>Age heaping can seriously affect survey results for indices that include an age component (e.g. height- for-age and weight-for age). The effect is important when there is systematic rounding up or systematic rounding down. Systematic rounding can lead to bias. If rounding is systematically down then indices will be biased upwards and prevalence biased downwards. If rounding is systematically up then indices will be biased downwards and prevalence biased upwards.</p>
 <p>A useful way of looking at age heaping when age is recorded in months is to examine the remainders when the ages are divided by 12.</p>
 <p>The R language provides a special operator (%%) to help with this:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">rem</span> <span class="kw">&lt;-</span> <span class="no">svy</span>$<span class="no">age</span> <span class="kw">%%</span> <span class="fl">12</span>
-<span class="no">remTable</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/fullTable.html">fullTable</a></span>(<span class="no">rem</span>, <span class="kw">values</span> <span class="kw">=</span> <span class="fl">0</span>:<span class="fl">11</span>)
-<span class="no">remTable</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">rem</span> <span class="op">&lt;-</span> <span class="va">svy</span><span class="op">$</span><span class="va">age</span> <span class="op">%%</span> <span class="fl">12</span>
+<span class="va">remTable</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fullTable.html">fullTable</a></span><span class="op">(</span><span class="va">rem</span>, values <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span>
+<span class="va">remTable</span>
 <span class="co">#&gt;   0   1   2   3   4   5   6   7   8   9  10  11 </span>
 <span class="co">#&gt; 170  33  46  41  46  48 105  63  83  72  90  76</span>
-<span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span>(<span class="no">remTable</span>) * <span class="fl">100</span>
+<span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="va">remTable</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>
 <span class="co">#&gt;         0         1         2         3         4         5         6         7 </span>
 <span class="co">#&gt; 19.473081  3.780069  5.269187  4.696449  5.269187  5.498282 12.027491  7.216495 </span>
 <span class="co">#&gt;         8         9        10        11 </span>
 <span class="co">#&gt;  9.507446  8.247423 10.309278  8.705613</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span>(<span class="no">remTable</span>, <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Age (months) %% 12"</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Frequency"</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span>(<span class="kw">h</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">remTable</span> / <span class="fl">12</span>), <span class="kw">lty</span> <span class="kw">=</span> <span class="fl">3</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">remTable</span>, xlab <span class="op">=</span> <span class="st">"Age (months) %% 12"</span>, ylab <span class="op">=</span> <span class="st">"Frequency"</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">remTable</span> <span class="op">/</span> <span class="fl">12</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p><img src="ah_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span>(<span class="no">remTable</span>)
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">remTable</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Chi-squared test for given probabilities</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:  remTable</span>
-<span class="co">#&gt; X-squared = 214.96, df = 11, p-value &lt; 2.2e-16</span></pre></body></html></div>
+<span class="co">#&gt; X-squared = 214.96, df = 11, p-value &lt; 2.2e-16</span></code></pre></div>
 <p>The NiPN data quality toolkit provides an R language function called <code><a href="../reference/ageHeaping.html">ageHeaping()</a></code> that performs this age-heaping analysis. Applying this function to the example data:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/ageHeaping.html">ageHeaping</a></span>(<span class="no">svy</span>$<span class="no">age</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ageHeaping.html">ageHeaping</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></code></pre></div>
 <p>This returns:</p>
 <pre><code>#&gt; 
 #&gt;  Age-heaping Analysis
@@ -212,43 +242,47 @@
 #&gt; data:    Remainder of svy$age / 12
 #&gt; X-squared = 214.9588, df = 11, p-value = 0.0000</code></pre>
 <p>The output of the <code><a href="../reference/ageHeaping.html">ageHeaping()</a></code> function can be saved for later use:</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">ah12</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ageHeaping.html">ageHeaping</a></span>(<span class="no">svy</span>$<span class="no">age</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ah12</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ageHeaping.html">ageHeaping</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></code></pre></div>
 <p>The saved output contains the Chi-squared test and frequency tables of the final digits (counts and percentages). These can be accessed using:</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">ah12</span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ah12</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Age-heaping Analysis</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:    Remainder of svy$age / 12</span>
 <span class="co">#&gt; X-squared = 214.9588, df = 11, p-value = 0.0000</span>
-<span class="no">ah12</span>$<span class="no">X2</span>
+<span class="va">ah12</span><span class="op">$</span><span class="va">X2</span>
 <span class="co">#&gt; X-squared </span>
 <span class="co">#&gt;  214.9588</span>
-<span class="no">ah12</span>$<span class="no">df</span>
+<span class="va">ah12</span><span class="op">$</span><span class="va">df</span>
 <span class="co">#&gt; df </span>
 <span class="co">#&gt; 11</span>
-<span class="no">ah12</span>$<span class="no">p</span>
+<span class="va">ah12</span><span class="op">$</span><span class="va">p</span>
 <span class="co">#&gt; [1] 5.791598e-40</span>
-<span class="no">ah12</span>$<span class="no">tab</span>
+<span class="va">ah12</span><span class="op">$</span><span class="va">tab</span>
 <span class="co">#&gt; Remainder of svy$age / 12</span>
 <span class="co">#&gt;   0   1   2   3   4   5   6   7   8   9  10  11 </span>
 <span class="co">#&gt; 170  33  46  41  46  48 105  63  83  72  90  76</span>
-<span class="no">ah12</span>$<span class="no">pct</span>
+<span class="va">ah12</span><span class="op">$</span><span class="va">pct</span>
 <span class="co">#&gt; Remainder of svy$age / 12</span>
 <span class="co">#&gt;    0    1    2    3    4    5    6    7    8    9   10   11 </span>
-<span class="co">#&gt; 19.5  3.8  5.3  4.7  5.3  5.5 12.0  7.2  9.5  8.2 10.3  8.7</span></pre></body></html></div>
+<span class="co">#&gt; 19.5  3.8  5.3  4.7  5.3  5.5 12.0  7.2  9.5  8.2 10.3  8.7</span></code></pre></div>
 <p>The saved results may also be plotted:</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">ah12</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Age-heaping (remainder of age / 12)"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ah12</span>, main <span class="op">=</span> <span class="st">"Age-heaping (remainder of age / 12)"</span><span class="op">)</span></code></pre></div>
 <p>The resulting plot is shown below.</p>
 <p><img src="ah_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>The <code><a href="../reference/ageHeaping.html">ageHeaping()</a></code> function assumes that you want to examine the remainder after dividing by twelve. This is useful when working with ages that are recorded in months. It may also be useful to use other divisors, such as examining the remainder after dividing by six:</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">ah6</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ageHeaping.html">ageHeaping</a></span>(<span class="no">svy</span>$<span class="no">age</span>, <span class="kw">divisor</span> <span class="kw">=</span> <span class="fl">6</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">ah6</span>)
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ah6</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ageHeaping.html">ageHeaping</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, divisor <span class="op">=</span> <span class="fl">6</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ah6</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Age-heaping Analysis</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:    Remainder of svy$age / 6</span>
 <span class="co">#&gt; X-squared = 145.0275, df = 5, p-value = 0.0000</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">ah6</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ah6</span><span class="op">)</span></code></pre></div>
 <p><img src="ah_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>This shows the extent of age heaping at whole and half-years (see figure above).</p>
 </div>
@@ -256,50 +290,56 @@
 <h2 class="hasAnchor">
 <a href="#age-heaping-in-adults" class="anchor"></a>Age heaping in adults</h2>
 <p>Using ten and five as divisors can be useful when dealing with data for adults in which ages are recorded in whole years. For example:</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">svy</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span>(<span class="st">"ah.ex01.csv"</span>, <span class="kw">header</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">","</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">svy</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">svy</span> <span class="kw">&lt;-</span> <span class="no">ah.ex01</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">svy</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">svy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"ah.ex01.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">svy</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">svy</span> <span class="op">&lt;-</span> <span class="va">ah.ex01</span> 
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">svy</span><span class="op">)</span></code></pre></div>
 <p>The file <strong>ah.ex01.csv</strong> is a comma-separated-value (CSV) file containing anthropometric data from a Rapid Assessment Method for Older People (RAM-OP) survey in the Dadaab refugee camp in Garissa, Kenya. This is a survey of people aged sixty years and older.</p>
 <p>The variable of interest is age (age in years):</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">svy</span>$<span class="no">age</span>)
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>
 <span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
-<span class="co">#&gt;     6.0    18.0    30.0    30.4    42.0    59.0</span></pre></body></html></div>
+<span class="co">#&gt;     6.0    18.0    30.0    30.4    42.0    59.0</span></code></pre></div>
 <p>Care should be exercised when specifying the <strong>divisor</strong> to use in the analysis of age heaping. Not all calendars use base ten. Amongst Han Chinese, for example, age heaping may occur with a twelve-year cycle corresponding to preferred animal years in the Chinese calendar. An analysis of age heaping that concentrates on specific digits (e.g. zero and five) or on decimal intervals will not be appropriate in all populations. It is advisable, therefore to use simple tabulation and visualisation techniques to heap decide an appropriate <strong>divisor</strong>.</p>
 <p>With the example data:</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">svy</span>$<span class="no">age</span>)
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>
 <span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
 <span class="co">#&gt;     6.0    18.0    30.0    30.4    42.0    59.0</span>
-<span class="fu"><a href="../reference/fullTable.html">fullTable</a></span>(<span class="no">svy</span>$<span class="no">age</span>)
+<span class="fu"><a href="../reference/fullTable.html">fullTable</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>
 <span class="co">#&gt;  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 </span>
 <span class="co">#&gt; 10 17 25 13 19 23 38 11 11 17  9 14 26  9 17 14 24 12 31  8 13  9 21 14 38 14 </span>
 <span class="co">#&gt; 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 </span>
 <span class="co">#&gt; 16 23 22 18 57  8 13  9 11 12 19 10 13 14 12 14 44  6  9  6  5  8 12 13 12  8 </span>
 <span class="co">#&gt; 58 59 </span>
 <span class="co">#&gt; 13  9</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span>(<span class="fu"><a href="../reference/fullTable.html">fullTable</a></span>(<span class="no">svy</span>$<span class="no">age</span>),
-        <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Age (years)"</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Frequency"</span>, <span class="kw">las</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">cex.names</span> <span class="kw">=</span> <span class="fl">0.6</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/fullTable.html">fullTable</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>, 
+        xlab <span class="op">=</span> <span class="st">"Age (years)"</span>, ylab <span class="op">=</span> <span class="st">"Frequency"</span>, las <span class="op">=</span> <span class="fl">3</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></code></pre></div>
 <p><img src="ah_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>shows age-heaping at decades and half-decades (see figure above). In this survey using a <strong>divisor</strong> of 10 would be appropriate:</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">ah10</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ageHeaping.html">ageHeaping</a></span>(<span class="no">svy</span>$<span class="no">age</span>, <span class="kw">divisor</span> <span class="kw">=</span> <span class="fl">10</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">ah10</span>)
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ah10</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ageHeaping.html">ageHeaping</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, divisor <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ah10</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Age-heaping Analysis</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:    Remainder of svy$age / 10</span>
 <span class="co">#&gt; X-squared = 70.31042, df = 9, p-value = 0.0000</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">ah10</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ah10</span><span class="op">)</span></code></pre></div>
 <p><img src="ah_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>There is pronounced age heaping at decades and, to a lesser extent, half-decades in these data (see figure above).</p>
 <p>It may also be useful to use other divisors, such as examining the remainder after dividing by five:</p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="no">ah5</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ageHeaping.html">ageHeaping</a></span>(<span class="no">svy</span>$<span class="no">age</span>, <span class="kw">divisor</span> <span class="kw">=</span> <span class="fl">5</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">ah5</span>)
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ah5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ageHeaping.html">ageHeaping</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, divisor <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ah5</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Age-heaping Analysis</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:    Remainder of svy$age / 5</span>
 <span class="co">#&gt; X-squared = 10.39633, df = 4, p-value = 0.0343</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">ah5</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ah5</span><span class="op">)</span></code></pre></div>
 <p><img src="ah_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>This shows the extent of age heaping at whole and half decades (see figure above).</p>
 </div>
@@ -320,7 +360,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

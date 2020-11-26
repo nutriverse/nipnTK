@@ -6,7 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NiPN Anthropometric Data Toolkit • nipnTK</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -17,6 +23,7 @@
     include measurements of weight, height or length, MUAC, sex and age. The 
     focus is on anthropometric status but many of the presented methods could be 
     applied to other variables.">
+<meta property="og:image" content="https://nutriverse.io/nipnTK/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -30,7 +37,7 @@
 </head>
 <body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -98,6 +105,18 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
+  <a href="https://twitter.com/katilingban">
+    <span class="fab fa fab fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/company/katilingban/">
+    <span class="fab fa fab fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/nutriverse/nipnTK/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -115,46 +134,57 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="nipntk-national-information-platforms-for-nutrition-nipn-data-quality-toolkit" class="section level1">
+<div id="nipntk-national-information-platforms-for-nutrition-nipn-data-quality-toolkit-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#nipntk-national-information-platforms-for-nutrition-nipn-data-quality-toolkit" class="anchor"></a>nipnTK: National Information Platforms for Nutrition (NiPN) data quality toolkit</h1></div>
-<!-- <img src="man/figures/logo_nipn_en.png" align="right" display="none" /> -->
+<a href="#nipntk-national-information-platforms-for-nutrition-nipn-data-quality-toolkit-" class="anchor"></a>nipnTK: National Information Platforms for Nutrition (NiPN) Data Quality Toolkit <img src="reference/figures/logo.png" width="200px" align="right" display="none">
+</h1></div>
 <!-- Badges start here -->
 
-<p><a href="http://www.nipn-nutrition-platforms.org">National Information Platforms for Nutrition (NIPN)</a> is an initiative of the European Commission to provide support to countries to strengthen their information systems for nutrition and to improve the analysis of data so as to better inform the strategic decisions they are faced with to prevent malnutrition and its consequences.</p>
-<p>As part of this mandate, NiPN has commissioned work on the development of a toolkit to assess the quality of various nutrition-specific and nutrition-related data. This is a companion R package to the toolkit of practical analytical methods that can be applied to variables in datasets to assess their quality.</p>
-<p>The focus of the toolkit is on data required to assess anthropometric status such as measurements of weight, height or length, MUAC, sex and age. The focus is on anthropometric status but many of presented methods could be applied to other types of data. NiPN may commission additional toolkits to examine other variables or other types of variables.</p>
+<p><a href="http://www.nipn-nutrition-platforms.org">National Information Platforms for Nutrition (NiPN)</a> is an initiative of the European Commission to provide support to countries to strengthen their information systems for nutrition and to improve the analysis of data so as to better inform the strategic decisions they are faced with to prevent malnutrition and its consequences.</p>
+<p>As part of this mandate, <a href="http://www.nipn-nutrition-platforms.org">NiPN</a> has commissioned work on the development of a toolkit to assess the quality of various nutrition-specific and nutrition-related data. This is a companion R package to the toolkit of practical analytical methods that can be applied to variables in datasets to assess their quality.</p>
+<p>The focus of the toolkit is on data required to assess anthropometric status such as measurements of weight, height or length, MUAC, sex and age. The focus is on anthropometric status but many of presented methods could be applied to other types of data. <a href="http://www.nipn-nutrition-platforms.org">NiPN</a> may commission additional toolkits to examine other variables or other types of variables.</p>
 <div id="requirements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#requirements" class="anchor"></a>Requirements</h2>
 <ul>
-<li>R version 3.4 or higher</li>
+<li>
+<a href="https://cran.r-project.org">R</a> version 3.4 or higher</li>
 </ul>
-<p>Extensive use is made of the R language and environment for statistical computing. This is a free and powerful data analysis system. R provides a very extensive language for working with data. This companion package has been written using only a small subset of the R language. Many of the data quality activities described in the toolkit are supported by R functions included in this package that have been written specifically for this purpose. These simplify the assessment of the quality of data related to anthropometry and anthropometric indices.</p>
+<p>Extensive use is made of the <a href="https://cran.r-project.org">R</a> language and environment for statistical computing. This is a free and powerful data analysis system. <a href="https://cran.r-project.org">R</a> provides a very extensive language for working with data. This companion package has been written using only a small subset of the <a href="https://cran.r-project.org">R</a> language. Many of the data quality activities described in the toolkit are supported by <a href="https://cran.r-project.org">R</a> functions included in this package that have been written specifically for this purpose. These simplify the assessment of the quality of data related to anthropometry and anthropometric indices.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the development version of nipnTK from GitHub with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="kw">if</span>(!<span class="fu"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="no">remotes</span>)) <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"nutriverse/nipnTK"</span>)</pre></div>
+<p>You can install <code>nipnTK</code> from <a href="https://cran.r-project.org">CRAN</a>:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"nipnTK"</span><span class="op">)</span></code></pre></div>
+<p>You can install the development version of <code>nipnTK</code> from <a href="https://github.com/nutriverse/nipnTK">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"nutriverse/nipnTK"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>Data quality is assessed by:</p>
 <ol>
-<li><p>Range checks and value checks to identify <em>univariate</em> outliers.</p></li>
-<li><p>Scatterplots and statistical methods to identify <em>bivariate</em> outliers.</p></li>
-<li><p>Use of flags to identify outliers in anthropometric indices.</p></li>
-<li><p>Examining the distribution and the statistics of the distribution of measurements and anthropometric indices.</p></li>
-<li><p>Assessing the extent of digit preference in recorded measurements.</p></li>
-<li><p>Assessing the extent of age heaping in recorded ages.</p></li>
-<li><p>Examining the sex ratio.</p></li>
-<li><p>Examining age distributions and age by sex distributions.</p></li>
+<li><p>Range checks and value checks to identify <em>univariate</em> outliers - <a href="https://nutriverse.io/nipnTK/articles/rl.html">guide</a></p></li>
+<li><p>Scatterplots and statistical methods to identify <em>bivariate</em> outliers - <a href="https://nutriverse.io/nipnTK/articles/sp.html">guide</a></p></li>
+<li><p>Use of flags to identify outliers in anthropometric indices - <a href="https://nutriverse.io/nipnTK/articles/flagging.html">guide</a></p></li>
+<li><p>Examining the distribution and the statistics of the distribution of measurements and anthropometric indices - <a href="https://nutriverse.io/nipnTK/articles/ad.html">guide</a></p></li>
+<li><p>Assessing the extent of digit preference in recorded measurements - <a href="https://nutriverse.io/nipnTK/articles/dp.html">guide</a></p></li>
+<li><p>Assessing the extent of age heaping in recorded ages - <a href="https://nutriverse.io/nipnTK/articles/ah.html">guide</a></p></li>
+<li><p>Examining the sex ratio - <a href="https://nutriverse.io/nipnTK/articles/sr.html">guide</a></p></li>
+<li><p>Examining age distributions and age by sex distributions - <a href="https://nutriverse.io/nipnTK/articles/as.html">guide</a></p></li>
 </ol>
 <p>These activities and a proposed order in which they should be performed are shown below:</p>
 <p><img src="reference/figures/nipnWorkflow.png" width="918"></p>
+</div>
+<div id="community-guidelines" class="section level2">
+<h2 class="hasAnchor">
+<a href="#community-guidelines" class="anchor"></a>Community guidelines</h2>
+<p>Feedback, bug reports and feature requests are welcome; file issues or seek support <a href="https://github.com/nutriverse/nipnTK/issues">here</a>. If you would like to contribute to the package, please see our <a href="https://nutriverse.io/nipnTK/docs/CONTRIBUTING.html">contributing guidelines</a>.</p>
+<p>This project is released with a <a href="https://nutriverse.io/nipnTK/docs/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
@@ -178,6 +208,13 @@
 <li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
 </ul>
 </div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
@@ -194,8 +231,9 @@
 <li><a href="https://cran.r-project.org/package=nipnTK"><img src="https://img.shields.io/cran/v/nipnTK.svg" alt="CRAN"></a></li>
 <li><a href="https://CRAN.R-project.org/package=nipnTK"><img src="https://img.shields.io/cran/l/nipnTK.svg" alt="CRAN"></a></li>
 <li><a href="https://cran.r-project.org/package=nipnTK"><img src="http://cranlogs.r-pkg.org/badges/nipnTK" alt="CRAN"></a></li>
-<li><a href="https://travis-ci.org/nutriverse/nipnTK"><img src="https://travis-ci.org/nutriverse/nipnTK.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://github.com/nutriverse/nipnTK/actions"><img src="https://github.com/nutriverse/nipnTK/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://ci.appveyor.com/project/nutriverse/nipnTK"><img src="https://ci.appveyor.com/api/projects/status/github/nutriverse/nipnTK?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
+<li><a href="https://github.com/nutriverse/nipnTK/actions"><img src="https://github.com/nutriverse/nipnTK/workflows/test-coverage/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/nutriverse/nipnTK"><img src="https://codecov.io/gh/nutriverse/nipnTK/branch/master/graph/badge.svg" alt="codecov"></a></li>
 <li><a href="https://www.codefactor.io/repository/github/nutriverse/nipntk"><img src="https://www.codefactor.io/repository/github/nutriverse/nipntk/badge" alt="CodeFactor"></a></li>
 </ul>
@@ -209,7 +247,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

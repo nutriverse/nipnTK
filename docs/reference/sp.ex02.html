@@ -8,11 +8,18 @@
 
 <title>Example dataset for using scatterplots to identify outliers — sp.ex02 • nipnTK</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -42,6 +49,7 @@
 <meta property="og:title" content="Example dataset for using scatterplots to identify outliers — sp.ex02" />
 <meta property="og:description" content="Anthropometric data from a survey of school-age (i.e., between 5 and 15 years)
 children from Pakistan" />
+<meta property="og:image" content="https://nutriverse.io/nipnTK/logo.png" />
 
 
 
@@ -72,7 +80,7 @@ children from Pakistan" />
   <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -140,6 +148,18 @@ children from Pakistan" />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://twitter.com/katilingban">
+    <span class="fab fa fab fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/company/katilingban/">
+    <span class="fab fa fab fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/nutriverse/nipnTK/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -159,7 +179,7 @@ children from Pakistan" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Example dataset for using scatterplots to identify outliers</h1>
-    <small class="dont-index">Source: <a href='https://github.com/nutriverse/nipnTK/blob/master/R/nipnTK.R'><code>R/nipnTK.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/nutriverse/nipnTK/blob/master/R/data.R'><code>R/data.R</code></a></small>
     <div class="hidden name"><code>sp.ex02.Rd</code></div>
     </div>
 
@@ -168,23 +188,24 @@ children from Pakistan" />
 children from Pakistan</p>
     </div>
 
-    <pre class="usage"><span class='no'>sp.ex02</span></pre>
+    <pre class="usage"><span class='va'>sp.ex02</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 849 observations and 9 variables</p><dl'>
-<dt><code>region</code></dt><dd><p>Region code</p></dd>
-<dt><code>school</code></dt><dd><p>School code</p></dd>
-<dt><code>ageMonths</code></dt><dd><p>Age (months)</p></dd>
-<dt><code>sex</code></dt><dd><p>Sex (1 = Male / 2 = Female)</p></dd>
-<dt><code>weight</code></dt><dd><p>Weight (kg)</p></dd>
-<dt><code>height</code></dt><dd><p>Height (cm)</p></dd>
-<dt><code>haz</code></dt><dd><p>Height-for-age z-score</p></dd>
-<dt><code>waz</code></dt><dd><p>Weight-for-age z-score</p></dd>
-<dt><code>baz</code></dt><dd><p>Body mass index (BMI)-for-age z-score</p></dd>
+    <p>A data frame with 849 observations and 9 variables</p><table class='table'>
+<tr><td><strong>Variable</strong></td><td><strong>Description</strong></td></tr>
+<tr><td><em>region</em></td><td>Region code</td></tr>
+<tr><td><em>school</em></td><td>School code</td></tr>
+<tr><td><em>ageMonths</em></td><td>Age (months)</td></tr>
+<tr><td><em>sex</em></td><td>Sex (1 = Male / 2 = Female)</td></tr>
+<tr><td><em>weight</em></td><td>Weight (kg)</td></tr>
+<tr><td><em>height</em></td><td>Height (cm)</td></tr>
+<tr><td><em>haz</em></td><td>Height-for-age z-score</td></tr>
+<tr><td><em>waz</em></td><td>Weight-for-age z-score</td></tr>
+<tr><td><em>baz</em></td><td>Body mass index (BMI)-for-age z-score</td></tr>
+</table>
 
-</dl>
 
 
   </div>
@@ -202,7 +223,7 @@ children from Pakistan</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
