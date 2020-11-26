@@ -15,7 +15,7 @@
 #' \cite{Kari Kuulasmaa K, Hense HW, Tolonen H (for the WHO MONICA Project),
 #' Quality Assessment of Data on Blood Pressure in the WHO MONICA Project,
 #' WHO MONICA Project e-publications No. 9, WHO, Geneva, May 1998 available
-#' from \url{http://www.thl.fi/publications/monica/bp/bpqa.htm}}
+#' from \url{https://www.thl.fi/publications/monica/bp/bpqa.htm}}
 #'
 #' @param x Numeric vector
 #' @param digits Number of decimal places in `x`. using `digits = 1`

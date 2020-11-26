@@ -22,7 +22,7 @@
 #' | *muac* | Mid-upper arm circumference (cm) |
 #' | *oedema* | Oedema |
 #'
-#' @source Data courtesy of [HelpAge International](http://www.helpage.org)
+#' @source Data courtesy of [HelpAge International](https://www.helpage.org)
 #'
 #
 ################################################################################
