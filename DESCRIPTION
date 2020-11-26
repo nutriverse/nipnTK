@@ -7,7 +7,7 @@ Authors@R: c(
            family = "Myatt", 
            comment = c(ORCID = "0000-0003-1119-1474"),
            email = "mark@brixtonhealth.com", 
-           role = "aut",
+           role = "aut"),
     person(given = "Ernest", 
            family = "Guevarra", 
            comment = c(ORCID = "0000-0002-4887-4415"), 
