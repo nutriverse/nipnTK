@@ -1,9 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# nipnTK: National Information Platforms for Nutrition (NiPN) data quality toolkit
-
-<!-- <img src="man/figures/logo_nipn_en.png" align="right" display="none" /> -->
+# nipnTK: National Information Platforms for Nutrition (NiPN) Data Quality Toolkit <img src="man/figures/logo.png" width="200px" align="right" display="none" />
 
 <!-- Badges start here -->
 

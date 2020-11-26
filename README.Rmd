@@ -17,8 +17,7 @@ knitr::opts_chunk$set(
 library(nipnTK)
 ```
 
-# nipnTK: National Information Platforms for Nutrition (NiPN) data quality toolkit 
-<!-- <img src="man/figures/logo_nipn_en.png" align="right" display="none" /> -->
+# nipnTK: National Information Platforms for Nutrition (NiPN) Data Quality Toolkit <img src="man/figures/logo.png" width="200px" align="right" display="none" />
 
 <!-- Badges start here -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
