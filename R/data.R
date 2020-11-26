@@ -54,7 +54,7 @@
 #'
 #' Example dataset for age and sex distributions function
 #'
-#' Census data of Tanzania taken from the Wolfram|Alpha knoweldge engine.
+#' Census data of Tanzania taken from the Wolfram|Alpha knowledge engine.
 #'
 #' @format A data frame with 20 observations and 4 variables
 #'
