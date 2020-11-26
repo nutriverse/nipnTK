@@ -20,3 +20,4 @@
 ^vignettes/sr\.Rmd$
 ^vignettes/as\.Rmd$
 ^\.github$
+^pkgdown$

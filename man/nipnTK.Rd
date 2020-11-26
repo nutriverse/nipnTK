@@ -12,17 +12,18 @@ anthropometry surveys.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://nutriverse.io/nipnTK/}
   \item \url{https://github.com/nutriverse/nipnTK}
   \item Report bugs at \url{https://github.com/nutriverse/nipnTK/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Ernest Guevarra \email{ernest@guevarra.io} (\href{https://orcid.org/0000-0002-4887-4415}{ORCID}) [contributor]
+\strong{Maintainer}: Ernest Guevarra \email{ernest@guevarra.io} (\href{https://orcid.org/0000-0002-4887-4415}{ORCID})
 
 Authors:
 \itemize{
-  \item Mark Myatt \email{mark@brixtonhealth.com} (\href{https://orcid.org/0000-0003-1119-1474}{ORCID}) [copyright holder]
+  \item Mark Myatt \email{mark@brixtonhealth.com} (\href{https://orcid.org/0000-0003-1119-1474}{ORCID})
 }
 
 }

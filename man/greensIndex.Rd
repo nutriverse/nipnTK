@@ -13,19 +13,19 @@ greensIndex(data, psu, case, replicates = 999)
 vector of length = 1 (e.g. \code{psu})}
 
 \item{case}{Name of variable holding case status as a character vector of
-length = 1 (e.g. \code{GAM}). The function assumes that case status is
+length = 1 (e.g. \emph{GAM}). The function assumes that case status is
 coded with 1 = case}
 
 \item{replicates}{Number of bootstrap replicates (default is 9999)}
 }
 \value{
-A list of class \code{GI} with names:
-\describe{
-\item{\code{GI}}{Estimate of Green's index}
-\item{\code{LCL}}{95\% LCL for GI}
-\item{\code{UCL}}{95\% UCL for GI}
-\item{\code{minGI}}{Minimum possible GI (maximum uniformity) for the data}
-\item{\code{p}}{\code{p-value} (H0: = Random distribution of cases across PSUs)}
+A list of class \code{GI} with names:\tabular{ll}{
+   \strong{Variable} \tab \strong{Description} \cr
+   \emph{GI} \tab Estimate of Green's index \cr
+   \emph{LCL} \tab 95\\\% LCL for GI \cr
+   \emph{UCL} \tab 95\\\% UCL for GI \cr
+   \emph{minGI} \tab Minimum possible GI (maximum uniformity) for the data \cr
+   \emph{p} \tab \code{p-value} (H0: = Random distribution of cases across PSUs) \cr
 }
 }
 \description{
@@ -37,11 +37,11 @@ units is random.
 \details{
 The value of Green's Index can range between \code{-1/(n - 1)} for maximum
 uniformity (specific to the dataset) and one for maximum clumping. The
-interpretation of Green’s Index is straightforward:
-\describe{
-\item{\code{Green's Index U+2248 0}}{Random}
-\item{\code{Green's Index > 0}}{Clumped (i.e. more clumped than random)}
-\item{\code{Green’s Index < 0}}{Uniform (i.e. more uniform than random)}
+interpretation of Green’s Index is straightforward:\tabular{ll}{
+   \strong{Green's Index Value} \tab \strong{Interpretation} \cr
+   \emph{Green's Index close to 0} \tab Random \cr
+   \emph{Green's Index greater than 0} \tab Clumped (i.e. more clumped than random) \cr
+   \emph{Green’s Index less than 0} \tab Uniform (i.e. more uniform than random) \cr
 }
 }
 \examples{
@@ -55,4 +55,5 @@ svy$flag <- ifelse(!is.na(svy$waz) & (svy$waz < -6 | svy$waz > 5), svy$flag + 4,
 svy <- svy[svy$flag == 0, ]
 svy$stunted <- ifelse(svy$haz < -2, 1, 2)
 greensIndex(data = svy, psu = "psu", case = "stunted")
+
 }

@@ -2,20 +2,20 @@
 % Please edit documentation in R/greensIndex.R
 \name{print.greensIndex}
 \alias{print.greensIndex}
-\title{\code{print()} helper function for \code{print.greensIndex()} function}
+\title{\code{\link[=print]{print()}} helper function for \code{print.greensIndex()} function}
 \usage{
 \method{print}{greensIndex}(x, ...)
 }
 \arguments{
-\item{x}{Object resulting from applying the \code{greensIndex()} function}
+\item{x}{Object resulting from applying the \code{\link[=greensIndex]{greensIndex()}} function}
 
-\item{...}{Additional \code{print()} parameters}
+\item{...}{Additional \code{\link[=print]{print()}} parameters}
 }
 \value{
-Printed output of \code{greenIndex()} function
+Printed output of \code{\link[=greensIndex]{greensIndex()}} function
 }
 \description{
-\code{print()} helper function for \code{print.greensIndex()} function
+\code{\link[=print]{print()}} helper function for \code{print.greensIndex()} function
 }
 \examples{
 # Apply Green's Index using anthropometric data from a SMART survey in Sudan
@@ -29,4 +29,5 @@ svy <- svy[svy$flag == 0, ]
 svy$stunted <- ifelse(svy$haz < -2, 1, 2)
 gi <- greensIndex(data = svy, psu = "psu", case = "stunted")
 print(gi)
+
 }

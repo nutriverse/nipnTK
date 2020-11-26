@@ -23,7 +23,7 @@ histNormal(
 
 \item{main}{Plot title}
 
-\item{breaks}{Passed to \code{hist()} function (\code{?hist} for details)}
+\item{breaks}{Passed to \code{\link[=hist]{hist()}} function (\code{?hist} for details)}
 
 \item{ylim}{\code{y-axis} limits}
 }
@@ -32,11 +32,12 @@ Histogram with normal curve superimposed to help with “by-eye” assessments
 of normality of distribution
 }
 \examples{
-# \code{histNormal()} with data from a SMART survey in Kabul, Afghanistan
+# histNormal() with data from a SMART survey in Kabul, Afghanistan
 # (dist.ex01)
 svy <- dist.ex01
 histNormal(svy$muac)
 histNormal(svy$haz)
 histNormal(svy$waz)
 histNormal(svy$whz)
+
 }

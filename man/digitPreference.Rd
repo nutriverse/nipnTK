@@ -15,11 +15,11 @@ digitPreference(x, digits = 1, values = 0:9)
 \item{values}{A vector of possible values for the final digit (default = 0:9)}
 }
 \value{
-A list of class \code{digitPreference} with:
-\describe{
-\item{\code{dps}}{Digit Preference Score (DPS)}
-\item{\code{tab}}{Table of final digit counts}
-\item{\code{pct}}{Table of proportions (\code{\%}) of final digit counts}
+A list of class \code{"digitPreference"} with:\tabular{ll}{
+   \strong{Variable} \tab \strong{Description} \cr
+   \emph{dps} \tab Digit Preference Score (DPS) \cr
+   \emph{tab} \tab Table of final digit counts \cr
+   \emph{pct} \tab Table of proportions (\\\%) of final digit counts \cr
 }
 }
 \description{
@@ -27,9 +27,8 @@ Digit preference is the observation that the final number in a measurement
 occurs with a greater frequency that is expected by chance. This can occur
 because of rounding, the practice of increasing or decreasing the value in a
 measurement to the nearest whole or half unit, or because data are made up.
-The \code{digitPreference()} function assesses the level by which digit
-preference exists in a given dataset using a \code{digit preference score
-(DPS)}.
+The \code{\link[=digitPreference]{digitPreference()}} function assesses the level by which digit
+preference exists in a given dataset using a \verb{digit preference score (DPS)}.
 }
 \details{
 DPS definition from:
@@ -44,4 +43,5 @@ from \url{http://www.thl.fi/publications/monica/bp/bpqa.htm}}
 # from a DHS survey in a West African country
 svy <- dp.ex01
 digitPreference(svy$wt, digits = 1)
+
 }

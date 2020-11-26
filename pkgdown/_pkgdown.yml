@@ -4,13 +4,14 @@ url: https://nutriverse.io/nipnTK
 
 template:
   params:
-    bootswatch: sandstone
+    bootswatch: yeti
     ganalytics: UA-155098215-2
 
 navbar:
+  type: inverse
   structure:
     left: [home, intro, reference, articles, news]
-    right: [github]
+    right: [twitter, linkedin, github]
 
   components:
     articles:
@@ -32,12 +33,12 @@ navbar:
         href: articles/sr.html
       - text: "Assess age and sex distributions"
         href: articles/as.html
-    #twitter:
-    #  icon: "fab fa-twitter fa-lg"
-    #  href: https://twitter.com/ernestguevarra
-    #linkedin:
-    #  icon: "fab fa-linkedin fa-lg"
-    #  href: https://www.linkedin.com/in/ernestguevarra/
+    twitter:
+      icon: "fab fa-twitter fa-lg"
+      href: https://twitter.com/katilingban
+    linkedin:
+      icon: "fab fa-linkedin fa-lg"
+      href: https://www.linkedin.com/company/katilingban/
 
 home:
   links:

@@ -9,7 +9,9 @@
 #' @param border Border colour
 #' @param lwd Border width
 #' @param pad Add padding to (L) and (R) ends of bounding box
+#'
 #' @return NULL
+#'
 #' @examples
 #' \dontrun{
 #'   boxText(x = sum(par("usr")[1:2]) / 2,
@@ -18,7 +20,9 @@
 #'           cex = cex,
 #'           pad = TRUE)
 #' }
+#'
 #' @export
+#'
 #
 ################################################################################
 

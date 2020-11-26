@@ -16,18 +16,19 @@ national.SMART(x, strata, indices = c("haz", "whz", "waz"))
 }
 \value{
 A data.frame with same structure as \code{x} with a \code{flagSMART}
-    column added. This column is coded using sums of powers of two
+column added. This column is coded using sums of powers of two
 }
 \description{
 Add SMART flags to a stratified sample survey (e.g. MICS, DHS, national
 SMART)
 }
 \examples{
-# Use the \code{national.SMART()} function to flag indices from a national
+# Use the national.SMART() function to flag indices from a national
 # SMART survey in Nigeria (flag.ex03)
 svy <- flag.ex03
 svyFlagged <- national.SMART(x = svy, strata = "state")
 
 # Exclude records with flagging codes relevant to whz:
 svyFlagged <- svyFlagged[!(svyFlagged$flagSMART \%in\% c(2, 3, 6, 7)), ]
+
 }

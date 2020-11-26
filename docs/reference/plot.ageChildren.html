@@ -6,13 +6,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>plot()</code> helper function for <code>ageChildren()</code> function — plot.ageChildren • nipnTK</title>
+<title>Plot helper function for ageChildren() function — plot.ageChildren • nipnTK</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -39,8 +46,9 @@
 
 
 
-<meta property="og:title" content="<code>plot()</code> helper function for <code>ageChildren()</code> function — plot.ageChildren" />
-<meta property="og:description" content="plot() helper function for ageChildren() function" />
+<meta property="og:title" content="Plot helper function for ageChildren() function — plot.ageChildren" />
+<meta property="og:description" content="Plot helper function for ageChildren() function" />
+<meta property="og:image" content="https://nutriverse.io/nipnTK/logo.png" />
 
 
 
@@ -71,7 +79,7 @@
   <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -139,6 +147,18 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="https://twitter.com/katilingban">
+    <span class="fab fa fab fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/company/katilingban/">
+    <span class="fab fa fab fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/nutriverse/nipnTK/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
@@ -157,17 +177,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>plot()</code> helper function for <code>ageChildren()</code> function</h1>
+    <h1>Plot helper function for <code><a href='ageChildren.html'>ageChildren()</a></code> function</h1>
     <small class="dont-index">Source: <a href='https://github.com/nutriverse/nipnTK/blob/master/R/ageChildren.R'><code>R/ageChildren.R</code></a></small>
     <div class="hidden name"><code>plot.ageChildren.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code><a href='https://rdrr.io/r/base/plot.html'>plot()</a></code> helper function for <code><a href='ageChildren.html'>ageChildren()</a></code> function</p>
+    <p>Plot helper function for <code><a href='ageChildren.html'>ageChildren()</a></code> function</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ageChildren</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,10 +208,12 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Plot Chi-Squared test for age of children in dp.ex02 sample dataset using</span>
-<span class='co'># an \code{u5mr} of 1 / 10,000 / day.</span>
-<span class='no'>svy</span> <span class='kw'>&lt;-</span> <span class='no'>dp.ex02</span>
-<span class='no'>ac</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ageChildren.html'>ageChildren</a></span>(<span class='no'>svy</span>$<span class='no'>age</span>, <span class='kw'>u5mr</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>ac</span>)</div><div class='img'><img src='plot.ageChildren-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='co'># an u5mr of 1 / 10,000 / day.</span>
+<span class='va'>svy</span> <span class='op'>&lt;-</span> <span class='va'>dp.ex02</span>
+<span class='va'>ac</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ageChildren.html'>ageChildren</a></span><span class='op'>(</span><span class='va'>svy</span><span class='op'>$</span><span class='va'>age</span>, u5mr <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>ac</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.ageChildren-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -207,7 +229,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

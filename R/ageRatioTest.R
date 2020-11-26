@@ -6,16 +6,19 @@
 #'
 #' @param x Numeric vector (age)
 #' @param ratio Expected age ratio
-#' @return A lit of class \code{"ageRatioTest"} with:
-#' \describe{
-#' \item{\code{expectedR}}{Expected sex ratio}
-#' \item{\code{expectedP}}{Expected proportion aged 6:29 months}
-#' \item{\code{observedR}}{Observed sex ratio}
-#' \item{\code{observedP}}{Observed proportion aged 6:29 months}
-#' \item{\code{X2}}{Chi-squared test statistic}
-#' \item{\code{df}}{Degrees of freedom for Chi-squared test}
-#' \item{\code{p}}{\code{p-value} for Chi-squared test}
-#' }
+#'
+#' @return A lit of class `"ageRatioTest"` with:
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *expectedR* | Expected sex ratio |
+#' | *expectedP* | Expected proportion aged 6:29 months |
+#' | *observedR* | Observed sex ratio |
+#' | *observedP* | Observed proportion aged 6:29 months |
+#' | *X2* | Chi-squared test statistic |
+#' | *df* | Degrees of freedom for Chi-squared test |
+#' | *p* | `p-value` for Chi-squared test |
+#'
 #' @examples
 #' # Age-ratio test on survey dataset from Kabul, Afghanistan (dp.ex02)
 #' # with an age ratio of 0.85
@@ -49,15 +52,18 @@ ageRatioTest <- function(x, ratio = 0.85) {
 
 ################################################################################
 #
-#' \code{print()} helper function for \code{ageRatioTest()} function
+#' [print()] helper function for [ageRatioTest()] function
 #'
-#' @param x Object resulting from applying \code{ageRatioTest()} function
-#' @param ... Additional \code{print()} arguments
-#' @return Printed output of \code{ageRatioTest()} function
+#' @param x Object resulting from applying [ageRatioTest()] function
+#' @param ... Additional [print()] arguments
+#'
+#' @return Printed output of [ageRatioTest()] function
+#'
 #' @examples
 #' # Print age-ratio test results for survey dataset from Kabul, Afghanistan (dp.ex02)
 #' svy <- dp.ex02
 #' print(ageRatioTest(svy$age, ratio = 0.85))
+#'
 #' @export
 #'
 #
@@ -65,9 +71,14 @@ ageRatioTest <- function(x, ratio = 0.85) {
 
 print.ageRatioTest <- function(x, ...) {
   cat("\n\t\tAge Ratio Test (children\'s data)\n\n", sep = "")
-  cat("                    Expected age ratio = ", formatC(x$expectedR, format = "f", width = 6), "\n", sep = "")
-  cat("Expected proportion aged 6 - 29 months = ", formatC(x$expectedP, format = "f", width = 6), "\n\n", sep = "")
-  cat("                    Observed age ratio = ", formatC(x$observedR, format = "f", width = 6), "\n", sep = "")
-  cat("Observed proportion aged 6 - 29 months = ", formatC(x$observedP, format = "f", width = 6), "\n\n", sep = "")
-  cat("X-squared = ", formatC(x$X2, format = "f", width = 6), ", p = ", formatC(x$p, format = "f", width = 6), "\n\n", sep = "")
+  cat("                    Expected age ratio = ",
+      formatC(x$expectedR, format = "f", width = 6), "\n", sep = "")
+  cat("Expected proportion aged 6 - 29 months = ",
+      formatC(x$expectedP, format = "f", width = 6), "\n\n", sep = "")
+  cat("                    Observed age ratio = ",
+      formatC(x$observedR, format = "f", width = 6), "\n", sep = "")
+  cat("Observed proportion aged 6 - 29 months = ",
+      formatC(x$observedP, format = "f", width = 6), "\n\n", sep = "")
+  cat("X-squared = ", formatC(x$X2, format = "f", width = 6),
+      ", p = ", formatC(x$p, format = "f", width = 6), "\n\n", sep = "")
 }

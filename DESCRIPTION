@@ -3,10 +3,16 @@ Type: Package
 Title: NiPN Anthropometric Data Toolkit
 Version: 0.1.0
 Authors@R: c(
-    person("Mark", "Myatt", comment = c(ORCID = "0000-0003-1119-1474"),
-           email = "mark@brixtonhealth.com", role = c("aut", "cph")),
-    person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
-           email = "ernest@guevarra.io", role = c("ctb", "cre")))
+    person(given = "Mark", 
+           family = "Myatt", 
+           comment = c(ORCID = "0000-0003-1119-1474"),
+           email = "mark@brixtonhealth.com", 
+           role = "aut"),
+    person(given = "Ernest", 
+           family = "Guevarra", 
+           comment = c(ORCID = "0000-0002-4887-4415"), 
+           email = "ernest@guevarra.io", 
+           role = c("aut", "cre")))
 Description: An implementation of the National Information Platforms for Nutrition 
     (NiPN) analytical methods for assessing quality of anthropometric datasets that 
     include measurements of weight, height or length, MUAC, sex and age. The 
@@ -21,12 +27,14 @@ Suggests:
     testthat,
     knitr,
     rmarkdown,
-    tufte
-License: AGPL-3
+    tufte,
+    spelling
+License: GPL-3
 Encoding: UTF-8
-Language: en-gb
+Language: en-GB
 LazyData: true
 RoxygenNote: 7.1.1
-URL: https://github.com/nutriverse/nipnTK
+Roxygen: list(markdown = TRUE)
+URL: https://nutriverse.io/nipnTK/, https://github.com/nutriverse/nipnTK
 BugReports: https://github.com/nutriverse/nipnTK/issues
 VignetteBuilder: knitr

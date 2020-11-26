@@ -2,25 +2,26 @@
 % Please edit documentation in R/ageChildren.R
 \name{plot.ageChildren}
 \alias{plot.ageChildren}
-\title{\code{plot()} helper function for \code{ageChildren()} function}
+\title{Plot helper function for \code{\link[=ageChildren]{ageChildren()}} function}
 \usage{
 \method{plot}{ageChildren}(x, ...)
 }
 \arguments{
-\item{x}{Object resulting from applying \code{ageChildren()} function}
+\item{x}{Object resulting from applying \code{\link[=ageChildren]{ageChildren()}} function}
 
-\item{...}{Additional \code{barplot()} graphical parameters}
+\item{...}{Additional \code{\link[=barplot]{barplot()}} graphical parameters}
 }
 \value{
 Bar plot comparing table of observed counts vs table of expected counts
 }
 \description{
-\code{plot()} helper function for \code{ageChildren()} function
+Plot helper function for \code{\link[=ageChildren]{ageChildren()}} function
 }
 \examples{
 # Plot Chi-Squared test for age of children in dp.ex02 sample dataset using
-# an \code{u5mr} of 1 / 10,000 / day.
+# an u5mr of 1 / 10,000 / day.
 svy <- dp.ex02
 ac <- ageChildren(svy$age, u5mr = 1)
 plot(ac)
+
 }

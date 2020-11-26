@@ -4,13 +4,16 @@
 #'
 #' @param x A vector to tabulate
 #' @param values A vector of values to be included in a table. Default is:
-#' \code{min(x, na.rm = TRUE):max(x, na.rm = TRUE)}
+#'   `min(x, na.rm = TRUE):max(x, na.rm = TRUE)`
+#'
 #' @return A table object including zero cells
+#'
 #' @examples
-#' # Generate some artificial data and then apply \code{fullTable()}
+#' # Generate some artificial data and then apply `fullTable()`
 #' set.seed(0)
 #' finalDigits <- sample(x = 0:9, size = 1000, replace = TRUE)
 #' fullTable(finalDigits)
+#'
 #' @export
 #'
 #

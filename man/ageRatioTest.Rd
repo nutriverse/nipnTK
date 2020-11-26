@@ -12,15 +12,15 @@ ageRatioTest(x, ratio = 0.85)
 \item{ratio}{Expected age ratio}
 }
 \value{
-A lit of class \code{"ageRatioTest"} with:
-\describe{
-\item{\code{expectedR}}{Expected sex ratio}
-\item{\code{expectedP}}{Expected proportion aged 6:29 months}
-\item{\code{observedR}}{Observed sex ratio}
-\item{\code{observedP}}{Observed proportion aged 6:29 months}
-\item{\code{X2}}{Chi-squared test statistic}
-\item{\code{df}}{Degrees of freedom for Chi-squared test}
-\item{\code{p}}{\code{p-value} for Chi-squared test}
+A lit of class \code{"ageRatioTest"} with:\tabular{ll}{
+   \strong{Variable} \tab \strong{Description} \cr
+   \emph{expectedR} \tab Expected sex ratio \cr
+   \emph{expectedP} \tab Expected proportion aged 6:29 months \cr
+   \emph{observedR} \tab Observed sex ratio \cr
+   \emph{observedP} \tab Observed proportion aged 6:29 months \cr
+   \emph{X2} \tab Chi-squared test statistic \cr
+   \emph{df} \tab Degrees of freedom for Chi-squared test \cr
+   \emph{p} \tab \code{p-value} for Chi-squared test \cr
 }
 }
 \description{

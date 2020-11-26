@@ -41,4 +41,5 @@ Plot text in a coloured bounding box.
           cex = cex,
           pad = TRUE)
 }
+
 }
