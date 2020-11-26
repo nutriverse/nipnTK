@@ -12,14 +12,13 @@ ageHeaping(x, divisor = 12)
 \item{divisor}{Divisor (usually 5, 6, 10, or 12); default is 12}
 }
 \value{
-A list of class "ageHeaping" with:
-\describe{
-  \item{\code{X2}}{Chi-squared test statistic}
-  \item{\code{df}}{Degrees of freedom or Chi-squared test}
-  \item{\code{p}}{\code{p-value} for Chi-squared test}
-  \item{\code{tab}}{Table of remainders (for \code{x \%\%} divisor)}
-  \item{\code{pct}}{Table of proportions (\code{\%}) of remainders
-    (for \code{x \%\%} divisor)}
+A list of class "ageHeaping" with:\tabular{ll}{
+   \strong{Variable} \tab \strong{Description} \cr
+   \emph{X2} \tab Chi-squared test statistic \cr
+   \emph{df} \tab Degrees of freedom or Chi-squared test \cr
+   \emph{p} \tab \code{p-value} for Chi-squared test \cr
+   \emph{tab} \tab Table of remainders (for \verb{x \\\%\\\%} divisor) \cr
+   \emph{pct} \tab Table of proportions (\verb{\\\%}) of remainders for \verb{x \\\%\\\%} divisor) \cr
 }
 }
 \description{

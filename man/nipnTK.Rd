@@ -12,6 +12,7 @@ anthropometry surveys.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://nutriverse.io/nipnTK/}
   \item \url{https://github.com/nutriverse/nipnTK}
   \item Report bugs at \url{https://github.com/nutriverse/nipnTK/issues}
 }

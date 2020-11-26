@@ -10,24 +10,25 @@ skewKurt(x)
 \item{x}{Numeric vector}
 }
 \value{
-A list of class "skewKurt" with:
-\describe{
-\item{\code{s}}{Skewness with direction}
-\item{\code{s.se}}{Standard error of skewness}
-\item{\code{s.z}}{Test statistic (\code{s.z = s / s.se})}
-\item{\code{s.p}}{\code{p-value} (\code{s != 0})}
-\item{\code{k}}{Excess kurtosis with direction}
-\item{\code{k.se}}{Standard error of excess kurtosis}
-\item{\code{k.z}}{Test statistic (\code{k.z = k / k.se})}
-\item{\code{k.p}}{\code{p-value} (\code{k != 0})}
+A list of class "skewKurt" with:\tabular{ll}{
+   \strong{Variable} \tab \strong{Description} \cr
+   \emph{s} \tab Skewness with direction \cr
+   \emph{s.se} \tab Standard error of skewness \cr
+   \emph{s.z} \tab Test statistic (\code{s.z = s / s.se}) \cr
+   \emph{s.p} \tab \code{p-value} (\code{s != 0}) \cr
+   \emph{k} \tab Excess kurtosis with direction \cr
+   \emph{k.se} \tab Standard error of excess kurtosis \cr
+   \emph{k.z} \tab Test statistic (\code{k.z = k / k.se}) \cr
+   \emph{k.p} \tab \code{p-value} (\code{k != 0}) \cr
 }
 }
 \description{
 Skew and kurtosis
 }
 \examples{
-# Use \code{skewKurt()} on an anthropometric data from a SMART survey in
+# Use skewKurt() on an anthropometric data from a SMART survey in
 # Kabul, Afghanistan (dist.ex01)
 svy <- dist.ex01
 skewKurt(svy$muac)
+
 }

@@ -12,14 +12,15 @@ outliersUV(x, fence = 1.5)
 \item{fence}{\code{IQR} multiplier (defaults to 1.5)}
 }
 \value{
-A logical vector (\code{TRUE} for an outlier)
+A logical vector (TRUE for an outlier)
 }
 \description{
 IQR to detect univariate outliers
 }
 \examples{
-# Use \code{outliersUV()} to detect univariate outliers in an anthropometric
+# Use outliersUV() to detect univariate outliers in an anthropometric
 # dataset from a SMART survey from Angola (rl.ex01)
 svy <- rl.ex01
 svy[outliersUV(svy$muac), ]
+
 }

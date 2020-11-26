@@ -2,20 +2,20 @@
 % Please edit documentation in R/ageHeaping.R
 \name{print.ageHeaping}
 \alias{print.ageHeaping}
-\title{\code{print} helper functions for \code{ageHeaping} functions}
+\title{\code{\link[=print]{print()}} helper functions for \code{\link[=ageHeaping]{ageHeaping()}} functions}
 \usage{
 \method{print}{ageHeaping}(x, ...)
 }
 \arguments{
-\item{x}{Object resulting from applying the \code{\link{ageHeaping}} function}
+\item{x}{Object resulting from applying the \code{\link[=ageHeaping]{ageHeaping()}} function}
 
-\item{...}{Additional \code{\link{print}} arguments}
+\item{...}{Additional \code{\link[=print]{print()}} arguments}
 }
 \value{
-Printed output of the \code{\link{ageHeaping}} function
+Printed output of the \code{\link[=ageHeaping]{ageHeaping()}} function
 }
 \description{
-\code{print} helper functions for \code{ageHeaping} functions
+\code{\link[=print]{print()}} helper functions for \code{\link[=ageHeaping]{ageHeaping()}} functions
 }
 \examples{
 # Print age heaping test on SMART survey data in Kabul, Afghanistan (dp.ex02)

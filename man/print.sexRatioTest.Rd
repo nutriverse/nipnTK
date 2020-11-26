@@ -2,23 +2,23 @@
 % Please edit documentation in R/sexRatioTest.R
 \name{print.sexRatioTest}
 \alias{print.sexRatioTest}
-\title{\code{print()} helper function for \code{sexRatioTest()} function}
+\title{\code{\link[=print]{print()}} helper function for \code{\link[=sexRatioTest]{sexRatioTest()}} function}
 \usage{
 \method{print}{sexRatioTest}(x, ...)
 }
 \arguments{
-\item{x}{Output resulting from applying the \code{sexRatioTest()} function}
+\item{x}{Output resulting from applying the \code{\link[=sexRatioTest]{sexRatioTest()}} function}
 
-\item{...}{Additional \code{print()} parameters}
+\item{...}{Additional \code{\link[=print]{print()}} parameters}
 }
 \value{
-Printed output of \code{sexRatioTest()} function
+Printed output of \code{\link[=sexRatioTest]{sexRatioTest()}} function
 }
 \description{
-\code{print()} helper function for \code{sexRatioTest()} function
+\code{\link[=print]{print()}} helper function for \code{\link[=sexRatioTest]{sexRatioTest()}} function
 }
 \examples{
-# Use \code{sexRatioTest()} on household roster data from a survey in Tanzania
+# Use sexRatioTest() on household roster data from a survey in Tanzania
 # (as.ex01) and census data of Tanzania extracted from Wolfram|Alpha knowledge
 # engine (as.ex02)
 svy <- as.ex01
@@ -27,4 +27,5 @@ censusM <- sum(ref$Males)
 censusF <- sum(ref$Females)
 srt <- sexRatioTest(svy$sex, codes = c(1, 2), pop = c(censusM, censusF))
 print(srt)
+
 }

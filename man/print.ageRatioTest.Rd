@@ -2,23 +2,24 @@
 % Please edit documentation in R/ageRatioTest.R
 \name{print.ageRatioTest}
 \alias{print.ageRatioTest}
-\title{\code{print()} helper function for \code{ageRatioTest()} function}
+\title{\code{\link[=print]{print()}} helper function for \code{\link[=ageRatioTest]{ageRatioTest()}} function}
 \usage{
 \method{print}{ageRatioTest}(x, ...)
 }
 \arguments{
-\item{x}{Object resulting from applying \code{ageRatioTest()} function}
+\item{x}{Object resulting from applying \code{\link[=ageRatioTest]{ageRatioTest()}} function}
 
-\item{...}{Additional \code{print()} arguments}
+\item{...}{Additional \code{\link[=print]{print()}} arguments}
 }
 \value{
-Printed output of \code{ageRatioTest()} function
+Printed output of \code{\link[=ageRatioTest]{ageRatioTest()}} function
 }
 \description{
-\code{print()} helper function for \code{ageRatioTest()} function
+\code{\link[=print]{print()}} helper function for \code{\link[=ageRatioTest]{ageRatioTest()}} function
 }
 \examples{
 # Print age-ratio test results for survey dataset from Kabul, Afghanistan (dp.ex02)
 svy <- dp.ex02
 print(ageRatioTest(svy$age, ratio = 0.85))
+
 }

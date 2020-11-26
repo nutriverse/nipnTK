@@ -2,20 +2,20 @@
 % Please edit documentation in R/ageChildren.R
 \name{print.ageChildren}
 \alias{print.ageChildren}
-\title{\code{print} helper function for \code{ageChildren} function}
+\title{\code{\link[=print]{print()}} helper function for \code{\link[=ageChildren]{ageChildren()}} function}
 \usage{
 \method{print}{ageChildren}(x, ...)
 }
 \arguments{
-\item{x}{Object resulting from applying \code{\link{ageChildren}} function}
+\item{x}{Object resulting from applying \code{\link[=ageChildren]{ageChildren()}} function}
 
-\item{...}{Additional \code{\link{print}} arguments}
+\item{...}{Additional \code{\link[=print]{print()}} arguments}
 }
 \value{
-Printed output of \code{\link{ageChildren}} function
+Printed output of \code{\link[=ageChildren]{ageChildren()}} function
 }
 \description{
-\code{print} helper function for \code{ageChildren} function
+\code{\link[=print]{print()}} helper function for \code{\link[=ageChildren]{ageChildren()}} function
 }
 \examples{
 # Print Chi-Squared test for age of children in dp.ex02 sample dataset using

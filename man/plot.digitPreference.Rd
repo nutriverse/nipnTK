@@ -2,12 +2,12 @@
 % Please edit documentation in R/digitPreference.R
 \name{plot.digitPreference}
 \alias{plot.digitPreference}
-\title{\code{plot()} helper function for \code{digitPreference()} function}
+\title{\code{\link[=plot]{plot()}} helper function for \code{\link[=digitPreference]{digitPreference()}} function}
 \usage{
 \method{plot}{digitPreference}(x, main = "", xlab = "Final Digit", ylab = "Frequency", cex = 0.75, ...)
 }
 \arguments{
-\item{x}{Object resulting from applying the \code{digitPreference()} function.}
+\item{x}{Object resulting from applying the \code{\link[=digitPreference]{digitPreference()}} function.}
 
 \item{main}{Title of plot}
 
@@ -17,14 +17,14 @@
 
 \item{cex}{Character expansion; default is 0.75}
 
-\item{...}{Additional \code{plot()} parameters}
+\item{...}{Additional \code{\link[=plot]{plot()}} parameters}
 }
 \value{
-Plotted output of \code{digitPreference()} function comparing the
+Plotted output of \code{\link[=digitPreference]{digitPreference()}} function comparing the
 frequencies of the various final digits
 }
 \description{
-\code{plot()} helper function for \code{digitPreference()} function
+\code{\link[=plot]{plot()}} helper function for \code{\link[=digitPreference]{digitPreference()}} function
 }
 \examples{
 # Plot output of digit preference test applied to anthropometric data from a
@@ -32,4 +32,5 @@ frequencies of the various final digits
 svy <- dp.ex01
 digitPreference(svy$wt, digits = 1)
 plot(digitPreference(svy$wt, digits = 1))
+
 }

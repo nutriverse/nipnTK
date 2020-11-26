@@ -40,8 +40,9 @@ A table of \code{x} by \code{g} (invisible)
 Pyramid plot function for creating population pyramids.
 }
 \examples{
-# Use \code{pyramid.plot()} on anthropometric data from a SMART survey in
+# Use pyramid.plot() on anthropometric data from a SMART survey in
 # Kabul, Afghanistan (dp.ex02)
 svy <- dp.ex02
 pyramid.plot(svy$age, svy$sex)
+
 }

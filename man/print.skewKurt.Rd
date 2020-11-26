@@ -2,25 +2,26 @@
 % Please edit documentation in R/skewKurt.R
 \name{print.skewKurt}
 \alias{print.skewKurt}
-\title{\code{print()} helper function for \code{skewKurt()} function}
+\title{\code{\link[=print]{print()}} helper function for \code{\link[=skewKurt]{skewKurt()}} function}
 \usage{
 \method{print}{skewKurt}(x, ...)
 }
 \arguments{
-\item{x}{Object resulting from applying the \code{skewKurt()} function}
+\item{x}{Object resulting from applying the \code{\link[=skewKurt]{skewKurt()}} function}
 
-\item{...}{Additional \code{print()} parameters}
+\item{...}{Additional \code{\link[=print]{print()}} parameters}
 }
 \value{
-Printed output of \code{skewKurt()} function
+Printed output of \code{\link[=skewKurt]{skewKurt()}} function
 }
 \description{
-\code{print()} helper function for \code{skewKurt()} function
+\code{\link[=print]{print()}} helper function for \code{\link[=skewKurt]{skewKurt()}} function
 }
 \examples{
-# Use \code{skewKurt()} on an anthropometric data from a SMART survey in
+# Use skewKurt() on an anthropometric data from a SMART survey in
 # Kabul, Afghanistan (dist.ex01)
 svy <- dist.ex01
 sk <- skewKurt(svy$muac)
 print(sk)
+
 }

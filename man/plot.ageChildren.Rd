@@ -2,20 +2,20 @@
 % Please edit documentation in R/ageChildren.R
 \name{plot.ageChildren}
 \alias{plot.ageChildren}
-\title{\code{plot} helper function for \code{ageChildren} function}
+\title{Plot helper function for \code{\link[=ageChildren]{ageChildren()}} function}
 \usage{
 \method{plot}{ageChildren}(x, ...)
 }
 \arguments{
-\item{x}{Object resulting from applying \code{\link{ageChildren}} function}
+\item{x}{Object resulting from applying \code{\link[=ageChildren]{ageChildren()}} function}
 
-\item{...}{Additional \code{\link{barplot}} graphical parameters}
+\item{...}{Additional \code{\link[=barplot]{barplot()}} graphical parameters}
 }
 \value{
 Bar plot comparing table of observed counts vs table of expected counts
 }
 \description{
-\code{plot} helper function for \code{ageChildren} function
+Plot helper function for \code{\link[=ageChildren]{ageChildren()}} function
 }
 \examples{
 # Plot Chi-Squared test for age of children in dp.ex02 sample dataset using
