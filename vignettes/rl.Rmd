@@ -236,7 +236,7 @@ If you have fixed the problems in the data this should return:
 x[outliersUV(x$muac, fence = 3), ]
 ```
 
-The `edit()` function works differently on different operating systems and with different graphical user interfaces. If you are using *RStudio* or *RAnalyticFlow* on OS X you will need to install *XQuartz* if you want to use the `edit()` function. *XQuarts* is available from:
+The `edit()` function works differently on different operating systems and with different graphical user interfaces. If you are using *RStudio* or *RAnalyticFlow* on OS X you will need to install *XQuartz* if you want to use the `edit()` function. *XQuartz* is available from:
 
 [https://www.xquartz.org/index.html](https://www.xquartz.org/index.html)
 
