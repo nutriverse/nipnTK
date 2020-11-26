@@ -7,30 +7,34 @@
 #' is used to test whether the distribution of cases across primary sampling
 #' units is random.
 #'
-#' The value of Green's Index can range between \code{-1/(n - 1)} for maximum
+#' The value of Green's Index can range between `-1/(n - 1)` for maximum
 #' uniformity (specific to the dataset) and one for maximum clumping. The
 #' interpretation of Green’s Index is straightforward:
-#' \describe{
-#' \item{\code{Green's Index U+2248 0}}{Random}
-#' \item{\code{Green's Index > 0}}{Clumped (i.e. more clumped than random)}
-#' \item{\code{Green’s Index < 0}}{Uniform (i.e. more uniform than random)}
-#' }
+#'
+#' | **Green's Index Value** | **Interpretation** |
+#' | :--- | :--- |
+#' | *Green's Index close to 0* | Random |
+#' | *Green's Index greater than 0* | Clumped (i.e. more clumped than random) |
+#' | *Green’s Index less than 0* | Uniform (i.e. more uniform than random) |
 #'
 #' @param data Survey dataset (as an R data.frame)
 #' @param psu Name of variable holding PSU (cluster) data as a character
-#'     vector of length = 1 (e.g. \code{psu})
+#'   vector of length = 1 (e.g. `psu`)
 #' @param case Name of variable holding case status as a character vector of
-#'     length = 1 (e.g. \code{GAM}). The function assumes that case status is
-#'     coded with 1 = case
+#'   length = 1 (e.g. *GAM*). The function assumes that case status is
+#'   coded with 1 = case
 #' @param replicates Number of bootstrap replicates (default is 9999)
-#' @return A list of class \code{GI} with names:
-#' \describe{
-#' \item{\code{GI}}{Estimate of Green's index}
-#' \item{\code{LCL}}{95\% LCL for GI}
-#' \item{\code{UCL}}{95\% UCL for GI}
-#' \item{\code{minGI}}{Minimum possible GI (maximum uniformity) for the data}
-#' \item{\code{p}}{\code{p-value} (H0: = Random distribution of cases across PSUs)}
-#' }
+#'
+#' @return A list of class `GI` with names:
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *GI* | Estimate of Green's index |
+#' | *LCL* | 95\\% LCL for GI |
+#' | *UCL* | 95\\% UCL for GI |
+#' | *minGI* | Minimum possible GI (maximum uniformity) for the data |
+#' | *p* | `p-value` (H0: = Random distribution of cases across PSUs) |
+#'
 #' @examples
 #' # Apply Green's Index using anthropometric data from a SMART survey in Sudan
 #' # (flag.ex01)
@@ -42,6 +46,7 @@
 #' svy <- svy[svy$flag == 0, ]
 #' svy$stunted <- ifelse(svy$haz < -2, 1, 2)
 #' greensIndex(data = svy, psu = "psu", case = "stunted")
+#'
 #' @export
 #'
 #
@@ -57,7 +62,7 @@ greensIndex <- function(data, psu, case, replicates = 999) {
     boot <- c(boot, (var(counts) / mean(counts) - 1) / (sum(counts) - 1))
   }
 
-  GI <- round(quantile(boot, probs = c(0.5, 0.025, 0.975), na.rm = TRUE), 4)
+  GI <- round(stats::quantile(boot, probs = c(0.5, 0.025, 0.975), na.rm = TRUE), 4)
   p <- 1 - sum(boot > 0, na.rm = TRUE) / sum(!is.na(boot))
 
   if(GI[1] < 0) {
@@ -73,11 +78,13 @@ greensIndex <- function(data, psu, case, replicates = 999) {
 
 ################################################################################
 #
-#' \code{print()} helper function for \code{print.greensIndex()} function
+#' [print()] helper function for `print.greensIndex()` function
 #'
-#' @param x Object resulting from applying the \code{greensIndex()} function
-#' @param ... Additional \code{print()} parameters
-#' @return Printed output of \code{greenIndex()} function
+#' @param x Object resulting from applying the [greensIndex()] function
+#' @param ... Additional [print()] parameters
+#'
+#' @return Printed output of [greensIndex()] function
+#'
 #' @examples
 #' # Apply Green's Index using anthropometric data from a SMART survey in Sudan
 #' # (flag.ex01)
@@ -90,6 +97,7 @@ greensIndex <- function(data, psu, case, replicates = 999) {
 #' svy$stunted <- ifelse(svy$haz < -2, 1, 2)
 #' gi <- greensIndex(data = svy, psu = "psu", case = "stunted")
 #' print(gi)
+#'
 #' @export
 #'
 #
@@ -97,7 +105,12 @@ greensIndex <- function(data, psu, case, replicates = 999) {
 
 print.greensIndex <- function(x, ...) {
   cat("\n\tGreen's Index of Dispersion\n\n", sep = "")
-  cat("Green's Index (GI) of Dispersion  = ", formatC(x$GI, format = "f", flag = "+", width = 6), ", 95% CI = (", formatC(x$LCL, format = "f", flag = "+", width = 6), ", ", formatC(x$UCL, format = "f", flag = "+", width = 6), ")\n", sep = "")
-  cat("Maximum uniformity for this data  = ", formatC(x$minGI, format = "f", flag = "+", width = 6), "\n", sep ="")
-  cat("                         p-value  =  ", formatC(x$p, format = "f", width = 6), "\n\n", sep ="")
+  cat("Green's Index (GI) of Dispersion  = ",
+      formatC(x$GI, format = "f", flag = "+", width = 6),
+      ", 95% CI = (", formatC(x$LCL, format = "f", flag = "+", width = 6), ", ",
+      formatC(x$UCL, format = "f", flag = "+", width = 6), ")\n", sep = "")
+  cat("Maximum uniformity for this data  = ",
+      formatC(x$minGI, format = "f", flag = "+", width = 6), "\n", sep ="")
+  cat("                         p-value  =  ",
+      formatC(x$p, format = "f", width = 6), "\n\n", sep ="")
 }

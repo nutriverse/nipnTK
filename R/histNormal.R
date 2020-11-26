@@ -4,20 +4,23 @@
 #' of normality of distribution
 #'
 #' @param x A numeric vector
-#' @param xlab \code{x-axis} label
-#' @param ylab \code{y-axis} label
+#' @param xlab `x-axis` label
+#' @param ylab `y-axis` label
 #' @param main Plot title
-#' @param breaks Passed to \code{hist()} function (\code{?hist} for details)
-#' @param ylim \code{y-axis} limits
+#' @param breaks Passed to [hist()] function (`?hist` for details)
+#' @param ylim `y-axis` limits
+#'
 #' @return NULL
+#'
 #' @examples
-#' # \code{histNormal()} with data from a SMART survey in Kabul, Afghanistan
+#' # histNormal() with data from a SMART survey in Kabul, Afghanistan
 #' # (dist.ex01)
 #' svy <- dist.ex01
 #' histNormal(svy$muac)
 #' histNormal(svy$haz)
 #' histNormal(svy$waz)
 #' histNormal(svy$whz)
+#'
 #' @export
 #'
 #

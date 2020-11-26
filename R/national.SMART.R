@@ -4,18 +4,21 @@
 #' SMART)
 #'
 #' @param x Survey dataset (as an R data.frame) with indices present
-#' @param strata Name of column in \code{x} that defines the strata
-#' @param indices Names of columns in \code{x} containing indices
-#' @return A data.frame with same structure as \code{x} with a \code{flagSMART}
-#'     column added. This column is coded using sums of powers of two
+#' @param strata Name of column in `x` that defines the strata
+#' @param indices Names of columns in `x` containing indices
+#'
+#' @return A data.frame with same structure as `x` with a `flagSMART`
+#'   column added. This column is coded using sums of powers of two
+#'
 #' @examples
-#' # Use the \code{national.SMART()} function to flag indices from a national
+#' # Use the national.SMART() function to flag indices from a national
 #' # SMART survey in Nigeria (flag.ex03)
 #' svy <- flag.ex03
 #' svyFlagged <- national.SMART(x = svy, strata = "state")
 #'
 #' # Exclude records with flagging codes relevant to whz:
 #' svyFlagged <- svyFlagged[!(svyFlagged$flagSMART %in% c(2, 3, 6, 7)), ]
+#'
 #' @export
 #'
 #
@@ -30,11 +33,15 @@ national.SMART <- function(x, strata, indices = c("haz", "whz", "waz")) {
 
     for(j in indices) {
       referenceMean <- mean(stratumData[[j]], na.rm = TRUE)
-      stratumData$flagSMART <- ifelse(!is.na(stratumData[[j]]) & (stratumData[[j]] < (referenceMean - 3) | stratumData[[j]] > (referenceMean + 3)), stratumData$flagSMART + 2^lambda, stratumData$flagSMART)
+      stratumData$flagSMART <- ifelse(!is.na(stratumData[[j]]) &
+                                        (stratumData[[j]] < (referenceMean - 3) |
+                                           stratumData[[j]] > (referenceMean + 3)),
+                                      stratumData$flagSMART + 2^lambda,
+                                      stratumData$flagSMART)
       lambda <- lambda + 1
     }
-
     result <- rbind(result, stratumData)
   }
   return(result)
 }
+

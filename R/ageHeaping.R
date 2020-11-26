@@ -11,14 +11,14 @@
 #' @param divisor Divisor (usually 5, 6, 10, or 12); default is 12
 #'
 #' @return A list of class "ageHeaping" with:
-#' \describe{
-#'   \item{\code{X2}}{Chi-squared test statistic}
-#'   \item{\code{df}}{Degrees of freedom or Chi-squared test}
-#'   \item{\code{p}}{\code{p-value} for Chi-squared test}
-#'   \item{\code{tab}}{Table of remainders (for \code{x \%\%} divisor)}
-#'   \item{\code{pct}}{Table of proportions (\code{\%}) of remainders
-#'     (for \code{x \%\%} divisor)}
-#' }
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *X2* | Chi-squared test statistic |
+#' | *df* | Degrees of freedom or Chi-squared test |
+#' | *p* | `p-value` for Chi-squared test |
+#' | *tab* | Table of remainders (for `x \%\%` divisor) |
+#' | *pct* | Table of proportions (`\%`) of remainders for `x \%\%` divisor) |
 #'
 #' @examples
 #' # Test for age heaping using SMART survey data in Kabul, Afghanistan (dp.ex02)
@@ -52,12 +52,12 @@ ageHeaping <- function(x, divisor = 12) {
 
 ################################################################################
 #
-#' \code{print} helper functions for \code{ageHeaping} functions
+#' [print()] helper functions for [ageHeaping()] functions
 #'
-#' @param x Object resulting from applying the \code{\link{ageHeaping}} function
-#' @param ... Additional \code{\link{print}} arguments
+#' @param x Object resulting from applying the [ageHeaping()] function
+#' @param ... Additional [print()] arguments
 #'
-#' @return Printed output of the \code{\link{ageHeaping}} function
+#' @return Printed output of the [ageHeaping()] function
 #'
 #' @examples
 #' # Print age heaping test on SMART survey data in Kabul, Afghanistan (dp.ex02)
@@ -74,20 +74,21 @@ ageHeaping <- function(x, divisor = 12) {
 print.ageHeaping <- function(x, ...) {
   cat("\n\tAge-heaping Analysis\n\n", sep = "")
   cat("data:\t", names(dimnames(x$tab)), "\n", sep = "")
-  cat("X-squared = ", x$X2, ", df = ", x$df, ", p-value = ", formatC(x$p, format = "f", width = 6), "\n\n", sep = "")
+  cat("X-squared = ", x$X2, ", df = ", x$df, ", p-value = ",
+      formatC(x$p, format = "f", width = 6), "\n\n", sep = "")
 }
 
 
 ################################################################################
 #
-#' \code{plot} helper functions for \code{ageHeaping} functions
+#' [plot()] helper functions for [ageHeaping()] functions
 #'
-#' @param x Object resulting from applying the \code{\link{ageHeaping}} function
+#' @param x Object resulting from applying the [ageHeaping()] function
 #' @param main Title of plot
-#' @param xlab \code{x-axis} label; default is \code{Remainder}
-#' @param ylab \code{y-axis} label; default is \code{Frequency}
+#' @param xlab `x-axis` label; default is `Remainder`
+#' @param ylab `y-axis` label; default is `Frequency`
 #' @param cex Character expansion (numeric); default is 0.75
-#' @param ... Additional \code{\link{plot}} graphical parameters
+#' @param ... Additional [plot()] graphical parameters
 #'
 #' @return Barplot of frequency of remainders of age when divided by a specified
 #' divisor

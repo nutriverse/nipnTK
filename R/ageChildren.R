@@ -5,18 +5,19 @@
 #' @param age Vector of ages
 #' @param u5mr Under five years mortality rate as deaths / 10,000 persons / day
 #' @param groups Age groupings specified as recodes parameter in the
-#'     \code{\link[bbw]{recode}} function; default is
-#'     \code{"6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5"}
+#'   [bbw::recode()] function; default is
+#'   `"6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5"`
 #'
 #' @return A list of class "ageChildren" with:
-#' \describe{
-#'   \item{\code{u5mr}}{Under five years mortality rate as deaths / 10000 persons / day}
-#'   \item{\code{observed}}{Table of counts in each (year-centred) age group}
-#'   \item{\code{expected}}{Table of expected counts in each (year-centred) age group}
-#'   \item{\code{X2}}{Chi-squared test statistic}
-#'   \item{\code{df}}{Degrees of freedom for Chi-squared test}
-#'   \item{\code{p}}{p-value for Chi-squared test}
-#' }
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *u5mr* | Under five years mortality rate as deaths / 10000 persons / day |
+#' | *observed* | Table of counts in each (year-centred) age group |
+#' | *expected* | Table of expected counts in each (year-centred) age group |
+#' | *X2* | Chi-squared test statistic |
+#' | *df* | Degrees of freedom for Chi-squared test |
+#' | *p* | p-value for Chi-squared test |
 #'
 #' @examples
 #' # Chi-Squared test for age of children in dp.ex02 sample dataset using an
@@ -62,18 +63,17 @@ ageChildren <- function(age,
                  p = pX2)
   class(result) <- "ageChildren"
   return(result)
-
 }
 
 
 ################################################################################
 #
-#' \code{print} helper function for \code{ageChildren} function
+#' [print()] helper function for [ageChildren()] function
 #'
-#' @param x Object resulting from applying \code{\link{ageChildren}} function
-#' @param ... Additional \code{\link{print}} arguments
+#' @param x Object resulting from applying [ageChildren()] function
+#' @param ... Additional [print()] arguments
 #'
-#' @return Printed output of \code{\link{ageChildren}} function
+#' @return Printed output of [ageChildren()] function
 #'
 #' @examples
 #' # Print Chi-Squared test for age of children in dp.ex02 sample dataset using
@@ -89,16 +89,19 @@ ageChildren <- function(age,
 
 print.ageChildren <- function(x, ...) {
   cat("\n\tAge Test (Children)\n\n", sep = "")
-  cat("X-squared = ", formatC(x$X2, format = "f", width = 6), ", df = ", x$df, ", p = ", formatC(x$p, format = "f", width = 6), "\n\n", sep = "")
+  cat("X-squared = ",
+      formatC(x$X2, format = "f", width = 6),
+      ", df = ", x$df, ", p = ",
+      formatC(x$p, format = "f", width = 6), "\n\n", sep = "")
 }
 
 
 ################################################################################
 #
-#' \code{plot} helper function for \code{ageChildren} function
+#' Plot helper function for [ageChildren()] function
 #'
-#' @param x Object resulting from applying \code{\link{ageChildren}} function
-#' @param ... Additional \code{\link{barplot}} graphical parameters
+#' @param x Object resulting from applying [ageChildren()] function
+#' @param ... Additional [barplot()] graphical parameters
 #'
 #' @return Bar plot comparing table of observed counts vs table of expected counts
 #'
