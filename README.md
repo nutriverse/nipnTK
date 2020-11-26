@@ -19,7 +19,6 @@ Status](https://ci.appveyor.com/api/projects/status/github/nutriverse/nipnTK?bra
 [![R build
 status](https://github.com/nutriverse/nipnTK/workflows/test-coverage/badge.svg)](https://github.com/nutriverse/nipnTK/actions)
 [![codecov](https://codecov.io/gh/nutriverse/nipnTK/branch/master/graph/badge.svg)](https://codecov.io/gh/nutriverse/nipnTK)
-[![CodeFactor](https://www.codefactor.io/repository/github/nutriverse/nipntk/badge)](https://www.codefactor.io/repository/github/nutriverse/nipntk)
 <!-- Badges end here -->
 
 [National Information Platforms for Nutrition
@@ -114,8 +113,8 @@ are shown below:
 Feedback, bug reports and feature requests are welcome; file issues or
 seek support [here](https://github.com/nutriverse/nipnTK/issues). If you
 would like to contribute to the package, please see our [contributing
-guidelines](https://nutriverse.io/nipnTK/docs/CONTRIBUTING.html).
+guidelines](https://nutriverse.io/nipnTK/CONTRIBUTING.html).
 
 This project is released with a [Contributor Code of
-Conduct](https://nutriverse.io/nipnTK/docs/CODE_OF_CONDUCT.html). By
+Conduct](https://nutriverse.io/nipnTK/CODE_OF_CONDUCT.html). By
 participating in this project you agree to abide by its terms.

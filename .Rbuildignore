@@ -21,3 +21,4 @@
 ^vignettes/as\.Rmd$
 ^\.github$
 ^pkgdown$
+^cran-comments\.md$

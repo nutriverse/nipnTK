@@ -1,6 +1,6 @@
 Package: nipnTK
 Type: Package
-Title: NiPN Anthropometric Data Toolkit
+Title: National Information Platforms for Nutrition Anthropometric Data Toolkit
 Version: 0.1.0
 Authors@R: c(
     person(given = "Mark", 
@@ -13,11 +13,12 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-4887-4415"), 
            email = "ernest@guevarra.io", 
            role = c("aut", "cre")))
-Description: An implementation of the National Information Platforms for Nutrition 
-    (NiPN) analytical methods for assessing quality of anthropometric datasets that 
-    include measurements of weight, height or length, MUAC, sex and age. The 
-    focus is on anthropometric status but many of the presented methods could be 
-    applied to other variables.
+Description: An implementation of the National Information Platforms for 
+    Nutrition or NiPN's analytic methods for assessing quality of anthropometric 
+    datasets that include measurements of weight, height or length, middle upper 
+    arm circumference, sex and age. The focus is on anthropometric status but 
+    many of the presented methods could be applied to other variables.
+License: GPL-3
 Depends: R (>= 2.10)
 Imports: 
     stats,
@@ -29,7 +30,6 @@ Suggests:
     rmarkdown,
     tufte,
     spelling
-License: GPL-3
 Encoding: UTF-8
 Language: en-GB
 LazyData: true

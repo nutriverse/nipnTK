@@ -1065,7 +1065,7 @@ Check weight, height and age
 <pre><code>#&gt; 
 #&gt;   0   1   2 
 #&gt; 960   2  11</code></pre>
-<p>This table shows the relative frequency of detected problems. See previou table to find the meaning of each of the codes. The number of flagged records can be found using:</p>
+<p>This table shows the relative frequency of detected problems. See previous table to find the meaning of each of the codes. The number of flagged records can be found using:</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">flag</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span><span class="op">[</span><span class="st">"TRUE"</span><span class="op">]</span></code></pre></div>
 <p>which returns:</p>

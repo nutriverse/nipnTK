@@ -20,6 +20,6 @@ A data frame with 20 observations and 4 variables\tabular{ll}{
 as.ex02
 }
 \description{
-Census data of Tanzania taken from the Wolfram|Alpha knoweldge engine.
+Census data of Tanzania taken from the Wolfram|Alpha knowledge engine.
 }
 \keyword{datasets}

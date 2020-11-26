@@ -522,7 +522,7 @@ returns:
 table(svy$flag)
 ```
 
-This table shows the relative frequency of detected problems. See previou table to find the meaning of each of the codes. The number of flagged records can be found using:
+This table shows the relative frequency of detected problems. See previous table to find the meaning of each of the codes. The number of flagged records can be found using:
 
 ```{r, echo = TRUE, eval = FALSE}
 table(svy$flag != 0)["TRUE"]

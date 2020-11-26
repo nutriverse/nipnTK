@@ -22,7 +22,7 @@
 #' | *muac* | Mid-upper arm circumference (cm) |
 #' | *oedema* | Oedema |
 #'
-#' @source Data courtesy of [HelpAge International](http://www.helpage.org)
+#' @source Data courtesy of [HelpAge International](https://www.helpage.org)
 #'
 #
 ################################################################################
@@ -54,7 +54,7 @@
 #'
 #' Example dataset for age and sex distributions function
 #'
-#' Census data of Tanzania taken from the Wolfram|Alpha knoweldge engine.
+#' Census data of Tanzania taken from the Wolfram|Alpha knowledge engine.
 #'
 #' @format A data frame with 20 observations and 4 variables
 #'
