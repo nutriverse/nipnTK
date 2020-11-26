@@ -29,7 +29,6 @@ library(nipnTK)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/nutriverse/nipnTK?branch=master&svg=true)](https://ci.appveyor.com/project/nutriverse/nipnTK)
 [![R build status](https://github.com/nutriverse/nipnTK/workflows/test-coverage/badge.svg)](https://github.com/nutriverse/nipnTK/actions)
 [![codecov](https://codecov.io/gh/nutriverse/nipnTK/branch/master/graph/badge.svg)](https://codecov.io/gh/nutriverse/nipnTK)
-[![CodeFactor](https://www.codefactor.io/repository/github/nutriverse/nipntk/badge)](https://www.codefactor.io/repository/github/nutriverse/nipntk)
 <!-- Badges end here -->
 
 [National Information Platforms for Nutrition (NiPN)](http://www.nipn-nutrition-platforms.org) is an initiative of the European Commission to provide support to countries to strengthen their information systems for nutrition and to improve the analysis of data so as to better inform the strategic decisions they are faced with to prevent malnutrition and its consequences.
@@ -87,6 +86,6 @@ knitr::include_graphics("man/figures/nipnWorkflow.png")
 
 ## Community guidelines
 
-Feedback, bug reports and feature requests are welcome; file issues or seek support [here](https://github.com/nutriverse/nipnTK/issues). If you would like to contribute to the package, please see our [contributing guidelines](https://nutriverse.io/nipnTK/docs/CONTRIBUTING.html).
+Feedback, bug reports and feature requests are welcome; file issues or seek support [here](https://github.com/nutriverse/nipnTK/issues). If you would like to contribute to the package, please see our [contributing guidelines](https://nutriverse.io/nipnTK/CONTRIBUTING.html).
 
-This project is released with a [Contributor Code of Conduct](https://nutriverse.io/nipnTK/docs/CODE_OF_CONDUCT.html). By participating in this project you agree to abide by its terms.
+This project is released with a [Contributor Code of Conduct](https://nutriverse.io/nipnTK/CODE_OF_CONDUCT.html). By participating in this project you agree to abide by its terms.
