@@ -19,8 +19,10 @@
 
 outliersMD <- function(x, y, alpha = 0.001) {
   df <- data.frame(x, y)
-  md <- mahalanobis(df, colMeans(df, na.rm = TRUE), cov(df, use = "complete.obs"))
-  p <- pchisq(md, 2, lower.tail = FALSE)
+  md <- stats::mahalanobis(df,
+                           colMeans(df, na.rm = TRUE),
+                           stats::cov(df, use = "complete.obs"))
+  p <- stats::pchisq(md, 2, lower.tail = FALSE)
   outlierMD <- (p < alpha)
   return(outlierMD)
 }

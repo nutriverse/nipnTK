@@ -40,11 +40,17 @@
 #' # (flag.ex01)
 #' svy <- flag.ex01
 #' svy$flag <- 0
-#' svy$flag <- ifelse(!is.na(svy$haz) & (svy$haz < -6 | svy$haz > 6), svy$flag + 1, svy$flag)
-#' svy$flag <- ifelse(!is.na(svy$whz) & (svy$whz < -5 | svy$whz > 5), svy$flag + 2, svy$flag)
-#' svy$flag <- ifelse(!is.na(svy$waz) & (svy$waz < -6 | svy$waz > 5), svy$flag + 4, svy$flag)
+#' svy$flag <- ifelse(!is.na(svy$haz) & (svy$haz < -6 | svy$haz > 6),
+#'                    svy$flag + 1, svy$flag)
+#' svy$flag <- ifelse(!is.na(svy$whz) & (svy$whz < -5 | svy$whz > 5),
+#'                    svy$flag + 2, svy$flag)
+#' svy$flag <- ifelse(!is.na(svy$waz) & (svy$waz < -6 | svy$waz > 5),
+#'                    svy$flag + 4, svy$flag)
 #' svy <- svy[svy$flag == 0, ]
 #' svy$stunted <- ifelse(svy$haz < -2, 1, 2)
+#'
+#' ## set seed to 0 to replicate results
+#' set.seed(0)
 #' greensIndex(data = svy, psu = "psu", case = "stunted")
 #'
 #' @export
@@ -54,7 +60,7 @@
 
 greensIndex <- function(data, psu, case, replicates = 999) {
   caseCounts <- table(data[[psu]], data[[case]])[ ,"1"]
-  set.seed(0)
+
   boot <- NULL
 
   for(i in 1:replicates) {
@@ -62,7 +68,10 @@ greensIndex <- function(data, psu, case, replicates = 999) {
     boot <- c(boot, (var(counts) / mean(counts) - 1) / (sum(counts) - 1))
   }
 
-  GI <- round(stats::quantile(boot, probs = c(0.5, 0.025, 0.975), na.rm = TRUE), 4)
+  GI <- round(stats::quantile(boot,
+                              probs = c(0.5, 0.025, 0.975),
+                              na.rm = TRUE), 4)
+
   p <- 1 - sum(boot > 0, na.rm = TRUE) / sum(!is.na(boot))
 
   if(GI[1] < 0) {

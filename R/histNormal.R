@@ -32,9 +32,11 @@ histNormal <- function(x,
                        main = deparse(substitute(x)),
                        breaks = "Sturges",
                        ylim = NULL) {
-  h <- hist(x, plot = FALSE, breaks = breaks)
+  h <- graphics::hist(x, plot = FALSE, breaks = breaks)
   xfit <- seq(min(x, na.rm = TRUE), max(x, na.rm = TRUE), length = 100)
-  yfit <- dnorm(xfit, mean = mean(x, na.rm = TRUE), sd = sd(x, na.rm = TRUE))
+  yfit <- stats::dnorm(xfit,
+                       mean = mean(x, na.rm = TRUE),
+                       sd = stats::sd(x, na.rm = TRUE))
   yfit <- yfit * diff(h$mids[1:2]) * length(x)
 
   if(is.null(ylim)) {

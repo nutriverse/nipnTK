@@ -103,7 +103,8 @@ print.ageChildren <- function(x, ...) {
 #' @param x Object resulting from applying [ageChildren()] function
 #' @param ... Additional [barplot()] graphical parameters
 #'
-#' @return Bar plot comparing table of observed counts vs table of expected counts
+#' @return Bar plot comparing table of observed counts vs table of expected
+#'   counts
 #'
 #' @examples
 #' # Plot Chi-Squared test for age of children in dp.ex02 sample dataset using
@@ -119,7 +120,7 @@ print.ageChildren <- function(x, ...) {
 
 plot.ageChildren <- function(x, ...) {
   YLIM = c(0, max(max(x$observed), max(x$expected)))
-  par(mfcol = c(1, 2))
+  withr::local_par(mfcol = c(1, 2))
   graphics::barplot(x$observed, main = "Observed", ylim = YLIM)
   graphics::barplot(x$expected, main = "Expected", ylim = YLIM)
 }
