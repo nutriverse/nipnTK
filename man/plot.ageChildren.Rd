@@ -12,7 +12,8 @@
 \item{...}{Additional \code{\link[=barplot]{barplot()}} graphical parameters}
 }
 \value{
-Bar plot comparing table of observed counts vs table of expected counts
+Bar plot comparing table of observed counts vs table of expected
+counts
 }
 \description{
 Plot helper function for \code{\link[=ageChildren]{ageChildren()}} function

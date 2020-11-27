@@ -34,4 +34,5 @@ ageRatioTest(svy$age, ratio = 0.85)
 
 # The age ratio test applied to data for each sex separately
 by(svy$age, svy$sex, ageRatioTest, ratio = 0.85)
+
 }
