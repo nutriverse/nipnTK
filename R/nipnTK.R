@@ -13,6 +13,7 @@
 #' @importFrom graphics abline axTicks axis barplot hist lines par plot rect
 #'   strheight strwidth text
 #' @importFrom bbw recode
+#' @importFrom withr local_par
 #'
 #
 ################################################################################

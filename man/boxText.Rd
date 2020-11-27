@@ -34,12 +34,15 @@ boxText(
 Plot text in a coloured bounding box.
 }
 \examples{
-\dontrun{
-  boxText(x = sum(par("usr")[1:2]) / 2,
-          y = max(x$tab) * 0.1,
-          labels = "(numbers on bars represent the proportions in each class)",
-          cex = cex,
-          pad = TRUE)
-}
+## Use of boxtext in the ageHeaping plot function
+svy <- dp.ex02
+ah12 <- ageHeaping(svy$age)
+
+plot.new()
+boxText(x = as.numeric(names(ah12$tab)),
+        y = max(ah12$tab) * 0.1,
+        labels = paste(sprintf(fmt = "\%3.1f", ah12$pct), "\%", sep = ""),
+        cex = 0.5,
+        pad = TRUE)
 
 }

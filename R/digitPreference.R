@@ -47,9 +47,11 @@ digitPreference <- function(x, digits = 1, values = 0:9) {
   finalDigit <- substr(x, nchar(x), nchar(x))
   tab <- fullTable(finalDigit, values = values)
   names(dimnames(tab)) <- dataName
-  chiSq <- chisq.test(tab)
+  chiSq <- stats::chisq.test(tab)
   pct <- round(prop.table(tab) * 100, 1)
-  dps <- round(100 * sqrt(chiSq$statistic / (sum(chiSq$observed) * chiSq$parameter)), 2)
+  dps <- round(
+    100 * sqrt(chiSq$statistic / (sum(chiSq$observed) * chiSq$parameter)), 2
+  )
   dpsClass <- ifelse(dps < 8, "Excellent",
                 ifelse(dps < 12, "Good",
                   ifelse(dps < 20, "Acceptable", "Problematic")))
@@ -121,11 +123,10 @@ plot.digitPreference <- function(x,
                                  ylab = "Frequency",
                                  cex = 0.75,
                                  ...) {
-
   main <- ifelse(main == "", names(dimnames(x$tab)), main)
   main <- paste(main, " (DPS = ", x$dps, " : ", x$dpsClass, ")", sep = "")
   plot(x$tab, main = main, xlab = xlab, ylab = ylab, frame.plot = FALSE, lwd = 3)
-  abline(h = sum(x$tab) / length(x$tab), lty = 3)
+  graphics::abline(h = sum(x$tab) / length(x$tab), lty = 3)
   boxText(as.numeric(names(x$tab)), rep(max(x$tab) * 0.2, length(x$tab)),
           paste(sprintf(fmt = "%3.1f", x$pct), "%", sep = ""),
           cex = cex, pad = FALSE)

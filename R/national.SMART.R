@@ -33,11 +33,12 @@ national.SMART <- function(x, strata, indices = c("haz", "whz", "waz")) {
 
     for(j in indices) {
       referenceMean <- mean(stratumData[[j]], na.rm = TRUE)
-      stratumData$flagSMART <- ifelse(!is.na(stratumData[[j]]) &
-                                        (stratumData[[j]] < (referenceMean - 3) |
-                                           stratumData[[j]] > (referenceMean + 3)),
-                                      stratumData$flagSMART + 2^lambda,
-                                      stratumData$flagSMART)
+      stratumData$flagSMART <- ifelse(
+        !is.na(stratumData[[j]]) &
+          (stratumData[[j]] < (referenceMean - 3) |
+             stratumData[[j]] > (referenceMean + 3)),
+        stratumData$flagSMART + 2 ^ lambda, stratumData$flagSMART
+      )
       lambda <- lambda + 1
     }
     result <- rbind(result, stratumData)

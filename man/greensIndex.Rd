@@ -49,11 +49,17 @@ interpretation of Green’s Index is straightforward:\tabular{ll}{
 # (flag.ex01)
 svy <- flag.ex01
 svy$flag <- 0
-svy$flag <- ifelse(!is.na(svy$haz) & (svy$haz < -6 | svy$haz > 6), svy$flag + 1, svy$flag)
-svy$flag <- ifelse(!is.na(svy$whz) & (svy$whz < -5 | svy$whz > 5), svy$flag + 2, svy$flag)
-svy$flag <- ifelse(!is.na(svy$waz) & (svy$waz < -6 | svy$waz > 5), svy$flag + 4, svy$flag)
+svy$flag <- ifelse(!is.na(svy$haz) & (svy$haz < -6 | svy$haz > 6),
+                   svy$flag + 1, svy$flag)
+svy$flag <- ifelse(!is.na(svy$whz) & (svy$whz < -5 | svy$whz > 5),
+                   svy$flag + 2, svy$flag)
+svy$flag <- ifelse(!is.na(svy$waz) & (svy$waz < -6 | svy$waz > 5),
+                   svy$flag + 4, svy$flag)
 svy <- svy[svy$flag == 0, ]
 svy$stunted <- ifelse(svy$haz < -2, 1, 2)
+
+## set seed to 0 to replicate results
+set.seed(0)
 greensIndex(data = svy, psu = "psu", case = "stunted")
 
 }

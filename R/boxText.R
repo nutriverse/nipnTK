@@ -13,13 +13,16 @@
 #' @return NULL
 #'
 #' @examples
-#' \dontrun{
-#'   boxText(x = sum(par("usr")[1:2]) / 2,
-#'           y = max(x$tab) * 0.1,
-#'           labels = "(numbers on bars represent the proportions in each class)",
-#'           cex = cex,
-#'           pad = TRUE)
-#' }
+#' ## Use of boxtext in the ageHeaping plot function
+#' svy <- dp.ex02
+#' ah12 <- ageHeaping(svy$age)
+#'
+#' plot.new()
+#' boxText(x = as.numeric(names(ah12$tab)),
+#'         y = max(ah12$tab) * 0.1,
+#'         labels = paste(sprintf(fmt = "%3.1f", ah12$pct), "%", sep = ""),
+#'         cex = 0.5,
+#'         pad = TRUE)
 #'
 #' @export
 #'
@@ -34,9 +37,10 @@ boxText <- function(x,
                     border = FALSE,
                     lwd = 0.5,
                     pad = TRUE) {
-  w <- strwidth(labels, cex = cex)
-  w <- ifelse(pad, w + strwidth("w", cex = cex), w)
-  h <- 2 * strheight(labels, cex = cex)
-  rect(x - w / 2, y - h / 2, x + w / 2, y + h / 2, col = col, border = border, lwd = lwd)
-  text(x, y, labels = labels, cex = cex)
+  w <- graphics::strwidth(labels, cex = cex)
+  w <- ifelse(pad, w + graphics::strwidth("w", cex = cex), w)
+  h <- 2 * graphics::strheight(labels, cex = cex)
+  graphics::rect(x - w / 2, y - h / 2, x + w / 2, y + h / 2,
+                 col = col, border = border, lwd = lwd)
+  graphics::text(x, y, labels = labels, cex = cex)
 }

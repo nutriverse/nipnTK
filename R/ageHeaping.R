@@ -41,10 +41,13 @@ ageHeaping <- function(x, divisor = 12) {
   dataName <- deparse(substitute(x))
   r <- x %% divisor
   tab <- fullTable(r, values = 0:(divisor - 1))
-  names(dimnames(tab)) <- paste("Remainder of ", dataName, " / ", divisor, sep = "")
+  names(dimnames(tab)) <- paste("Remainder of ",
+                                dataName, " / ",
+                                divisor, sep = "")
   chiSq <- stats::chisq.test(tab)
   pct <- round(prop.table(tab) * 100, 1)
-  result <- list(X2 = chiSq$statistic, df = chiSq$parameter, p = chiSq$p.value, tab = tab, pct = pct)
+  result <- list(X2 = chiSq$statistic, df = chiSq$parameter,
+                 p = chiSq$p.value, tab = tab, pct = pct)
   class(result) <- "ageHeaping"
   return(result)
 }
