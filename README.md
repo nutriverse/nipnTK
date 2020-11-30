@@ -10,8 +10,11 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN](https://img.shields.io/cran/v/nipnTK.svg)](https://cran.r-project.org/package=nipnTK)
+[![cran
+checks](https://cranchecks.info/badges/summary/nipnTK)](https://cran.r-project.org/web/checks/check_results_nipnTK.html)
 [![CRAN](https://img.shields.io/cran/l/nipnTK.svg)](https://CRAN.R-project.org/package=nipnTK)
 [![CRAN](http://cranlogs.r-pkg.org/badges/nipnTK)](https://cran.r-project.org/package=nipnTK)
+[![CRAN](http://cranlogs.r-pkg.org/badges/grand-total/nipnTK)](https://cran.r-project.org/package=nipnTK)
 [![R build
 status](https://github.com/nutriverse/nipnTK/workflows/R-CMD-check/badge.svg)](https://github.com/nutriverse/nipnTK/actions)
 [![AppVeyor Build
