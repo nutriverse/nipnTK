@@ -1082,9 +1082,9 @@ Everyone is sure of this [the normal distribution] … experimentalists believe 
 <pre><code>#&gt; 
 #&gt;  Green's Index of Dispersion
 #&gt; 
-#&gt; Green's Index (GI) of Dispersion  = -0.0014, 95% CI = (-0.0021, -0.0005)
+#&gt; Green's Index (GI) of Dispersion  = -0.0013, 95% CI = (-0.0022, -0.0004)
 #&gt; Maximum uniformity for this data  = -0.0035
-#&gt;                          p-value  =  0.0030</code></pre>
+#&gt;                          p-value  =  0.0000</code></pre>
 <p>The point estimate of Green’s Index (<strong>-0.0013</strong>) is below zero and the p-value of the test for a random distribution of cases across primary sampling units (<strong>0.0040</strong>) is below 0.05. The distribution of cases across primary sampling units in the example data is significantly more uniform than it is random. We can see this graphically using:</p>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">psu</span>, <span class="va">svy</span><span class="op">$</span><span class="va">stunted</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>
