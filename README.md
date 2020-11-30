@@ -22,6 +22,8 @@ Status](https://ci.appveyor.com/api/projects/status/github/nutriverse/nipnTK?bra
 [![R build
 status](https://github.com/nutriverse/nipnTK/workflows/test-coverage/badge.svg)](https://github.com/nutriverse/nipnTK/actions)
 [![codecov](https://codecov.io/gh/nutriverse/nipnTK/branch/master/graph/badge.svg)](https://codecov.io/gh/nutriverse/nipnTK)
+[![CodeFactor](https://www.codefactor.io/repository/github/nutriverse/nipntk/badge)](https://www.codefactor.io/repository/github/nutriverse/nipntk)
+[![DOI](https://zenodo.org/badge/118171028.svg)](https://zenodo.org/badge/latestdoi/118171028)
 <!-- Badges end here -->
 
 [National Information Platforms for Nutrition
