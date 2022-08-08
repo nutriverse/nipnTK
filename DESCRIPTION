@@ -1,7 +1,7 @@
 Package: nipnTK
 Type: Package
 Title: National Information Platforms for Nutrition Anthropometric Data Toolkit
-Version: 0.1.0.9000
+Version: 0.1.1.9000
 Authors@R: c(
     person(given = "Mark", 
            family = "Myatt", 
@@ -34,7 +34,7 @@ Suggests:
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 URL: https://nutriverse.io/nipnTK/, https://github.com/nutriverse/nipnTK
 BugReports: https://github.com/nutriverse/nipnTK/issues
