@@ -3,6 +3,7 @@ AnthroPlus
 AppVeyor
 BAZ
 BMI
+CodeFactor
 DHS
 DPS
 Dadaab
@@ -44,6 +45,7 @@ bp
 bpqa
 cex
 codecov
+cran
 csv
 demispan
 df
@@ -87,7 +89,3 @@ xquartz
 years’
 zt
 β
-Anthropometric
-anthropometric
-anthropometry
-
