@@ -2,7 +2,7 @@
 
 ## Bugs
 
-* Submit an issue on the [issues page](https://github.com/como-ph/oxcgrt/issues)
+* Submit an issue on the [issues page](https://github.com/nutriverse/nipnTK/issues)
 
 ## Code contributions
 
@@ -11,14 +11,14 @@
 * Clone your version on your account down to your machine from your account 
 
 ```
-git clone https://github.com/<yourgithubusername>/oxcgrt.git
+git clone https://github.com/<yourgithubusername>/nipnTK.git
 ```
 
-* Make sure to track progress upstream i.e., on our version of `oxcgrt` 
-at `oxcgrt/covidphdata`, by doing 
+* Make sure to track progress upstream i.e., on our version of `nipnTK` 
+at `nutriverse/nipnTK`, by doing 
 
 ```
-git remote add upstream https://github.com/como-ph/oxcgrt.git
+git remote add upstream https://github.com/nutriverse/nipnTK.git
 ```
 
 * Before making changes make sure to pull changes in from `upstream` by doing 
@@ -32,4 +32,4 @@ documentation
 
 * Push up changes to your account
 
-* Submit a pull request at `como-ph/oxcgrt`
+* Submit a pull request at `nutriverse/nipnTK`

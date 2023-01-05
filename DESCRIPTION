@@ -30,11 +30,12 @@ Suggests:
     knitr,
     rmarkdown,
     tufte,
-    spelling
+    spelling,
+    covr
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 URL: https://nutriverse.io/nipnTK/, https://github.com/nutriverse/nipnTK
 BugReports: https://github.com/nutriverse/nipnTK/issues

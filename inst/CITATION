@@ -1,0 +1,18 @@
+citHeader("To cite nipnTK in publications use:")
+
+citEntry(
+  entry    = "Manual",
+  title    = "nipnTK: National Information Platforms for Nutrition (NiPN) Data Quality Toolkit",
+  author   = c(person("Mark Myatt"), person("Ernest Guevarra")),
+  year     = "2023",
+  note     = "R package version 0.1.1.9000",
+  url      = "https://nutriverse.io/nipnTK/",
+  doi      = "10.5281/zenodo.4297897",
+  textVersion = paste(
+    "Mark Myatt and Ernest Guevarra (2023).",
+    "nipnTK: National Information Platforms for Nutrition (NiPN) Data Quality Toolkit",
+    "R package version 0.1.1.9000",
+    "URL https://nutriverse.io/nipnTK/",
+    "DOI 10.5281/zenodo.4297897"
+  )
+)
