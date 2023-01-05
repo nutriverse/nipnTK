@@ -19,6 +19,8 @@ release:
 
 * upgrade website to bootstrap 5
 
+* edit typo in vignette
+
 
 # nipnTK 0.1.0
 
