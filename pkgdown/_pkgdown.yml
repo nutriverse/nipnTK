@@ -1,16 +1,18 @@
 title: nipnTK
 
-url: https://nutriverse.io/nipnTK
+url: https://nutriverse.io/nipnTK/
 
 template:
-  params:
-    bootswatch: yeti
-    ganalytics: UA-155098215-2
+  bootstrap: 5
+  bootswatch: lumen
+  theme: haddock
+  ganalytics: UA-155098215-2
 
 navbar:
-  type: inverse
+  bg: primary
+  type: light
   structure:
-    left: [home, intro, reference, articles, news]
+    left:  [home, intro, reference, articles, news]
     right: [twitter, linkedin, github]
 
   components:

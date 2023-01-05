@@ -1,6 +1,7 @@
 Anthro
 AnthroPlus
 AppVeyor
+Appveyor
 BAZ
 BMI
 CodeFactor
@@ -43,7 +44,9 @@ agro
 baz
 bp
 bpqa
+cd
 cex
+ci
 codecov
 cran
 csv

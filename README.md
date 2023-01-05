@@ -8,20 +8,18 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN](https://img.shields.io/cran/v/nipnTK.svg)](https://cran.r-project.org/package=nipnTK)
 [![cran
 checks](https://cranchecks.info/badges/summary/nipnTK)](https://cran.r-project.org/web/checks/check_results_nipnTK.html)
 [![CRAN](https://img.shields.io/cran/l/nipnTK.svg)](https://CRAN.R-project.org/package=nipnTK)
 [![CRAN](http://cranlogs.r-pkg.org/badges/nipnTK)](https://cran.r-project.org/package=nipnTK)
 [![CRAN](http://cranlogs.r-pkg.org/badges/grand-total/nipnTK)](https://cran.r-project.org/package=nipnTK)
-[![R build
-status](https://github.com/nutriverse/nipnTK/workflows/R-CMD-check/badge.svg)](https://github.com/nutriverse/nipnTK/actions)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/nutriverse/nipnTK?branch=master&svg=true)](https://ci.appveyor.com/project/nutriverse/nipnTK)
-[![R build
-status](https://github.com/nutriverse/nipnTK/workflows/test-coverage/badge.svg)](https://github.com/nutriverse/nipnTK/actions)
-[![codecov](https://codecov.io/gh/nutriverse/nipnTK/branch/master/graph/badge.svg)](https://codecov.io/gh/nutriverse/nipnTK)
+[![R-CMD-check](https://github.com/nutriverse/nipnTK/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nutriverse/nipnTK/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/nutriverse/nipnTK/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/nutriverse/nipnTK/actions/workflows/test-coverage.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/nutriverse/nipnTK/branch/main/graph/badge.svg)](https://app.codecov.io/gh/nutriverse/nipnTK?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/nutriverse/nipntk/badge)](https://www.codefactor.io/repository/github/nutriverse/nipntk)
 [![DOI](https://zenodo.org/badge/118171028.svg)](https://zenodo.org/badge/latestdoi/118171028)
 <!-- Badges end here -->
@@ -49,7 +47,7 @@ variables.
 
 ## Requirements
 
-  - [R](https://cran.r-project.org) version 3.4 or higher
+- [R](https://cran.r-project.org) version 3.4 or higher
 
 Extensive use is made of the [R](https://cran.r-project.org) language
 and environment for statistical computing. This is a free and powerful
@@ -112,6 +110,33 @@ These activities and a proposed order in which they should be performed
 are shown below:
 
 <img src="man/figures/nipnWorkflow.png" width="918" />
+
+## Citation
+
+If you find the `nipnTK` package useful, please cite using the suggested
+citation provided by a call to the `citation` function as follows:
+
+``` r
+citation("nipnTK")
+#> 
+#> To cite nipnTK in publications use:
+#> 
+#>   Mark Myatt and Ernest Guevarra (2023). nipnTK: National Information
+#>   Platforms for Nutrition (NiPN) Data Quality Toolkit R package version
+#>   0.1.1.9000 URL https://nutriverse.io/nipnTK/ DOI
+#>   10.5281/zenodo.4297897
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {nipnTK: National Information Platforms for Nutrition (NiPN) Data Quality Toolkit},
+#>     author = {{Mark Myatt} and {Ernest Guevarra}},
+#>     year = {2023},
+#>     note = {R package version 0.1.1.9000},
+#>     url = {https://nutriverse.io/nipnTK/},
+#>     doi = {10.5281/zenodo.4297897},
+#>   }
+```
 
 ## Community guidelines
 

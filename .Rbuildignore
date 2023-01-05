@@ -23,3 +23,5 @@
 ^pkgdown$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^CODE_OF_CONDUCT\.md$
+^codecov\.yml$
