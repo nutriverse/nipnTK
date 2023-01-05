@@ -414,7 +414,7 @@ as the tall central columns that exceed the expected values shown by the overlai
 Skew and kurtosis are both used in SMART plausibility checks. Table below shows how skew and kurtosis statistics are applied by SMART.
 
 ```{r tab2, echo = FALSE, eval = TRUE}
-col1 <- c("< 0.2", "≥ 0.2 and < 0.4", "≥ 0.6 and < 0.6", "≥ 0.6")
+col1 <- c("< 0.2", "≥ 0.2 and < 0.4", "≥ 0.4 and < 0.6", "≥ 0.6")
 col2 <- c("Excellent", "Good", "Acceptable", "Problematic")
 
 tab <- data.frame(col1, col2)
