@@ -31,7 +31,8 @@ Suggests:
     rmarkdown,
     tufte,
     spelling,
-    covr
+    covr,
+    kableExtra
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
