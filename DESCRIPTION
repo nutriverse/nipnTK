@@ -31,11 +31,12 @@ Suggests:
     rmarkdown,
     tufte,
     spelling,
-    covr
+    covr,
+    kableExtra
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Roxygen: list(markdown = TRUE)
 URL: https://nutriverse.io/nipnTK/, https://github.com/nutriverse/nipnTK
 BugReports: https://github.com/nutriverse/nipnTK/issues

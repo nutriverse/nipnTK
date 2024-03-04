@@ -25,3 +25,4 @@
 ^CRAN-RELEASE$
 ^CODE_OF_CONDUCT\.md$
 ^codecov\.yml$
+^_pkgdown\.yml$

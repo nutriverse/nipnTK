@@ -2,8 +2,8 @@
 % Please edit documentation in R/nipnTK.R
 \docType{package}
 \name{nipnTK}
-\alias{nipnTK}
 \alias{nipnTK-package}
+\alias{nipnTK}
 \title{NiPN data quality toolkit}
 \description{
 This is a library of R functions for assessing data-quality in nutritional
