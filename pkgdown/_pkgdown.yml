@@ -4,7 +4,7 @@ template:
   bootstrap: 5
   bootswatch: cosmo
   theme: haddock
-  ganalytics: UA-155098215-2
+  ganalytics: G-HD17FR1JE1
 navbar:
   bg: success
   type: light
