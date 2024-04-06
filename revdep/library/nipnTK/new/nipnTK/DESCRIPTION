@@ -35,8 +35,8 @@ VignetteBuilder: knitr
 RemoteType: local
 RemoteUrl: /home/ernestguevarra/Documents/GitHub/nipnTK
 NeedsCompilation: no
-Packaged: 2024-04-06 21:13:08 UTC; ernestguevarra
+Packaged: 2024-04-06 21:36:26 UTC; ernestguevarra
 Author: Mark Myatt [aut] (<https://orcid.org/0000-0003-1119-1474>),
   Ernest Guevarra [aut, cre] (<https://orcid.org/0000-0002-4887-4415>)
 Maintainer: Ernest Guevarra <ernest@guevarra.io>
-Built: R 4.3.3; ; 2024-04-06 21:13:09 UTC; unix
+Built: R 4.3.3; ; 2024-04-06 21:36:26 UTC; unix
