@@ -75,7 +75,7 @@ ageRatioTest <- function(x, ratio = 0.85) {
 #' @param x Object resulting from applying [ageRatioTest()] function
 #' @param ... Additional [print()] arguments
 #'
-#' @return Printed output of [ageRatioTest()] function
+#' @returns Printed output of [ageRatioTest()] function
 #'
 #' @examples
 #' # Print age-ratio test results for survey dataset from Kabul, Afghanistan

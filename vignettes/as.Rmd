@@ -12,7 +12,6 @@ knitr::opts_chunk$set(
 
 ```{r setup, echo = FALSE}
 library(nipnTK)
-library(bbw)
 library(knitr)
 library(kableExtra)
 ```
@@ -40,10 +39,15 @@ The dataset `dp.ex02` is a comma-separated-value (CSV) file containing anthropom
 
 ### Tabulation and visualisation
 
-The NiPN data quality toolkit provides an R language function called `recode()` that makes it easy to recode and group data. We will use the `recode()` function to group the data in the age variable (age in months) into year-centred age-groups.
+We will use the base R function `cut()` to group the data in the age variable (age in months) into year-centred age-groups.
 
 ```{r as2, echo = TRUE, eval = TRUE}
-svy$ycag <- recode(svy$age, "6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5")
+svy$ycag <- cut(
+  svy$age, 
+  breaks = c(6, 18, 30, 42, 54, 60), 
+  labels = 1:5,
+  include.lowest = TRUE, right = FALSE
+)
 head(svy)
 ```
 
@@ -134,19 +138,7 @@ pyramid.plot(svy$ycag, svy$sex,
 
 The `pyramid.plot()` function uses the values of the grouped age variable as y-axis value labels. 
 
-We can assign descriptive text values using the `recode()` function. For example:
-
-```{r as7, echo = TRUE, eval = TRUE, fig.align = "center"}
-svy$ageLabel <- recode(svy$age, "6:29='< 30 months'; 30:hi='30 month or older'")
-
-pyramid.plot(svy$ageLabel, 
-             svy$sex, 
-             main = "Distribution of age by sex", 
-             xlab = "Frequency (Males | Females)", 
-             ylab = "Age-group")
-```
-
-We can also use a factor type variable. This type of variable allows labels to be specified: 
+We can use a factor type variable. This type of variable allows labels to be specified: 
 
 ```{r as7a, echo = TRUE, eval = TRUE, fig.align = "center"}
 svy$ageLabel <- factor(svy$ycag,
@@ -420,7 +412,6 @@ females <- c(564103, 523046, 499895, 482923, 467949)
 df <- data.frame(age, both, males, females)
 
 kable(x = df,
-      booktabs = TRUE,
       col.names = c("Age", "Both Sexes", "Males", "Females")) %>%
   kable_styling(bootstrap_options = c("striped"), full_width = FALSE)
 ```
@@ -493,10 +484,16 @@ The age ratio is defined as:
 
 $$ \text{Age ratio} ~ = ~ \frac{\text{number of children aged between 6 and 29 months}}{\text{number of children aged between 30 and 59 months}} $$
 
-We will use the `recode()` function from NiPN data quality toolkit to create the relevant age-groups: 
+We will use the base R `cut()` function to create the relevant age-groups: 
 
 ```{r as20, echo = TRUE, eval = TRUE}
-svy$ageGroup <- recode(svy$age, "6:29=1; 30:59=2")
+svy$ageGroup <- cut(
+  svy$age, 
+  breaks = c(6, 30, 60), 
+  labels = 1:2, 
+  include.lowest = TRUE, 
+  right = FALSE
+)
 head(svy)
 ```
 

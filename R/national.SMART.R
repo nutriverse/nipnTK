@@ -7,7 +7,7 @@
 #' @param strata Name of column in `x` that defines the strata
 #' @param indices Names of columns in `x` containing indices
 #'
-#' @return A data.frame with same structure as `x` with a `flagSMART`
+#' @returns A data.frame with same structure as `x` with a `flagSMART`
 #'   column added. This column is coded using sums of powers of two
 #'
 #' @examples

@@ -6,7 +6,7 @@
 #' @param values A vector of values to be included in a table. Default is:
 #'   `min(x, na.rm = TRUE):max(x, na.rm = TRUE)`
 #'
-#' @return A table object including zero cells
+#' @returns A table object including zero cells
 #'
 #' @examples
 #' # Generate some artificial data and then apply `fullTable()`

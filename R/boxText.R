@@ -10,7 +10,7 @@
 #' @param lwd Border width
 #' @param pad Add padding to (L) and (R) ends of bounding box
 #'
-#' @return NULL
+#' @returns NULL
 #'
 #' @examples
 #' ## Use of boxtext in the ageHeaping plot function
