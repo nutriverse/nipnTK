@@ -2,6 +2,9 @@ title: nipnTK
 
 url: https://nutriverse.io/nipnTK/
 
+development:
+  mode: auto
+
 template:
   bootstrap: 5
   bootswatch: cosmo
@@ -43,6 +46,9 @@ navbar:
       href: https://www.linkedin.com/company/katilingban/
 
 home:
+  sidebar:
+    structure: [links, license, community, citation, authors, dev]
+
   links:
   - text: Read more about NiPN
     href: https://www.nipn-nutrition-platforms.org
