@@ -1,4 +1,23 @@
-# nipnTK 0.1.2
+# nipnTK 0.1.2.9000
+
+Third release of `nipnTK`. This is a GitHub-only development release. In this
+release:
+
+## Bug fixes
+
+* Resolved issue with `ageRatioTest()` not working properly when age has
+missing values
+
+* Resolved issue with `ageRatioTest()` not providing appropriate results when
+age values are numeric
+
+## General updates
+
+* added `pkgdown` GitHub Actions workflow to deploy website via `gh-pages`
+branch
+
+* updated documentation for `ageRatioTest()`
+
 
 # nipnTK 0.1.1.9000
 
