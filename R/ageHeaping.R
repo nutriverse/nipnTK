@@ -7,10 +7,11 @@
 #' very common. This is a major reason why data from nutritional anthropometry
 #' surveys is often analysed and reported using broad age groups.
 #'
-#' @param x Vector of ages
+#' @param x A vector of ages. Should either be in whole months (integer) or in
+#'   calculated decimal months (numeric).
 #' @param divisor Divisor (usually 5, 6, 10, or 12); default is 12
 #'
-#' @return A list of class "ageHeaping" with:
+#' @returns A list of class "ageHeaping" with:
 #'
 #' | **Variable** | **Description** |
 #' | :--- | :--- |
@@ -38,12 +39,14 @@
 ################################################################################
 
 ageHeaping <- function(x, divisor = 12) {
+  ## If x is not numeric or integer ----
+  if (!is.numeric(x) & !is.integer(x))
+    stop("Age should be of class integer or numeric. Try again.")
+
   dataName <- deparse(substitute(x))
   r <- x %% divisor
   tab <- fullTable(r, values = 0:(divisor - 1))
-  names(dimnames(tab)) <- paste("Remainder of ",
-                                dataName, " / ",
-                                divisor, sep = "")
+  names(dimnames(tab)) <- paste0("Remainder of ", dataName, " / ", divisor)
   chiSq <- stats::chisq.test(tab)
   pct <- round(prop.table(tab) * 100, 1)
   result <- list(X2 = chiSq$statistic, df = chiSq$parameter,
@@ -60,7 +63,7 @@ ageHeaping <- function(x, divisor = 12) {
 #' @param x Object resulting from applying the [ageHeaping()] function
 #' @param ... Additional [print()] arguments
 #'
-#' @return Printed output of the [ageHeaping()] function
+#' @returns Printed output of the [ageHeaping()] function
 #'
 #' @examples
 #' # Print age heaping test on SMART survey data in Kabul, Afghanistan (dp.ex02)
@@ -93,7 +96,7 @@ print.ageHeaping <- function(x, ...) {
 #' @param cex Character expansion (numeric); default is 0.75
 #' @param ... Additional [plot()] graphical parameters
 #'
-#' @return Barplot of frequency of remainders of age when divided by a specified
+#' @returns Barplot of frequency of remainders of age when divided by a specified
 #' divisor
 #'
 #' @examples

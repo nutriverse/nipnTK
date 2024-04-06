@@ -25,7 +25,7 @@
 #'   coded with 1 = case
 #' @param replicates Number of bootstrap replicates (default is 9999)
 #'
-#' @return A list of class `GI` with names:
+#' @returns A list of class `GI` with names:
 #'
 #' | **Variable** | **Description** |
 #' | :--- | :--- |
@@ -92,7 +92,7 @@ greensIndex <- function(data, psu, case, replicates = 999) {
 #' @param x Object resulting from applying the [greensIndex()] function
 #' @param ... Additional [print()] parameters
 #'
-#' @return Printed output of [greensIndex()] function
+#' @returns Printed output of [greensIndex()] function
 #'
 #' @examples
 #' # Apply Green's Index using anthropometric data from a SMART survey in Sudan

@@ -10,7 +10,7 @@
 #' @param breaks Passed to [hist()] function (`?hist` for details)
 #' @param ylim `y-axis` limits
 #'
-#' @return NULL
+#' @returns NULL
 #'
 #' @examples
 #' # histNormal() with data from a SMART survey in Kabul, Afghanistan

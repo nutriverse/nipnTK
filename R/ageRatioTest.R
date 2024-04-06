@@ -9,7 +9,7 @@
 #' of the observed ratio to the expected ratio is then compared statistically
 #' using Chi-squared test.
 #'
-#' @param x A vector for age. Should either be in whole months (integer) or in
+#' @param x A vector of ages. Should either be in whole months (integer) or in
 #'   calculated decimal months (numeric).
 #' @param ratio Expected age ratio. Default is 0.85.
 #'
@@ -75,7 +75,7 @@ ageRatioTest <- function(x, ratio = 0.85) {
 #' @param x Object resulting from applying [ageRatioTest()] function
 #' @param ... Additional [print()] arguments
 #'
-#' @return Printed output of [ageRatioTest()] function
+#' @returns Printed output of [ageRatioTest()] function
 #'
 #' @examples
 #' # Print age-ratio test results for survey dataset from Kabul, Afghanistan

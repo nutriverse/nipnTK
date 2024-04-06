@@ -12,4 +12,8 @@ test_that("str(sk) is list", {
   expect_true(is.list(sk))
 })
 
+test_that("print(sk) message exists", {
+  expect_output(print(sk))
+})
+
 

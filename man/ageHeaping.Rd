@@ -7,7 +7,8 @@
 ageHeaping(x, divisor = 12)
 }
 \arguments{
-\item{x}{Vector of ages}
+\item{x}{A vector of ages. Should either be in whole months (integer) or in
+calculated decimal months (numeric).}
 
 \item{divisor}{Divisor (usually 5, 6, 10, or 12); default is 12}
 }

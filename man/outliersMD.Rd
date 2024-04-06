@@ -11,7 +11,7 @@ outliersMD(x, y, alpha = 0.001)
 
 \item{y}{Numeric vector}
 
-\item{alpha}{Critical \code{alpha} value to detect and outlier (defaults to
+\item{alpha}{Critical \code{alpha} value to detect an outlier (defaults to
 0.001)}
 }
 \value{
@@ -25,4 +25,5 @@ Mahalanobis distance to detect bivariate outliers
 # a SMART survey from the Democratic Republic of Congo (sp.ex01)
 svy <- sp.ex01
 svy[outliersMD(svy$height,svy$weight), ]
+
 }

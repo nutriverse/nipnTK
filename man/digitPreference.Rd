@@ -7,9 +7,9 @@
 digitPreference(x, digits = 1, values = 0:9)
 }
 \arguments{
-\item{x}{Numeric vector}
+\item{x}{Numeric vector of measurements}
 
-\item{digits}{Number of decimal places in \code{x}. using \code{digits = 1}
+\item{digits}{Number of decimal places in \code{x}. Using \code{digits = 1}
 (e.g.) allows 105 to be treated as 105.0}
 
 \item{values}{A vector of possible values for the final digit (default = 0:9)}

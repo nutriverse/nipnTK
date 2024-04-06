@@ -2,22 +2,16 @@
 % Please edit documentation in R/ageChildren.R
 \name{ageChildren}
 \alias{ageChildren}
-\title{Goodness of fit to an expected (model-based) age distribution}
+\title{Goodness of fit to an expected model-based age distribution}
 \usage{
-ageChildren(
-  age,
-  u5mr = 0,
-  groups = "6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5"
-)
+ageChildren(age, u5mr = 1)
 }
 \arguments{
-\item{age}{Vector of ages}
+\item{age}{A vector of ages. Should either be in whole months (integer) or in
+calculated decimal months (numeric).}
 
-\item{u5mr}{Under five years mortality rate as deaths / 10,000 persons / day}
-
-\item{groups}{Age groupings specified as recodes parameter in the
-\code{\link[bbw:recode]{bbw::recode()}} function; default is
-\code{"6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5"}}
+\item{u5mr}{A numeric value for under five years mortality rate expressed as
+deaths / 10,000 persons / day. Default is set to 1.}
 }
 \value{
 A list of class "ageChildren" with:\tabular{ll}{
@@ -31,7 +25,13 @@ A list of class "ageChildren" with:\tabular{ll}{
 }
 }
 \description{
-Goodness of fit to an expected (model-based) age distribution
+A simple model-based method for calculating expected numbers using
+exponential decay in a population in which births and deaths balance each
+other and with a 1:1 male to female sex ratio. This function is built
+specifically to test goodness of fit for a sample of children aged 6-59
+months old grouped into four 1 year age groups and 1 half year age group
+(6 to less than 18 months, 18 to less than 30 months, 30 to less than 42
+months, 42 to less than 54 months, and 54 months to less than 60 months).
 }
 \examples{
 # Chi-Squared test for age of children in dp.ex02 sample dataset using an
