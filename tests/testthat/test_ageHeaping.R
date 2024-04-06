@@ -32,3 +32,6 @@ test_that("plot(ah12) is NULL", {
 test_that("print(ah12) message exists", {
   expect_output(print(ah12))
 })
+
+expect_error(ageHeaping(as.character(svy$age)))
+

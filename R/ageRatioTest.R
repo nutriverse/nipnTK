@@ -43,9 +43,6 @@ ageRatioTest <- function(x, ratio = 0.85) {
   ## If x is numeric ----
   if (is.numeric(x)) x <- floor(x)
 
-  ## If x is integer ----
-  if (is.integer(x)) x <- x
-
   ## If x is not numeric or integer ----
   if (!is.numeric(x) & !is.integer(x))
     stop("Age should be of class integer or numeric. Try again.")
