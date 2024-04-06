@@ -23,7 +23,6 @@ Depends: R (>= 2.10)
 Imports: 
     stats,
     graphics,
-    bbw,
     withr
 Suggests: 
     testthat,
