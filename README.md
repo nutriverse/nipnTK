@@ -12,7 +12,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN](https://img.shields.io/cran/v/nipnTK.svg)](https://cran.r-project.org/package=nipnTK)
 [![cran
-checks](https://cranchecks.info/badges/summary/nipnTK)](https://cran.r-project.org/web/checks/check_results_nipnTK.html)
+checks](https://badges.cranchecks.info/worst/nipnTK.svg)](https://cran.r-project.org/web/checks/check_results_nipnTK.html)
 [![CRAN](https://img.shields.io/cran/l/nipnTK.svg)](https://CRAN.R-project.org/package=nipnTK)
 [![CRAN](http://cranlogs.r-pkg.org/badges/nipnTK)](https://cran.r-project.org/package=nipnTK)
 [![CRAN](http://cranlogs.r-pkg.org/badges/grand-total/nipnTK)](https://cran.r-project.org/package=nipnTK)
@@ -25,23 +25,24 @@ coverage](https://codecov.io/gh/nutriverse/nipnTK/branch/main/graph/badge.svg)](
 <!-- Badges end here -->
 
 [National Information Platforms for Nutrition
-(NiPN)](http://www.nipn-nutrition-platforms.org) is an initiative of the
-European Commission to provide support to countries to strengthen their
-information systems for nutrition and to improve the analysis of data so
-as to better inform the strategic decisions they are faced with to
-prevent malnutrition and its consequences.
+(NiPN)](https://www.nipn-nutrition-platforms.org) is an initiative of
+the European Commission to provide support to countries to strengthen
+their information systems for nutrition and to improve the analysis of
+data so as to better inform the strategic decisions they are faced with
+to prevent malnutrition and its consequences.
 
-As part of this mandate, [NiPN](http://www.nipn-nutrition-platforms.org)
-has commissioned work on the development of a toolkit to assess the
-quality of various nutrition-specific and nutrition-related data. This
-is a companion R package to the toolkit of practical analytical methods
-that can be applied to variables in datasets to assess their quality.
+As part of this mandate,
+[NiPN](https://www.nipn-nutrition-platforms.org) has commissioned work
+on the development of a toolkit to assess the quality of various
+nutrition-specific and nutrition-related data. This is a companion R
+package to the toolkit of practical analytical methods that can be
+applied to variables in datasets to assess their quality.
 
 The focus of the toolkit is on data required to assess anthropometric
 status such as measurements of weight, height or length, MUAC, sex and
 age. The focus is on anthropometric status but many of presented methods
 could be applied to other types of data.
-[NiPN](http://www.nipn-nutrition-platforms.org) may commission
+[NiPN](https://www.nipn-nutrition-platforms.org) may commission
 additional toolkits to examine other variables or other types of
 variables.
 
@@ -118,7 +119,6 @@ citation provided by a call to the `citation` function as follows:
 
 ``` r
 citation("nipnTK")
-#> 
 #> To cite nipnTK in publications use:
 #> 
 #>   Mark Myatt and Ernest Guevarra (2023). nipnTK: National Information
