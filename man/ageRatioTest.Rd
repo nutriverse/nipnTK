@@ -7,9 +7,10 @@
 ageRatioTest(x, ratio = 0.85)
 }
 \arguments{
-\item{x}{Numeric vector (age)}
+\item{x}{A vector for age. Should either be in whole months (integer) or in
+calculated decimal months (numeric).}
 
-\item{ratio}{Expected age ratio}
+\item{ratio}{Expected age ratio. Default is 0.85.}
 }
 \value{
 A lit of class \code{"ageRatioTest"} with:\tabular{ll}{
@@ -24,10 +25,15 @@ A lit of class \code{"ageRatioTest"} with:\tabular{ll}{
 }
 }
 \description{
-Age Ratio Test is an age-related test of survey and data quality.
+Age ratio test is an age-related test of survey and data quality. In this
+test, the ratio of the number of children aged from 6 to 29 months to the
+number of children aged from 30 to 59 months is calculated. This ratio is
+then compared to an expected ratio (usually set at 0.85). The difference
+of the observed ratio to the expected ratio is then compared statistically
+using Chi-squared test.
 }
 \examples{
-# Age-ratio test on survey dataset from Kabul, Afghanistan (dp.ex02)
+# Age-ratio test on survey dataset from Kabul, Afghanistan (`dp.ex02`)
 # with an age ratio of 0.85
 svy <- dp.ex02
 ageRatioTest(svy$age, ratio = 0.85)
