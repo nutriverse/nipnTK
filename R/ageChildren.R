@@ -53,9 +53,6 @@ ageChildren <- function(age,
   ## If age is numeric ----
   if (is.numeric(age)) age <- floor(age)
 
-  ## If age is integer ----
-  if (is.integer(age)) age <- age
-
   ## If x is not numeric or integer ----
   if (!is.numeric(age) & !is.integer(age))
     stop("Age should be of class integer or numeric. Try again.")
