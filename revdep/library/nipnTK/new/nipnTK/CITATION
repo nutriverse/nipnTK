@@ -1,0 +1,10 @@
+bibentry(
+  bibtype  = "Manual",
+  header   = "To cite nipnTK in publications use:",
+  title    = "nipnTK: National Information Platforms for Nutrition (NiPN) Data Quality Toolkit",
+  author   = c(person("Mark Myatt"), person("Ernest Guevarra")),
+  year     = "2024",
+  note     = "R package version 0.2.0",
+  url      = "https://nutriverse.io/nipnTK/",
+  doi      = "10.5281/zenodo.4297897"
+)

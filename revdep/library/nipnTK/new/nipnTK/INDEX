@@ -1,0 +1,64 @@
+ageChildren             Goodness of fit to an expected model-based age
+                        distribution
+ageHeaping              Age-heaping analysis
+ageRatioTest            Age ratio test
+ah.ex01                 Example dataset for age heaping function
+as.ex01                 Example dataset for age and sex distributions
+                        function
+as.ex02                 Example dataset for age and sex distributions
+                        function
+boxText                 Plot text in a coloured bounding box.
+digitPreference         Digit preference test
+dist.ex01               Example dataset for distributions of variables
+                        and indices
+dp.ex01                 Example dataset for digit preference function
+dp.ex02                 Example dataset for digit preference function
+dp.ex03                 Example dataset for digit preference
+flag.ex01               Example dataset for identifying outliers using
+                        flags
+flag.ex02               Example dataset for identifying outliers using
+                        flags
+flag.ex03               Example dataset for identifying outliers using
+                        flags
+fullTable               Fill out a one-dimensional table to include a
+                        specified range of values
+greensIndex             Green's Index of Dispersion
+histNormal              Histogram with normal curve superimposed to
+                        help with “by-eye” assessments of normality of
+                        distribution
+national.SMART          Add SMART flags to a stratified sample survey
+                        (e.g. MICS, DHS, national SMART)
+outliersMD              Mahalanobis distance to detect bivariate
+                        outliers
+outliersUV              IQR to detect univariate outliers
+plot.ageChildren        Plot helper function for 'ageChildren()'
+                        function
+plot.ageHeaping         'plot()' helper functions for 'ageHeaping()'
+                        functions
+plot.digitPreference    'plot()' helper function for
+                        'digitPreference()' function
+print.ageChildren       'print()' helper function for 'ageChildren()'
+                        function
+print.ageHeaping        'print()' helper functions for 'ageHeaping()'
+                        functions
+print.ageRatioTest      'print()' helper function for 'ageRatioTest()'
+                        function
+print.digitPreference   'print()' helper function for
+                        'digitPreference()' function
+print.greensIndex       'print()' helper function for
+                        'print.greensIndex()' function
+print.sexRatioTest      'print()' helper function for 'sexRatioTest()'
+                        function
+print.skewKurt          'print()' helper function for 'skewKurt()'
+                        function
+pyramid.plot            Pyramid plot function for creating population
+                        pyramids.
+qqNormalPlot            Normal quantile-quantile plot
+rl.ex01                 Example dataset for checking ranges and legal
+                        values
+sexRatioTest            Sex Ratio Test
+skewKurt                Skew and kurtosis
+sp.ex01                 Example dataset for using scatterplots to
+                        identify outliers
+sp.ex02                 Example dataset for using scatterplots to
+                        identify outliers
