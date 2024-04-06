@@ -1,12 +1,19 @@
 ################################################################################
 #
-#' Goodness of fit to an expected (model-based) age distribution
+#' Goodness of fit to an expected model-based age distribution
 #'
-#' @param age Vector of ages
-#' @param u5mr Under five years mortality rate as deaths / 10,000 persons / day
-#' @param groups Age groupings specified as recodes parameter in the
-#'   [bbw::recode()] function; default is
-#'   `"6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5"`
+#' A simple model-based method for calculating expected numbers using
+#' exponential decay in a population in which births and deaths balance each
+#' other and with a 1:1 male to female sex ratio. This function is built
+#' specifically to test goodness of fit for a sample of children aged 6-59
+#' months old grouped into four 1 year age groups and 1 half year age group
+#' (6 to less than 18 months, 18 to less than 30 months, 30 to less than 42
+#' months, 42 to less than 54 months, and 54 months to less than 60 months).
+#'
+#' @param age A vector of ages. Should either be in whole months (integer) or in
+#'   calculated decimal months (numeric).
+#' @param u5mr A numeric value for under five years mortality rate expressed as
+#'   deaths / 10,000 persons / day. Default is set to 1.
 #'
 #' @return A list of class "ageChildren" with:
 #'
@@ -42,24 +49,46 @@
 ################################################################################
 
 ageChildren <- function(age,
-                        u5mr = 0,
-                        groups = "6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5") {
-  ycag <- bbw::recode(age, groups)
+                        u5mr = 1) {
+  ## If age is numeric ----
+  if (is.numeric(age)) age <- floor(age)
+
+  ## If age is integer ----
+  if (is.integer(age)) age <- age
+
+  ## If x is not numeric or integer ----
+  if (!is.numeric(age) & !is.integer(age))
+    stop("Age should be of class integer or numeric. Try again.")
+
+  ## Check that u5mr is numeric ----
+  if (!is.numeric(u5mr))
+    stop ("Under-5 mortality rate should be numeric. Try again.")
+
+  ## Create breaks ----
+  breaks <- c(6, 18, 30, 42, 54, 60)
+
+  ## Create age groupings based on breaks ----
+  ycag <- cut(
+    age, breaks = breaks, labels = seq_len(length(breaks) - 1),
+    include.lowest = TRUE, right = FALSE,
+  )
+
+  ## Model the age distribution ----
   z <- (u5mr / 10000) * 365.25
-  t <- 0:4
-  p <- exp(-z * 0:4)
+  t <- seq(from = 0, to = length(breaks) - 2, by = 1)
+  p <- exp(-z * t)
   d <- c(1, 1, 1, 1, 0.5)
   p <- d * p / sum(d * p)
   expected <- p * sum(table(ycag))
-  names(expected) <- 1:5
-  observed <- fullTable(ycag, values = 1:5)
-  X2 <- sum((observed - expected)^2 / expected)
-  pX2 <- stats::pchisq(X2, df = 4, lower.tail = FALSE)
+  names(expected) <- seq_len(length(breaks) - 1)
+  observed <- fullTable(ycag, values = seq_len(length(breaks) - 1))
+  X2 <- sum((observed - expected) ^ 2 / expected)
+  pX2 <- stats::pchisq(X2, df = length(breaks) - 2, lower.tail = FALSE)
   result <- list(u5mr = u5mr,
                  observed = observed,
                  expected = expected,
                  X2 = X2,
-                 df = 4,
+                 df = length(breaks) - 2,
                  p = pX2)
   class(result) <- "ageChildren"
   return(result)

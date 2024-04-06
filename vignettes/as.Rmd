@@ -214,7 +214,7 @@ p
 
 This yields the following survival probabilities:
 
-```{r as9a, echo = TRUE, eval = TRUE}
+```{r as9a, echo = FALSE, eval = TRUE}
 z <- (1 / 10000) * 365.25 
 
 t <- 0:4
@@ -321,7 +321,7 @@ In this example the age distribution is significantly different from expected nu
 
 Note that we specify the degrees of freedom (`df`) for the Chi-Squared test as the number of age-groups minus one. As we have five age-groups we specify `df = 4`. The degrees of freedom (`df`) that we need to specify will depend on the number of age-groups that we use. It is always the number of age-groups minus one. If, for example, there are ten age-groups we would need to specify `df = 9`.
 
-The NiPN data quality toolkit provides an R function called `ageChildren()` that performs the model- based Chi-Squared test:
+The NiPN data quality toolkit provides an R function called `ageChildren()` that performs the model-based Chi-Squared test specifically for a sample of children aged 6-59 months:
 
 ```{r as10, echo = TRUE, eval = FALSE}
 ageChildren(svy$age, u5mr = 1)
