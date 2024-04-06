@@ -40,12 +40,6 @@ As part of this mandate, [NiPN](https://www.nipn-nutrition-platforms.org) has co
 
 The focus of the toolkit is on data required to assess anthropometric status such as measurements of weight, height or length, MUAC, sex and age. The focus is on anthropometric status but many of presented methods could be applied to other types of data. [NiPN](https://www.nipn-nutrition-platforms.org) may commission additional toolkits to examine other variables or other types of variables.
 
-## Requirements
-
-* [R](https://cran.r-project.org) version 3.4 or higher
-
-Extensive use is made of the [R](https://cran.r-project.org) language and environment for statistical computing. This is a free and powerful data analysis system. [R](https://cran.r-project.org) provides a very extensive language for working with data. This companion package has been written using only a small subset of the [R](https://cran.r-project.org) language. Many of the data quality activities described in the toolkit are supported by [R](https://cran.r-project.org) functions included in this package that have been written specifically for this purpose. These simplify the assessment of the quality of data related to anthropometry and anthropometric indices.
-
 ## Installation
 
 You can install `nipnTK` from [CRAN](https://cran.r-project.org):

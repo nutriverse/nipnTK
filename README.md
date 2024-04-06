@@ -46,22 +46,6 @@ could be applied to other types of data.
 additional toolkits to examine other variables or other types of
 variables.
 
-## Requirements
-
-- [R](https://cran.r-project.org) version 3.4 or higher
-
-Extensive use is made of the [R](https://cran.r-project.org) language
-and environment for statistical computing. This is a free and powerful
-data analysis system. [R](https://cran.r-project.org) provides a very
-extensive language for working with data. This companion package has
-been written using only a small subset of the
-[R](https://cran.r-project.org) language. Many of the data quality
-activities described in the toolkit are supported by
-[R](https://cran.r-project.org) functions included in this package that
-have been written specifically for this purpose. These simplify the
-assessment of the quality of data related to anthropometry and
-anthropometric indices.
-
 ## Installation
 
 You can install `nipnTK` from [CRAN](https://cran.r-project.org):
@@ -121,18 +105,18 @@ citation provided by a call to the `citation` function as follows:
 citation("nipnTK")
 #> To cite nipnTK in publications use:
 #> 
-#>   Mark Myatt and Ernest Guevarra (2023). nipnTK: National Information
-#>   Platforms for Nutrition (NiPN) Data Quality Toolkit R package version
-#>   0.1.1.9000 URL https://nutriverse.io/nipnTK/ DOI
-#>   10.5281/zenodo.4297897
+#>   Mark Myatt, Ernest Guevarra (2024). _nipnTK: National Information
+#>   Platforms for Nutrition (NiPN) Data Quality Toolkit_.
+#>   doi:10.5281/zenodo.4297897 <https://doi.org/10.5281/zenodo.4297897>,
+#>   R package version 0.2.0, <https://nutriverse.io/nipnTK/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {nipnTK: National Information Platforms for Nutrition (NiPN) Data Quality Toolkit},
 #>     author = {{Mark Myatt} and {Ernest Guevarra}},
-#>     year = {2023},
-#>     note = {R package version 0.1.1.9000},
+#>     year = {2024},
+#>     note = {R package version 0.2.0},
 #>     url = {https://nutriverse.io/nipnTK/},
 #>     doi = {10.5281/zenodo.4297897},
 #>   }
