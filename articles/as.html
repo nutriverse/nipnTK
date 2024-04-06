@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">nipnTK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -142,12 +142,15 @@ Afghanistan.</p>
 <div class="section level3">
 <h3 id="tabulation-and-visualisation">Tabulation and visualisation<a class="anchor" aria-label="anchor" href="#tabulation-and-visualisation"></a>
 </h3>
-<p>The NiPN data quality toolkit provides an R language function called
-<code>recode()</code> that makes it easy to recode and group data. We
-will use the <code>recode()</code> function to group the data in the age
-variable (age in months) into year-centred age-groups.</p>
+<p>We will use the base R function <code><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut()</a></code> to group the data
+in the age variable (age in months) into year-centred age-groups.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">svy</span><span class="op">$</span><span class="va">ycag</span> <span class="op">&lt;-</span> <span class="fu">recode</span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, <span class="st">"6:17=1; 18:29=2; 30:41=3; 42:53=4; 54:59=5"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">svy</span><span class="op">$</span><span class="va">ycag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span></span>
+<span>  <span class="va">svy</span><span class="op">$</span><span class="va">age</span>, </span>
+<span>  breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">18</span>, <span class="fl">30</span>, <span class="fl">42</span>, <span class="fl">54</span>, <span class="fl">60</span><span class="op">)</span>, </span>
+<span>  labels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
+<span>  include.lowest <span class="op">=</span> <span class="cn">TRUE</span>, right <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">svy</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   psu age sex weight height muac oedema ycag</span></span>
 <span><span class="co">#&gt; 1   1   6   1    7.3   65.0  146      2    1</span></span>
@@ -256,22 +259,9 @@ below.</p>
 <p><img src="as_files/figure-html/as6d-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>The <code><a href="../reference/pyramid.plot.html">pyramid.plot()</a></code> function uses the values of the
 grouped age variable as y-axis value labels.</p>
-<p>We can assign descriptive text values using the <code>recode()</code>
-function. For example:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">svy</span><span class="op">$</span><span class="va">ageLabel</span> <span class="op">&lt;-</span> <span class="fu">recode</span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, <span class="st">"6:29='&lt; 30 months'; 30:hi='30 month or older'"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in recode(svy$age, "6:29='&lt; 30 months'; 30:hi='30 month or older'"):</span></span>
-<span><span class="co">#&gt; NAs introduced by coercion</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/pyramid.plot.html">pyramid.plot</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageLabel</span>, </span>
-<span>             <span class="va">svy</span><span class="op">$</span><span class="va">sex</span>, </span>
-<span>             main <span class="op">=</span> <span class="st">"Distribution of age by sex"</span>, </span>
-<span>             xlab <span class="op">=</span> <span class="st">"Frequency (Males | Females)"</span>, </span>
-<span>             ylab <span class="op">=</span> <span class="st">"Age-group"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="as_files/figure-html/as7-1.png" width="700" style="display: block; margin: auto;"></p>
-<p>We can also use a factor type variable. This type of variable allows
+<p>We can use a factor type variable. This type of variable allows
 labels to be specified:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">svy</span><span class="op">$</span><span class="va">ageLabel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ycag</span>,</span>
 <span>                       labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"6:17"</span>, <span class="st">"18:29"</span>, <span class="st">"30:41"</span>, <span class="st">"42:53"</span>, <span class="st">"54:59"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -282,7 +272,7 @@ labels to be specified:</p>
 <span>             ylab <span class="op">=</span> <span class="st">"Year-centred age-group"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="as_files/figure-html/as7a-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>The <code><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut()</a></code> function may also be used:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">svy</span><span class="op">$</span><span class="va">ageCuts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">17</span>, <span class="fl">29</span>, <span class="fl">41</span>, <span class="fl">53</span>, <span class="fl">59</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/pyramid.plot.html">pyramid.plot</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageCuts</span>, </span>
@@ -306,7 +296,7 @@ default. Values below one make the labels smaller than the default.</p>
 </h2>
 <p>It is possible to perform a formal test on the distribution of
 age-groups by sex. A simple test is:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html" class="external-link">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ycag</span>, <span class="va">svy</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>This yields:</p>
 <pre><code><span><span class="co">#&gt; </span></span>
@@ -340,7 +330,7 @@ below.</p>
 <p>With five year-centred age-groups and a mortality rate of 1 / 10,000
 / day, the expected proportions surviving at each year can be calculated
 as:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fl">10000</span><span class="op">)</span> <span class="op">*</span> <span class="fl">365.25</span> </span>
 <span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span></span>
@@ -349,37 +339,29 @@ as:</p>
 <span></span>
 <span><span class="va">p</span></span></code></pre></div>
 <p>This yields the following survival probabilities:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fl">10000</span><span class="op">)</span> <span class="op">*</span> <span class="fl">365.25</span> </span>
-<span></span>
-<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span></span>
-<span></span>
-<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">z</span> <span class="op">*</span> <span class="va">t</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">p</span></span>
-<span><span class="co">#&gt; [1] 1.0000000 0.9641340 0.9295544 0.8962149 0.8640713</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; [1] 1.0000000 0.9641340 0.9295544 0.8962149 0.8640713</span></span></code></pre>
 <p>We need to specify the duration (i.e. the number of years)
 represented by each age-group:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <p>We can then calculate expected proportions of children in each
 age-group:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ep</span> <span class="op">&lt;-</span> <span class="va">d</span> <span class="op">*</span> <span class="va">p</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">d</span> <span class="op">*</span> <span class="va">p</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="va">ep</span></span></code></pre></div>
 <p>This gives:</p>
 <pre><code><span><span class="co">#&gt; [1] 0.2368580 0.2283628 0.2201724 0.2122757 0.1023311</span></span></code></pre>
 <p>We can now calculate expected numbers:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>expected <span class="ot">&lt;-</span> ep <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">table</span>(svy<span class="sc">$</span>ycag)) <span class="fu">names</span>(expected) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>expected</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>expected <span class="ot">&lt;-</span> ep <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">table</span>(svy<span class="sc">$</span>ycag)) <span class="fu">names</span>(expected) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>expected</span></code></pre></div>
 <p>giving:</p>
 <pre><code><span><span class="co">#&gt;         1         2         3         4         5 </span></span>
 <span><span class="co">#&gt; 206.77703 199.36076 192.21049 185.31667  89.33505</span></span></code></pre>
 <p>A formal test would compare the observed numbers with the expected
 numbers. The observed numbers can be found using:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">observed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ycag</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="va">observed</span></span></code></pre></div>
@@ -389,7 +371,7 @@ numbers. The observed numbers can be found using:</p>
 <span><span class="co">#&gt; 207 198 241 160  67</span></span></code></pre>
 <p>It can be useful to examine observed and expected numbers
 graphically:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfcol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">observed</span>, main <span class="op">=</span> <span class="st">"Observed"</span>, xlab <span class="op">=</span> <span class="st">"Age group"</span>, ylab <span class="op">=</span> <span class="st">"Frequency"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">250</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">expected</span>, main <span class="op">=</span> <span class="st">"Expected"</span>, xlab <span class="op">=</span> <span class="st">"Age group"</span>, ylab <span class="op">=</span> <span class="st">"Frequency"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">250</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -399,11 +381,11 @@ graphically:</p>
 \frac{(\text{observed} - \text{expected}) ^ 2}{\text{expected}}
 \]</span></p>
 <p>using:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">X2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">observed</span> <span class="op">-</span> <span class="va">expected</span><span class="op">)</span> <span class="op">^</span> <span class="fl">2</span> <span class="op">/</span> <span class="va">expected</span><span class="op">)</span></span></code></pre></div>
 <p>which yields a Chi-Squared test statistic of:</p>
 <p>We can find the p-value using:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html" class="external-link">pchisq</a></span><span class="op">(</span><span class="va">X2</span>, df <span class="op">=</span> <span class="fl">4</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>This gives:</p>
 <pre><code><span><span class="co">#&gt; [1] 0.000259395</span></span></code></pre>
@@ -417,9 +399,9 @@ age-groups that we use. It is always the number of age-groups minus one.
 If, for example, there are ten age-groups we would need to specify
 <code>df = 9</code>.</p>
 <p>The NiPN data quality toolkit provides an R function called
-<code><a href="../reference/ageChildren.html">ageChildren()</a></code> that performs the model- based Chi-Squared
-test:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code><a href="../reference/ageChildren.html">ageChildren()</a></code> that performs the model-based Chi-Squared
+test specifically for a sample of children aged 6-59 months:</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ageChildren.html">ageChildren</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, u5mr <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p>which returns:</p>
 <pre><code><span><span class="co">#&gt; </span></span>
@@ -437,11 +419,11 @@ practice. The commands that are given above can, however, be adapted for
 use with different age-groups.</p>
 <p>The output of the <code><a href="../reference/ageChildren.html">ageChildren()</a></code> function can be saved
 for later use:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ac</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ageChildren.html">ageChildren</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, u5mr <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p>The saved output contains the Chi-squared test results and tables of
 observed and expected values. These can be accessed using:</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ac</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Age Test (Children)</span></span>
@@ -465,12 +447,12 @@ observed and expected values. These can be accessed using:</p>
 <span><span class="co">#&gt;         1         2         3         4         5 </span></span>
 <span><span class="co">#&gt; 206.77703 199.36076 192.21049 185.31667  89.33505</span></span></code></pre></div>
 <p>The saved results may also be plotted:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ac</span><span class="op">)</span></span></code></pre></div>
 <p><img src="as_files/figure-html/as10d-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>The <code><a href="../reference/ageChildren.html">ageChildren()</a></code> function can be applied to each sex
 separately. To males:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acM</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ageChildren.html">ageChildren</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span><span class="op">[</span><span class="va">svy</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span>, u5mr <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="va">acM</span></span>
@@ -482,7 +464,7 @@ separately. To males:</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">acM</span><span class="op">)</span></span></code></pre></div>
 <p><img src="as_files/figure-html/as11-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>and to females:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acF</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ageChildren.html">ageChildren</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span><span class="op">[</span><span class="va">svy</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span>, u5mr <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="va">acF</span></span>
@@ -494,7 +476,7 @@ separately. To males:</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">acF</span><span class="op">)</span></span></code></pre></div>
 <p><img src="as_files/figure-html/as12-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>An easier way of doing this is:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, <span class="va">svy</span><span class="op">$</span><span class="va">sex</span>, <span class="va">ageChildren</span>, u5mr <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; svy$sex: 1</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -630,12 +612,12 @@ Females
 </tbody>
 </table>
 <p>We can calculate expected values from these data:</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1148379</span>, <span class="fl">1062635</span>, <span class="fl">1015688</span>, <span class="fl">981288</span>, <span class="fl">950875</span><span class="op">)</span> </span>
 <span><span class="va">ep</span> <span class="op">&lt;-</span> <span class="va">pop</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">pop</span><span class="op">)</span></span></code></pre></div>
 <p>With a sample size of <span class="math inline">\(n = 900\)</span>
 the expected number in each age-group would be:</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">expected</span> <span class="op">&lt;-</span> <span class="va">ep</span> <span class="op">*</span> <span class="fl">900</span></span>
 <span><span class="va">expected</span></span>
 <span><span class="co">#&gt; [1] 200.3427 185.3841 177.1939 171.1925 165.8868</span></span></code></pre></div>
@@ -655,7 +637,7 @@ fitting the model:</p>
 in each age-group.</p>
 <p>The absolute value of the β coefficient is the point estimate of the
 mortality rate (z). Using the 2015 population data for Afghanistan:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">pop</span><span class="op">)</span> <span class="op">~</span> <span class="va">t</span><span class="op">)</span></span></code></pre></div>
 <p>This gives:</p>
@@ -671,13 +653,13 @@ mortality rate (z). Using the 2015 population data for Afghanistan:</p>
 the sign) is <strong>0.04571</strong>. This is the point estimate of the
 mortality rate. Expressed as the number of deaths / 10,000 persons /
 day:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="fl">0.04571</span> <span class="op">/</span> <span class="fl">365.25</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10000</span></span></code></pre></div>
 <p>this is:</p>
 <pre><code><span><span class="co">#&gt; [1] 1.251472</span></span></code></pre>
 <p>We can use this estimate with the <code><a href="../reference/ageChildren.html">ageChildren()</a></code>
 function:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ageChildren.html">ageChildren</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, u5mr <span class="op">=</span> <span class="fl">1.251472</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Age Test (Children)</span></span>
@@ -693,10 +675,16 @@ data quality is the <em>age ratio</em> test.</p>
 \frac{\text{number of children aged between 6 and 29
 months}}{\text{number of children aged between 30 and 59 months}}
 \]</span></p>
-<p>We will use the <code>recode()</code> function from NiPN data quality
-toolkit to create the relevant age-groups:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span> <span class="op">&lt;-</span> <span class="fu">recode</span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, <span class="st">"6:29=1; 30:59=2"</span><span class="op">)</span></span>
+<p>We will use the base R <code><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut()</a></code> function to create the
+relevant age-groups:</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span></span>
+<span>  <span class="va">svy</span><span class="op">$</span><span class="va">age</span>, </span>
+<span>  breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">30</span>, <span class="fl">60</span><span class="op">)</span>, </span>
+<span>  labels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, </span>
+<span>  include.lowest <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>  right <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">svy</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   psu age sex weight height muac oedema ycag ageLabel ageCuts ageGroup</span></span>
 <span><span class="co">#&gt; 1   1   6   1    7.3   65.0  146      2    1     6:17  (0,17]        1</span></span>
@@ -706,13 +694,13 @@ toolkit to create the relevant age-groups:</p>
 <span><span class="co">#&gt; 5   1  52   1   12.1   87.3  152      2    4    42:53 (41,53]        2</span></span>
 <span><span class="co">#&gt; 6   1  36   2   16.9   93.0  190      2    3    30:41 (29,41]        2</span></span></code></pre></div>
 <p>The observed age ratio is:</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>which gives:</p>
 <pre><code><span><span class="co">#&gt; [1] 0.8653846</span></span></code></pre>
 <p>It is often easier to work with proportions than with ratios so we
 only need to calculate the proportion in the younger age-group:</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>which gives:</p>
 <pre><code><span><span class="co">#&gt; [1] 0.4639175</span></span></code></pre>
@@ -721,7 +709,7 @@ demographic model. The simplest approach is to use a standard value.
 SMART surveys often use the ratio 0.85:1.</p>
 <p>We only need to calculate the expected proportion in the younger
 group. For the ratio 0.85:1 this is:</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">0.85</span> <span class="op">/</span> <span class="op">(</span><span class="fl">0.85</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> </span></code></pre></div>
 <p>This gives:</p>
 <pre><code><span><span class="co">#&gt; [1] 0.4594595</span></span></code></pre>
@@ -729,7 +717,7 @@ group. For the ratio 0.85:1 this is:</p>
 (0.4594595) are so similar that a formal test of statistical
 significance is not required in this case.</p>
 <p>Formal testing can be done using a Chi-squared test:</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/prop.test.html" class="external-link">prop.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span><span class="op">)</span><span class="op">)</span>, p <span class="op">=</span> <span class="fl">0.4594595</span><span class="op">)</span></span></code></pre></div>
 <p>This returns:</p>
 <pre><code><span><span class="co">#&gt; </span></span>
@@ -747,7 +735,7 @@ significance is not required in this case.</p>
 the expected age ratio.</p>
 <p>The NiPN data quality toolkit provide an R function called
 <code><a href="../reference/ageRatioTest.html">ageRatioTest()</a></code> that performs the age ratio test:</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ageRatioTest.html">ageRatioTest</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, ratio <span class="op">=</span> <span class="fl">0.85</span><span class="op">)</span></span></code></pre></div>
 <p>This returns:</p>
 <pre><code><span><span class="co">#&gt; </span></span>
@@ -768,7 +756,7 @@ to data from children aged between 6 and 59 months only (all other ages
 are ignored).</p>
 <p>The age ratio test might be applied to data from both sexes (as
 above) and to each sex separately:</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, <span class="va">svy</span><span class="op">$</span><span class="va">sex</span>, <span class="va">ageRatioTest</span>, ratio <span class="op">=</span> <span class="fl">0.85</span><span class="op">)</span></span>
 <span><span class="co">#&gt; svy$sex: 1</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -806,7 +794,7 @@ surveys<a class="anchor" aria-label="anchor" href="#age-and-sex-distributions-ad
 the population in terms of the age and sex distribution. We can test
 this by comparison with census data.</p>
 <p>We will retrieve some example data:</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">svy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="st">"as.ex01.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">svy</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   age sex</span></span>
@@ -828,7 +816,7 @@ below.</p>
 <p><img src="../reference/figures/pyramidPlot.png" style="display: block; margin: auto;"></p>
 <p>The table produced by Wolfram|Alpha was downloaded and stored in a
 CSV file:</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ref</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="st">"as.ex02.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span>
 <span><span class="va">ref</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;         age   Males Females     All</span></span>
@@ -861,13 +849,13 @@ b\)</span>. For example, [30,35) is used to indicate the set {30, 31,
 <p>The reference data (<code>ref</code>) uses five-year age-groups. We
 will create the same age-groups in the example dataset.</p>
 <p>We should first check the range of ages in the example data:</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></span></code></pre></div>
 <p>which returns:</p>
 <pre><code><span><span class="co">#&gt; [1]  0 93</span></span></code></pre>
 <p>The R language provides a function that makes it easy to create ISO
 31-11 groupings from raw data:</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, </span>
 <span>                   breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">0</span>, to <span class="op">=</span> <span class="fl">95</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>,</span>
 <span>                   include.lowest <span class="op">=</span> <span class="cn">TRUE</span>, right <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
@@ -877,7 +865,7 @@ function to include the lowest breaks value (zero in this case). Using
 groupings that are closed on the left. This combination of parameters
 creates the same “closed on the left” and “open on the right” age-groups
 as are used in the reference (<strong>ref</strong>) data:</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   [0,5)  [5,10) [10,15) [15,20) [20,25) [25,30) [30,35) [35,40) [40,45) [45,50) </span></span>
@@ -885,7 +873,7 @@ as are used in the reference (<strong>ref</strong>) data:</p>
 <span><span class="co">#&gt; [50,55) [55,60) [60,65) [65,70) [70,75) [75,80) [80,85) [85,90) [90,95] </span></span>
 <span><span class="co">#&gt;     284     128     165      82      98      51      60      18      12</span></span></code></pre></div>
 <p>A tabular analysis of age-group by sex can be produced using:</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span>, <span class="va">svy</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          </span></span>
 <span><span class="co">#&gt;             1   2</span></span>
@@ -909,11 +897,11 @@ as are used in the reference (<strong>ref</strong>) data:</p>
 <span><span class="co">#&gt;   [85,90)  10   8</span></span>
 <span><span class="co">#&gt;   [90,95]   1  11</span></span></code></pre></div>
 <p>A visual inspection is useful:</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pyramid.plot.html">pyramid.plot</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span>, <span class="va">svy</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span></code></pre></div>
 <p><img src="as_files/figure-html/as35-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>We can make this easier to read:</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pyramid.plot.html">pyramid.plot</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span>, </span>
 <span>             <span class="va">svy</span><span class="op">$</span><span class="va">sex</span>, </span>
 <span>             main <span class="op">=</span> <span class="st">"Age-group by sex"</span>,</span>
@@ -925,7 +913,7 @@ as are used in the reference (<strong>ref</strong>) data:</p>
 <p>Note that we specified <code>ylab = ""</code> because it is clear
 that the category labels represent age-groups and to prevent the y-axis
 label from obscuring the category labels, which happens with:</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pyramid.plot.html">pyramid.plot</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span>, </span>
 <span>             <span class="va">svy</span><span class="op">$</span><span class="va">sex</span>, </span>
 <span>             main <span class="op">=</span> <span class="st">"Age-group by sex"</span>,</span>
@@ -938,7 +926,7 @@ label from obscuring the category labels, which happens with:</p>
 plot, reduce the size of the age-group labels, and place the y-axis
 label on a specific line in the left margin of the plot in order to make
 a clearer plot:</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/pyramid.plot.html">pyramid.plot</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span>, </span>
@@ -959,13 +947,13 @@ distributions.</p>
 <p>The general shapes of the two distributions are similar. Some of the
 lumpiness in figure on the right is due to age heaping in the adult ages
 at decades and half-decades:</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ah</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ageHeaping.html">ageHeaping</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">age</span>, divisor <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ah</span>, main <span class="op">=</span> <span class="st">"Remainder of age / 10"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="as_files/figure-html/as36-1.png" width="700"></p>
 <p>A more formal test of the age structure can be made by comparing
 observed and expected numbers. We can do this graphically:</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ref</span> <span class="op">&lt;-</span> <span class="va">ref</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">19</span>, <span class="op">]</span></span>
 <span></span>
 <span><span class="va">expectedProportions</span> <span class="op">&lt;-</span> <span class="va">ref</span><span class="op">$</span><span class="va">All</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">ref</span><span class="op">$</span><span class="va">All</span><span class="op">)</span></span>
@@ -982,7 +970,7 @@ observed and expected numbers. We can do this graphically:</p>
 lumpiness in the observed numbers is due to age heaping. See Figure
 ASA04.</p>
 <p>Formal testing can be performed:</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html" class="external-link">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span><span class="op">)</span>, </span>
 <span>           p <span class="op">=</span> <span class="va">expectedProportions</span><span class="op">)</span></span></code></pre></div>
 <p>This gives:</p>
@@ -995,7 +983,7 @@ ASA04.</p>
 <span><span class="co">#&gt; X-squared = 248.41, df = 18, p-value &lt; 2.2e-16</span></span></code></pre>
 <p>The warning is due to small expected numbers (i.e. n &lt; 5) in the
 older age-groups. R provides a more robust “Monte Carlo” test:</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html" class="external-link">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">svy</span><span class="op">$</span><span class="va">ageGroup</span><span class="op">)</span>, </span>
 <span>           p <span class="op">=</span> <span class="va">expectedProportions</span>, </span>
 <span>           simulate.p.value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -1015,7 +1003,7 @@ differs from the expected age-structure of the population. We also need
 to examine the sex ratio of the sample. A sex ratio test can be
 performed using the <code><a href="../reference/sexRatioTest.html">sexRatioTest()</a></code> function from the NiPN
 data quality toolkit and the sex ratio observed in the census data:</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">censusM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">ref</span><span class="op">$</span><span class="va">Males</span><span class="op">)</span></span>
 <span><span class="va">censusF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">ref</span><span class="op">$</span><span class="va">Females</span><span class="op">)</span></span>
 <span></span>
