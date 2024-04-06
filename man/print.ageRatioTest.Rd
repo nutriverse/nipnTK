@@ -18,7 +18,7 @@ Printed output of \code{\link[=ageRatioTest]{ageRatioTest()}} function
 \code{\link[=print]{print()}} helper function for \code{\link[=ageRatioTest]{ageRatioTest()}} function
 }
 \examples{
-# Print age-ratio test results for survey dataset from Kabul, Afghanistan (dp.ex02)
+# Print age-ratio test results for survey dataset from Kabul, Afghanistan
 svy <- dp.ex02
 print(ageRatioTest(svy$age, ratio = 0.85))
 

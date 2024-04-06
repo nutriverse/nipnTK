@@ -2,12 +2,18 @@
 #
 #' Age ratio test
 #'
-#' Age Ratio Test is an age-related test of survey and data quality.
+#' Age ratio test is an age-related test of survey and data quality. In this
+#' test, the ratio of the number of children aged from 6 to 29 months to the
+#' number of children aged from 30 to 59 months is calculated. This ratio is
+#' then compared to an expected ratio (usually set at 0.85). The difference
+#' of the observed ratio to the expected ratio is then compared statistically
+#' using Chi-squared test.
 #'
-#' @param x Numeric vector (age)
-#' @param ratio Expected age ratio
+#' @param x A vector for age. Should either be in whole months (integer) or in
+#'   calculated decimal months (numeric).
+#' @param ratio Expected age ratio. Default is 0.85.
 #'
-#' @return A lit of class `"ageRatioTest"` with:
+#' @returns A lit of class `"ageRatioTest"` with:
 #'
 #' | **Variable** | **Description** |
 #' | :--- | :--- |
@@ -20,7 +26,7 @@
 #' | *p* | `p-value` for Chi-squared test |
 #'
 #' @examples
-#' # Age-ratio test on survey dataset from Kabul, Afghanistan (dp.ex02)
+#' # Age-ratio test on survey dataset from Kabul, Afghanistan (`dp.ex02`)
 #' # with an age ratio of 0.85
 #' svy <- dp.ex02
 #' ageRatioTest(svy$age, ratio = 0.85)
@@ -34,11 +40,22 @@
 ################################################################################
 
 ageRatioTest <- function(x, ratio = 0.85) {
-  g <- recode(x, "6:29=1; 30:59=2")
+  ## If x is numeric ----
+  if (is.numeric(x)) x <- floor(x)
+
+  ## If x is integer ----
+  if (is.integer(x)) x <- x
+
+  ## If x is not numeric or integer ----
+  if (!is.numeric(x) & !is.integer(x))
+    stop("Age should be of class integer or numeric. Try again.")
+
+  ## Calculate age ratio ----
+  g <- ifelse(x < 30, 1, 2)
   expectedP <- ratio / (ratio + 1)
-  observedP <- sum(g == 1)/ sum(table(g))
+  observedP <- sum(g == 1, na.rm = TRUE)/ sum(table(g))
   observedR <- observedP / (1 - observedP)
-  X2 <- prop.test(sum(g == 1), sum(table(g)), p = expectedP)
+  X2 <- prop.test(sum(g == 1, na.rm = TRUE), sum(table(g)), p = expectedP)
   result <- list(expectedR = ratio,
                  expectedP = expectedP,
                  observedR = observedR,
@@ -61,7 +78,7 @@ ageRatioTest <- function(x, ratio = 0.85) {
 #' @return Printed output of [ageRatioTest()] function
 #'
 #' @examples
-#' # Print age-ratio test results for survey dataset from Kabul, Afghanistan (dp.ex02)
+#' # Print age-ratio test results for survey dataset from Kabul, Afghanistan
 #' svy <- dp.ex02
 #' print(ageRatioTest(svy$age, ratio = 0.85))
 #'
