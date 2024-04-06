@@ -5,7 +5,7 @@
 #' @param x Numeric vector
 #' @param fence `IQR` multiplier (defaults to 1.5)
 #'
-#' @return A logical vector (TRUE for an outlier)
+#' @returns A logical vector (TRUE for an outlier)
 #'
 #' @examples
 #' # Use outliersUV() to detect univariate outliers in an anthropometric

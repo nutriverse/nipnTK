@@ -2,11 +2,11 @@
 #
 #' Sex Ratio Test
 #'
-#' @param sex Numeric vector (`sex`)
+#' @param sex A vector of values that indicate sex
 #' @param codes Codes used to identify males and females (in that order)
 #' @param pop Relative populations of males and females (in that order)
 #'
-#' @return A list of class `"sexRatioTest"` with:
+#' @returns A list of class `"sexRatioTest"` with:
 #'
 #' | **Variable** | **Description** |
 #' | :--- | :--- |
@@ -53,7 +53,7 @@ sexRatioTest <- function(sex, codes = c(1, 2), pop = c(1, 1)) {
 #' @param x Output resulting from applying the [sexRatioTest()] function
 #' @param ... Additional [print()] parameters
 #'
-#' @return Printed output of [sexRatioTest()] function
+#' @returns Printed output of [sexRatioTest()] function
 #'
 #' @examples
 #' # Use sexRatioTest() on household roster data from a survey in Tanzania

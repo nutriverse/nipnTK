@@ -15,7 +15,7 @@
 #' @param u5mr A numeric value for under five years mortality rate expressed as
 #'   deaths / 10,000 persons / day. Default is set to 1.
 #'
-#' @return A list of class "ageChildren" with:
+#' @returns A list of class "ageChildren" with:
 #'
 #' | **Variable** | **Description** |
 #' | :--- | :--- |
@@ -102,7 +102,7 @@ ageChildren <- function(age,
 #' @param x Object resulting from applying [ageChildren()] function
 #' @param ... Additional [print()] arguments
 #'
-#' @return Printed output of [ageChildren()] function
+#' @returns Printed output of [ageChildren()] function
 #'
 #' @examples
 #' # Print Chi-Squared test for age of children in dp.ex02 sample dataset using
@@ -132,7 +132,7 @@ print.ageChildren <- function(x, ...) {
 #' @param x Object resulting from applying [ageChildren()] function
 #' @param ... Additional [barplot()] graphical parameters
 #'
-#' @return Bar plot comparing table of observed counts vs table of expected
+#' @returns Bar plot comparing table of observed counts vs table of expected
 #'   counts
 #'
 #' @examples

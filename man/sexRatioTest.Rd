@@ -7,7 +7,7 @@
 sexRatioTest(sex, codes = c(1, 2), pop = c(1, 1))
 }
 \arguments{
-\item{sex}{Numeric vector (\code{sex})}
+\item{sex}{A vector of values that indicate sex}
 
 \item{codes}{Codes used to identify males and females (in that order)}
 

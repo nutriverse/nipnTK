@@ -17,12 +17,12 @@
 #' WHO MONICA Project e-publications No. 9, WHO, Geneva, May 1998 available
 #' from \url{https://www.thl.fi/publications/monica/bp/bpqa.htm}}
 #'
-#' @param x Numeric vector
-#' @param digits Number of decimal places in `x`. using `digits = 1`
+#' @param x Numeric vector of measurements
+#' @param digits Number of decimal places in `x`. Using `digits = 1`
 #'   (e.g.) allows 105 to be treated as 105.0
 #' @param values A vector of possible values for the final digit (default = 0:9)
 #'
-#' @return A list of class `"digitPreference"` with:
+#' @returns A list of class `"digitPreference"` with:
 #'
 #' | **Variable** | **Description** |
 #' | :--- | :--- |
@@ -70,7 +70,7 @@ digitPreference <- function(x, digits = 1, values = 0:9) {
 #' @param x Object resulting from applying the [digitPreference()] function.
 #' @param ... Additional [print()] parameters
 #'
-#' @return Printed output of [digitPreference()] function
+#' @returns Printed output of [digitPreference()] function
 #'
 #' @examples
 #' # Print output of digit preference test applied to anthropometric data from a
@@ -102,7 +102,7 @@ print.digitPreference <- function(x, ...) {
 #' @param cex Character expansion; default is 0.75
 #' @param ... Additional [plot()] parameters
 #'
-#' @return Plotted output of [digitPreference()] function comparing the
+#' @returns Plotted output of [digitPreference()] function comparing the
 #' frequencies of the various final digits
 #'
 #' @examples

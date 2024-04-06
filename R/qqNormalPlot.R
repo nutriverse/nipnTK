@@ -4,7 +4,7 @@
 #'
 #' @param x A numeric vector
 #'
-#' @return NULL
+#' @returns NULL
 #'
 #' @examples
 #' # qqNormalPlot() with data from a SMART survey in Kabul, Afghanistan

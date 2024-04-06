@@ -13,7 +13,7 @@
 #'     colours allocated on a `checkerboard` basis to each bar
 #' @param ... Other graphical parameters
 #'
-#' @return A table of `x` by `g` (invisible)
+#' @returns A table of `x` by `g` (invisible)
 #'
 #' @examples
 #' # Use pyramid.plot() on anthropometric data from a SMART survey in

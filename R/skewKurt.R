@@ -4,7 +4,7 @@
 #'
 #' @param x Numeric vector
 #'
-#' @return A list of class "skewKurt" with:
+#' @returns A list of class "skewKurt" with:
 #'
 #' | **Variable** | **Description** |
 #' | :--- | :--- |
@@ -54,7 +54,7 @@ skewKurt <- function(x) {
 #' @param x Object resulting from applying the [skewKurt()] function
 #' @param ... Additional [print()] parameters
 #'
-#' @return Printed output of [skewKurt()] function
+#' @returns Printed output of [skewKurt()] function
 #'
 #' @examples
 #' # Use skewKurt() on an anthropometric data from a SMART survey in
