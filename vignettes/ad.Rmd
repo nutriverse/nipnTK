@@ -12,7 +12,6 @@ knitr::opts_chunk$set(
 
 ```{r setup, echo = FALSE}
 library(nipnTK)
-library(magrittr)
 library(tufte)
 ```
 

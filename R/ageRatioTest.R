@@ -9,7 +9,7 @@
 #' of the observed ratio to the expected ratio is then compared statistically
 #' using Chi-squared test.
 #'
-#' @param x A vector for age. Should either be in whole months (integer) or in
+#' @param x A vector of ages. Should either be in whole months (integer) or in
 #'   calculated decimal months (numeric).
 #' @param ratio Expected age ratio. Default is 0.85.
 #'

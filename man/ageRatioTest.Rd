@@ -7,7 +7,7 @@
 ageRatioTest(x, ratio = 0.85)
 }
 \arguments{
-\item{x}{A vector for age. Should either be in whole months (integer) or in
+\item{x}{A vector of ages. Should either be in whole months (integer) or in
 calculated decimal months (numeric).}
 
 \item{ratio}{Expected age ratio. Default is 0.85.}
