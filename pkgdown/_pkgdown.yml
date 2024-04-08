@@ -8,7 +8,7 @@ development:
 template:
   bootstrap: 5
   bootswatch: cosmo
-  theme: haddock
+  theme: pygments #haddock
   ganalytics: G-HD17FR1JE1
 
 navbar:

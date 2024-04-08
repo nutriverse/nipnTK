@@ -1,7 +1,7 @@
 Package: nipnTK
 Type: Package
 Title: National Information Platforms for Nutrition Anthropometric Data Toolkit
-Version: 0.2.0
+Version: 0.2.0.9000
 Authors@R: c(
     person(given = "Mark", 
            family = "Myatt", 
@@ -25,7 +25,7 @@ Imports:
     graphics,
     withr
 Suggests: 
-    testthat,
+    testthat (>= 3.0.0),
     knitr,
     rmarkdown,
     tufte,
@@ -40,3 +40,4 @@ Roxygen: list(markdown = TRUE)
 URL: https://nutriverse.io/nipnTK/, https://github.com/nutriverse/nipnTK
 BugReports: https://github.com/nutriverse/nipnTK/issues
 VignetteBuilder: knitr
+Config/testthat/edition: 3
