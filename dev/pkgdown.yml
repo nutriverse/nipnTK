@@ -1,0 +1,18 @@
+pandoc: 3.1.11
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  ad: ad.html
+  ah: ah.html
+  as: as.html
+  dp: dp.html
+  flagging: flagging.html
+  nipnTK: nipnTK.html
+  rl: rl.html
+  sp: sp.html
+  sr: sr.html
+last_built: 2024-04-08T10:58Z
+urls:
+  reference: https://nutriverse.io/nipnTK/reference
+  article: https://nutriverse.io/nipnTK/articles
+
