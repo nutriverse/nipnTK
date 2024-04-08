@@ -3,7 +3,7 @@
 
 # nipnTK: National Information Platforms for Nutrition (NiPN) Data Quality Toolkit <img src="man/figures/logo.png" width="200px" align="right" display="none" />
 
-<!-- Badges start here -->
+<!-- badges: start -->
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -22,7 +22,7 @@ checks](https://badges.cranchecks.info/worst/nipnTK.svg)](https://cran.r-project
 coverage](https://codecov.io/gh/nutriverse/nipnTK/branch/main/graph/badge.svg)](https://app.codecov.io/gh/nutriverse/nipnTK?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/nutriverse/nipntk/badge)](https://www.codefactor.io/repository/github/nutriverse/nipntk)
 [![DOI](https://zenodo.org/badge/118171028.svg)](https://zenodo.org/badge/latestdoi/118171028)
-<!-- Badges end here -->
+<!-- badges: end -->
 
 [National Information Platforms for Nutrition
 (NiPN)](https://www.nipn-nutrition-platforms.org) is an initiative of

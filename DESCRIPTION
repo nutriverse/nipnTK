@@ -25,7 +25,7 @@ Imports:
     graphics,
     withr
 Suggests: 
-    testthat,
+    testthat (>= 3.0.0),
     knitr,
     rmarkdown,
     tufte,
@@ -40,3 +40,4 @@ Roxygen: list(markdown = TRUE)
 URL: https://nutriverse.io/nipnTK/, https://github.com/nutriverse/nipnTK
 BugReports: https://github.com/nutriverse/nipnTK/issues
 VignetteBuilder: knitr
+Config/testthat/edition: 3
