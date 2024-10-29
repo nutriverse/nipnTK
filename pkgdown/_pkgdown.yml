@@ -7,16 +7,18 @@ development:
 
 template:
   bootstrap: 5
-  bootswatch: cosmo
-  theme: pygments #haddock
-  ganalytics: G-HD17FR1JE1
+  bootswatch: pulse
+  theme: breeze-light
+  ganalytics: G-51ZQ0EXXM4
+  bslib:
+    pkgdown-nav-height: 100px
 
 navbar:
   bg: success
   type: light
   structure:
     left:  [home, intro, reference, articles, news]
-    right: [mastodon, linkedin, github]
+    right: [search, mastodon, github]
 
   components:
     articles:
@@ -24,7 +26,7 @@ navbar:
       menu:
       - text: Check ranges and legal values
         href: articles/rl.html
-      - text: Identify outliers using scatterplots
+      - text: Identify outliers using scatter plots
         href: articles/sp.html
       - text: Identify outliers using flags
         href: articles/flagging.html
@@ -40,15 +42,9 @@ navbar:
         href: articles/as.html
     mastodon:
       icon: fab fa-mastodon fa-lg
-      href: https://fosstodon.org/@katilingban
-    linkedin:
-      icon: fab fa-linkedin fa-lg
-      href: https://www.linkedin.com/company/katilingban/
+      href: https://mastodon.social/@nutriverse
 
 home:
-  sidebar:
-    structure: [links, license, community, citation, authors, dev]
-
   links:
   - text: Read more about NiPN
     href: https://www.nipn-nutrition-platforms.org
@@ -63,7 +59,7 @@ reference:
     - outliersUV
     - rl.ex01
 
-  - title: Using scatterplots to identify outliers
+  - title: Using scatter plots to identify outliers
     contents:
     - outliersMD
     - sp.ex01
