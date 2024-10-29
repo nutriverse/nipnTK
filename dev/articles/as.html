@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="nipnTK">
 <title>Age and sex distributions • nipnTK</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -15,84 +14,55 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Age and sex distributions">
-<meta property="og:description" content="nipnTK">
-<meta property="og:image" content="https://nutriverse.io/nipnTK/logo.png">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Age and sex distributions">
 <meta name="robots" content="noindex">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-success"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-success" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">nipnTK</a>
 
     <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9000</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../articles/nipnTK.html">Get started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../articles/nipnTK.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/rl.html">Check ranges and legal values</a>
-    <a class="dropdown-item" href="../articles/sp.html">Identify outliers using scatterplots</a>
-    <a class="dropdown-item" href="../articles/flagging.html">Identify outliers using flags</a>
-    <a class="dropdown-item" href="../articles/ad.html">Assess distributions of variables and indices</a>
-    <a class="dropdown-item" href="../articles/dp.html">Assess digit preference</a>
-    <a class="dropdown-item" href="../articles/ah.html">Assess age heaping</a>
-    <a class="dropdown-item" href="../articles/sr.html">Assess sex ratio</a>
-    <a class="dropdown-item" href="../articles/as.html">Assess age and sex distributions</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/rl.html">Check ranges and legal values</a></li>
+    <li><a class="dropdown-item" href="../articles/sp.html">Identify outliers using scatter plots</a></li>
+    <li><a class="dropdown-item" href="../articles/flagging.html">Identify outliers using flags</a></li>
+    <li><a class="dropdown-item" href="../articles/ad.html">Assess distributions of variables and indices</a></li>
+    <li><a class="dropdown-item" href="../articles/dp.html">Assess digit preference</a></li>
+    <li><a class="dropdown-item" href="../articles/ah.html">Assess age heaping</a></li>
+    <li><a class="dropdown-item" href="../articles/sr.html">Assess sex ratio</a></li>
+    <li><a class="dropdown-item" href="../articles/as.html">Assess age and sex distributions</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://fosstodon.org/@katilingban">
-    <span class="fab fa fab fa-mastodon fa-lg"></span>
-     
-  </a>
-</li>
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://www.linkedin.com/company/katilingban/">
-    <span class="fab fa fab fa-linkedin fa-lg"></span>
-     
-  </a>
-</li>
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/nutriverse/nipnTK/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://mastodon.social/@nutriverse"><span class="fa fab fa-mastodon fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/nutriverse/nipnTK/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -105,7 +75,7 @@
                         <h4 data-toc-skip class="author">Mark Myatt</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/nutriverse/nipnTK/blob/HEAD/vignettes/as.Rmd" class="external-link"><code>vignettes/as.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/nutriverse/nipnTK/blob/main/vignettes/as.Rmd" class="external-link"><code>vignettes/as.Rmd</code></a></small>
       <div class="d-none name"><code>as.Rmd</code></div>
     </div>
 
@@ -320,7 +290,7 @@ exponential decay in a population in which births and deaths balance
 each other and with a 1:1 male to female sex ratio. Under this model the
 proportion surviving in each group at each year can be calculated
 as:</p>
-<p><span class="math display">\[ p ~ = ~ e ^ {-zt} \]</span></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mspace width="0.222em"></mspace><mo>=</mo><mspace width="0.222em"></mspace><msup><mi>e</mi><mrow><mo>−</mo><mi>z</mi><mi>t</mi></mrow></msup></mrow><annotation encoding="application/x-tex"> p ~ = ~ e ^ {-zt} </annotation></semantics></math></p>
 <p>in which e is the base of the natural logarithm (approximately
 2.7183), z is the mortality rate associated with each time period, and t
 is time. Time (t) starts at zero for the purposes of computation. Age
@@ -378,9 +348,7 @@ graphically:</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">expected</span>, main <span class="op">=</span> <span class="st">"Expected"</span>, xlab <span class="op">=</span> <span class="st">"Age group"</span>, ylab <span class="op">=</span> <span class="st">"Frequency"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">250</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="as_files/figure-html/as9i-1.png" width="700" style="display: block; margin: auto;"></p>
 <p>We will calculate a Chi-squared test statistic:</p>
-<p><span class="math display">\[ \chi ^ 2 ~ = ~ \sum
-\frac{(\text{observed} - \text{expected}) ^ 2}{\text{expected}}
-\]</span></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>χ</mi><mn>2</mn></msup><mspace width="0.222em"></mspace><mo>=</mo><mspace width="0.222em"></mspace><mo>∑</mo><mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">observed</mtext><mo>−</mo><mtext mathvariant="normal">expected</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mtext mathvariant="normal">expected</mtext></mfrac></mrow><annotation encoding="application/x-tex"> \chi ^ 2 ~ = ~ \sum \frac{(\text{observed} - \text{expected}) ^ 2}{\text{expected}} </annotation></semantics></math></p>
 <p>using:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">X2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">observed</span> <span class="op">-</span> <span class="va">expected</span><span class="op">)</span> <span class="op">^</span> <span class="fl">2</span> <span class="op">/</span> <span class="va">expected</span><span class="op">)</span></span></code></pre></div>
@@ -616,7 +584,8 @@ Females
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1148379</span>, <span class="fl">1062635</span>, <span class="fl">1015688</span>, <span class="fl">981288</span>, <span class="fl">950875</span><span class="op">)</span> </span>
 <span><span class="va">ep</span> <span class="op">&lt;-</span> <span class="va">pop</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">pop</span><span class="op">)</span></span></code></pre></div>
-<p>With a sample size of <span class="math inline">\(n = 900\)</span>
+<p>With a sample size of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>900</mn></mrow><annotation encoding="application/x-tex">n = 900</annotation></semantics></math>
 the expected number in each age-group would be:</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">expected</span> <span class="op">&lt;-</span> <span class="va">ep</span> <span class="op">*</span> <span class="fl">900</span></span>
@@ -629,13 +598,13 @@ mortality rate (U5MR) which can then be used with the
 <code><a href="../reference/ageChildren.html">ageChildren()</a></code> function.</p>
 <p>The model of exponential decay in a population in which births and
 deaths balance each other with a 1:1 male to female sex ratio:</p>
-<p><span class="math display">\[ p ~ = ~ e ^ {-zt} \]</span></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mspace width="0.222em"></mspace><mo>=</mo><mspace width="0.222em"></mspace><msup><mi>e</mi><mrow><mo>−</mo><mi>z</mi><mi>t</mi></mrow></msup></mrow><annotation encoding="application/x-tex"> p ~ = ~ e ^ {-zt} </annotation></semantics></math></p>
 <p>means that we can, given an age-distribution, estimate mortality by
 fitting the model:</p>
-<p><span class="math display">\[ \log_e(n) ~ = ~ \alpha ~ + ~ \beta t
-\]</span></p>
-<p>where <span class="math inline">\(n\)</span> is the count of children
-in each age-group.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>log</mo><mi>e</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.222em"></mspace><mo>=</mo><mspace width="0.222em"></mspace><mi>α</mi><mspace width="0.222em"></mspace><mo>+</mo><mspace width="0.222em"></mspace><mi>β</mi><mi>t</mi></mrow><annotation encoding="application/x-tex"> \log_e(n) ~ = ~ \alpha ~ + ~ \beta t </annotation></semantics></math></p>
+<p>where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is the count of children in each age-group.</p>
 <p>The absolute value of the β coefficient is the point estimate of the
 mortality rate (z). Using the 2015 population data for Afghanistan:</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
@@ -649,11 +618,13 @@ mortality rate (z). Using the 2015 population data for Afghanistan:</p>
 <span><span class="co">#&gt; Coefficients:</span></span>
 <span><span class="co">#&gt; (Intercept)            t  </span></span>
 <span><span class="co">#&gt;    13.93601     -0.04571</span></span></code></pre>
-<p>The value reported under <strong>t</strong> is the <span class="math inline">\(\beta\)</span> coefficient
-(<strong>-0.04571</strong>). The absolute value of the <span class="math inline">\(\beta\)</span> coefficient (i.e. the value without
-the sign) is <strong>0.04571</strong>. This is the point estimate of the
-mortality rate. Expressed as the number of deaths / 10,000 persons /
-day:</p>
+<p>The value reported under <strong>t</strong> is the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
+coefficient (<strong>-0.04571</strong>). The absolute value of the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
+coefficient (i.e. the value without the sign) is
+<strong>0.04571</strong>. This is the point estimate of the mortality
+rate. Expressed as the number of deaths / 10,000 persons / day:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="fl">0.04571</span> <span class="op">/</span> <span class="fl">365.25</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10000</span></span></code></pre></div>
 <p>this is:</p>
@@ -672,10 +643,7 @@ function:</p>
 <p>A much simpler and less problematic age-related test of survey and
 data quality is the <em>age ratio</em> test.</p>
 <p>The age ratio is defined as:</p>
-<p><span class="math display">\[ \text{Age ratio} ~ = ~
-\frac{\text{number of children aged between 6 and 29
-months}}{\text{number of children aged between 30 and 59 months}}
-\]</span></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Age ratio</mtext><mspace width="0.222em"></mspace><mo>=</mo><mspace width="0.222em"></mspace><mfrac><mtext mathvariant="normal">number of children aged between 6 and 29 months</mtext><mtext mathvariant="normal">number of children aged between 30 and 59 months</mtext></mfrac></mrow><annotation encoding="application/x-tex"> \text{Age ratio} ~ = ~ \frac{\text{number of children aged between 6 and 29 months}}{\text{number of children aged between 30 and 59 months}} </annotation></semantics></math></p>
 <p>We will use the base R <code><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut()</a></code> function to create the
 relevant age-groups:</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
@@ -843,10 +811,11 @@ CSV file:</p>
 <span><span class="co">#&gt; 20 [95,100)       0    1000    1000</span></span></code></pre>
 <p>The age-groups are expressed using the form specified in ISO 31-11,
 an international standard that applies to mathematical symbols. The form
-[a,b) expresses the interval <span class="math inline">\(a ≤ x &lt;
-b\)</span>. For example, [30,35) is used to indicate the set {30, 31,
-32, 33, 34} of ages in years. The form [a,b) is said to be
-<em>closed</em> on the left and <em>open</em> on the right.</p>
+[a,b) expresses the interval
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a ≤ x &lt; b</annotation></semantics></math>.
+For example, [30,35) is used to indicate the set {30, 31, 32, 33, 34} of
+ages in years. The form [a,b) is said to be <em>closed</em> on the left
+and <em>open</em> on the right.</p>
 <p>The reference data (<code>ref</code>) uses five-year age-groups. We
 will create the same age-groups in the example dataset.</p>
 <p>We should first check the range of ages in the example data:</p>
@@ -996,14 +965,15 @@ older age-groups. R provides a more robust “Monte Carlo” test:</p>
 <span><span class="co">#&gt; data:  table(svy$ageGroup)</span></span>
 <span><span class="co">#&gt; X-squared = 248.41, df = NA, p-value = 0.0004998</span></span></code></pre>
 <p>The test results need to be interpreted with caution. The sample size
-(<span class="math inline">\(n = 8736\)</span>) is large in this
-example. This means that small differences, which may be due to age
-heaping, become statistically significant. This test cannot be
-considered to be good evidence that the age-structure of the sample
-differs from the expected age-structure of the population. We also need
-to examine the sex ratio of the sample. A sex ratio test can be
-performed using the <code><a href="../reference/sexRatioTest.html">sexRatioTest()</a></code> function from the NiPN
-data quality toolkit and the sex ratio observed in the census data:</p>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>8736</mn></mrow><annotation encoding="application/x-tex">n = 8736</annotation></semantics></math>)
+is large in this example. This means that small differences, which may
+be due to age heaping, become statistically significant. This test
+cannot be considered to be good evidence that the age-structure of the
+sample differs from the expected age-structure of the population. We
+also need to examine the sex ratio of the sample. A sex ratio test can
+be performed using the <code><a href="../reference/sexRatioTest.html">sexRatioTest()</a></code> function from the
+NiPN data quality toolkit and the sex ratio observed in the census
+data:</p>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">censusM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">ref</span><span class="op">$</span><span class="va">Males</span><span class="op">)</span></span>
 <span><span class="va">censusF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">ref</span><span class="op">$</span><span class="va">Females</span><span class="op">)</span></span>
@@ -1030,28 +1000,26 @@ outlined above but it would make no sense to examine the sex ratio. Care
 should be taken when examining data from surveys that may have
 deliberately oversampled specific age-groups.</p>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Mark Myatt, Ernest Guevarra.</p>
+  <p>Developed by Mark Myatt, Ernest Guevarra.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

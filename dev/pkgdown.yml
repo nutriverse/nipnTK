@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.0.7
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   ad: ad.html
@@ -11,8 +11,7 @@ articles:
   rl: rl.html
   sp: sp.html
   sr: sr.html
-last_built: 2024-04-08T10:58Z
+last_built: 2024-10-29T17:18Z
 urls:
   reference: https://nutriverse.io/nipnTK/reference
   article: https://nutriverse.io/nipnTK/articles
-
