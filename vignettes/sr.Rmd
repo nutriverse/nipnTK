@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 
 ```{r setup, echo = FALSE}
 library(nipnTK)
-#library(bbw)
+library(bbw)
 library(knitr)
 library(kableExtra)
 ```

@@ -31,7 +31,8 @@ Suggests:
     tufte,
     spelling,
     covr,
-    kableExtra
+    kableExtra,
+    bbw
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
