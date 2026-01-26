@@ -1,7 +1,5 @@
 # Changelog
 
-## nipnTK 0.2.0.9000
-
 ## nipnTK 0.2.0
 
 CRAN release: 2024-04-06
