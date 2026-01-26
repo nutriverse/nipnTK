@@ -95,7 +95,7 @@ knitr::include_graphics("man/figures/nipnWorkflow.png")
 
 ## Citation
 
-If you find the `{nipnTK}` package useful, please cite using the suggested citation provided by a call to the `citation` function as follows:
+If you use the `{nipnTK}` package in your work, please cite using the suggested citation provided by a call to the `citation` function as follows:
 
 ```{r cite}
 citation("nipnTK")
@@ -106,3 +106,7 @@ citation("nipnTK")
 Feedback, bug reports and feature requests are welcome; file issues or seek support [here](https://github.com/nutriverse/nipnTK/issues). If you would like to contribute to the package, please see our [contributing guidelines](https://nutriverse.io/nipnTK/CONTRIBUTING.html).
 
 This project is released with a [Contributor Code of Conduct](https://nutriverse.io/nipnTK/CODE_OF_CONDUCT.html). By participating in this project you agree to abide by its terms.
+
+&nbsp;
+
+[![This is part of the nutriverse project under the Oxford iHealth initiative of the MSc in International Health and Tropical Medicine, Nuffield Department of Medicine, University of Oxford](https://github.com/nutriverse/nutriverse-images/blob/main/nutriverse/nutriverse_footer.png?raw=true)](https://nutriverse.io)

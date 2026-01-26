@@ -119,11 +119,11 @@ Data quality is assessed by:
 These activities and a proposed order in which they should be performed
 are shown below:
 
-![](man/figures/nipnWorkflow.png)<!-- -->
+<img src="man/figures/nipnWorkflow.png" alt="" width="918" />
 
 ## Citation
 
-If you find the `{nipnTK}` package useful, please cite using the
+If you use the `{nipnTK}` package in your work, please cite using the
 suggested citation provided by a call to the `citation` function as
 follows:
 
@@ -158,3 +158,10 @@ guidelines](https://nutriverse.io/nipnTK/CONTRIBUTING.html).
 This project is released with a [Contributor Code of
 Conduct](https://nutriverse.io/nipnTK/CODE_OF_CONDUCT.html). By
 participating in this project you agree to abide by its terms.
+
+ 
+
+[![This is part of the nutriverse project under the Oxford iHealth
+initiative of the MSc in International Health and Tropical Medicine,
+Nuffield Department of Medicine, University of
+Oxford](https://github.com/nutriverse/nutriverse-images/blob/main/nutriverse/nutriverse_footer.png?raw=true)](https://nutriverse.io)
