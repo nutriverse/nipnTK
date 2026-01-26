@@ -1,7 +1,3 @@
-# nipnTK 0.2.0.9000
-
-
-
 # nipnTK 0.2.0
 
 ## Bug fixes
