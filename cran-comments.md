@@ -29,8 +29,8 @@ This is a patch release of `nipnTK`. This release is for general updates and rou
 0 errors | 0 warnings | 1 note
 
 Author field differs from that derived from Authors@R
-  Author:    'Mark Myatt [aut, cph] (ORCID: <https://orcid.org/0000-0003-1119-1474>), Ernest Guevarra [aut, cre, cph] (ORCID: <https://orcid.org/0000-0002-4887-4415>), Pascale Fritsch [aut], Katja Siling [aut], HelpAge International [cph], Elrha [fnd]'
-  Authors@R: 'Mark Myatt [aut, cph] (<https://orcid.org/0000-0003-1119-1474>), Ernest Guevarra [aut, cre, cph] (<https://orcid.org/0000-0002-4887-4415>), Pascale Fritsch [aut], Katja Siling [aut], HelpAge International [cph], Elrha [fnd]'
+  Author:    'Mark Myatt [aut] (ORCID: <https://orcid.org/0000-0003-1119-1474>), Ernest Guevarra [aut, cre] (ORCID: <https://orcid.org/0000-0002-4887-4415>)'
+  Authors@R: 'Mark Myatt [aut] (<https://orcid.org/0000-0003-1119-1474>), Ernest Guevarra [aut, cre] (<https://orcid.org/0000-0002-4887-4415>)'
 
 Both author information are the same but ORCID records are formatted differently.
 

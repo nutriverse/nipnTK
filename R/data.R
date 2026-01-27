@@ -65,7 +65,7 @@
 #' | *Females* | Total female population |
 #' | *All* | Total population |
 #'
-#' @source \url{http://www.wolframalpha.com/input/?i=Tanzania+age+distribution}
+#' @source Wolfram|Alpha
 #'
 #
 ################################################################################

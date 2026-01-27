@@ -20,7 +20,7 @@ checks](https://badges.cranchecks.info/worst/nipnTK.svg)](https://cran.r-project
 [![CRAN](http://cranlogs.r-pkg.org/badges/grand-total/nipnTK)](https://cran.r-project.org/package=nipnTK)
 [![R-CMD-check.yaml](https://github.com/nutriverse/nipnTK/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nutriverse/nipnTK/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/nutriverse/nipnTK/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/nutriverse/nipnTK/actions/workflows/test-coverage.yaml)
-[![codecov](https://codecov.io/gh/nutriverse/nipnTK/branch/main/graph/badge.svg?token=XJIhRjAL5l)](https://codecov.io/gh/nutriverse/nipnTK)
+[![codecov](https://codecov.io/gh/nutriverse/nipnTK/branch/main/graph/badge.svg?token=XJIhRjAL5l)](https://app.codecov.io/gh/nutriverse/nipnTK/tree/main)
 [![CodeFactor](https://www.codefactor.io/repository/github/nutriverse/nipntk/badge)](https://www.codefactor.io/repository/github/nutriverse/nipntk)
 <a href="https://zenodo.org/badge/latestdoi/118171028"
 class="pkgdown-release"><img
@@ -131,18 +131,18 @@ follows:
 citation("nipnTK")
 #> To cite nipnTK in publications use:
 #> 
-#>   Mark Myatt, Ernest Guevarra (2024). _nipnTK: National Information
+#>   Mark Myatt, Ernest Guevarra (2026). _nipnTK: National Information
 #>   Platforms for Nutrition (NiPN) Data Quality Toolkit_.
 #>   doi:10.5281/zenodo.4297897 <https://doi.org/10.5281/zenodo.4297897>,
-#>   R package version 0.2.0, <https://nutriverse.io/nipnTK/>.
+#>   R package version 0.2.1, <https://nutriverse.io/nipnTK/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {nipnTK: National Information Platforms for Nutrition (NiPN) Data Quality Toolkit},
 #>     author = {{Mark Myatt} and {Ernest Guevarra}},
-#>     year = {2024},
-#>     note = {R package version 0.2.0},
+#>     year = {2026},
+#>     note = {R package version 0.2.1},
 #>     url = {https://nutriverse.io/nipnTK/},
 #>     doi = {10.5281/zenodo.4297897},
 #>   }

@@ -8,7 +8,7 @@ message: 'To cite package "nipnTK" in publications use:'
 type: software
 license: GPL-3.0-only
 title: 'nipnTK: National Information Platforms for Nutrition Anthropometric Data Toolkit'
-version: 0.2.1
+version: 0.2.2
 doi: 10.5281/zenodo.4297897
 identifiers:
 - type: doi
@@ -35,7 +35,7 @@ preferred-citation:
   - name: Mark Myatt
   - name: Ernest Guevarra
   year: '2026'
-  notes: R package version 0.2.1
+  notes: R package version 0.2.2
   url: https://nutriverse.io/nipnTK/
   doi: 10.5281/zenodo.4297897
 repository: https://CRAN.R-project.org/package=nipnTK
