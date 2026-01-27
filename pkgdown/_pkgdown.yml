@@ -29,7 +29,7 @@ navbar:
   type: dark
   structure:
     left:  [home, intro, reference, articles, news]
-    right: [search, mastodon, bluesky, linkedin, github]
+    right: [search, website, mastodon, bluesky, linkedin, github]
 
   components:
     articles:
@@ -51,6 +51,10 @@ navbar:
         href: articles/sr.html
       - text: Assess age and sex distributions
         href: articles/as.html
+    website:
+      icon: "fa-globe"
+      href: https://nutriverse.io
+      aria-label: Website
     mastodon:
       icon: fab fa-mastodon fa-lg
       href: https://mastodon.social/@nutriverse
