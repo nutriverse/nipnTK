@@ -20,8 +20,7 @@ checks](https://badges.cranchecks.info/worst/nipnTK.svg)](https://cran.r-project
 [![CRAN](http://cranlogs.r-pkg.org/badges/grand-total/nipnTK)](https://cran.r-project.org/package=nipnTK)
 [![R-CMD-check.yaml](https://github.com/nutriverse/nipnTK/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nutriverse/nipnTK/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/nutriverse/nipnTK/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/nutriverse/nipnTK/actions/workflows/test-coverage.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/nutriverse/nipnTK/graph/badge.svg)](https://app.codecov.io/gh/nutriverse/nipnTK)
+[![codecov](https://codecov.io/gh/nutriverse/nipnTK/branch/main/graph/badge.svg?token=XJIhRjAL5l)](https://codecov.io/gh/nutriverse/nipnTK)
 [![CodeFactor](https://www.codefactor.io/repository/github/nutriverse/nipntk/badge)](https://www.codefactor.io/repository/github/nutriverse/nipntk)
 <a href="https://zenodo.org/badge/latestdoi/118171028"
 class="pkgdown-release"><img

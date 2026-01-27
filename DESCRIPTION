@@ -1,7 +1,7 @@
 Package: nipnTK
 Type: Package
 Title: National Information Platforms for Nutrition Anthropometric Data Toolkit
-Version: 0.2.0.9000
+Version: 0.2.1.9000
 Authors@R: c(
     person(given = "Mark", 
            family = "Myatt", 
