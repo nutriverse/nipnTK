@@ -27,5 +27,6 @@ outliersMD <- function(x, y, alpha = 0.001) {
                            stats::cov(df, use = "complete.obs"))
   p <- stats::pchisq(md, 2, lower.tail = FALSE)
   outlierMD <- (p < alpha)
-  return(outlierMD)
+  
+  outlierMD
 }

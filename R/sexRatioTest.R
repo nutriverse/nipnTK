@@ -42,7 +42,8 @@ sexRatioTest <- function(sex, codes = c(1, 2), pop = c(1, 1)) {
                  df = X2$parameter,
                  p = X2$p.value)
   class(result) <- "sexRatioTest"
-  return(result)
+  
+  result
 }
 
 

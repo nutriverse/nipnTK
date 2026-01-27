@@ -26,5 +26,6 @@ outliersUV <- function(x, fence = 1.5) {
       ", Upper fence = ", quartiles[2] + fence * iqr, "\n\n", sep = "")
   outliers <- (x < quartiles[1] - fence * iqr) | (x > quartiles[2] + fence * iqr)
   outliers[is.na(outliers)] <- FALSE
-  return(outliers)
+  
+  outliers
 }

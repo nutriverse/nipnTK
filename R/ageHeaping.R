@@ -52,7 +52,8 @@ ageHeaping <- function(x, divisor = 12) {
   result <- list(X2 = chiSq$statistic, df = chiSq$parameter,
                  p = chiSq$p.value, tab = tab, pct = pct)
   class(result) <- "ageHeaping"
-  return(result)
+  
+  result
 }
 
 

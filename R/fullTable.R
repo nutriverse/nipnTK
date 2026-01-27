@@ -28,5 +28,6 @@ fullTable <- function(x, values = min(x, na.rm = TRUE):max(x, na.rm = TRUE)) {
 
   tab[is.na(tab)] <- 0
   names(tab) <- as.character(values)
-  return(as.table(tab))
+  
+  as.table(tab)
 }
