@@ -8,7 +8,7 @@ message: 'To cite package "nipnTK" in publications use:'
 type: software
 license: GPL-3.0-only
 title: 'nipnTK: National Information Platforms for Nutrition Anthropometric Data Toolkit'
-version: 0.2.0
+version: 0.2.1
 doi: 10.5281/zenodo.4297897
 identifiers:
 - type: doi
@@ -34,8 +34,8 @@ preferred-citation:
   authors:
   - name: Mark Myatt
   - name: Ernest Guevarra
-  year: '2024'
-  notes: R package version 0.2.0
+  year: '2026'
+  notes: R package version 0.2.1
   url: https://nutriverse.io/nipnTK/
   doi: 10.5281/zenodo.4297897
 repository: https://CRAN.R-project.org/package=nipnTK
@@ -180,6 +180,21 @@ references:
   year: '2026'
   doi: 10.32614/CRAN.package.rmarkdown
 - type: software
+  title: tufte
+  abstract: 'tufte: Tufte''s Styles for R Markdown Documents'
+  notes: Suggests
+  url: https://github.com/rstudio/tufte
+  repository: https://CRAN.R-project.org/package=tufte
+  authors:
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  - family-names: Allaire
+    given-names: JJ
+  year: '2026'
+  doi: 10.32614/CRAN.package.tufte
+- type: software
   title: spelling
   abstract: 'spelling: Tools for Spell Checking in R'
   notes: Suggests
@@ -220,4 +235,20 @@ references:
     orcid: https://orcid.org/0000-0002-3386-6076
   year: '2026'
   doi: 10.32614/CRAN.package.kableExtra
+- type: software
+  title: bbw
+  abstract: 'bbw: Blocked Weighted Bootstrap'
+  notes: Suggests
+  url: https://rapidsurveys.io/bbw/
+  repository: https://CRAN.R-project.org/package=bbw
+  authors:
+  - family-names: Myatt
+    given-names: Mark
+    email: mark@brixtonhealth.com
+  - family-names: Guevarra
+    given-names: Ernest
+    email: ernestgmd@gmail.com
+    orcid: https://orcid.org/0000-0002-4887-4415
+  year: '2026'
+  doi: 10.32614/CRAN.package.bbw
 
