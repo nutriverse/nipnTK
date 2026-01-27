@@ -5,7 +5,6 @@ BAZ
 BMI
 CMD
 CodeFactor
-Codecov
 DHS
 DPS
 Dadaab
@@ -47,6 +46,7 @@ baz
 cd
 cex
 ci
+codecov
 cran
 csv
 demispan
