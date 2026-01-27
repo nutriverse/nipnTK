@@ -4,11 +4,9 @@
 
 ## Bug fixes
 
-* Resolved issue with `ageRatioTest()` not working properly when age has
-missing values
+* Resolved issue with `ageRatioTest()` not working properly when age has missing values
 
-* Resolved issue with `ageRatioTest()` not providing appropriate results when
-age values are numeric
+* Resolved issue with `ageRatioTest()` not providing appropriate results when age values are numeric
 
 ## General updates
 
@@ -24,11 +22,9 @@ release:
 
 ## Bug fixes
 
-* Resolved issue with `ageRatioTest()` not working properly when age has
-missing values
+* Resolved issue with `ageRatioTest()` not working properly when age has missing values
 
-* Resolved issue with `ageRatioTest()` not providing appropriate results when
-age values are numeric
+* Resolved issue with `ageRatioTest()` not providing appropriate results when age values are numeric
 
 ## General updates
 
