@@ -81,7 +81,8 @@ greensIndex <- function(data, psu, case, replicates = 999) {
   minGI <- -1 / (sum(caseCounts) - 1)
   result <- list(GI = GI[1], LCL = GI[2], UCL = GI[3], minGI = minGI, p = p)
   class(result) <- "greensIndex"
-  return(result)
+  
+  result
 }
 
 

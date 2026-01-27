@@ -43,7 +43,8 @@ skewKurt <- function(x) {
   result <- list(s = s, s.se = s.se, s.z = s.z, s.p = s.p,
                  k = k, k.se = k.se, k.z = k.z, k.p = k.p)
   class(result) <- "skewKurt"
-  return(result)
+  
+  result
 }
 
 

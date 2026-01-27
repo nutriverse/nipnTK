@@ -59,7 +59,8 @@ digitPreference <- function(x, digits = 1, values = 0:9) {
   names(dps) <- NULL
   result <- list(dps = dps, tab = tab, pct = pct, dpsClass = dpsClass)
   class(result) <- "digitPreference"
-  return(result)
+  
+  result
 }
 
 

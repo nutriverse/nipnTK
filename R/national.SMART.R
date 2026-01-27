@@ -43,6 +43,7 @@ national.SMART <- function(x, strata, indices = c("haz", "whz", "waz")) {
     }
     result <- rbind(result, stratumData)
   }
-  return(result)
+  
+  result
 }
 

@@ -61,7 +61,8 @@ ageRatioTest <- function(x, ratio = 0.85) {
                  df = X2$parameter,
                  p = X2$p.value)
   class(result) <- "ageRatioTest"
-  return(result)
+  
+  result
 }
 
 

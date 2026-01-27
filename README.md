@@ -10,9 +10,10 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-<a href="https://cran.r-project.org/package=nipnTK"
+<a href="https://CRAN.R-project.org/package=oldr"
 class="pkgdown-release"><img
-src="https://img.shields.io/cran/v/nipnTK.svg" alt="CRAN" /></a> [![cran
+src="https://www.r-pkg.org/badges/version/oldr" alt="CRAN status" /></a>
+[![cran
 checks](https://badges.cranchecks.info/worst/nipnTK.svg)](https://cran.r-project.org/web/checks/check_results_nipnTK.html)
 [![CRAN](https://img.shields.io/cran/l/nipnTK.svg)](https://CRAN.R-project.org/package=nipnTK)
 [![CRAN](http://cranlogs.r-pkg.org/badges/nipnTK)](https://cran.r-project.org/package=nipnTK)

@@ -88,7 +88,8 @@ ageChildren <- function(age,
                  df = length(breaks) - 2,
                  p = pX2)
   class(result) <- "ageChildren"
-  return(result)
+  
+  result
 }
 
 
