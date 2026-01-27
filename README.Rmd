@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 [![CRAN](http://cranlogs.r-pkg.org/badges/grand-total/nipnTK)](https://cran.r-project.org/package=nipnTK)
 [![R-CMD-check.yaml](https://github.com/nutriverse/nipnTK/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nutriverse/nipnTK/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/nutriverse/nipnTK/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/nutriverse/nipnTK/actions/workflows/test-coverage.yaml)
-[![Codecov test coverage](https://codecov.io/gh/nutriverse/nipnTK/graph/badge.svg)](https://app.codecov.io/gh/nutriverse/nipnTK)
+[![codecov](https://codecov.io/gh/nutriverse/nipnTK/branch/main/graph/badge.svg?token=XJIhRjAL5l)](https://codecov.io/gh/nutriverse/nipnTK)
 [![CodeFactor](https://www.codefactor.io/repository/github/nutriverse/nipntk/badge)](https://www.codefactor.io/repository/github/nutriverse/nipntk)
 [![DOI](https://zenodo.org/badge/118171028.svg)](https://zenodo.org/badge/latestdoi/118171028){.pkgdown-release}
 [![DOI](https://img.shields.io/badge/DOI-10.32614/CRAN.package.nipnTK-blue)](https://doi.org/10.32614/CRAN.package.nipnTK){.pkgdown-release}
