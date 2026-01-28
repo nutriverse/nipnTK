@@ -10,7 +10,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/nutriverse/nipnTK/blob/v0.2.2/inst/CITATION)
+[`inst/CITATION`](https://github.com/nutriverse/nipnTK/blob/main/inst/CITATION)
 
 Mark Myatt, Ernest Guevarra (2026). *nipnTK: National Information
 Platforms for Nutrition (NiPN) Data Quality Toolkit*.
