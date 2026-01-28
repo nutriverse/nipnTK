@@ -2,6 +2,13 @@
 
 ## nipnTK (development version)
 
+## nipnTK 0.2.2
+
+CRAN release: 2026-01-27
+
+This is a patch release of `nipnTK`. This release is for general updates
+and routine maintenance upkeep.
+
 ## nipnTK 0.2.0
 
 CRAN release: 2024-04-06

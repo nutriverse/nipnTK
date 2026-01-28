@@ -22,4 +22,4 @@ A data frame with 20 observations and 4 variables
 
 ## Source
 
-<http://www.wolframalpha.com/input/?i=Tanzania+age+distribution>
+Wolfram\|Alpha
