@@ -1,4 +1,4 @@
-# nipnTK 0.2.1
+# nipnTK 0.2.2
 
 This is a patch release of `nipnTK`. This release is for general updates and routine maintenance upkeep.
 
